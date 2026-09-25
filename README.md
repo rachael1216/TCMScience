@@ -4,7 +4,7 @@
 
 ### A governed, evidence-grounded and reproducible AI scientist for TCM & biomedical research
 
-**首个面向中医药与生物医学科学发现的受治理自主科研智能体**
+**全球首个面向中医药与生物医学科学发现的受治理自主科研智能体**
 
 [![ci](https://github.com/psknlr/TCMScience/actions/workflows/ci.yml/badge.svg)](https://github.com/psknlr/TCMScience/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
