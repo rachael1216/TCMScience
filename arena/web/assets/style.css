@@ -825,3 +825,12 @@ pre.code {
 }
 .author-list li:last-child { border-bottom: 0; }
 .author-list sup { color: hsl(var(--primary)); font-weight: 600; }
+
+/* Each affiliation on its own line under the author's name. */
+.author-aff {
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground-strong, var(--muted-foreground)));
+  margin-top: 0.125rem;
+  line-height: 1.5;
+}
+.author-list li { padding: 0.625rem 0; }

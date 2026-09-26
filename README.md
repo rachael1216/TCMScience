@@ -12,13 +12,17 @@
 
 ## Authors · 作者
 
-| | 中文 | English | 单位 |
-|---|---|---|---|
-| ¹† | **康砚澜** | Yanlan Kang | Institute of Medical Philosophy & Future AI (IMPF-AI) |
-| ²† | **刘瑞琦** | Ruiqi Liu | Shanghai Medical College, Fudan University |
-| ³\* | **许帅** | Shuai Xu | Shanghai Ziranerran Traditional Chinese Medicine Foundation |
-| ⁴\* | **张绪坤** | Xukun Zhang | Li Ka Shing Faculty of Medicine, The University of Hong Kong |
-| ⁵\* | **朱正忠** | [William Cheng-Chung Chu](https://www.sciopen.com/scholar/info?id=1952658822209773569) | Fuyao University of Science and Technology |
+**康砚澜** Yanlan Kang ¹†　·　**刘瑞琦** Ruiqi Liu ²†　·　**许帅** Shuai Xu ³\*　·　**张绪坤** Xukun Zhang ⁴\*　·　**[朱正忠](https://www.sciopen.com/scholar/info?id=1952658822209773569) William Cheng-Chung Chu** ⁵\*
+
+<sub>
+
+¹ Institute of Medical Philosophy & Future AI (IMPF-AI) · 医学哲学与未来人工智能研究所<br>
+² Shanghai Medical College, Fudan University · 复旦大学上海医学院<br>
+³ Shanghai Ziranerran Traditional Chinese Medicine Foundation · 上海自然尔然中医药基金会<br>
+⁴ Li Ka Shing Faculty of Medicine, The University of Hong Kong · 香港大学李嘉诚医学院<br>
+⁵ Fuyao University of Science and Technology · 福耀科技大学
+
+</sub>
 
 † These authors contributed equally · 同等贡献　　\* Co-corresponding authors · 共同通讯作者
 
