@@ -10,7 +10,17 @@
 
 *The model may reason. It does not define the laws of the laboratory.*
 
-[![ci](https://github.com/psknlr/TCMScience/actions/workflows/ci.yml/badge.svg)](https://github.com/psknlr/TCMScience/actions/workflows/ci.yml)
+## Authors · 作者
+
+**Yanlan Kang¹† · Ruiqi Liu²† · Shuai Xu³\* · Xukun Zhang⁴\* · [William Cheng-Chung Chu](https://www.sciopen.com/scholar/info?id=1952658822209773569)⁵\***
+
+¹ Institute of Medical Philosophy & Future AI (IMPF-AI)　·　² Shanghai Medical College, Fudan University
+³ Shanghai Ziranerran Traditional Chinese Medicine Foundation　·　⁴ Li Ka Shing Faculty of Medicine, The University of Hong Kong
+⁵ Fuyao University of Science and Technology
+
+† These authors contributed equally · 同等贡献　　\* Co-corresponding authors · 共同通讯作者
+
+[![ci](https://github.com/rachael1216/TCMScience/actions/workflows/ci.yml/badge.svg)](https://github.com/rachael1216/TCMScience/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 ![PSH](https://img.shields.io/badge/kernel-PSH%200.5.3-6f42c1)
@@ -141,41 +151,60 @@ cd BioScience-Harness && PYTHONPATH=src:../PSH-Harness/src python -m pytest -q -
 ## 🏛 架构：三层，一个不可逾越的边界
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, -apple-system, sans-serif","fontSize":"13px","lineColor":"#8ea3b8"}}}%%
 flowchart TB
-    U["科研问题"]
+    Q(["🔬　科研问题 · Research question"])
 
-    subgraph GOV["治理层 · 推理输出必须穿过这里"]
-        SKILLS["bioagent.skills<br/>skill.yaml → 可校验程序"]
-        CONTRACTS["bioagent.contracts<br/>SourceCard → EvidenceItem →<br/>CandidateClaim → ResearchArtifact"]
-        UPDATES["bioagent.updates<br/>scout · rank · promote"]
-        BENCH["bioagent.benchmarks<br/>6 赛道 · 8 维度 · 4 硬门槛"]
+    subgraph GOV["治理层 · Governance　—　虚线＝约束注入点"]
+        direction LR
+        G1["<b>skills</b><br/>skill.yaml → 可校验程序"]
+        G2["<b>contracts</b><br/>四份数据契约 + 校验器"]
+        G3["<b>updates</b><br/>scout · rank（不能自动上线）"]
+        G4["<b>benchmarks</b><br/>6 赛道 · 8 维度 · 4 门槛"]
+        G1 --- G2 --- G3 --- G4
     end
 
-    subgraph PSH["PSH-Harness · 可信内核"]
-        ING["入口分级"]
-        AUTH["权限与策略格"]
-        BROKER["执行代理"]
-        GATE["模型 · 工具 · 委派网关"]
-        Q["隔离区 + 发布门"]
-        AUDIT["哈希链审计"]
+    subgraph PSH["🔒　可信内核 · Trusted kernel　—　模型无法改写这里的规则"]
+        direction LR
+        P1["入口分级"] --> P2["权限与策略格"] --> P3["执行代理"] --> P4["模型·工具·网关"] --> P5["隔离 + 发布门"]
     end
 
-    subgraph BIO["BioScience-Harness · 能力平面"]
-        SRC["58 公开数据源 / 153 操作"]
-        TOOL["147 原生工具 / 12 领域"]
-        TCM["bioagent.tcm · 中医药原生层"]
+    subgraph BIO["能力平面 · Capability plane"]
+        direction LR
+        B1["58 数据源<br/>153 操作"] --- B2["147 原生工具<br/>12 领域"] --- B3["bioagent.tcm<br/>中医药原生层"]
     end
 
-    U --> ING --> AUTH --> BROKER --> GATE
-    SKILLS -->|编译成内核可校验的程序| BROKER
-    CONTRACTS -->|每一件产物都要过门| Q
-    UPDATES -->|钉住运行时能解析什么| BROKER
-    BENCH -->|给已发布运行打分| AUDIT
-    GATE --> SRC
-    GATE --> TOOL
-    GATE --> TCM
-    BROKER --> Q --> AUDIT
+    AUD[("哈希链审计<br/>Hash-chained audit")]
+
+    Q ==> P1
+    P5 ==> AUD
+    P4 ==> B1
+    P4 ==> B2
+    G1 -.-> P3
+    G2 -.-> P5
+    G3 -.-> P3
+    G4 -.-> AUD
+
+    classDef k fill:#e7f0fb,stroke:#4a7fb5,stroke-width:2px,color:#16283d
+    classDef b fill:#f1f7f3,stroke:#7aa78e,stroke-width:1px,color:#16283d
+    classDef g fill:#fdf6ec,stroke:#d9a441,stroke-width:1px,color:#16283d
+    classDef e fill:#4a7fb5,stroke:#3a6a99,stroke-width:2px,color:#ffffff
+    class P1,P2,P3,P4,P5 k
+    class B1,B2,B3 b
+    class G1,G2,G3,G4 g
+    class Q e
 ```
+
+> **读法**：橙色＝治理层（约束注入点，虚线）；蓝色＝可信内核（模型无法改写）；
+> 绿色＝能力平面（被调用者）。粗箭头是执行路径。
+>
+> *Orange is the governance layer (dotted = constraint injection); blue is the trusted kernel,
+> which the model cannot rewrite; green is the capability plane, which is called.
+> Bold arrows are the execution path.*
+
+> **读法**：粗箭头是执行路径，虚线是治理层的约束注入点。模型只能在 `BROKER` 之下活动；它写不出绕过 `AUTH` 的计划，也改不动 `QC` 的判定。
+>
+> *Bold arrows are the execution path; dotted arrows are where the governance layer injects its constraints. A model operates below `BROKER` — it cannot author a plan that bypasses `AUTH`, nor alter what `QC` decides.*
 
 **核心设计**：LLM 不应同时是自己的规划器、执行器、安全策略、证据裁判和发布权威。
 
@@ -332,26 +361,53 @@ TCMScience/
 ## 🔄 月度 Skill 发现：能发现，不能上线
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{
+  "fontFamily":"Inter, -apple-system, Segoe UI, sans-serif",
+  "fontSize":"14px",
+  "lineColor":"#8296ad",
+  "primaryColor":"#eef3fa","primaryTextColor":"#16283d","primaryBorderColor":"#b9cbe0"
+}}}%%
 flowchart LR
-    S["10 个已声明源"] --> SCOUT["月度 scout<br/>只发现，不执行"]
-    SCOUT --> CAND["候选目录"]
-    CAND --> AUDIT["审计 + 8 项硬淘汰"]
-    AUDIT --> SCORE["100 分制评分"]
-    SCORE --> HUMAN{"人工决策<br/>PromotionDecision"}
-    HUMAN -->|批准| STABLE["稳定注册表"]
-    HUMAN -->|拒绝/推迟/忽略| CAND
-    STABLE --> LOCK["skills.lock.yaml<br/>按内容哈希钉住"]
+
+    SRC(["10 个已声明源<br/><i>declared sources</i>"])
+    SCOUT["月度 scout<br/><i>discovers, runs nothing</i>"]
+    CAND["候选目录<br/><i>Candidate registry</i>"]
+    AUDIT["审计<br/>8 项硬淘汰"]
+    SCORE["100 分制评分"]
+    HUMAN{"人工决策<br/><i>PromotionDecision</i>"}
+    STABLE["<b>稳定注册表</b><br/><i>Stable registry</i>"]
+    LOCK[("skills.lock.yaml<br/>按内容哈希钉住")]
+    RUNTIME(["TCMScience 运行时"])
+
+    SRC --> SCOUT --> CAND --> AUDIT --> SCORE --> HUMAN
+    HUMAN -->|批准 approve| STABLE
+    HUMAN -.->|拒绝 · 推迟 · 忽略<br/>reject · defer · ignore| CAND
+    STABLE --> LOCK --> RUNTIME
+
+    SEASON["❄️　冻结的 Benchmark Season<br/><i>120 例 · 一经冻结不可修改</i>"]
+
+    CAND  -.-x|✗ 绝不自动上线<br/>never auto-activated| STABLE
+    SCOUT -.-x|✗ 月度更新不得修改基准<br/>a month may not touch it| SEASON
+    SEASON -.->|打分 scored against| RUNTIME
+
+    classDef auto   fill:#fdf6ec,stroke:#d9a441,stroke-width:1px,color:#16283d
+    classDef human  fill:#e7f0fb,stroke:#4a7fb5,stroke-width:2px,color:#16283d
+    classDef frozen fill:#eef4f8,stroke:#7f9ab5,stroke-width:1px,stroke-dasharray:4 3,color:#16283d
+    classDef entry  fill:#4a7fb5,stroke:#3a6a99,stroke-width:2px,color:#ffffff
+
+    class SRC,SCOUT,CAND,AUDIT,SCORE auto
+    class HUMAN,STABLE,LOCK human
+    class SEASON frozen
+    class RUNTIME entry
 ```
 
-自动化**做不到**的事才是关键：
+> **读法**：橙色是**自动化**区间，蓝色是**需要人**的地方，虚线框是**冻结**的基准。
+> 两条带 ✗ 的虚线是这套设计的关键：**候选永远不会自动变成稳定版本**，**月度更新永远不能碰基准**。
+>
+> *Orange is automated; blue requires a human; the dashed frame is frozen. The two ✗ arrows are the
+> point: a candidate never promotes itself, and a monthly run may never touch the benchmark.*iv align="center">
 
-- **不能晋级。** `Registry.promote` 是稳定条目的唯一写入者，且必须传入 `PromotionDecision`；后者拒绝空的 `decided_by`——**无署名的批准不是批准**。scout CLI 根本没有晋级参数
-- **硬淘汰先于评分。** 八项淘汰条件跑在评分之前，高分**不能**抵销许可证问题
-- **赛季冻结后无法晋级。** 冻结在进程内不可逆——解冻会成为「让不方便的对比消失」的手段
-- **社区热度上限 5/100**，由测试断言，不是靠权重自觉
-- **scout 无法访问白名单外的主机**，提交的 URL 不能让运行时去意料之外的地方
-
----
+# TCMScience
 
 ## ⚠️ 我们不声称什么
 
@@ -372,17 +428,6 @@ flowchart LR
 
 ---
 
-## 👥 Authors
-
-**Yanlan Kang¹† · Ruiqi Liu²† · Shuai Xu³\* · Xukun Zhang⁴\* · [William Cheng-Chung Chu](https://www.sciopen.com/scholar/info?id=1952658822209773569)⁵\***
-
-¹ Institute of Medical Philosophy & Future AI (IMPF-AI)
-² Shanghai Medical College, Fudan University
-³ Shanghai Ziranerran Traditional Chinese Medicine Foundation
-⁴ Li Ka Shing Faculty of Medicine, The University of Hong Kong
-⁵ Fuyao University of Science and Technology
-
-† 同等贡献　\* 共同通讯作者
 
 ---
 
@@ -393,7 +438,7 @@ flowchart LR
   title        = {TCMScience: An Autonomous Scientist for Traditional Chinese Medicine},
   author       = {Kang, Yanlan and Liu, Ruiqi and Xu, Shuai and Zhang, Xukun and Chu, William Cheng-Chung},
   year         = {2026},
-  url          = {https://github.com/psknlr/TCMScience},
+  url          = {https://github.com/rachael1216/TCMScience},
   note         = {Open-source research software}
 }
 ```
