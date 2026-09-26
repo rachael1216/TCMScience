@@ -54,6 +54,14 @@ def main(argv: list[str] | None = None) -> int:
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
 
+    # One writer per file. `runs.json`, `tracks.json` and `skills.json` are
+    # produced by `run_demo_season.py` from real skill runs; this script writes
+    # only `benchmarks.json`, which is season metadata from the registry.
+    #
+    # Both scripts used to write all four with *different shapes*, so whichever
+    # ran last decided whether the site rendered. Three separate page crashes
+    # came from that, and a shared-path convention is not a fix — one writer per
+    # file is.
     lockfile = registry_dir / "skills.lock.yaml"
     versions = (load_lockfile(lockfile.read_text(encoding="utf-8"))
                 if lockfile.is_file() else [])
@@ -64,15 +72,30 @@ def main(argv: list[str] | None = None) -> int:
                  "The Arena renders; it never scores."),
     }
 
-    (out / "tracks.json").write_text(json.dumps({
+    (out / "benchmarks.json").write_text(json.dumps({
         **common,
         "season": "season-1",
         "dimensions": [{"key": d, "label": d.replace("_", " ").title(),
                         "direction": "lower_is_better" if d in ("latency", "cost")
                                      else "higher_is_better"}
                        for d in SCORE_DIMENSIONS],
-        "tracks": [{"key": t, "metric_focus": f} for t, f in TRACKS.items()],
-        "gates": [{"code": c, "description": GATE_DESCRIPTIONS[c]} for c in GATES],
+        # `id` and a *list* `metric_focus`: that is what the site reads
+        # (`app.js` maps over metric_focus). This script previously wrote `key`
+        # and a comma-joined string, which crashed the overview page — two
+        # generators wrote the same file with different shapes and the later one
+        # won. Shapes are now pinned by tests against the site's own reader.
+        "season_label": "Season 1 (not yet evaluated)",
+        "season_status": "designed",
+        "tracks": [{"id": t, "name": t, "cases": 20,
+                    "metric_focus": [m.strip() for m in f.split(",")]}
+                   for t, f in TRACKS.items()],
+        "gates": [{"id": {"GATE002": "G1", "GATE001": "G2", "GATE003": "G3",
+                          "GATE004": "G4"}.get(c, c),
+                   "code": c,
+                   "name": GATE_DESCRIPTIONS[c].split(";")[0].split(":")[0][:60],
+                   "rule": GATE_DESCRIPTIONS[c],
+                   "board": "experimental"}
+                  for c in GATES],
         "aggregation": {
             "method": "weighted_harmonic_mean",
             "formula": "n / sum(1 / s_i) over the eight dimensions",
@@ -106,28 +129,30 @@ def main(argv: list[str] | None = None) -> int:
         **common,
         "seasons": [{
             "season": "season-1", "status": "designed",
-            "tracks": {t: {"cases": 20, "metric_focus": f} for t, f in TRACKS.items()},
-            "splits": {"dev": 60, "hidden": 40, "adversarial": 20},
+            # A list of objects with an `id` and a *list* `metric_focus`, matching
+            # what `benchmarks.html` maps over. Every shape in these documents is
+            # now pinned by `scripts/check_arena_contract.py`, because this file
+            # and `run_demo_season.py` both write here and had drifted apart
+            # three separate times before that check existed.
+            "tracks": [{"id": t, "name": t, "cases": 20,
+                        "metric_focus": [m.strip() for m in f.split(",")]}
+                       for t, f in TRACKS.items()],
+            # A list of objects, which is what benchmarks.html renders. A dict
+            # here crashed the page, because the reader maps over the field.
+            "splits": [
+                {"name": "dev", "cases": 60,
+                 "availability": "published with the release"},
+                {"name": "hidden", "cases": 40,
+                 "availability": "delivered to official evaluators"},
+                {"name": "adversarial", "cases": 20,
+                 "availability": "scored on its own axes"},
+            ],
             "cases_published": False,
             "note": ("The cases and their gold labels are not published. Only their "
                      "digests are, so a reported score can be tied to a revision of "
                      "the case set without the set being disclosed."),
         }],
         "scoring": [{"dimension": d} for d in SCORE_DIMENSIONS],
-    }, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    (out / "skills.json").write_text(json.dumps({
-        **common,
-        "stable": [v.as_dict() for v in versions],
-        "candidate": [],
-        "candidate_note": ("Candidates are produced by the monthly scout and are "
-                           "never active until a reviewed PromotionDecision moves "
-                           "one into the stable registry."),
-    }, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    (out / "runs.json").write_text(json.dumps({
-        **common, "runs": [],
-        "pending": "No run traces have been published.",
     }, indent=2, ensure_ascii=False), encoding="utf-8")
 
     written = sorted(p.name for p in out.glob("*.json"))

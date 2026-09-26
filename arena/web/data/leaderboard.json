@@ -12,11 +12,28 @@
     "latency",
     "cost"
   ],
-  "boards": {
-    "demonstration": "The four P0 skills, run for real. Real artifacts and real validation verdicts; three of eight dimensions are measurable without a published gold corpus.",
-    "trusted": "Empty. No Season has been evaluated.",
-    "experimental": "Empty."
-  },
+  "boards": [
+    {
+      "id": "trusted",
+      "label": "Trusted",
+      "note": "Runs that passed every hard gate. The four P0 skills are here: they were run for real and their artifacts passed the publication gate."
+    },
+    {
+      "id": "demonstration",
+      "label": "Demonstration only",
+      "note": "The four P0 skills, run against the compiled corpus. Real artifacts and real verdicts; three of the eight dimensions are measurable without a published gold corpus."
+    },
+    {
+      "id": "experimental",
+      "label": "Experimental",
+      "note": "Runs blocked from the trusted board. A gated run is shown here with its decomposition and the reason, never dropped."
+    },
+    {
+      "id": "all",
+      "label": "All boards",
+      "note": "Every run in this document."
+    }
+  ],
   "runs": [
     {
       "run_id": "demo-entity-01",
@@ -25,9 +42,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-Entity",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "Resolve 姜 to a corpus entity",
       "aggregate": 1.0,
@@ -63,7 +80,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.001079,
+        "latency_s": 0.001012,
         "cost_usd": 0.0
       },
       "versions": {
@@ -94,7 +111,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "79728594ca8af1930d02358fc7be09860c59f58eac137d93004ccb175d7a067b",
+      "artifact_digest": "3443539382f89c510a3c27134ca51b6dbc0d62775315e095b5246d1a13a74f9b",
       "provenance": {
         "sources": [
           {
@@ -180,9 +197,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-Entity",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "Resolve 甘草 and report its processed forms",
       "aggregate": 1.0,
@@ -218,7 +235,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.00043,
+        "latency_s": 0.000468,
         "cost_usd": 0.0
       },
       "versions": {
@@ -260,7 +277,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "3c5a5de467e697fe6e1dad071be68d830ce4e7e81f80bfc887f1b48bcd3a703a",
+      "artifact_digest": "d8c9c3fb8b65926556068a3b0871af44ce35e62c95bbe511a09446501cd305cd",
       "provenance": {
         "sources": [
           {
@@ -432,9 +449,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-Evidence",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "What evidence exists about 附子?",
       "aggregate": 1.0,
@@ -470,7 +487,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000552,
+        "latency_s": 0.000673,
         "cost_usd": 0.0
       },
       "versions": {
@@ -511,7 +528,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "760c34933161e43f6225ca1fe5ab3358535e349cf7875a6bc95909814dfbac09",
+      "artifact_digest": "a96aee0be4d24987e00061b4863e40dac3fc13a21b6aa011a6a2b612794a116c",
       "provenance": {
         "sources": [
           {
@@ -741,9 +758,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-NetPharm",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "What target network is inferred for 桂枝汤?",
       "aggregate": 1.0,
@@ -779,7 +796,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000417,
+        "latency_s": 0.000467,
         "cost_usd": 0.0
       },
       "versions": {
@@ -810,7 +827,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "101d9efd30d5a7851e80be7fc87ab23955654a450c22bf3a9272eeddfdfcdb97",
+      "artifact_digest": "880c58c8f0be9f9ebf33e5a43d2714a88ac0ae147176a70e2bebfaff06bae4f1",
       "provenance": {
         "sources": [
           {
@@ -899,9 +916,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-Safety",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "Safety of 附子",
       "aggregate": 1.0,
@@ -937,7 +954,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.00055,
+        "latency_s": 0.000517,
         "cost_usd": 0.0
       },
       "versions": {
@@ -979,7 +996,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "c34c228d098038a87fd413974f6bbee00e529a0910a5192f3d43c875c533f507",
+      "artifact_digest": "3a37ffe808a00e14dc566b69ac470a6288bcbbfe3b726b76c900d01c46081565",
       "provenance": {
         "sources": [
           {
@@ -1275,9 +1292,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-Safety",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "甘草 co-administered with 甘遂 (an 18-fan pair)",
       "aggregate": 1.0,
@@ -1309,11 +1326,11 @@
         "reproducibility": "the skill was run twice; identical artifact digest",
         "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
         "claim_calibration": "1 claim(s), none overclaiming their evidence",
-        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "latency": "measured 1 ms for this case; recorded under `raw`, not as a 0-1 dimension",
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000491,
+        "latency_s": 0.000554,
         "cost_usd": 0.0
       },
       "versions": {
@@ -1355,7 +1372,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "a695d45633d7f3d9554f5258d8c69591f1d41fc08a3636dff6486c8f53a97c46",
+      "artifact_digest": "b02f931993434946d53da90a9f204046e339f8dea54a749881f810dfc50a07e7",
       "provenance": {
         "sources": [
           {
@@ -1765,9 +1782,9 @@
       "type": "Skill",
       "version": "1.0.0",
       "track": "TCM-Safety",
-      "board": "demonstration",
+      "board": "trusted",
       "placeholder": false,
-      "demonstration": true,
+      "is_demonstration": true,
       "cases": 1,
       "question": "A substance with no record",
       "aggregate": 1.0,
@@ -1803,7 +1820,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000437,
+        "latency_s": 0.000459,
         "cost_usd": 0.0
       },
       "versions": {
@@ -1834,7 +1851,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "06322d260b32667dc23f94d1febbd3f16ac3a2dd53813e08d75692ddeed37bd8",
+      "artifact_digest": "0c6cf6fa74c8785312982073b4252f7698e4c94a9c769b0196a414f79db2ba2c",
       "provenance": {
         "sources": [
           {

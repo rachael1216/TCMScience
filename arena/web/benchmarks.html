@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,17 +19,21 @@
       <span class="brand__mark">TCMScience</span>
       <span class="brand__name">Arena</span>
     </a>
-    <span class="brand__sub">Read-only evaluation surface</span>
+    <span class="brand__sub"><span data-en>Read-only evaluation surface</span><span data-zh>只读评测平台</span></span>
     <nav class="nav" aria-label="Primary">
       <ul class="nav__list">
-        <li><a class="nav__link" href="index.html">Overview</a></li>
-        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
-        <li><a class="nav__link" href="benchmarks.html" aria-current="page">Benchmarks</a></li>
-        <li><a class="nav__link" href="skills.html">Skills</a></li>
-        <li><a class="nav__link" href="methods.html">Methods</a></li>
-        <li><a class="nav__link" href="compare.html">Compare</a></li>
-        <li><a class="nav__link" href="submit.html">Submit</a></li>
+        <li><a class="nav__link" href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+        <li><a class="nav__link" href="leaderboard.html"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+        <li><a class="nav__link" href="benchmarks.html" aria-current="page"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+        <li><a class="nav__link" href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+        <li><a class="nav__link" href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+        <li><a class="nav__link" href="compare.html"><span data-en>Compare</span><span data-zh>对比</span></a></li>
+        <li><a class="nav__link" href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
       </ul>
+      <div class="lang-switch" role="group" aria-label="Language / 语言">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
     </nav>
   </div>
 </header>
@@ -39,7 +43,7 @@
 <main id="main">
   <div class="page-head">
     <div class="wrap">
-      <h1>Benchmark registry</h1>
+      <h1><span data-en>Benchmark registry</span><span data-zh>基准注册表</span></h1>
       <p class="page-head__lede">
         A Season is the unit of comparability. It is cut from a Stable Registry revision and is
         thereafter immutable: a monthly skill update can never modify it, because otherwise this
@@ -83,8 +87,8 @@
           <caption class="visually-hidden">Tracks, metric focus, case count and scoring notes</caption>
           <thead>
             <tr>
-              <th scope="col">Track</th>
-              <th scope="col">Metric focus</th>
+              <th scope="col"><span data-en>Track</span><span data-zh>赛道</span></th>
+              <th scope="col"><span data-en>Metric focus</span><span data-zh>核心指标</span></th>
               <th scope="col" class="col-num">Cases</th>
               <th scope="col">Notes</th>
             </tr>

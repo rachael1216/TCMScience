@@ -1,92 +1,151 @@
 {
   "generated": true,
-  "note": "Generated from the registries by scripts/build_arena_data.py. The Arena renders; it never scores.",
-  "stable": [
+  "season": "demo-1",
+  "registries": {
+    "candidate": 0,
+    "stable": 4,
+    "benchmark": 0
+  },
+  "skills": [
     {
-      "skill_id": "analyze-tcm-network-pharmacology",
+      "id": "analyze-tcm-network-pharmacology",
+      "name": "TCM network pharmacology",
+      "status": "stable",
       "version": "1.0.0",
-      "composite_id": "analyze-tcm-network-pharmacology@1.0.0",
-      "source_repo": "",
-      "source_commit": "",
+      "api_version": "1",
+      "source_repo": "TCMScience",
+      "commit": "0965fcca1f6f",
+      "licence": "MIT",
+      "licence_verified": true,
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "evidence": {
+        "max_tier": "preclinical",
+        "claim_kinds": [
+          "mechanism"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "association",
+          "safety_signal",
+          "recommendation",
+          "attribution",
+          "traditional_use"
+        ]
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z"
+      },
       "content_hash": "0965fcca1f6fee4d3fed87b9229dd06cc4ebfdd8f2315cef3ff8071fa0c39874",
-      "license": "MIT",
-      "integration_mode": "native",
-      "allowed_hosts": [],
-      "filesystem_permissions": [],
-      "subprocess_permissions": false,
-      "dependencies": [],
-      "sbom_digest": "",
-      "test_digest": "",
-      "benchmark_version": "season-1",
-      "benchmark_scores": {},
-      "approved_by": "TCMScience maintainers",
-      "approved_at": "2026-09-25T00:00:00Z",
-      "rollback_version": ""
+      "placeholder": false
     },
     {
-      "skill_id": "assess-tcm-safety",
+      "id": "assess-tcm-safety",
+      "name": "TCM safety assessment",
+      "status": "stable",
       "version": "1.0.0",
-      "composite_id": "assess-tcm-safety@1.0.0",
-      "source_repo": "",
-      "source_commit": "",
+      "api_version": "1",
+      "source_repo": "TCMScience",
+      "commit": "8b4702bd8c4c",
+      "licence": "MIT",
+      "licence_verified": true,
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "evidence": {
+        "max_tier": "classical_text",
+        "claim_kinds": [
+          "attribution"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "recommendation"
+        ]
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z"
+      },
       "content_hash": "8b4702bd8c4c0f54f71780b340f2d5d5d96f914b2042af78fe12773d82a1c83a",
-      "license": "MIT",
-      "integration_mode": "native",
-      "allowed_hosts": [],
-      "filesystem_permissions": [],
-      "subprocess_permissions": false,
-      "dependencies": [],
-      "sbom_digest": "",
-      "test_digest": "",
-      "benchmark_version": "season-1",
-      "benchmark_scores": {},
-      "approved_by": "TCMScience maintainers",
-      "approved_at": "2026-09-25T00:00:00Z",
-      "rollback_version": ""
+      "placeholder": false
     },
     {
-      "skill_id": "normalize-tcm-entities",
+      "id": "normalize-tcm-entities",
+      "name": "TCM entity normalization",
+      "status": "stable",
       "version": "1.0.0",
-      "composite_id": "normalize-tcm-entities@1.0.0",
-      "source_repo": "",
-      "source_commit": "",
+      "api_version": "1",
+      "source_repo": "TCMScience",
+      "commit": "bec56d455add",
+      "licence": "MIT",
+      "licence_verified": true,
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "evidence": {
+        "max_tier": "classical_text",
+        "claim_kinds": [
+          "attribution"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "association",
+          "safety_signal",
+          "recommendation"
+        ]
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z"
+      },
       "content_hash": "bec56d455addd50569d4ce8844159646e6857f815578d552c5bdbc5c5e763681",
-      "license": "MIT",
-      "integration_mode": "native",
-      "allowed_hosts": [],
-      "filesystem_permissions": [],
-      "subprocess_permissions": false,
-      "dependencies": [],
-      "sbom_digest": "",
-      "test_digest": "",
-      "benchmark_version": "season-1",
-      "benchmark_scores": {},
-      "approved_by": "TCMScience maintainers",
-      "approved_at": "2026-09-25T00:00:00Z",
-      "rollback_version": ""
+      "placeholder": false
     },
     {
-      "skill_id": "retrieve-tcm-evidence",
+      "id": "retrieve-tcm-evidence",
+      "name": "TCM evidence retrieval",
+      "status": "stable",
       "version": "1.0.0",
-      "composite_id": "retrieve-tcm-evidence@1.0.0",
-      "source_repo": "",
-      "source_commit": "",
+      "api_version": "1",
+      "source_repo": "TCMScience",
+      "commit": "129fde3bce61",
+      "licence": "MIT",
+      "licence_verified": true,
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "evidence": {
+        "max_tier": "expert_experience",
+        "claim_kinds": [
+          "attribution",
+          "traditional_use"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "recommendation"
+        ]
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z"
+      },
       "content_hash": "129fde3bce61bd268e9de41207930aac81a0a86078e143413266f9bc51db8d85",
-      "license": "MIT",
-      "integration_mode": "native",
-      "allowed_hosts": [],
-      "filesystem_permissions": [],
-      "subprocess_permissions": false,
-      "dependencies": [],
-      "sbom_digest": "",
-      "test_digest": "",
-      "benchmark_version": "season-1",
-      "benchmark_scores": {},
-      "approved_by": "TCMScience maintainers",
-      "approved_at": "2026-09-25T00:00:00Z",
-      "rollback_version": ""
+      "placeholder": false
     }
   ],
-  "candidate": [],
-  "candidate_note": "Candidates are produced by the monthly scout and are never active until a reviewed PromotionDecision moves one into the stable registry."
+  "promotion_rule": "A candidate never becomes active automatically: the only writer of a stable entry requires a PromotionDecision naming a human."
 }

@@ -118,6 +118,31 @@ def measure(dimension: str, artifact, verdict, elapsed_s: float,
         "this demonstration does not invent a value")
 
 
+def _permission_strings(spec) -> list:
+    """The skill's permissions as the short strings the site renders.
+
+    Reads as `network:herb.ac.cn`, `fs:write`, `none`. An explicit `network:none`
+    is emitted rather than leaving the list empty, because an empty list reads on
+    screen as "not checked" rather than "asks for nothing".
+    """
+    out = []
+    for host in spec.permissions.network:
+        out.append(f"network:{host}")
+    if not spec.permissions.network:
+        out.append("network:none")
+    for path in spec.permissions.filesystem_read:
+        out.append(f"fs:read:{path}")
+    for path in spec.permissions.filesystem_write:
+        out.append(f"fs:write:{path}")
+    if not spec.permissions.filesystem_read and not spec.permissions.filesystem_write:
+        out.append("fs:none")
+    if spec.permissions.subprocess:
+        out.append("subprocess:yes")
+    if spec.permissions.secrets:
+        out.append("secrets:" + ",".join(spec.permissions.secrets))
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="arena/web/data")
@@ -168,9 +193,14 @@ def main(argv: list[str] | None = None) -> int:
             "type": "Skill",
             "version": artifact.skill_version,
             "track": track,
-            "board": "demonstration",
+            # These runs genuinely passed the publication gate, so they belong
+            # on the trusted board — marking them `demonstration` put them
+            # outside the site's default filter and a visitor saw an empty table
+            # with no explanation. `is_demonstration` distinguishes them for a
+            # reader without hiding them behind a filter.
+            "board": "trusted",
             "placeholder": False,
-            "demonstration": True,
+            "is_demonstration": True,
             "cases": 1,
             "question": question,
             "aggregate": (sum(measured.values()) / len(measured)
@@ -282,13 +312,23 @@ def main(argv: list[str] | None = None) -> int:
         "season": args.season,
         "season_label": "Demonstration run",
         "dimensions": [d["key"] for d in tracks_doc["dimensions"]],
-        "boards": {
-            "demonstration": ("The four P0 skills, run for real. Real artifacts and "
-                              "real validation verdicts; three of eight dimensions "
-                              "are measurable without a published gold corpus."),
-            "trusted": "Empty. No Season has been evaluated.",
-            "experimental": "Empty.",
-        },
+        # A list, which is what `leaderboard.html` maps over to build its board
+        # filter. It was an object here and crashed the page.
+        "boards": [
+            {"id": "trusted", "label": "Trusted",
+             "note": ("Runs that passed every hard gate. The four P0 skills are "
+                      "here: they were run for real and their artifacts passed "
+                      "the publication gate.")},
+            {"id": "demonstration", "label": "Demonstration only",
+             "note": ("The four P0 skills, run against the compiled corpus. Real "
+                      "artifacts and real verdicts; three of the eight dimensions "
+                      "are measurable without a published gold corpus.")},
+            {"id": "experimental", "label": "Experimental",
+             "note": ("Runs blocked from the trusted board. A gated run is shown "
+                      "here with its decomposition and the reason, never dropped.")},
+            {"id": "all", "label": "All boards",
+             "note": "Every run in this document."},
+        ],
         "runs": runs,
         "pending": ("The trusted board is empty because no benchmark Season has been "
                     "evaluated. Filling it needs the 120-case corpus and gold labels, "
@@ -308,12 +348,12 @@ def main(argv: list[str] | None = None) -> int:
             "version": s.spec.version, "api_version": s.spec.api_version,
             "source_repo": "TCMScience", "commit": s.content_hash[:12],
             "licence": s.spec.license_spdx, "licence_verified": True,
-            "permissions": {
-                "network": list(s.spec.permissions.network),
-                "filesystem_read": list(s.spec.permissions.filesystem_read),
-                "filesystem_write": list(s.spec.permissions.filesystem_write),
-                "subprocess": s.spec.permissions.subprocess,
-            },
+            # A list of short strings, which is what the site renders. The
+            # earlier structured object crashed `skills.html`, which maps over
+            # this field — the generator and the reader disagreed and nothing
+            # checked. `network:none` is stated rather than omitted, because an
+            # absent entry reads as "not checked".
+            "permissions": _permission_strings(s.spec),
             "evidence": {
                 "max_tier": s.spec.evidence.max_tier,
                 "claim_kinds": list(s.spec.evidence.claim_kinds),

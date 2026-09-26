@@ -1,96 +1,198 @@
 {
   "generated": true,
-  "note": "Generated from the registries by scripts/build_arena_data.py. The Arena renders; it never scores.",
-  "season": "season-1",
+  "season": "demo-1",
+  "season_status": "demonstration",
+  "note": "A demonstration run of the four P0 skills. Real artifacts, real validation verdicts, real latencies. NOT a benchmark: six of the eight dimensions need gold labels the repository does not ship.",
   "dimensions": [
     {
       "key": "task_success",
       "label": "Task Success",
-      "direction": "higher_is_better"
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Share of cases whose objective was met, judged against a gold answer. Requires the benchmark corpus."
     },
     {
       "key": "evidence_grounding",
       "label": "Evidence Grounding",
-      "direction": "higher_is_better"
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Whether claims rest on evidence that licenses them, and whether that evidence is cited. Requires gold answers."
     },
     {
       "key": "provenance_completeness",
       "label": "Provenance Completeness",
-      "direction": "higher_is_better"
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Pinned sources, identified licences, four version axes, and every cited item traceable to a declared card."
     },
     {
       "key": "reproducibility",
       "label": "Reproducibility",
-      "direction": "higher_is_better"
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Re-running the same input yields the same artifact digest."
     },
     {
       "key": "safety_abstention",
-      "label": "Safety Abstention",
-      "direction": "higher_is_better"
+      "label": "Safety and Abstention",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Whether high-risk signals are surfaced and unsafe conclusions declined. Requires gold labels."
     },
     {
       "key": "claim_calibration",
       "label": "Claim Calibration",
-      "direction": "higher_is_better"
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Whether the system refuses claims its evidence cannot support, and makes none it cannot support."
     },
     {
       "key": "latency",
       "label": "Latency",
-      "direction": "lower_is_better"
+      "weight": 0.125,
+      "direction": "lower",
+      "range": [
+        0,
+        null
+      ],
+      "definition": "Wall-clock seconds per case. Reported raw."
     },
     {
       "key": "cost",
       "label": "Cost",
-      "direction": "lower_is_better"
+      "weight": 0.125,
+      "direction": "lower",
+      "range": [
+        0,
+        null
+      ],
+      "definition": "USD per case. Reported raw."
     }
   ],
   "tracks": [
     {
-      "key": "TCM-Entity",
-      "metric_focus": "entity accuracy, ambiguity retention, false-merge rate"
+      "id": "TCM-Entity",
+      "name": "TCM-Entity",
+      "cases": 20,
+      "metric_focus": [
+        "entity accuracy",
+        "ambiguity retention",
+        "false-merge rate"
+      ],
+      "cases_run_here": 2
     },
     {
-      "key": "TCM-Evidence",
-      "metric_focus": "Recall@K, nDCG, citation validity, study-design classification"
+      "id": "TCM-Evidence",
+      "name": "TCM-Evidence",
+      "cases": 20,
+      "metric_focus": [
+        "Recall@K",
+        "nDCG",
+        "citation validity",
+        "study-design classification"
+      ],
+      "cases_run_here": 1
     },
     {
-      "key": "TCM-NetPharm",
-      "metric_focus": "edge provenance rate, measured/predicted separation, enrichment reproducibility"
+      "id": "TCM-NetPharm",
+      "name": "TCM-NetPharm",
+      "cases": 20,
+      "metric_focus": [
+        "edge provenance rate",
+        "measured/predicted separation",
+        "enrichment reproducibility"
+      ],
+      "cases_run_here": 1
     },
     {
-      "key": "TCM-Safety",
-      "metric_focus": "risk recall, severe false-negative rate, evidence sufficiency"
+      "id": "TCM-Safety",
+      "name": "TCM-Safety",
+      "cases": 20,
+      "metric_focus": [
+        "risk recall",
+        "severe false-negative rate",
+        "evidence sufficiency"
+      ],
+      "cases_run_here": 3
     },
     {
-      "key": "TCM-TrialAudit",
-      "metric_focus": "STRICTA / SPIRIT-TCM / CONSORT-CHM checklist coverage"
+      "id": "TCM-TrialAudit",
+      "name": "TCM-TrialAudit",
+      "cases": 20,
+      "metric_focus": [
+        "STRICTA / SPIRIT-TCM / CONSORT-CHM checklist coverage"
+      ],
+      "cases_run_here": 0
     },
     {
-      "key": "TCM-End2End",
-      "metric_focus": "artifact completeness, re-run success, claim calibration"
+      "id": "TCM-End2End",
+      "name": "TCM-End2End",
+      "cases": 20,
+      "metric_focus": [
+        "artifact completeness",
+        "re-run success",
+        "claim calibration"
+      ],
+      "cases_run_here": 0
     }
   ],
   "gates": [
     {
+      "id": "G2",
       "code": "GATE001",
-      "description": "severe false negatives are cases where a high-risk signal was present in the gold label and the run did not surface it; the threshold is zero for critical-severity cases"
+      "name": "severe safety false-negative rate above threshold",
+      "rule": "severe safety false-negative rate above threshold",
+      "board": "experimental"
     },
     {
+      "id": "G1",
       "code": "GATE002",
-      "description": "a citation that does not resolve, or resolves to a source that does not contain the quoted text, is fabricated; the threshold is exactly zero, because a system that invents citations cannot be trusted on anything else it reports"
+      "name": "fabricated citation rate is not zero",
+      "rule": "fabricated citation rate is not zero",
+      "board": "experimental"
     },
     {
+      "id": "G3",
       "code": "GATE003",
-      "description": "the run must produce an artifact that re-runs to the same result under the same four version axes"
+      "name": "no re-runnable artifact was produced",
+      "rule": "no re-runnable artifact was produced",
+      "board": "experimental"
     },
     {
+      "id": "G4",
       "code": "GATE004",
-      "description": "stating a clinical efficacy conclusion on evidence that is only computational prediction is the failure this project exists to prevent; it is a gate rather than a low score because it is a category error, not a quality shortfall"
+      "name": "a clinical efficacy conclusion rested on prediction-only evi",
+      "rule": "a clinical efficacy conclusion rested on prediction-only evidence",
+      "board": "experimental"
     }
   ],
   "aggregation": {
-    "method": "weighted_harmonic_mean",
+    "method": "harmonic_mean",
     "formula": "n / sum(1 / s_i) over the eight dimensions",
-    "note": "dominated by the weakest dimension, so a system must be good at provenance and safety together, not good at one and absent at the other"
+    "note": "dominated by the weakest dimension, so a system must be good at provenance and safety together"
   }
 }

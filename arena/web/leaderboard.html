@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,17 +19,21 @@
       <span class="brand__mark">TCMScience</span>
       <span class="brand__name">Arena</span>
     </a>
-    <span class="brand__sub">Read-only evaluation surface</span>
+    <span class="brand__sub"><span data-en>Read-only evaluation surface</span><span data-zh>只读评测平台</span></span>
     <nav class="nav" aria-label="Primary">
       <ul class="nav__list">
-        <li><a class="nav__link" href="index.html">Overview</a></li>
-        <li><a class="nav__link" href="leaderboard.html" aria-current="page">Leaderboard</a></li>
-        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
-        <li><a class="nav__link" href="skills.html">Skills</a></li>
-        <li><a class="nav__link" href="methods.html">Methods</a></li>
-        <li><a class="nav__link" href="compare.html">Compare</a></li>
-        <li><a class="nav__link" href="submit.html">Submit</a></li>
+        <li><a class="nav__link" href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+        <li><a class="nav__link" href="leaderboard.html" aria-current="page"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+        <li><a class="nav__link" href="benchmarks.html"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+        <li><a class="nav__link" href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+        <li><a class="nav__link" href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+        <li><a class="nav__link" href="compare.html"><span data-en>Compare</span><span data-zh>对比</span></a></li>
+        <li><a class="nav__link" href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
       </ul>
+      <div class="lang-switch" role="group" aria-label="Language / 语言">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
     </nav>
   </div>
 </header>
@@ -55,29 +59,29 @@
         <div class="card__body">
           <div class="filters">
             <div class="field">
-              <label class="field__label" for="filter-track">Track</label>
+              <label class="field__label" for="filter-track"><span data-en>Track</span><span data-zh>赛道</span></label>
               <select id="filter-track"></select>
-              <span class="field__hint">Rank is published per track; ranks are not comparable across tracks.</span>
+              <span class="field__hint"><span data-en>Rank is published per track; ranks are not comparable across tracks.</span><span data-zh>排名按赛道分别发布；不同赛道之间的排名不可直接比较。</span></span>
             </div>
             <div class="field">
-              <label class="field__label" for="filter-type">Submission type</label>
+              <label class="field__label" for="filter-type"><span data-en>Submission type</span><span data-zh>提交方式</span></label>
               <select id="filter-type"></select>
-              <span class="field__hint">Skill, OCI container, or remote agent API.</span>
+              <span class="field__hint"><span data-en>Skill, OCI container, or remote agent API.</span><span data-zh>技能、OCI 容器，或远程 Agent API。</span></span>
             </div>
             <fieldset class="filters__group" id="filter-board-group">
-              <legend>Board</legend>
+              <legend><span data-en>Board</span><span data-zh>榜单</span></legend>
               <div class="filters__radios" id="filter-board"></div>
-              <span class="field__hint">A gated system is not removed — it moves to the Experimental board with its reason.</span>
+              <span class="field__hint"><span data-en>A gated system is not removed — it moves to the Experimental board with its reason.</span><span data-zh>被门槛拦下的系统不会被删除——它会连同原因移到「实验榜」。</span></span>
             </fieldset>
             <div class="field">
-              <label class="field__label" for="filter-query">Search</label>
+              <label class="field__label" for="filter-query"><span data-en>Search</span><span data-zh>搜索</span></label>
               <input type="search" id="filter-query" placeholder="System, track, run id" autocomplete="off">
-              <span class="field__hint">Matches the system name, track, type or run id.</span>
+              <span class="field__hint"><span data-en>Matches the system name, track, type or run id.</span><span data-zh>匹配系统名、赛道、类型或运行编号。</span></span>
             </div>
           </div>
           <div class="filters__footer">
             <p class="filters__count" id="filter-count" role="status" aria-live="polite"></p>
-            <button class="btn btn--ghost btn--sm" type="button" id="reset-filters">Reset filters</button>
+            <button class="btn btn--ghost btn--sm" type="button" id="reset-filters"><span data-en>Reset filters</span><span data-zh>重置筛选</span></button>
           </div>
         </div>
       </div>
@@ -106,8 +110,8 @@
       <div id="blocked-notes" style="margin-top:1.25rem"></div>
 
       <p class="small muted" style="margin-top:1rem">
-        Column definitions, the aggregation formula and the gate statements are on the
-        <a href="methods.html">methods page</a>. Raw latencies and costs are shown under their
+        <span data-en>Column definitions, the aggregation formula and the gate statements are on the</span><span data-zh>各列定义、聚合公式与门槛说明见</span>
+        <a href="methods.html"><span data-en>methods page</span><span data-zh>方法页</span></a>. Raw latencies and costs are shown under their
         subscores; the subscores exist so those two axes can enter a geometric mean.
       </p>
     </section>

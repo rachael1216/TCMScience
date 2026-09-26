@@ -5,37 +5,84 @@
     {
       "season": "season-1",
       "status": "designed",
-      "tracks": {
-        "TCM-Entity": {
+      "tracks": [
+        {
+          "id": "TCM-Entity",
+          "name": "TCM-Entity",
           "cases": 20,
-          "metric_focus": "entity accuracy, ambiguity retention, false-merge rate"
+          "metric_focus": [
+            "entity accuracy",
+            "ambiguity retention",
+            "false-merge rate"
+          ]
         },
-        "TCM-Evidence": {
+        {
+          "id": "TCM-Evidence",
+          "name": "TCM-Evidence",
           "cases": 20,
-          "metric_focus": "Recall@K, nDCG, citation validity, study-design classification"
+          "metric_focus": [
+            "Recall@K",
+            "nDCG",
+            "citation validity",
+            "study-design classification"
+          ]
         },
-        "TCM-NetPharm": {
+        {
+          "id": "TCM-NetPharm",
+          "name": "TCM-NetPharm",
           "cases": 20,
-          "metric_focus": "edge provenance rate, measured/predicted separation, enrichment reproducibility"
+          "metric_focus": [
+            "edge provenance rate",
+            "measured/predicted separation",
+            "enrichment reproducibility"
+          ]
         },
-        "TCM-Safety": {
+        {
+          "id": "TCM-Safety",
+          "name": "TCM-Safety",
           "cases": 20,
-          "metric_focus": "risk recall, severe false-negative rate, evidence sufficiency"
+          "metric_focus": [
+            "risk recall",
+            "severe false-negative rate",
+            "evidence sufficiency"
+          ]
         },
-        "TCM-TrialAudit": {
+        {
+          "id": "TCM-TrialAudit",
+          "name": "TCM-TrialAudit",
           "cases": 20,
-          "metric_focus": "STRICTA / SPIRIT-TCM / CONSORT-CHM checklist coverage"
+          "metric_focus": [
+            "STRICTA / SPIRIT-TCM / CONSORT-CHM checklist coverage"
+          ]
         },
-        "TCM-End2End": {
+        {
+          "id": "TCM-End2End",
+          "name": "TCM-End2End",
           "cases": 20,
-          "metric_focus": "artifact completeness, re-run success, claim calibration"
+          "metric_focus": [
+            "artifact completeness",
+            "re-run success",
+            "claim calibration"
+          ]
         }
-      },
-      "splits": {
-        "dev": 60,
-        "hidden": 40,
-        "adversarial": 20
-      },
+      ],
+      "splits": [
+        {
+          "name": "dev",
+          "cases": 60,
+          "availability": "published with the release"
+        },
+        {
+          "name": "hidden",
+          "cases": 40,
+          "availability": "delivered to official evaluators"
+        },
+        {
+          "name": "adversarial",
+          "cases": 20,
+          "availability": "scored on its own axes"
+        }
+      ],
       "cases_published": false,
       "note": "The cases and their gold labels are not published. Only their digests are, so a reported score can be tied to a revision of the case set without the set being disclosed."
     }

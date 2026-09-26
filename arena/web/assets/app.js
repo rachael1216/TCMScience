@@ -55,7 +55,11 @@
     'a clinical one.';
 
   var TYPE_GLYPH = { 'Skill': 'S', 'OCI Container': 'C', 'Remote API': 'R' };
-  var BOARD_GLYPH = { trusted: '✓', experimental: '⚠' };
+  /* A `?` rather than `undefined` for a board this build does not know: a
+   * generator may add one, and rendering the string "undefined" into the label
+   * is how that shows up. */
+  var BOARD_GLYPH = { trusted: '✓', experimental: '⚠', demonstration: '◆', all: '·' };
+  var BOARD_FALLBACK_GLYPH = '·';
 
   /* ----------------------------------------------------------------------
    * Small helpers
@@ -229,7 +233,7 @@
   function boardBadge(board, label) {
     var isTrusted = board === 'trusted';
     return '<span class="badge ' + (isTrusted ? 'badge--ok' : 'badge--warn') + '">' +
-      '<span class="badge__glyph" aria-hidden="true">' + BOARD_GLYPH[board] + '</span>' +
+      '<span class="badge__glyph" aria-hidden="true">' + (BOARD_GLYPH[board] || BOARD_FALLBACK_GLYPH) + '</span>' +
       esc(label || (isTrusted ? 'Trusted' : 'Experimental')) + '</span>';
   }
 
@@ -406,6 +410,28 @@
     }
   }
 
+  /* Column labels, both languages. The header row is built by script, so the
+   * `data-en`/`data-zh` trick used in the HTML does not reach it — the labels
+   * have to be in the script too, or the table stays English while the rest of
+   * the page switches. */
+  var DIM_LABELS = {
+    en: { task_success: 'Task Success', evidence_grounding: 'Evidence Grounding',
+          provenance_completeness: 'Provenance Completeness',
+          reproducibility: 'Reproducibility', safety_abstention: 'Safety and Abstention',
+          claim_calibration: 'Claim Calibration', latency: 'Latency', cost: 'Cost',
+          aggregate: 'Aggregate', rank: 'Rank', system: 'System', type: 'Type' },
+    zh: { task_success: '任务成功率', evidence_grounding: '证据锚定',
+          provenance_completeness: '溯源完整性', reproducibility: '可复现性',
+          safety_abstention: '安全与弃权', claim_calibration: '主张校准',
+          latency: '延迟', cost: '成本', aggregate: '综合', rank: '排名',
+          system: '系统', type: '类型' }
+  };
+
+  function dimLabel(key) {
+    var lang = document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+    return DIM_LABELS[lang][key] || key;
+  }
+
   function renderLeaderboard() {
     var host = $('#leaderboard');
     if (!host) return;
@@ -452,15 +478,27 @@
           (key ? ' data-sort-key="' + esc(key) + '"' : '') +
           (hint ? ' title="' + esc(hint) + '"' : '') + '>' + inner + '</th>';
       }
+      /* Labels come from `dimLabel`, not from the English strings on the data
+       * file, so the table header follows the language switch. */
+      var dimLabels = { en: {}, zh: {} };
+      dims.forEach(function (dim) {
+        dimLabels.en[dim.key] = dim.label;
+        dimLabels.zh[dim.key] = dim.label_zh || DIM_LABELS.zh[dim.key] || dim.label;
+      });
+      function labelFor(key, fallback) {
+        var lang = document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+        return dimLabels[lang][key] || fallback;
+      }
       $('#leaderboard-head').innerHTML = '<tr>' +
-        headerCell('Rank', 'rank', 'col-num', 'Published rank within this track and board') +
-        headerCell('System', 'system', 'cell-system') +
-        headerCell('Type', null, '', 'Submission type: Skill, OCI Container or Remote API') +
+        headerCell(dimLabel('rank'), 'rank', 'col-num', 'Published rank within this track and board') +
+        headerCell(dimLabel('system'), 'system', 'cell-system') +
+        headerCell(dimLabel('type'), null, '', 'Submission type: Skill, OCI Container or Remote API') +
         dims.map(function (dim) {
-          return headerCell(dim.label, dim.key, 'col-num', dim.definition || '');
+          return headerCell(labelFor(dim.key, dim.label), dim.key, 'col-num',
+                            dim.definition || '');
         }).join('') +
-        headerCell('Aggregate', 'aggregate', 'col-num',
-          'Weighted geometric mean of the eight dimensions, as published by the generator') +
+        headerCell(dimLabel('aggregate'), 'aggregate', 'col-num',
+          'Weighted harmonic mean of the eight dimensions, as published by the generator') +
         '</tr>';
 
       var footCell = $('#leaderboard-table tfoot td');
@@ -471,7 +509,7 @@
       $('#filter-board').innerHTML = boards.map(function (board, index) {
         return '<label class="filters__radio"><input type="radio" name="board" value="' +
           esc(board.id) + '"' + (board.id === LEADERBOARD_STATE.board ? ' checked' : '') + '>' +
-          '<span aria-hidden="true">' + BOARD_GLYPH[board.id] + '</span> ' + esc(board.label) + '</label>';
+          '<span aria-hidden="true">' + (BOARD_GLYPH[board.id] || BOARD_FALLBACK_GLYPH) + '</span> ' + esc(board.label) + '</label>';
       }).join('');
 
       /* --- render ----------------------------------------------------- */
@@ -1464,7 +1502,19 @@
   function init() {
     var page = document.body.getAttribute('data-page');
     if (page === 'overview') renderOverview();
-    else if (page === 'leaderboard') renderLeaderboard();
+    else if (page === 'leaderboard') {
+      renderLeaderboard();
+      /* Re-render on a language change: the header row and the captions are
+       * built by script, so they do not follow the attribute switch by
+       * themselves. */
+      window.addEventListener('tcmscience:langchange', function () {
+        /* Re-run the render. `renderLeaderboard` writes into the containers it
+         * finds, so clearing them here destroyed the table skeleton it expects
+         * and threw "Cannot set properties of null". The render is idempotent;
+         * it only needs to be called again. */
+        renderLeaderboard();
+      });
+    }
     else if (page === 'run') renderRun();
     else if (page === 'compare') renderCompare();
     else if (page === 'benchmarks') renderBenchmarks();
@@ -1481,3 +1531,54 @@
     init();
   }
 })();
+
+/* ---------------------------------------------------------------------------
+ * Language
+ *
+ * The attribute lives on <html> and CSS does the switching, so the correct
+ * language shows before this script runs. This only wires the buttons and
+ * remembers the choice.
+ * --------------------------------------------------------------------------- */
+var LANG_KEY = 'tcmscience.lang';
+
+function currentLang() {
+  /* A `?lang=zh` query wins, so a link can point at a specific language and a
+   * screenshot or a crawler can request one deterministically. Then the stored
+   * choice, then English. */
+  try {
+    var q = new URLSearchParams(window.location.search).get('lang');
+    if (q === 'zh' || q === 'en') { return q; }
+  } catch (e) { /* no URLSearchParams: fall through */ }
+  try { return localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { return 'en'; }
+}
+
+function applyLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-Hans' : 'en');
+  try { localStorage.setItem(LANG_KEY, lang); } catch (e) { /* private mode */ }
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.lang-switch button'),
+    function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+  /* Tables are built by script, so the attribute change alone does not reach
+   * them — their headers would stay in the previous language. Re-dispatch the
+   * render rather than reloading the page, which would lose the filter state. */
+  try {
+    window.dispatchEvent(new CustomEvent('tcmscience:langchange', { detail: lang }));
+  } catch (e) { /* very old browser: headers stay in the load-time language */ }
+}
+
+function initLang() {
+  applyLang(currentLang());
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.lang-switch button'),
+    function (b) {
+      b.addEventListener('click', function () { applyLang(b.dataset.lang); });
+    });
+}
+
+/* Run before anything else so the page never shows the wrong language. */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLang);
+} else {
+  initLang();
+}
