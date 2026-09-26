@@ -1323,6 +1323,172 @@
    * Skills
    * -------------------------------------------------------------------- */
 
+  function statusBadge(skill) {
+        var approval = skill.approval || {};
+        if (skill.status === 'stable') {
+          return '<span class="badge badge--ok"><span class="badge__glyph" aria-hidden="true">✓</span>stable</span>';
+        }
+        if (approval.status === 'held') {
+          return '<span class="badge badge--warn"><span class="badge__glyph" aria-hidden="true">⚠</span>candidate · held</span>';
+        }
+        return '<span class="badge badge--plain">candidate</span>';
+      }
+
+  /* ---------------------------------------------------------------------
+   * Skill registry: a summary row plus a detail row.
+   *
+   * The table alone said *which* skills exist. A reader wants to know what
+   * each one does, what it may cite, what it refuses, and where its code is —
+   * all of which is in the manifest and none of which fits in a table cell.
+   * The detail row is collapsed by default so the list stays scannable.
+   * ------------------------------------------------------------------- */
+  function lang() {
+    return document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+  }
+
+  function pick(en, zh) {
+    return lang() === 'zh' ? (zh || en || '') : (en || '');
+  }
+
+  function chipList(items) {
+    if (!items || !items.length) return '<span class="muted small">—</span>';
+    return '<ul class="chip-list">' + items.map(function (x) {
+      return '<li class="chip">' + esc(x) + '</li>';
+    }).join('') + '</ul>';
+  }
+
+  function skillRow(skill, status) {
+    return '<tr data-status="' + esc(status) + '" class="skill-row">' +
+      '<th scope="row">' +
+        '<button type="button" class="skill-toggle" data-skill="' + esc(skill.id) + '"' +
+          ' aria-expanded="false" aria-controls="detail-' + esc(skill.id) + '">' +
+          '<span class="skill-toggle__glyph" aria-hidden="true">▸</span>' +
+          '<span>' + esc(pick(skill.name, skill.name_zh)) +
+            '<span class="mono small muted" style="display:block">' + esc(skill.id) +
+            '</span>' +
+          '</span>' +
+        '</button>' +
+        '<div class="small muted" style="margin-top:0.25rem">' +
+          esc(pick(skill.summary, skill.summary_zh)) + '</div>' +
+      '</th>' +
+      '<td>' + statusBadge(skill) + '</td>' +
+      '<td class="mono">' + esc(skill.version) +
+        '<div class="small muted">api ' + esc(skill.api_version) + '</div></td>' +
+      '<td class="small">' + esc(skill.source_repo || '—') +
+        '<div class="mono small muted">@' + esc(skill.commit || '') + '</div></td>' +
+      '<td class="small">' + esc(skill.licence) + ' ' + (skill.licence_verified
+        ? '<span class="badge badge--ok"><span class="badge__glyph" aria-hidden="true">✓</span>verified</span>'
+        : '<span class="badge badge--warn"><span class="badge__glyph" aria-hidden="true">⚠</span>unverified</span>') +
+      '</td>' +
+      '<td>' + chipList(skill.permissions) + '</td>' +
+      '<td class="small">' + (deltaCell(skill)) + '</td>' +
+      '</tr>';
+  }
+
+  function deltaCell(skill) {
+    if (skill.benchmark_delta && skill.benchmark_delta.aggregate !== undefined) {
+      return esc(String(skill.benchmark_delta.aggregate));
+    }
+    return '<span class="muted" title="' + esc(skill.benchmark_delta_note || '') + '">—</span>';
+  }
+
+  function skillDetail(skill, status) {
+    var ev = skill.evidence || {};
+    var rt = skill.runtime || {};
+    var ap = skill.approval || {};
+    function kv(label, labelZh, value) {
+      return '<dt>' + esc(pick(label, labelZh)) + '</dt><dd>' + value + '</dd>';
+    }
+    return '<tr class="skill-detail" id="detail-' + esc(skill.id) + '" hidden' +
+      ' data-status="' + esc(status) + '"><td colspan="7"><div class="skill-detail__inner">' +
+
+      '<div class="skill-detail__col">' +
+        '<h4>' + esc(pick('What it refuses to do', '它拒绝做什么')) + '</h4>' +
+        '<p>' + esc(pick(skill.refuses, skill.refuses_zh)) + '</p>' +
+        '<h4>' + esc(pick('Evidence policy', '证据政策')) + '</h4>' +
+        '<dl class="kv">' +
+          kv('Highest evidence tier', '可引用的最高证据层级',
+             '<span class="mono">' + esc(ev.max_tier) + '</span> — ' +
+             esc(ev.max_tier_zh || '')) +
+          kv('Claim kinds it may emit', '可主张的类型',
+             chipList(ev.claim_kinds_zh || ev.claim_kinds)) +
+          kv('Claim kinds forbidden', '禁止主张的类型',
+             chipList(ev.forbidden_claims_zh || ev.forbidden_claims)) +
+          kv('Sources must be pinned', '来源必须钉住',
+             ev.require_pinned_sources ? (lang() === 'zh' ? '是' : 'Yes')
+                                       : (lang() === 'zh' ? '否' : 'No')) +
+          kv('Quotes must be verified', '引文必须核验',
+             ev.require_quote_verified ? (lang() === 'zh' ? '是' : 'Yes')
+                                       : (lang() === 'zh' ? '否' : 'No')) +
+        '</dl>' +
+      '</div>' +
+
+      '<div class="skill-detail__col">' +
+        '<h4>' + esc(pick('How to run it', '怎么调用')) + '</h4>' +
+        '<pre class="code">python -m bioagent.cli skill ' + esc(skill.id) +
+        '\n    --arg &lt;name&gt;=&lt;value&gt;' +
+        '\n    --dir BioScience-Harness/skills/tcm</pre>' +
+        '<h4>' + esc(pick('Runtime', '运行方式')) + '</h4>' +
+        '<dl class="kv">' +
+          kv('Entry point', '入口', '<code class="mono small">' +
+             esc(skill.entrypoint || '—') + '</code>') +
+          kv('Backend', '后端', '<span class="mono">' + esc(rt.backend || '—') +
+             '</span>') +
+          kv('Timeout', '超时', esc((rt.timeout_s || 0) + ' s')) +
+          kv('Deterministic', '确定性',
+             rt.deterministic ? (lang() === 'zh' ? '是' : 'Yes')
+                              : (lang() === 'zh' ? '否' : 'No')) +
+          kv('Content hash', '内容哈希',
+             '<code class="mono small">' + esc((skill.content_hash || '').slice(0, 16)) +
+             '…</code>') +
+          kv('Reads sources', '读取的数据源', chipList(skill.sources)) +
+        '</dl>' +
+      '</div>' +
+
+      '<div class="skill-detail__col">' +
+        '<h4>' + esc(pick('Approval', '批准记录')) + '</h4>' +
+        '<dl class="kv">' +
+          kv('Approved by', '批准人', esc(ap.approved_by || '—')) +
+          kv('Approved at', '批准时间', esc(ap.approved_at || '—')) +
+        '</dl>' +
+        '<h4>' + esc(pick('Documentation', '文档')) + '</h4>' +
+        '<details class="skill-doc"><summary>' +
+          esc(pick('Read SKILL.md', '阅读 SKILL.md')) + '</summary>' +
+          '<pre class="skill-doc__body">' + esc(skill.documentation || '') + '</pre>' +
+        '</details>' +
+      '</div>' +
+
+      '</div></td></tr>';
+  }
+
+  function bindSkillDetail() {
+    /* `?skill=<id>` opens one detail panel, so a link can point at a specific
+     * skill and a screenshot can capture it without a click. */
+    var wanted = null;
+    try { wanted = new URLSearchParams(window.location.search).get('skill'); }
+    catch (e) { /* no URLSearchParams */ }
+
+    Array.prototype.forEach.call(
+      document.querySelectorAll('.skill-toggle'),
+      function (button) {
+        button.addEventListener('click', function () {
+          var id = button.getAttribute('data-skill');
+          var row = document.getElementById('detail-' + id);
+          if (!row) return;
+          var open = row.hasAttribute('hidden');
+          if (open) { row.removeAttribute('hidden'); } else { row.setAttribute('hidden', ''); }
+          button.setAttribute('aria-expanded', String(open));
+          button.querySelector('.skill-toggle__glyph').textContent = open ? '▾' : '▸';
+        });
+        /* Open the deep-linked one *after* its listener is attached; calling
+         * click() before this point dispatched into nothing, which is why
+         * ?skill= rendered a collapsed row. */
+        if (wanted && button.getAttribute('data-skill') === wanted) {
+          button.click();
+        }
+      });
+  }
+
   function renderSkills() {
     var host = $('#skills');
     if (!host) return;
@@ -1357,16 +1523,6 @@
           return '<option value="' + esc(status) + '">' + esc(label) + '</option>';
         }).join('');
 
-      function statusBadge(skill) {
-        var approval = skill.approval || {};
-        if (skill.status === 'stable') {
-          return '<span class="badge badge--ok"><span class="badge__glyph" aria-hidden="true">✓</span>stable</span>';
-        }
-        if (approval.status === 'held') {
-          return '<span class="badge badge--warn"><span class="badge__glyph" aria-hidden="true">⚠</span>candidate · held</span>';
-        }
-        return '<span class="badge badge--plain">candidate</span>';
-      }
 
       function draw() {
         var filter = $('#skill-filter').value;
@@ -1380,6 +1536,14 @@
         $('#skill-body').innerHTML = shown.map(function (skill) {
           var approval = skill.approval || {};
           var delta = skill.benchmark_delta || {};
+          var status = skill.status + (approval.status === 'held' ? ':held' : '');
+          return skillRow(skill, status) + skillDetail(skill, status);
+        }).join('');
+        bindSkillDetail();
+        return;
+
+        var _unused = shown.map(function (skill) {
+          var approval = skill.approval || {};
           var status = skill.status + (approval.status === 'held' ? ':held' : '');
           return '<tr data-status="' + esc(status) + '">' +
             '<th scope="row">' + esc(skill.name) +

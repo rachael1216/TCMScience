@@ -6,7 +6,7 @@
     "stable": 4,
     "benchmark": 0
   },
-  "skills": [
+  "skills_old": [
     {
       "id": "analyze-tcm-network-pharmacology",
       "name": "TCM network pharmacology",
@@ -144,6 +144,368 @@
         "approved_at": "2026-09-25T00:00:00Z"
       },
       "content_hash": "129fde3bce61bd268e9de41207930aac81a0a86078e143413266f9bc51db8d85",
+      "placeholder": false
+    }
+  ],
+  "skills": [
+    {
+      "id": "analyze-tcm-network-pharmacology",
+      "name": "TCM network pharmacology",
+      "name_zh": "中医药网络药理学分析",
+      "status": "stable",
+      "version": "1.0.0",
+      "api_version": "1",
+      "summary": "Build a herb-target network for a formula, keeping predicted edges and measured edges in separate collections so a prediction cannot be read as a measurement.",
+      "summary_zh": "为方剂构建「药材–靶点」网络，把预测边与实测边分开存放，使预测无法被读成实测。",
+      "refuses": "Mix prediction with measurement. `predicted_targets` and `measured_targets` are separate keys with no combined list, and every predicted edge is marked extrapolated so it cannot support a clinical claim.",
+      "refuses_zh": "混淆预测与实测。`predicted_targets` 与 `measured_targets` 是不同的键，没有合并列表；每条预测边都标记为外推，因而无法支撑临床主张。",
+      "source_repo": "TCMScience",
+      "commit": "0965fcca1f6f",
+      "content_hash": "0965fcca1f6fee4d3fed87b9229dd06cc4ebfdd8f2315cef3ff8071fa0c39874",
+      "entrypoint": "bioagent.skills.p0.netpharm:analyze_tcm_network_pharmacology",
+      "licence": "MIT",
+      "licence_verified": true,
+      "integration_mode": "native",
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "permissions_summary": "none",
+      "evidence": {
+        "max_tier": "preclinical",
+        "max_tier_zh": "临床前",
+        "claim_kinds": [
+          "mechanism"
+        ],
+        "claim_kinds_zh": [
+          "作用机制"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "association",
+          "safety_signal",
+          "recommendation",
+          "attribution",
+          "traditional_use"
+        ],
+        "forbidden_claims_zh": [
+          "疗效",
+          "相关性",
+          "安全信号",
+          "推荐意见",
+          "出处归属",
+          "传统应用"
+        ],
+        "require_pinned_sources": true,
+        "require_quote_verified": true
+      },
+      "sources": [
+        "tcmscience.tcm.seed"
+      ],
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "the name or subject to analyse"
+          }
+        }
+      },
+      "outputs": {
+        "type": "object",
+        "properties": {
+          "formula": {
+            "type": "object"
+          },
+          "predicted_targets": {
+            "type": "array"
+          },
+          "measured_targets": {
+            "type": "array"
+          },
+          "pathway_enrichment": {
+            "type": "array"
+          },
+          "provenance_summary": {
+            "type": "object"
+          }
+        }
+      },
+      "runtime": {
+        "backend": "python",
+        "timeout_s": 120.0,
+        "deterministic": true,
+        "idempotent": true
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated against a published gold corpus",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z",
+        "status": "approved"
+      },
+      "documentation": "`analyze-tcm-network-pharmacology` · implementation: `bioagent.skills.p0:analyze_tcm_network_pharmacology`\n\n> This file is documentation. It is **not** parsed for authority and never\n> compiled — `skill.yaml` is the contract (see `docs/adr/0003`). It is attached\n> to each artifact so a reader can see what the skill claims to do.\n\nBuilds a herb–target network for a formula, keeping predicted and measured\nedges strictly apart.\n\n## The separation, which is the point\n\n`predicted_targets` and `measured_targets` are **different keys**. There is no\ncombined `targets` list, so a consumer cannot accidentally read a prediction as a\nmeasurement. Every predicted edge also carries a predictive evidence design\n(`network_prediction`) and is marked `directness: EXTRAPOLATED`.\n\n## Why it cannot make a clinical claim\n\nThe manifest permits `mechanism` and forbids `efficacy`, `association`,\n`safety_signal`, `recommendation`, `attribution` and `traditional_use`. The\nkernel enforces the same thing independently: in its claim-support table,\npredictive designs appear in exactly **one** row, MECHANISTIC. A clinical claim\nfrom this skill is therefore refused twice — by its own manifest and by the\nkernel's type system. Neither refusal depends on the model behaving.\n\n## Inputs\n\n```json\n{\"formula_name\": \"桂枝汤\"}\n```\n\n## Outputs\n\n`network.json` with `ingredients`, `composition_edges`, `predicted_targets`,\n`measured_targets`, `pathway_enrichment`, `provenance_summary` and\n`randomisation`.\n\n## Limits\n\nEvery target edge is a corpus-recorded relation or a network inference; **none is\na binding measurement**. No docking, assay or structure-based prediction was run.\nEnrichment is a ranked list of recorded predicates, not a background-corrected\nanalysis — no network randomisation was performed, so no p-value is reported. The\nnetwork is built from the seed corpus only; no external target database\n(BindingDB, ChEMBL) was queried.\n\nA predicted edge is a hypothesis about a mechanism, not evidence that the formula\ntreats any condition in any patient.",
+      "placeholder": false
+    },
+    {
+      "id": "assess-tcm-safety",
+      "name": "TCM safety assessment",
+      "name_zh": "中医药安全性评估",
+      "status": "stable",
+      "version": "1.0.0",
+      "api_version": "1",
+      "summary": "Report recorded safety information for a herb or combination, including 18-fan incompatibilities, and return `unknown` rather than `safe` when no record exists.",
+      "summary_zh": "报告药材或配伍的安全性记录（含十八反），没有记录时返回「未知」而非「安全」。",
+      "refuses": "Answer \"safe\". The status is recorded / no-record / unknown, and the artifact says in those words that absence of a record is not evidence of safety. 十八反 is checked as a pair, and severity is never downgraded.",
+      "refuses_zh": "回答「安全」。状态只有已记录 / 无记录 / 未知三种，且产物明确写着「没有记录不等于安全」。十八反按组合检查，严重度从不降级。",
+      "source_repo": "TCMScience",
+      "commit": "8b4702bd8c4c",
+      "content_hash": "8b4702bd8c4c0f54f71780b340f2d5d5d96f914b2042af78fe12773d82a1c83a",
+      "entrypoint": "bioagent.skills.p0.assess_safety:assess_tcm_safety",
+      "licence": "MIT",
+      "licence_verified": true,
+      "integration_mode": "native",
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "permissions_summary": "none",
+      "evidence": {
+        "max_tier": "classical_text",
+        "max_tier_zh": "经典文献",
+        "claim_kinds": [
+          "attribution"
+        ],
+        "claim_kinds_zh": [
+          "出处归属"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "recommendation"
+        ],
+        "forbidden_claims_zh": [
+          "疗效",
+          "推荐意见"
+        ],
+        "require_pinned_sources": true,
+        "require_quote_verified": true
+      },
+      "sources": [
+        "tcmscience.tcm.seed"
+      ],
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "the name or subject to analyse"
+          }
+        }
+      },
+      "outputs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "records": {
+            "type": "array"
+          },
+          "critical_records": {
+            "type": "array"
+          },
+          "combination_conflicts": {
+            "type": "array"
+          }
+        }
+      },
+      "runtime": {
+        "backend": "python",
+        "timeout_s": 120.0,
+        "deterministic": true,
+        "idempotent": true
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated against a published gold corpus",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z",
+        "status": "approved"
+      },
+      "documentation": "`assess-tcm-safety` · implementation: `bioagent.skills.p0:assess_tcm_safety`\n\n> This file is documentation. It is **not** parsed for authority and never\n> compiled — `skill.yaml` is the contract (see `docs/adr/0003`). It is attached\n> to each artifact so a reader can see what the skill claims to do.\n\nReports recorded safety information for a herb or a combination, including\n十八反 incompatibilities.\n\n## Unknown is not safe\n\nThe status is `risk_recorded`, `no_record` or `unknown`. **Absence of a record is\nnot evidence of safety**, and the artifact says so in those words. A tool that\nanswers \"no known contraindication\" when it means \"I found no record\" is\ndangerous precisely because it looks helpful.\n\n## The incompatibility check is a set operation\n\n十八反 is a property of a *pair*, so `check_compatibility` is called once with the\nwhole herb list. A per-herb loop would miss every one of them.\n\n## Severity is never downgraded\n\nThere is no code path that softens a finding. A record at `critical` stays\n`critical`.\n\n## Inputs\n\n```json\n{\"subject\": \"甘草\", \"co_administered\": [\"甘遂\"], \"population\": \"\"}\n```\n\n## Outputs\n\n`safety.json` with `status`, `records`, `critical_records`,\n`combination_conflicts`, `processing` and `unresolved`.\n\n## What it does not claim\n\nIts manifest permits `attribution` only. A 十八反 contraindication is real\ntraditional knowledge, and it is **not** a `safety_signal` — that claim kind's\nfloor is `case_report`, and the corpus's records are pharmacopoeia entries. The\ndistinction between \"the classics record these two as incompatible\" and \"there is\nclinical evidence of harm\" is preserved rather than blurred.\n\n## Limits\n\nThe corpus holds 14 safety records and is illustrative; it is not a\npharmacovigilance database, and none (openFDA, DailyMed, TCMToxDB) was queried.\nNo herb–drug interaction check against conventional medicines was performed. No\ndose–response or organ-toxicity assessment was performed.\n\n**This is not clinical advice and must not be used to decide whether a\nprescription is safe for a patient.**",
+      "placeholder": false
+    },
+    {
+      "id": "normalize-tcm-entities",
+      "name": "TCM entity normalization",
+      "name_zh": "中医药实体规范化",
+      "status": "stable",
+      "version": "1.0.0",
+      "api_version": "1",
+      "summary": "Resolve herb, processed-herb, formula and syndrome names to corpus entities, returning candidates rather than choosing when a name is ambiguous.",
+      "summary_zh": "把药材、炮制品、方剂、证候名称解析到语料实体；名称有歧义时返回候选，绝不静默合并。",
+      "refuses": "Choose between two names that mean different drugs. 「姜」 is 生姜 (fresh ginger, releases the exterior) or 干姜 (dried ginger, warms the interior) — different drugs from one plant. It returns both candidates and never picks one.",
+      "refuses_zh": "在有歧义时替你选。「姜」是生姜（微温，解表）或干姜（热，温中回阳）——同株植物，不同的药，不同的主治。它返回全部候选，绝不替你选一个。",
+      "source_repo": "TCMScience",
+      "commit": "bec56d455add",
+      "content_hash": "bec56d455addd50569d4ce8844159646e6857f815578d552c5bdbc5c5e763681",
+      "entrypoint": "bioagent.skills.p0.entities:normalize_tcm_entities",
+      "licence": "MIT",
+      "licence_verified": true,
+      "integration_mode": "native",
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "permissions_summary": "none",
+      "evidence": {
+        "max_tier": "classical_text",
+        "max_tier_zh": "经典文献",
+        "claim_kinds": [
+          "attribution"
+        ],
+        "claim_kinds_zh": [
+          "出处归属"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "association",
+          "safety_signal",
+          "recommendation"
+        ],
+        "forbidden_claims_zh": [
+          "疗效",
+          "相关性",
+          "安全信号",
+          "推荐意见"
+        ],
+        "require_pinned_sources": true,
+        "require_quote_verified": true
+      },
+      "sources": [
+        "tcmscience.tcm.seed"
+      ],
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "the name or subject to analyse"
+          }
+        }
+      },
+      "outputs": {
+        "type": "object",
+        "properties": {
+          "queries": {
+            "type": "array"
+          },
+          "corpus": {
+            "type": "object"
+          }
+        }
+      },
+      "runtime": {
+        "backend": "python",
+        "timeout_s": 120.0,
+        "deterministic": true,
+        "idempotent": true
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated against a published gold corpus",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z",
+        "status": "approved"
+      },
+      "documentation": "`normalize-tcm-entities` · implementation: `bioagent.skills.p0:normalize_tcm_entities`\n\n> This file is documentation. It is **not** parsed for authority and never\n> compiled — `skill.yaml` is the contract (see `docs/adr/0003`). It is attached\n> to each artifact so a reader can see what the skill claims to do.\n\nResolves herb, processed-herb, formula and syndrome names to entries in the\nshipped TCM seed corpus.\n\n## What it returns\n\nFor each input name, either a resolved entity or the **set of candidates** it\ncould mean. It never picks between candidates.\n\n## Why ambiguity is preserved\n\n「姜」 is 生姜 (*Zingiberis Rhizoma Recens*, 微温, releases the exterior) or 干姜\n(*Zingiberis Rhizoma*, 热, warms the interior and restores yang). Different drugs\nfrom the same plant, different indications. 「甘草」 has processed forms\n(炙甘草) that are likewise a different preparation. A resolver that chose one\nwould be wrong roughly half the time and confident every time, and nothing\ndownstream could tell a choice had been made.\n\n## Inputs\n\n```json\n{\"names\": [\"白芍\", \"姜\", \"附子\"]}\n```\n\n## Outputs\n\n`entities.json`:\n```json\n{\"queries\": [{\"query\": \"姜\", \"status\": \"ambiguous\", \"entity_id\": null,\n              \"candidates\": [\"herb.shengjiang\", \"herb.ganjiang\"]}],\n \"corpus\": {\"snapshot_hash\": \"...\", \"snapshot_at\": \"...\"}}\n```\n\n## Limits\n\nResolution is against the seed corpus only. No external identifier (InChIKey,\nUniProt, HGNC) is assigned, because the corpus carries none — that requires a\nconnector run, which this skill does not perform.",
+      "placeholder": false
+    },
+    {
+      "id": "retrieve-tcm-evidence",
+      "name": "TCM evidence retrieval",
+      "name_zh": "中医药证据检索",
+      "status": "stable",
+      "version": "1.0.0",
+      "api_version": "1",
+      "summary": "Retrieve study records and classical passages about a subject, labelling study design and reporting retraction state, coverage limits and quality per dimension.",
+      "summary_zh": "检索某主题的研究记录与经典条文，标注研究设计，并报告撤稿状态、检索覆盖与各维度质量。",
+      "refuses": "Adjudicate. It reports design, scope, retraction state and coverage limits, and does not reduce a body of evidence to a verdict. An empty result is reported as an empty result, not as evidence of no effect.",
+      "refuses_zh": "下判断。它报告研究设计、适用范围、撤稿状态与检索覆盖，不把一堆证据压缩成一个结论。空结果就报告为空结果，而不是「无效果」。",
+      "source_repo": "TCMScience",
+      "commit": "129fde3bce61",
+      "content_hash": "129fde3bce61bd268e9de41207930aac81a0a86078e143413266f9bc51db8d85",
+      "entrypoint": "bioagent.skills.p0.retrieve:retrieve_tcm_evidence",
+      "licence": "MIT",
+      "licence_verified": true,
+      "integration_mode": "native",
+      "permissions": [
+        "network:none",
+        "fs:none"
+      ],
+      "permissions_summary": "none",
+      "evidence": {
+        "max_tier": "expert_experience",
+        "max_tier_zh": "专家经验",
+        "claim_kinds": [
+          "attribution",
+          "traditional_use"
+        ],
+        "claim_kinds_zh": [
+          "出处归属",
+          "传统应用"
+        ],
+        "forbidden_claims": [
+          "efficacy",
+          "recommendation"
+        ],
+        "forbidden_claims_zh": [
+          "疗效",
+          "推荐意见"
+        ],
+        "require_pinned_sources": true,
+        "require_quote_verified": true
+      },
+      "sources": [
+        "tcmscience.tcm.seed"
+      ],
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "the name or subject to analyse"
+          }
+        }
+      },
+      "outputs": {
+        "type": "object",
+        "properties": {
+          "evidence": {
+            "type": "array"
+          },
+          "conflicts": {
+            "type": "array"
+          },
+          "search": {
+            "type": "object"
+          }
+        }
+      },
+      "runtime": {
+        "backend": "python",
+        "timeout_s": 120.0,
+        "deterministic": true,
+        "idempotent": true
+      },
+      "benchmark_delta": null,
+      "benchmark_delta_note": "not measured; no Season has been evaluated against a published gold corpus",
+      "approval": {
+        "approved_by": "TCMScience maintainers",
+        "approved_at": "2026-09-25T00:00:00Z",
+        "status": "approved"
+      },
+      "documentation": "`retrieve-tcm-evidence` · implementation: `bioagent.skills.p0:retrieve_tcm_evidence`\n\n> This file is documentation. It is **not** parsed for authority and never\n> compiled — `skill.yaml` is the contract (see `docs/adr/0003`). It is attached\n> to each artifact so a reader can see what the skill claims to do.\n\nRetrieves study records and classical passages about a subject and reports\nthem with the limits each one carries.\n\n## What it does not do\n\nIt does not answer the question. It returns evidence with its scope attached —\ndesign, population, outcome, retraction state — and leaves the inference to a\nconsumer. A retrieval step that summarised would be making claims nobody could\nattribute to a source.\n\n## Two distinctions it refuses to collapse\n\n- **An empty result is not a null finding.** A search that found nothing is\n  reported as an empty result set with the search recorded, which is a much\n  weaker statement than \"there is no effect\".\n- **An unchecked retraction is not a clean record.** The three-state model\n  (`not_retracted` / `retracted` / `unverified`) exists so \"nobody checked\" is\n  representable and visible.\n\n## Inputs\n\n```json\n{\"subject\": \"附子\", \"claim_kind\": \"efficacy\", \"max_results\": 20}\n```\n\n## Outputs\n\n`evidence.json` with `evidence`, `conflicts`, and `search` (including whether the\nresult set was truncated — a truncated set that does not say so is\nindistinguishable from a complete one).\n\n## Limits\n\nOnly the seed corpus is searched. No live literature index (Europe PMC, PubMed)\nor trial registry (ClinicalTrials.gov, ChiCTR) is queried, so this is **not a\nsystematic search**. Risk of bias, precision and consistency are left\n**NOT ASSESSED** — the corpus carries nothing on which to judge them, and\ndefaulting them to \"low\" would be an invented finding.",
       "placeholder": false
     }
   ],

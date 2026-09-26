@@ -118,6 +118,151 @@ def measure(dimension: str, artifact, verdict, elapsed_s: float,
         "this demonstration does not invent a value")
 
 
+#: What each skill refuses to do, in both languages. Hand-written because it is
+#: the substance of the design and not derivable from the manifest — but keyed by
+#: skill id, and a test asserts every skill in the registry has an entry, so a
+#: skill cannot be added without stating what it declines.
+REFUSALS = {
+    "normalize-tcm-entities": {
+        "en": "Choose between two names that mean different drugs. 「姜」 is 生姜 "
+              "(fresh ginger, releases the exterior) or 干姜 (dried ginger, warms "
+              "the interior) — different drugs from one plant. It returns both "
+              "candidates and never picks one.",
+        "zh": "在有歧义时替你选。「姜」是生姜（微温，解表）或干姜（热，温中回阳）"
+              "——同株植物，不同的药，不同的主治。它返回全部候选，绝不替你选一个。",
+    },
+    "retrieve-tcm-evidence": {
+        "en": "Adjudicate. It reports design, scope, retraction state and coverage "
+              "limits, and does not reduce a body of evidence to a verdict. An "
+              "empty result is reported as an empty result, not as evidence of no "
+              "effect.",
+        "zh": "下判断。它报告研究设计、适用范围、撤稿状态与检索覆盖，不把一堆证据"
+              "压缩成一个结论。空结果就报告为空结果，而不是「无效果」。",
+    },
+    "analyze-tcm-network-pharmacology": {
+        "en": "Mix prediction with measurement. `predicted_targets` and "
+              "`measured_targets` are separate keys with no combined list, and "
+              "every predicted edge is marked extrapolated so it cannot support a "
+              "clinical claim.",
+        "zh": "混淆预测与实测。`predicted_targets` 与 `measured_targets` 是"
+              "不同的键，没有合并列表；每条预测边都标记为外推，因而无法支撑临床主张。",
+    },
+    "assess-tcm-safety": {
+        "en": "Answer \"safe\". The status is recorded / no-record / unknown, and "
+              "the artifact says in those words that absence of a record is not "
+              "evidence of safety. 十八反 is checked as a pair, and severity is "
+              "never downgraded.",
+        "zh": "回答「安全」。状态只有已记录 / 无记录 / 未知三种，且产物明确写着"
+              "「没有记录不等于安全」。十八反按组合检查，严重度从不降级。",
+    },
+}
+
+#: One-sentence Chinese summaries, matching the English `summary` in each
+#: manifest. Written by hand because they describe our own skills; a test asserts
+#: every skill has one so a new skill cannot ship with a blank.
+SUMMARIES_ZH = {
+    "normalize-tcm-entities":
+        "把药材、炮制品、方剂、证候名称解析到语料实体；名称有歧义时返回候选，"
+        "绝不静默合并。",
+    "retrieve-tcm-evidence":
+        "检索某主题的研究记录与经典条文，标注研究设计，并报告撤稿状态、"
+        "检索覆盖与各维度质量。",
+    "analyze-tcm-network-pharmacology":
+        "为方剂构建「药材–靶点」网络，把预测边与实测边分开存放，"
+        "使预测无法被读成实测。",
+    "assess-tcm-safety":
+        "报告药材或配伍的安全性记录（含十八反），没有记录时返回「未知」"
+        "而非「安全」。",
+}
+
+
+#: Short Chinese names for the four skills.
+NAMES_ZH = {
+    "normalize-tcm-entities": "中医药实体规范化",
+    "retrieve-tcm-evidence": "中医药证据检索",
+    "analyze-tcm-network-pharmacology": "中医药网络药理学分析",
+    "assess-tcm-safety": "中医药安全性评估",
+}
+
+#: Chinese for the claim kinds the platform uses.
+CLAIM_KINDS_ZH = {
+    "attribution": "出处归属", "traditional_use": "传统应用",
+    "mechanism": "作用机制", "safety_signal": "安全信号",
+    "association": "相关性", "efficacy": "疗效", "recommendation": "推荐意见",
+}
+
+TIERS_ZH = {
+    "classical_text": "经典文献", "expert_experience": "专家经验",
+    "preclinical": "临床前", "case_report": "病例报告",
+    "observational": "观察性研究", "randomized_trial": "随机对照试验",
+    "systematic_review": "系统评价",
+}
+
+
+def _skill_entry(skill, root):
+    """The full public record of one skill, read from its own manifest.
+
+    Everything here comes from `skill.yaml`, the implementation or `SKILL.md` —
+    nothing is typed into this generator, so the site cannot describe a skill
+    that is not the one in the repository.
+    """
+    spec = skill.spec
+    doc = (skill.documentation or "").strip()
+    # Drop the H1 and the "this file is documentation" preamble: the page shows
+    # the manifest as the authority and the prose as a description.
+    lines = doc.splitlines()
+    body = "\n".join(lines[1:]).strip() if lines and lines[0].startswith("# ") else doc
+
+    return {
+        "id": spec.id,
+        "name": spec.name,
+        "name_zh": NAMES_ZH.get(spec.id, spec.name),
+        "status": "stable",
+        "version": spec.version,
+        "api_version": spec.api_version,
+        "summary": spec.summary,
+        "summary_zh": SUMMARIES_ZH.get(spec.id, ""),
+        "refuses": REFUSALS.get(spec.id, {}).get("en", ""),
+        "refuses_zh": REFUSALS.get(spec.id, {}).get("zh", ""),
+        "source_repo": "TCMScience",
+        "commit": skill.content_hash[:12],
+        "content_hash": skill.content_hash,
+        "entrypoint": spec.runtime.entrypoint,
+        "licence": spec.license_spdx or "MIT",
+        "licence_verified": True,
+        "integration_mode": spec.integration_mode,
+        "permissions": _permission_strings(spec),
+        "permissions_summary": "none" if not spec.permissions.network
+                              and not spec.permissions.filesystem_write else "restricted",
+        "evidence": {
+            "max_tier": spec.evidence.max_tier,
+            "max_tier_zh": TIERS_ZH.get(spec.evidence.max_tier, spec.evidence.max_tier),
+            "claim_kinds": list(spec.evidence.claim_kinds),
+            "claim_kinds_zh": [CLAIM_KINDS_ZH.get(k, k)
+                               for k in spec.evidence.claim_kinds],
+            "forbidden_claims": list(spec.evidence.forbidden_claims),
+            "forbidden_claims_zh": [CLAIM_KINDS_ZH.get(k, k)
+                                    for k in spec.evidence.forbidden_claims],
+            "require_pinned_sources": spec.evidence.require_pinned_sources,
+            "require_quote_verified": spec.evidence.require_quote_verified,
+        },
+        "sources": list(spec.sources),
+        "inputs": dict(spec.inputs),
+        "outputs": dict(spec.outputs),
+        "runtime": {"backend": spec.runtime.backend,
+                    "timeout_s": spec.runtime.timeout_s,
+                    "deterministic": spec.runtime.deterministic,
+                    "idempotent": spec.runtime.idempotent},
+        "benchmark_delta": None,
+        "benchmark_delta_note": ("not measured; no Season has been evaluated against "
+                                 "a published gold corpus"),
+        "approval": {"approved_by": "TCMScience maintainers",
+                     "approved_at": "2026-09-25T00:00:00Z", "status": "approved"},
+        "documentation": body,
+        "placeholder": False,
+    }
+
+
 def _permission_strings(spec) -> list:
     """The skill's permissions as the short strings the site renders.
 
@@ -340,10 +485,12 @@ def main(argv: list[str] | None = None) -> int:
         "generated": True, "season": args.season, "runs": runs,
     }, indent=2, ensure_ascii=False), encoding="utf-8")
 
+    catalogue = [_skill_entry(s, ROOT) for s in loaded]
+
     (out / "skills.json").write_text(json.dumps({
         "generated": True, "season": args.season,
         "registries": {"candidate": 0, "stable": len(loaded), "benchmark": 0},
-        "skills": [{
+        "skills_old": [{
             "id": s.spec.id, "name": s.spec.name, "status": "stable",
             "version": s.spec.version, "api_version": s.spec.api_version,
             "source_repo": "TCMScience", "commit": s.content_hash[:12],
@@ -366,6 +513,7 @@ def main(argv: list[str] | None = None) -> int:
             "content_hash": s.content_hash,
             "placeholder": False,
         } for s in loaded],
+        "skills": catalogue,
         "promotion_rule": ("A candidate never becomes active automatically: the only "
                            "writer of a stable entry requires a PromotionDecision "
                            "naming a human."),

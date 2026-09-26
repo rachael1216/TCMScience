@@ -80,7 +80,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.001012,
+        "latency_s": 0.000878,
         "cost_usd": 0.0
       },
       "versions": {
@@ -111,7 +111,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "3443539382f89c510a3c27134ca51b6dbc0d62775315e095b5246d1a13a74f9b",
+      "artifact_digest": "0827f4086c578ddedce83edc5db8e6db3b1ea42b7c8c85b427be16d2f5ad99d2",
       "provenance": {
         "sources": [
           {
@@ -235,7 +235,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000468,
+        "latency_s": 0.000431,
         "cost_usd": 0.0
       },
       "versions": {
@@ -277,7 +277,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "d8c9c3fb8b65926556068a3b0871af44ce35e62c95bbe511a09446501cd305cd",
+      "artifact_digest": "043fcf81af5098338f7b4478ba42704f5eae61b27ed42a670fb8149ce8a77035",
       "provenance": {
         "sources": [
           {
@@ -487,7 +487,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000673,
+        "latency_s": 0.000532,
         "cost_usd": 0.0
       },
       "versions": {
@@ -528,7 +528,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "a96aee0be4d24987e00061b4863e40dac3fc13a21b6aa011a6a2b612794a116c",
+      "artifact_digest": "6341e7a8fe45af1ffc5636f1b217fc77a4f6a9196644419703c6253632230b80",
       "provenance": {
         "sources": [
           {
@@ -796,7 +796,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000467,
+        "latency_s": 0.000403,
         "cost_usd": 0.0
       },
       "versions": {
@@ -827,7 +827,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "880c58c8f0be9f9ebf33e5a43d2714a88ac0ae147176a70e2bebfaff06bae4f1",
+      "artifact_digest": "c9784280b22956d71f2b8b8775aca5139a34342240473cd53fcf1df0909f33d2",
       "provenance": {
         "sources": [
           {
@@ -950,11 +950,11 @@
         "reproducibility": "the skill was run twice; identical artifact digest",
         "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
         "claim_calibration": "1 claim(s), none overclaiming their evidence",
-        "latency": "measured 1 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000517,
+        "latency_s": 0.000455,
         "cost_usd": 0.0
       },
       "versions": {
@@ -996,7 +996,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "3a37ffe808a00e14dc566b69ac470a6288bcbbfe3b726b76c900d01c46081565",
+      "artifact_digest": "c6a93f9126bdbd748e4fc6dca1b6678e1426903092a11be0ee69eb56adc61ad4",
       "provenance": {
         "sources": [
           {
@@ -1326,11 +1326,11 @@
         "reproducibility": "the skill was run twice; identical artifact digest",
         "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
         "claim_calibration": "1 claim(s), none overclaiming their evidence",
-        "latency": "measured 1 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000554,
+        "latency_s": 0.000485,
         "cost_usd": 0.0
       },
       "versions": {
@@ -1372,7 +1372,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "b02f931993434946d53da90a9f204046e339f8dea54a749881f810dfc50a07e7",
+      "artifact_digest": "997f32338ef8d651554c9ce011c2215e0fdf10f165180ff57471334f90df8907",
       "provenance": {
         "sources": [
           {
@@ -1820,7 +1820,7 @@
         "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
       },
       "raw": {
-        "latency_s": 0.000459,
+        "latency_s": 0.000402,
         "cost_usd": 0.0
       },
       "versions": {
@@ -1851,7 +1851,7 @@
       },
       "refusal_codes": [],
       "blocking_reasons": [],
-      "artifact_digest": "0c6cf6fa74c8785312982073b4252f7698e4c94a9c769b0196a414f79db2ba2c",
+      "artifact_digest": "d8ff7684cbeb242952880a1acf000d3a1b6ca2e5548262354fa98a3f2fb30ca1",
       "provenance": {
         "sources": [
           {

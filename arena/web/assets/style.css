@@ -721,3 +721,93 @@ table.plain tbody tr:last-child td { border-bottom: 0; }
 .howto h2 { margin: 0 0 0.5rem; font-size: 1rem; }
 .howto ol, .howto ul { margin: 0.5rem 0 0; padding-left: 1.25rem; }
 .howto li { margin: 0.375rem 0; line-height: 1.65; }
+
+/* ---------------------------------------------------------------------------
+ * Skill registry: the expandable detail row.
+ *
+ * The table answers "which skills exist"; this answers "what does it actually
+ * do". Collapsed by default so the list stays scannable.
+ * --------------------------------------------------------------------------- */
+.skill-toggle {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  text-align: left;
+}
+.skill-toggle:hover { color: hsl(var(--primary)); }
+.skill-toggle__glyph { color: hsl(var(--primary)); font-size: 0.75rem; }
+
+.skill-detail > td { background: hsl(var(--muted)); padding: 0; }
+.skill-detail__inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid hsl(var(--primary));
+}
+.skill-detail__col h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: hsl(var(--muted-foreground-strong, var(--muted-foreground)));
+}
+.skill-detail__col h4:not(:first-child) { margin-top: 1.25rem; }
+.skill-detail__col p { margin: 0; line-height: 1.65; }
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.chip {
+  font-size: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 999px;
+  padding: 0.125rem 0.5rem;
+}
+
+pre.code {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin: 0 0 0.5rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.skill-doc summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: hsl(var(--primary));
+  font-weight: 500;
+}
+.skill-doc__body {
+  margin: 0.75rem 0 0;
+  max-height: 22rem;
+  overflow-y: auto;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.875rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
