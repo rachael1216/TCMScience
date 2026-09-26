@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill registry — TCMScience Arena</title>
+<meta name="description" content="The TCMScience skill registry: stable and candidate skills with version, source repository, commit, licence, requested permissions and measured benchmark delta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="skills">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html" aria-current="page">Skills</a></li>
+        <li><a class="nav__link" href="methods.html">Methods</a></li>
+        <li><a class="nav__link" href="compare.html">Compare</a></li>
+        <li><a class="nav__link" href="submit.html">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Skill registry</h1>
+      <p class="page-head__lede">
+        A skill executed inside the trusted runtime is code running with the operator's
+        authority. Star count is not evidence of fitness for that. Skills are discovered
+        automatically, promoted by a recorded human decision, and measured before promotion —
+        not after.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="skills">
+
+    <section class="section" aria-labelledby="registries-h">
+      <h2 id="registries-h">Three registries, three lifecycles</h2>
+      <p class="section__lede">
+        What we have found, what we have approved, and what we measure against are different
+        objects. Conflating them is how a leaderboard silently becomes meaningless.
+      </p>
+      <div class="grid grid--3" id="skill-registries"></div>
+      <div class="callout callout--info" style="margin-top:1.25rem">
+        <p class="callout__title">The promotion path is one-way</p>
+        <p id="skill-rule"></p>
+        <p class="small">
+          A monthly update may never modify the Benchmark Registry. Otherwise the current
+          month's score and last month's are not on the same scale.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="skills-h">
+      <h2 id="skills-h">Entries</h2>
+      <p class="section__lede">
+        Stable skills are the only ones the runtime resolves. Candidate skills are listed with
+        their requested permissions because that is the thing a reviewer has to judge — a
+        candidate that asks for <code>network:any</code> or <code>exec:python</code> is asking
+        for more than its benchmark delta can justify.
+      </p>
+
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card__body">
+          <div class="filters">
+            <div class="field">
+              <label class="field__label" for="skill-filter">Status</label>
+              <select id="skill-filter"></select>
+              <span class="field__hint">Held candidates have been measured and not promoted.</span>
+            </div>
+            <div class="field" style="justify-content:end">
+              <p class="filters__count" id="skill-count" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Skill registry entries">
+        <table class="plain">
+          <caption class="visually-hidden">
+            Skill registry entries with status, version, source, licence, requested permissions,
+            measured benchmark delta and approval decision
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Skill</th>
+              <th scope="col">Status</th>
+              <th scope="col">Version</th>
+              <th scope="col">Source</th>
+              <th scope="col">Licence</th>
+              <th scope="col">Permissions requested</th>
+              <th scope="col">Benchmark delta</th>
+              <th scope="col">Approval</th>
+            </tr>
+          </thead>
+          <tbody id="skill-body"></tbody>
+        </table>
+      </div>
+      <p class="small muted" style="margin-top:0.75rem">
+        A benchmark delta is the measured change in the named metric when the skill is added to
+        the reference stack, over the stated number of cases. <code>not measured</code> means
+        exactly that — a candidate is never promoted on the strength of an unmeasured claim.
+        Permission chips marked <span aria-hidden="true">⚠</span> are the ones that widen the
+        runtime's authority.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="promote-h">
+      <h2 id="promote-h">How a skill is promoted</h2>
+      <div class="prose">
+        <ol>
+          <li>
+            <strong>Discovery.</strong> The monthly pipeline scans upstream projects and newly
+            published <code>SKILL.md</code> files. It may write only to the Candidate Catalog.
+            Candidate skills are never executed in production.
+          </li>
+          <li>
+            <strong>Licence and security review.</strong> Run once, at promotion, rather than on
+            every execution. The review records the licence determination and the permission set.
+          </li>
+          <li>
+            <strong>Measurement.</strong> The candidate is benchmarked against the reference
+            stack on the current Season, producing a delta with a case count. A negative or absent
+            delta holds the promotion.
+          </li>
+          <li>
+            <strong>Decision.</strong> A <code>PromotionDecision</code> is recorded by a named
+            reviewer. It is the only writer of a Stable Registry revision; there is no automatic
+            path, and no popularity threshold.
+          </li>
+          <li>
+            <strong>Season cut.</strong> A benchmark Season is cut from a Stable revision and is
+            thereafter immutable. Promote into the registry, and the next Season picks it up;
+            never into the Season.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

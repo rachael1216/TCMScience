@@ -1,0 +1,2496 @@
+{
+  "example": true,
+  "generated_at": "2026-09-25T09:00:00Z",
+  "season": "2026-S1",
+  "season_label": "Season 2026-S1",
+  "boards": [
+    {
+      "id": "trusted",
+      "label": "Trusted board",
+      "note": "Passed every hard gate. Ranked within this track."
+    },
+    {
+      "id": "experimental",
+      "label": "Experimental board",
+      "note": "Blocked by a hard gate. Shown with the blocking reason; never silently dropped."
+    }
+  ],
+  "dimensions": [
+    {
+      "key": "task_success",
+      "label": "Task Success",
+      "weight": 0.125
+    },
+    {
+      "key": "evidence_grounding",
+      "label": "Evidence Grounding",
+      "weight": 0.125
+    },
+    {
+      "key": "provenance_completeness",
+      "label": "Provenance Completeness",
+      "weight": 0.125
+    },
+    {
+      "key": "reproducibility",
+      "label": "Reproducibility",
+      "weight": 0.125
+    },
+    {
+      "key": "safety_abstention",
+      "label": "Safety and Abstention",
+      "weight": 0.125
+    },
+    {
+      "key": "claim_calibration",
+      "label": "Claim Calibration",
+      "weight": 0.125
+    },
+    {
+      "key": "latency",
+      "label": "Latency",
+      "weight": 0.125
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "weight": 0.125
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "r-2026s1-alpha-entity",
+      "system": "Example Agent Alpha",
+      "system_slug": "alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.782,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.92,
+        "evidence_grounding": 0.82,
+        "provenance_completeness": 0.86,
+        "reproducibility": 0.9,
+        "safety_abstention": 0.79,
+        "claim_calibration": 0.85,
+        "latency": 0.64,
+        "cost": 0.56
+      },
+      "raw": {
+        "latency_s": 1014,
+        "cost_usd": 5.19
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": true,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-beta-entity",
+      "system": "Example Agent Beta",
+      "system_slug": "beta",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.775,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.87,
+        "evidence_grounding": 0.78,
+        "provenance_completeness": 0.79,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.75,
+        "claim_calibration": 0.8,
+        "latency": 0.72,
+        "cost": 0.67
+      },
+      "raw": {
+        "latency_s": 822,
+        "cost_usd": 3.98
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-gamma-entity",
+      "system": "Example Agent Gamma",
+      "system_slug": "gamma",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.752,
+      "aggregate_ci95": 0.02,
+      "scores": {
+        "task_success": 0.83,
+        "evidence_grounding": 0.72,
+        "provenance_completeness": 0.81,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.72,
+        "claim_calibration": 0.76,
+        "latency": 0.6,
+        "cost": 0.73
+      },
+      "raw": {
+        "latency_s": 1110,
+        "cost_usd": 3.32
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-delta-entity",
+      "system": "Example Agent Delta",
+      "system_slug": "delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.717,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.9,
+        "evidence_grounding": 0.86,
+        "provenance_completeness": 0.83,
+        "reproducibility": 0.85,
+        "safety_abstention": 0.69,
+        "claim_calibration": 0.44,
+        "latency": 0.68,
+        "cost": 0.62
+      },
+      "raw": {
+        "latency_s": 918,
+        "cost_usd": 4.53
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-epsilon-entity",
+      "system": "Example Agent Epsilon",
+      "system_slug": "epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.633,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.78,
+        "evidence_grounding": 0.67,
+        "provenance_completeness": 0.72,
+        "reproducibility": 0.77,
+        "safety_abstention": 0.28,
+        "claim_calibration": 0.7,
+        "latency": 0.66,
+        "cost": 0.69
+      },
+      "raw": {
+        "latency_s": 966,
+        "cost_usd": 3.76
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-netpharm-entity",
+      "system": "Example NetPharm Stack",
+      "system_slug": "netpharm",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.731,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.85,
+        "evidence_grounding": 0.75,
+        "provenance_completeness": 0.84,
+        "reproducibility": 0.86,
+        "safety_abstention": 0.7,
+        "claim_calibration": 0.79,
+        "latency": 0.54,
+        "cost": 0.59
+      },
+      "raw": {
+        "latency_s": 1254,
+        "cost_usd": 4.86
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 5
+    },
+    {
+      "run_id": "r-2026s1-auditor-entity",
+      "system": "Example Trial Auditor",
+      "system_slug": "auditor",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.775,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.8,
+        "evidence_grounding": 0.8,
+        "provenance_completeness": 0.8,
+        "reproducibility": 0.83,
+        "safety_abstention": 0.76,
+        "claim_calibration": 0.81,
+        "latency": 0.7,
+        "cost": 0.71
+      },
+      "raw": {
+        "latency_s": 870,
+        "cost_usd": 3.54
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-bm25-entity",
+      "system": "Example Baseline BM25",
+      "system_slug": "bm25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.555,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.62,
+        "evidence_grounding": 0.59,
+        "provenance_completeness": 0.34,
+        "reproducibility": 0.22,
+        "safety_abstention": 0.63,
+        "claim_calibration": 0.63,
+        "latency": 0.9,
+        "cost": 0.92
+      },
+      "raw": {
+        "latency_s": 390,
+        "cost_usd": 1.23
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": true,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-end2end-entity",
+      "system": "Example End2End Pipeline",
+      "system_slug": "end2end",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.699,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.81,
+        "evidence_grounding": 0.69,
+        "provenance_completeness": 0.78,
+        "reproducibility": 0.8,
+        "safety_abstention": 0.67,
+        "claim_calibration": 0.74,
+        "latency": 0.62,
+        "cost": 0.53
+      },
+      "raw": {
+        "latency_s": 1062,
+        "cost_usd": 5.52
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 6
+    },
+    {
+      "run_id": "r-2026s1-overclaim-entity",
+      "system": "Example Overclaim Demo",
+      "system_slug": "overclaim",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.655,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.88,
+        "evidence_grounding": 0.77,
+        "provenance_completeness": 0.82,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.65,
+        "claim_calibration": 0.28,
+        "latency": 0.65,
+        "cost": 0.61
+      },
+      "raw": {
+        "latency_s": 990,
+        "cost_usd": 4.64
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-alpha-evidence",
+      "system": "Example Agent Alpha",
+      "system_slug": "alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.778,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.85,
+        "evidence_grounding": 0.89,
+        "provenance_completeness": 0.89,
+        "reproducibility": 0.89,
+        "safety_abstention": 0.8,
+        "claim_calibration": 0.86,
+        "latency": 0.6,
+        "cost": 0.54
+      },
+      "raw": {
+        "latency_s": 1110,
+        "cost_usd": 5.41
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-beta-evidence",
+      "system": "Example Agent Beta",
+      "system_slug": "beta",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.772,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.8,
+        "evidence_grounding": 0.85,
+        "provenance_completeness": 0.82,
+        "reproducibility": 0.83,
+        "safety_abstention": 0.76,
+        "claim_calibration": 0.81,
+        "latency": 0.68,
+        "cost": 0.65
+      },
+      "raw": {
+        "latency_s": 918,
+        "cost_usd": 4.2
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-gamma-evidence",
+      "system": "Example Agent Gamma",
+      "system_slug": "gamma",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.748,
+      "aggregate_ci95": 0.02,
+      "scores": {
+        "task_success": 0.76,
+        "evidence_grounding": 0.79,
+        "provenance_completeness": 0.84,
+        "reproducibility": 0.87,
+        "safety_abstention": 0.73,
+        "claim_calibration": 0.77,
+        "latency": 0.56,
+        "cost": 0.71
+      },
+      "raw": {
+        "latency_s": 1206,
+        "cost_usd": 3.54
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-delta-evidence",
+      "system": "Example Agent Delta",
+      "system_slug": "delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.714,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.83,
+        "evidence_grounding": 0.93,
+        "provenance_completeness": 0.86,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.7,
+        "claim_calibration": 0.45,
+        "latency": 0.64,
+        "cost": 0.6
+      },
+      "raw": {
+        "latency_s": 1014,
+        "cost_usd": 4.75
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": true,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-epsilon-evidence",
+      "system": "Example Agent Epsilon",
+      "system_slug": "epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.633,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.71,
+        "evidence_grounding": 0.74,
+        "provenance_completeness": 0.75,
+        "reproducibility": 0.76,
+        "safety_abstention": 0.29,
+        "claim_calibration": 0.71,
+        "latency": 0.62,
+        "cost": 0.67
+      },
+      "raw": {
+        "latency_s": 1062,
+        "cost_usd": 3.98
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-netpharm-evidence",
+      "system": "Example NetPharm Stack",
+      "system_slug": "netpharm",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.725,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.78,
+        "evidence_grounding": 0.82,
+        "provenance_completeness": 0.87,
+        "reproducibility": 0.85,
+        "safety_abstention": 0.71,
+        "claim_calibration": 0.8,
+        "latency": 0.5,
+        "cost": 0.57
+      },
+      "raw": {
+        "latency_s": 1350,
+        "cost_usd": 5.08
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 5
+    },
+    {
+      "run_id": "r-2026s1-auditor-evidence",
+      "system": "Example Trial Auditor",
+      "system_slug": "auditor",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.771,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.73,
+        "evidence_grounding": 0.87,
+        "provenance_completeness": 0.83,
+        "reproducibility": 0.82,
+        "safety_abstention": 0.77,
+        "claim_calibration": 0.82,
+        "latency": 0.66,
+        "cost": 0.69
+      },
+      "raw": {
+        "latency_s": 966,
+        "cost_usd": 3.76
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-bm25-evidence",
+      "system": "Example Baseline BM25",
+      "system_slug": "bm25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.555,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.55,
+        "evidence_grounding": 0.66,
+        "provenance_completeness": 0.37,
+        "reproducibility": 0.21,
+        "safety_abstention": 0.64,
+        "claim_calibration": 0.64,
+        "latency": 0.86,
+        "cost": 0.9
+      },
+      "raw": {
+        "latency_s": 486,
+        "cost_usd": 1.45
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-end2end-evidence",
+      "system": "Example End2End Pipeline",
+      "system_slug": "end2end",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.695,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.74,
+        "evidence_grounding": 0.76,
+        "provenance_completeness": 0.81,
+        "reproducibility": 0.79,
+        "safety_abstention": 0.68,
+        "claim_calibration": 0.75,
+        "latency": 0.58,
+        "cost": 0.51
+      },
+      "raw": {
+        "latency_s": 1158,
+        "cost_usd": 5.74
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 6
+    },
+    {
+      "run_id": "r-2026s1-overclaim-evidence",
+      "system": "Example Overclaim Demo",
+      "system_slug": "overclaim",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.653,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.81,
+        "evidence_grounding": 0.84,
+        "provenance_completeness": 0.85,
+        "reproducibility": 0.83,
+        "safety_abstention": 0.66,
+        "claim_calibration": 0.29,
+        "latency": 0.61,
+        "cost": 0.59
+      },
+      "raw": {
+        "latency_s": 1086,
+        "cost_usd": 4.86
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-alpha-netpharm",
+      "system": "Example Agent Alpha",
+      "system_slug": "alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.773,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.87,
+        "evidence_grounding": 0.81,
+        "provenance_completeness": 0.91,
+        "reproducibility": 0.92,
+        "safety_abstention": 0.81,
+        "claim_calibration": 0.87,
+        "latency": 0.58,
+        "cost": 0.53
+      },
+      "raw": {
+        "latency_s": 1158,
+        "cost_usd": 5.52
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-beta-netpharm",
+      "system": "Example Agent Beta",
+      "system_slug": "beta",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.768,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.82,
+        "evidence_grounding": 0.77,
+        "provenance_completeness": 0.84,
+        "reproducibility": 0.86,
+        "safety_abstention": 0.77,
+        "claim_calibration": 0.82,
+        "latency": 0.66,
+        "cost": 0.64
+      },
+      "raw": {
+        "latency_s": 966,
+        "cost_usd": 4.31
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-gamma-netpharm",
+      "system": "Example Agent Gamma",
+      "system_slug": "gamma",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.744,
+      "aggregate_ci95": 0.02,
+      "scores": {
+        "task_success": 0.78,
+        "evidence_grounding": 0.71,
+        "provenance_completeness": 0.86,
+        "reproducibility": 0.9,
+        "safety_abstention": 0.74,
+        "claim_calibration": 0.78,
+        "latency": 0.54,
+        "cost": 0.7
+      },
+      "raw": {
+        "latency_s": 1254,
+        "cost_usd": 3.65
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-delta-netpharm",
+      "system": "Example Agent Delta",
+      "system_slug": "delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.712,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.85,
+        "evidence_grounding": 0.85,
+        "provenance_completeness": 0.88,
+        "reproducibility": 0.87,
+        "safety_abstention": 0.71,
+        "claim_calibration": 0.46,
+        "latency": 0.62,
+        "cost": 0.59
+      },
+      "raw": {
+        "latency_s": 1062,
+        "cost_usd": 4.86
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-epsilon-netpharm",
+      "system": "Example Agent Epsilon",
+      "system_slug": "epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.631,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.73,
+        "evidence_grounding": 0.66,
+        "provenance_completeness": 0.77,
+        "reproducibility": 0.79,
+        "safety_abstention": 0.3,
+        "claim_calibration": 0.72,
+        "latency": 0.6,
+        "cost": 0.66
+      },
+      "raw": {
+        "latency_s": 1110,
+        "cost_usd": 4.09
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-netpharm-netpharm",
+      "system": "Example NetPharm Stack",
+      "system_slug": "netpharm",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.721,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.8,
+        "evidence_grounding": 0.74,
+        "provenance_completeness": 0.89,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.72,
+        "claim_calibration": 0.81,
+        "latency": 0.48,
+        "cost": 0.56
+      },
+      "raw": {
+        "latency_s": 1398,
+        "cost_usd": 5.19
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": true,
+      "rank": 5
+    },
+    {
+      "run_id": "r-2026s1-auditor-netpharm",
+      "system": "Example Trial Auditor",
+      "system_slug": "auditor",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.768,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.75,
+        "evidence_grounding": 0.79,
+        "provenance_completeness": 0.85,
+        "reproducibility": 0.85,
+        "safety_abstention": 0.78,
+        "claim_calibration": 0.83,
+        "latency": 0.64,
+        "cost": 0.68
+      },
+      "raw": {
+        "latency_s": 1014,
+        "cost_usd": 3.87
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-bm25-netpharm",
+      "system": "Example Baseline BM25",
+      "system_slug": "bm25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.561,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.57,
+        "evidence_grounding": 0.58,
+        "provenance_completeness": 0.39,
+        "reproducibility": 0.24,
+        "safety_abstention": 0.65,
+        "claim_calibration": 0.65,
+        "latency": 0.84,
+        "cost": 0.89
+      },
+      "raw": {
+        "latency_s": 534,
+        "cost_usd": 1.56
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-end2end-netpharm",
+      "system": "Example End2End Pipeline",
+      "system_slug": "end2end",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.69,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.76,
+        "evidence_grounding": 0.68,
+        "provenance_completeness": 0.83,
+        "reproducibility": 0.82,
+        "safety_abstention": 0.69,
+        "claim_calibration": 0.76,
+        "latency": 0.56,
+        "cost": 0.5
+      },
+      "raw": {
+        "latency_s": 1206,
+        "cost_usd": 5.85
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 6
+    },
+    {
+      "run_id": "r-2026s1-overclaim-netpharm",
+      "system": "Example Overclaim Demo",
+      "system_slug": "overclaim",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.652,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.83,
+        "evidence_grounding": 0.76,
+        "provenance_completeness": 0.87,
+        "reproducibility": 0.86,
+        "safety_abstention": 0.67,
+        "claim_calibration": 0.3,
+        "latency": 0.59,
+        "cost": 0.58
+      },
+      "raw": {
+        "latency_s": 1134,
+        "cost_usd": 4.97
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [
+        "CLM004"
+      ],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-alpha-safety",
+      "system": "Example Agent Alpha",
+      "system_slug": "alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.779,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.82,
+        "evidence_grounding": 0.86,
+        "provenance_completeness": 0.87,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.88,
+        "claim_calibration": 0.88,
+        "latency": 0.59,
+        "cost": 0.55
+      },
+      "raw": {
+        "latency_s": 1134,
+        "cost_usd": 5.3
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-beta-safety",
+      "system": "Example Agent Beta",
+      "system_slug": "beta",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.773,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.77,
+        "evidence_grounding": 0.82,
+        "provenance_completeness": 0.8,
+        "reproducibility": 0.82,
+        "safety_abstention": 0.84,
+        "claim_calibration": 0.83,
+        "latency": 0.67,
+        "cost": 0.66
+      },
+      "raw": {
+        "latency_s": 942,
+        "cost_usd": 4.09
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-gamma-safety",
+      "system": "Example Agent Gamma",
+      "system_slug": "gamma",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.749,
+      "aggregate_ci95": 0.02,
+      "scores": {
+        "task_success": 0.73,
+        "evidence_grounding": 0.76,
+        "provenance_completeness": 0.82,
+        "reproducibility": 0.86,
+        "safety_abstention": 0.81,
+        "claim_calibration": 0.79,
+        "latency": 0.55,
+        "cost": 0.72
+      },
+      "raw": {
+        "latency_s": 1230,
+        "cost_usd": 3.43
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-delta-safety",
+      "system": "Example Agent Delta",
+      "system_slug": "delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.718,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.8,
+        "evidence_grounding": 0.9,
+        "provenance_completeness": 0.84,
+        "reproducibility": 0.83,
+        "safety_abstention": 0.78,
+        "claim_calibration": 0.47,
+        "latency": 0.63,
+        "cost": 0.61
+      },
+      "raw": {
+        "latency_s": 1038,
+        "cost_usd": 4.64
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-epsilon-safety",
+      "system": "Example Agent Epsilon",
+      "system_slug": "epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.644,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.68,
+        "evidence_grounding": 0.71,
+        "provenance_completeness": 0.73,
+        "reproducibility": 0.75,
+        "safety_abstention": 0.37,
+        "claim_calibration": 0.73,
+        "latency": 0.61,
+        "cost": 0.68
+      },
+      "raw": {
+        "latency_s": 1086,
+        "cost_usd": 3.87
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": true,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-netpharm-safety",
+      "system": "Example NetPharm Stack",
+      "system_slug": "netpharm",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.727,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.75,
+        "evidence_grounding": 0.79,
+        "provenance_completeness": 0.85,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.79,
+        "claim_calibration": 0.82,
+        "latency": 0.49,
+        "cost": 0.58
+      },
+      "raw": {
+        "latency_s": 1374,
+        "cost_usd": 4.97
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 5
+    },
+    {
+      "run_id": "r-2026s1-auditor-safety",
+      "system": "Example Trial Auditor",
+      "system_slug": "auditor",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.771,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.7,
+        "evidence_grounding": 0.84,
+        "provenance_completeness": 0.81,
+        "reproducibility": 0.81,
+        "safety_abstention": 0.85,
+        "claim_calibration": 0.84,
+        "latency": 0.65,
+        "cost": 0.7
+      },
+      "raw": {
+        "latency_s": 990,
+        "cost_usd": 3.65
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-bm25-safety",
+      "system": "Example Baseline BM25",
+      "system_slug": "bm25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.55,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.52,
+        "evidence_grounding": 0.63,
+        "provenance_completeness": 0.35,
+        "reproducibility": 0.2,
+        "safety_abstention": 0.72,
+        "claim_calibration": 0.66,
+        "latency": 0.85,
+        "cost": 0.91
+      },
+      "raw": {
+        "latency_s": 510,
+        "cost_usd": 1.34
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-end2end-safety",
+      "system": "Example End2End Pipeline",
+      "system_slug": "end2end",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.697,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.71,
+        "evidence_grounding": 0.73,
+        "provenance_completeness": 0.79,
+        "reproducibility": 0.78,
+        "safety_abstention": 0.76,
+        "claim_calibration": 0.77,
+        "latency": 0.57,
+        "cost": 0.52
+      },
+      "raw": {
+        "latency_s": 1182,
+        "cost_usd": 5.63
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 6
+    },
+    {
+      "run_id": "r-2026s1-overclaim-safety",
+      "system": "Example Overclaim Demo",
+      "system_slug": "overclaim",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.659,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.78,
+        "evidence_grounding": 0.81,
+        "provenance_completeness": 0.83,
+        "reproducibility": 0.82,
+        "safety_abstention": 0.74,
+        "claim_calibration": 0.31,
+        "latency": 0.6,
+        "cost": 0.6
+      },
+      "raw": {
+        "latency_s": 1110,
+        "cost_usd": 4.75
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-alpha-trialaudit",
+      "system": "Example Agent Alpha",
+      "system_slug": "alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.79,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.89,
+        "evidence_grounding": 0.87,
+        "provenance_completeness": 0.88,
+        "reproducibility": 0.89,
+        "safety_abstention": 0.84,
+        "claim_calibration": 0.87,
+        "latency": 0.61,
+        "cost": 0.56
+      },
+      "raw": {
+        "latency_s": 1086,
+        "cost_usd": 5.19
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-beta-trialaudit",
+      "system": "Example Agent Beta",
+      "system_slug": "beta",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.784,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.84,
+        "evidence_grounding": 0.83,
+        "provenance_completeness": 0.81,
+        "reproducibility": 0.83,
+        "safety_abstention": 0.8,
+        "claim_calibration": 0.82,
+        "latency": 0.69,
+        "cost": 0.67
+      },
+      "raw": {
+        "latency_s": 894,
+        "cost_usd": 3.98
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-gamma-trialaudit",
+      "system": "Example Agent Gamma",
+      "system_slug": "gamma",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.76,
+      "aggregate_ci95": 0.02,
+      "scores": {
+        "task_success": 0.8,
+        "evidence_grounding": 0.77,
+        "provenance_completeness": 0.83,
+        "reproducibility": 0.87,
+        "safety_abstention": 0.77,
+        "claim_calibration": 0.78,
+        "latency": 0.57,
+        "cost": 0.73
+      },
+      "raw": {
+        "latency_s": 1182,
+        "cost_usd": 3.32
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-delta-trialaudit",
+      "system": "Example Agent Delta",
+      "system_slug": "delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.726,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.87,
+        "evidence_grounding": 0.91,
+        "provenance_completeness": 0.85,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.74,
+        "claim_calibration": 0.46,
+        "latency": 0.65,
+        "cost": 0.62
+      },
+      "raw": {
+        "latency_s": 990,
+        "cost_usd": 4.53
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-epsilon-trialaudit",
+      "system": "Example Agent Epsilon",
+      "system_slug": "epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.649,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.75,
+        "evidence_grounding": 0.72,
+        "provenance_completeness": 0.74,
+        "reproducibility": 0.76,
+        "safety_abstention": 0.33,
+        "claim_calibration": 0.72,
+        "latency": 0.63,
+        "cost": 0.69
+      },
+      "raw": {
+        "latency_s": 1038,
+        "cost_usd": 3.76
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-netpharm-trialaudit",
+      "system": "Example NetPharm Stack",
+      "system_slug": "netpharm",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.738,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.82,
+        "evidence_grounding": 0.8,
+        "provenance_completeness": 0.86,
+        "reproducibility": 0.85,
+        "safety_abstention": 0.75,
+        "claim_calibration": 0.81,
+        "latency": 0.51,
+        "cost": 0.59
+      },
+      "raw": {
+        "latency_s": 1326,
+        "cost_usd": 4.86
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 5
+    },
+    {
+      "run_id": "r-2026s1-auditor-trialaudit",
+      "system": "Example Trial Auditor",
+      "system_slug": "auditor",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.783,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.77,
+        "evidence_grounding": 0.85,
+        "provenance_completeness": 0.82,
+        "reproducibility": 0.82,
+        "safety_abstention": 0.81,
+        "claim_calibration": 0.83,
+        "latency": 0.67,
+        "cost": 0.71
+      },
+      "raw": {
+        "latency_s": 942,
+        "cost_usd": 3.54
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-bm25-trialaudit",
+      "system": "Example Baseline BM25",
+      "system_slug": "bm25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.563,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.59,
+        "evidence_grounding": 0.64,
+        "provenance_completeness": 0.36,
+        "reproducibility": 0.21,
+        "safety_abstention": 0.68,
+        "claim_calibration": 0.65,
+        "latency": 0.87,
+        "cost": 0.92
+      },
+      "raw": {
+        "latency_s": 462,
+        "cost_usd": 1.23
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-end2end-trialaudit",
+      "system": "Example End2End Pipeline",
+      "system_slug": "end2end",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.707,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.78,
+        "evidence_grounding": 0.74,
+        "provenance_completeness": 0.8,
+        "reproducibility": 0.79,
+        "safety_abstention": 0.72,
+        "claim_calibration": 0.76,
+        "latency": 0.59,
+        "cost": 0.53
+      },
+      "raw": {
+        "latency_s": 1134,
+        "cost_usd": 5.52
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 6
+    },
+    {
+      "run_id": "r-2026s1-overclaim-trialaudit",
+      "system": "Example Overclaim Demo",
+      "system_slug": "overclaim",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-TrialAudit",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.666,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.85,
+        "evidence_grounding": 0.82,
+        "provenance_completeness": 0.84,
+        "reproducibility": 0.83,
+        "safety_abstention": 0.7,
+        "claim_calibration": 0.3,
+        "latency": 0.62,
+        "cost": 0.61
+      },
+      "raw": {
+        "latency_s": 1062,
+        "cost_usd": 4.64
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-alpha-end2end",
+      "system": "Example Agent Alpha",
+      "system_slug": "alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.75,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.86,
+        "evidence_grounding": 0.8,
+        "provenance_completeness": 0.84,
+        "reproducibility": 0.94,
+        "safety_abstention": 0.78,
+        "claim_calibration": 0.8,
+        "latency": 0.57,
+        "cost": 0.52
+      },
+      "raw": {
+        "latency_s": 1182,
+        "cost_usd": 5.63
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-beta-end2end",
+      "system": "Example Agent Beta",
+      "system_slug": "beta",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.745,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.81,
+        "evidence_grounding": 0.76,
+        "provenance_completeness": 0.77,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.74,
+        "claim_calibration": 0.75,
+        "latency": 0.65,
+        "cost": 0.63
+      },
+      "raw": {
+        "latency_s": 990,
+        "cost_usd": 4.42
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 2
+    },
+    {
+      "run_id": "r-2026s1-gamma-end2end",
+      "system": "Example Agent Gamma",
+      "system_slug": "gamma",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.72,
+      "aggregate_ci95": 0.02,
+      "scores": {
+        "task_success": 0.77,
+        "evidence_grounding": 0.7,
+        "provenance_completeness": 0.79,
+        "reproducibility": 0.92,
+        "safety_abstention": 0.71,
+        "claim_calibration": 0.71,
+        "latency": 0.53,
+        "cost": 0.69
+      },
+      "raw": {
+        "latency_s": 1278,
+        "cost_usd": 3.76
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-delta-end2end",
+      "system": "Example Agent Delta",
+      "system_slug": "delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.684,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.84,
+        "evidence_grounding": 0.84,
+        "provenance_completeness": 0.81,
+        "reproducibility": 0.89,
+        "safety_abstention": 0.68,
+        "claim_calibration": 0.39,
+        "latency": 0.61,
+        "cost": 0.58
+      },
+      "raw": {
+        "latency_s": 1086,
+        "cost_usd": 4.97
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 1
+    },
+    {
+      "run_id": "r-2026s1-epsilon-end2end",
+      "system": "Example Agent Epsilon",
+      "system_slug": "epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.605,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.72,
+        "evidence_grounding": 0.65,
+        "provenance_completeness": 0.7,
+        "reproducibility": 0.81,
+        "safety_abstention": 0.27,
+        "claim_calibration": 0.65,
+        "latency": 0.59,
+        "cost": 0.65
+      },
+      "raw": {
+        "latency_s": 1134,
+        "cost_usd": 4.2
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-netpharm-end2end",
+      "system": "Example NetPharm Stack",
+      "system_slug": "netpharm",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.698,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.79,
+        "evidence_grounding": 0.73,
+        "provenance_completeness": 0.82,
+        "reproducibility": 0.9,
+        "safety_abstention": 0.69,
+        "claim_calibration": 0.74,
+        "latency": 0.47,
+        "cost": 0.55
+      },
+      "raw": {
+        "latency_s": 1422,
+        "cost_usd": 5.3
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 5
+    },
+    {
+      "run_id": "r-2026s1-auditor-end2end",
+      "system": "Example Trial Auditor",
+      "system_slug": "auditor",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.744,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.74,
+        "evidence_grounding": 0.78,
+        "provenance_completeness": 0.78,
+        "reproducibility": 0.87,
+        "safety_abstention": 0.75,
+        "claim_calibration": 0.76,
+        "latency": 0.63,
+        "cost": 0.67
+      },
+      "raw": {
+        "latency_s": 1038,
+        "cost_usd": 3.98
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 3
+    },
+    {
+      "run_id": "r-2026s1-bm25-end2end",
+      "system": "Example Baseline BM25",
+      "system_slug": "bm25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.538,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.56,
+        "evidence_grounding": 0.57,
+        "provenance_completeness": 0.32,
+        "reproducibility": 0.26,
+        "safety_abstention": 0.62,
+        "claim_calibration": 0.58,
+        "latency": 0.83,
+        "cost": 0.88
+      },
+      "raw": {
+        "latency_s": 558,
+        "cost_usd": 1.67
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 4
+    },
+    {
+      "run_id": "r-2026s1-end2end-end2end",
+      "system": "Example End2End Pipeline",
+      "system_slug": "end2end",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "trusted",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.667,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.75,
+        "evidence_grounding": 0.67,
+        "provenance_completeness": 0.76,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.66,
+        "claim_calibration": 0.69,
+        "latency": 0.55,
+        "cost": 0.49
+      },
+      "raw": {
+        "latency_s": 1230,
+        "cost_usd": 5.96
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [],
+      "refusal_codes": [],
+      "detail_published": false,
+      "rank": 6
+    },
+    {
+      "run_id": "r-2026s1-overclaim-end2end",
+      "system": "Example Overclaim Demo",
+      "system_slug": "overclaim",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "experimental",
+      "placeholder": true,
+      "cases": 20,
+      "aggregate": 0.617,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.82,
+        "evidence_grounding": 0.75,
+        "provenance_completeness": 0.8,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.64,
+        "claim_calibration": 0.23,
+        "latency": 0.58,
+        "cost": 0.57
+      },
+      "raw": {
+        "latency_s": 1158,
+        "cost_usd": 5.08
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [
+        "CLM004"
+      ],
+      "detail_published": true,
+      "rank": 2
+    }
+  ]
+}

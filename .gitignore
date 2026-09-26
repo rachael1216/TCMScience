@@ -7,3 +7,37 @@ __pycache__/
 *.egg-info/
 build/
 dist/
+
+# ---------------------------------------------------------------------------
+# Research data and results stay local; the repository publishes the
+# architecture, not the findings.
+#
+# The repo exists so others can read, clone and re-run the *system*: the
+# runtime, the skill manifests and their implementations, the registry and its
+# lockfiles, the benchmark harness, the CI. It does not carry the benchmark
+# cases or their gold answers, the Arena's leaderboard data, or run traces.
+#
+# Two reasons. The paper is not on arXiv yet, and publishing the results first
+# would pre-empt it. And a public gold answer contaminates the benchmark for
+# everyone who clones it — the hidden split only means something if it stays
+# hidden.
+#
+# Framework code, schemas and data cards under these directories are NOT
+# ignored and should be committed; only data and results are.
+# ---------------------------------------------------------------------------
+BioScience-Harness/benchmarks/cases/**
+BioScience-Harness/benchmarks/hidden/**
+!BioScience-Harness/benchmarks/cases/README.md
+!BioScience-Harness/benchmarks/hidden/README.md
+arena/web/data/*.json
+arena/web/runs/*
+!arena/web/runs/.gitkeep
+# The example set is committed on purpose: the site must be demonstrable on a
+# fresh clone, where the generated files above do not exist. It carries
+# placeholder rows only — no real scores, no run traces.
+!arena/web/data/*.example.json
+
+# Paper source and PDF. These live outside this working tree by design (in
+# `TCM+AI/paper/`), so nothing should ever appear here; the rule is a backstop.
+paper/
+plan/

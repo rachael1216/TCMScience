@@ -14,7 +14,8 @@ from ..labels import DataLabel, Destination, Sensitivity
 from ..runtime.plan import Plan, TaskKind
 from ..runtime.plan_validator import PlanRejected, PlanValidator, PlanViolation, ValidatedPlan
 from ..runtime.plan_validator import _manifest_for
-from .ir import ClaimType, Effect, ScientificProgram, SideEffect, digest
+from .ir import (EVIDENCE_DESIGNS, PREDICTIVE_DESIGNS, ClaimType, Effect,
+                 ScientificProgram, SideEffect, digest)
 
 
 _DESTINATIONS = {
@@ -26,14 +27,37 @@ _DESTINATIONS = {
     Effect.PERSIST: Destination.PERSISTENT,
     Effect.USER_OUTPUT: Destination.USER_OUTPUT,
 }
+#: Which evidence designs may license which claim kind.
+#:
+#: Two things are deliberately *not* in this table, and both are load-bearing.
+#:
+#: **Predictive designs license only MECHANISTIC.** A docking score or a
+#: predicted target is a statement about a model, so it can support a mechanism
+#: claim — that is the entire output of network pharmacology and refusing it
+#: would make the tool useless. It appears in exactly one row. It cannot support
+#: ASSOCIATION, CLINICAL or SAFETY, because those are statements about patients
+#: and a prediction is not an observation of one. This is the type-level form of
+#: the plan's "computational prediction cannot be asserted as clinical fact".
+#:
+#: **CLINICAL accepts only `randomized_trial`.** Observational evidence is not
+#: enough for an efficacy claim, so there is no row here where a prediction and
+#: a clinical claim can meet.
 _SUPPORTS = {
     ClaimType.CLASSICAL: frozenset({"classical_text"}),
     ClaimType.TRADITIONAL: frozenset({"classical_text", "expert_consensus"}),
-    ClaimType.MECHANISTIC: frozenset({"in_vitro", "animal"}),
+    ClaimType.MECHANISTIC: EVIDENCE_DESIGNS - {"classical_text", "expert_consensus"}
+                           | PREDICTIVE_DESIGNS,
     ClaimType.ASSOCIATION: frozenset({"observational", "randomized_trial"}),
     ClaimType.CLINICAL: frozenset({"randomized_trial"}),
     ClaimType.SAFETY: frozenset({"case_report", "observational", "randomized_trial"}),
 }
+
+#: Claim kinds that assert something about patients. Used to report, rather than
+#: to refuse, a mechanism claim that rests on prediction: the claim is licensed,
+#: but every material claim downstream of a simulation is weaker than one
+#: downstream of a measurement, and a reader is entitled to know which they have.
+_CLINICAL_CLAIMS = frozenset({ClaimType.CLINICAL, ClaimType.ASSOCIATION,
+                              ClaimType.SAFETY})
 
 
 @dataclass(frozen=True)

@@ -7,7 +7,14 @@ name = "bioagent"
 version = "0.2.6"
 description = "Federating biomedical agent: unified capability registry over 16 open-source biomedical agent projects"
 requires-python = ">=3.10"
-dependencies = ["pandas>=2.0", "pyarrow>=14.0"]
+# PyYAML is a hard runtime dependency, not an optional convenience. The skill
+# loader, the registry and the scout all parse YAML, and a skill manifest that
+# cannot be read is not a skill. It was previously only *optionally* imported
+# (`runtime/component.from_yaml` falls back to a hand-rolled reader), which is
+# why it was never declared — and why a fresh install could not load the stable
+# registry at all. Found by simulating CI in a clean virtualenv rather than by
+# reading pyproject.toml.
+dependencies = ["pandas>=2.0", "pyarrow>=14.0", "pyyaml>=6.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "build>=1.0"]

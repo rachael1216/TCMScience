@@ -8,6 +8,52 @@ promised hard isolation, distributed scheduling and multi-tenancy that this does
 
 > **A policy-enforced control plane for biomedical scientific agents.** Research prototype.
 
+## The design vocabulary learned to name a simulation
+
+> **A change to the kernel's own vocabulary, made for a downstream skill and worth
+> understanding on its own.** The clearest example so far of a downstream
+> requirement forcing a kernel distinction that should have existed already.
+
+`workflow.ir` previously had one flat `DESIGNS` set, and it had no way to name a
+*computational* result. Compiling TCMScience's network-pharmacology skill exposed
+the consequence: a docking score or a predicted target relationship had no design
+to declare. The nearest available value was `in_vitro` — so a simulation would
+have been recorded in the IR as a bench experiment. That is precisely the confusion
+the IR exists to prevent, and the IR could not express the distinction needed to
+prevent it.
+
+`DESIGNS` is now two named sets:
+
+```python
+EVIDENCE_DESIGNS   = {classical_text, expert_consensus, in_vitro, animal,
+                      case_report, observational, randomized_trial, systematic_review}
+PREDICTIVE_DESIGNS = {in_silico, network_prediction, docking, molecular_dynamics,
+                      target_prediction, pathway_enrichment}
+DESIGNS            = EVIDENCE_DESIGNS | PREDICTIVE_DESIGNS
+```
+
+The split carries weight in `_SUPPORTS`, the claim-support table. Predictive
+designs appear in **exactly one row**:
+
+```python
+ClaimType.MECHANISTIC: EVIDENCE_DESIGNS - {classical_text, expert_consensus} | PREDICTIVE_DESIGNS
+```
+
+A prediction can therefore license a mechanism claim — the entire output of
+network pharmacology, and refusing it would make the tool useless — and can never
+license `CLINICAL`, `ASSOCIATION` or `SAFETY`. Those are statements about
+patients, and a prediction is not an observation of one. `CLINICAL` still accepts
+only `randomized_trial`, so there is no row where a prediction and a clinical
+claim meet.
+
+This is the kernel enforcing "predictions must not be presented as clinical
+facts" through the type system rather than through a prompt instruction — the
+difference between a rule the model *should* follow and one it *cannot* break.
+958 tests pass unchanged, which is the evidence that widening the vocabulary did
+not loosen anything.
+
+---
+
 ## v0.5.3 — the third review, closed
 
 A third external review (2026-09-18) probed the merged tree with synthetic data and found

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard — TCMScience Arena</title>
+<meta name="description" content="Published TCMScience Arena results by track, with all eight score dimensions decomposed and hard-gated systems shown on the Experimental board.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="leaderboard">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html" aria-current="page">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html">Skills</a></li>
+        <li><a class="nav__link" href="methods.html">Methods</a></li>
+        <li><a class="nav__link" href="compare.html">Compare</a></li>
+        <li><a class="nav__link" href="submit.html">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Leaderboard</h1>
+      <p class="page-head__lede">
+        One row per system per track. The eight dimensions are always visible; the aggregate is
+        published alongside them and never instead of them. Click a row for the run.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="leaderboard">
+
+    <section class="section" aria-labelledby="filters-h">
+      <h2 class="visually-hidden" id="filters-h">Filters</h2>
+      <div class="card">
+        <div class="card__body">
+          <div class="filters">
+            <div class="field">
+              <label class="field__label" for="filter-track">Track</label>
+              <select id="filter-track"></select>
+              <span class="field__hint">Rank is published per track; ranks are not comparable across tracks.</span>
+            </div>
+            <div class="field">
+              <label class="field__label" for="filter-type">Submission type</label>
+              <select id="filter-type"></select>
+              <span class="field__hint">Skill, OCI container, or remote agent API.</span>
+            </div>
+            <fieldset class="filters__group" id="filter-board-group">
+              <legend>Board</legend>
+              <div class="filters__radios" id="filter-board"></div>
+              <span class="field__hint">A gated system is not removed — it moves to the Experimental board with its reason.</span>
+            </fieldset>
+            <div class="field">
+              <label class="field__label" for="filter-query">Search</label>
+              <input type="search" id="filter-query" placeholder="System, track, run id" autocomplete="off">
+              <span class="field__hint">Matches the system name, track, type or run id.</span>
+            </div>
+          </div>
+          <div class="filters__footer">
+            <p class="filters__count" id="filter-count" role="status" aria-live="polite"></p>
+            <button class="btn btn--ghost btn--sm" type="button" id="reset-filters">Reset filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="board-h">
+      <h2 class="visually-hidden" id="board-h">Results</h2>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Leaderboard results">
+        <table class="data-table" id="leaderboard-table">
+          <caption id="leaderboard-caption"></caption>
+          <thead id="leaderboard-head"></thead>
+          <tbody id="leaderboard-body"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                Scores are reproduced exactly as the result generator published them. This page
+                sorts and filters; it does not compute, re-rank, or round. Bars are a reading aid —
+                the number is the information.
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div id="blocked-notes" style="margin-top:1.25rem"></div>
+
+      <p class="small muted" style="margin-top:1rem">
+        Column definitions, the aggregation formula and the gate statements are on the
+        <a href="methods.html">methods page</a>. Raw latencies and costs are shown under their
+        subscores; the subscores exist so those two axes can enter a geometric mean.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

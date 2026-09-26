@@ -1,0 +1,84 @@
+# skills.lock.yaml — the pinned stable registry.
+# Generated from the Registry; do not hand-edit. Every entry names an
+# immutable commit and a content hash, so an upstream edit that did not
+# bump the version still changes what is pinned.
+api_version: '1'
+generated_at: '2026-09-25T00:00:00Z'
+frozen_season: ''
+skills:
+- skill_id: analyze-tcm-network-pharmacology
+  version: 1.0.0
+  composite_id: analyze-tcm-network-pharmacology@1.0.0
+  source_repo: ''
+  source_commit: ''
+  content_hash: 0965fcca1f6fee4d3fed87b9229dd06cc4ebfdd8f2315cef3ff8071fa0c39874
+  license: MIT
+  integration_mode: native
+  allowed_hosts: []
+  filesystem_permissions: []
+  subprocess_permissions: false
+  dependencies: []
+  sbom_digest: ''
+  test_digest: ''
+  benchmark_version: season-1
+  benchmark_scores: {}
+  approved_by: TCMScience maintainers
+  approved_at: '2026-09-25T00:00:00Z'
+  rollback_version: ''
+- skill_id: assess-tcm-safety
+  version: 1.0.0
+  composite_id: assess-tcm-safety@1.0.0
+  source_repo: ''
+  source_commit: ''
+  content_hash: 8b4702bd8c4c0f54f71780b340f2d5d5d96f914b2042af78fe12773d82a1c83a
+  license: MIT
+  integration_mode: native
+  allowed_hosts: []
+  filesystem_permissions: []
+  subprocess_permissions: false
+  dependencies: []
+  sbom_digest: ''
+  test_digest: ''
+  benchmark_version: season-1
+  benchmark_scores: {}
+  approved_by: TCMScience maintainers
+  approved_at: '2026-09-25T00:00:00Z'
+  rollback_version: ''
+- skill_id: normalize-tcm-entities
+  version: 1.0.0
+  composite_id: normalize-tcm-entities@1.0.0
+  source_repo: ''
+  source_commit: ''
+  content_hash: bec56d455addd50569d4ce8844159646e6857f815578d552c5bdbc5c5e763681
+  license: MIT
+  integration_mode: native
+  allowed_hosts: []
+  filesystem_permissions: []
+  subprocess_permissions: false
+  dependencies: []
+  sbom_digest: ''
+  test_digest: ''
+  benchmark_version: season-1
+  benchmark_scores: {}
+  approved_by: TCMScience maintainers
+  approved_at: '2026-09-25T00:00:00Z'
+  rollback_version: ''
+- skill_id: retrieve-tcm-evidence
+  version: 1.0.0
+  composite_id: retrieve-tcm-evidence@1.0.0
+  source_repo: ''
+  source_commit: ''
+  content_hash: 129fde3bce61bd268e9de41207930aac81a0a86078e143413266f9bc51db8d85
+  license: MIT
+  integration_mode: native
+  allowed_hosts: []
+  filesystem_permissions: []
+  subprocess_permissions: false
+  dependencies: []
+  sbom_digest: ''
+  test_digest: ''
+  benchmark_version: season-1
+  benchmark_scores: {}
+  approved_by: TCMScience maintainers
+  approved_at: '2026-09-25T00:00:00Z'
+  rollback_version: ''

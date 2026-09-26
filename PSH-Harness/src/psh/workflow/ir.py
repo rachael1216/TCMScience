@@ -46,10 +46,29 @@ class Effect(str, Enum):
     USER_OUTPUT = "user_output"
 
 
-DESIGNS = frozenset({
+#: Empirical designs: observations of the world. Kept as its own name so a
+#: caller asking "is this an empirical study?" does not have to subtract the
+#: predictive set by hand — the question `_SUPPORTS` has to get right.
+EVIDENCE_DESIGNS = frozenset({
     "classical_text", "expert_consensus", "in_vitro", "animal", "case_report",
     "observational", "randomized_trial", "systematic_review",
 })
+
+#: Computational designs: the output of a model, not an observation.
+#:
+#: Before these were nameable, a network-pharmacology program could not be
+#: expressed in this IR at all — the nearest available design was ``in_vitro``,
+#: which would have recorded a simulation as a bench experiment. That is the
+#: exact confusion this vocabulary exists to prevent, and it is why the set is
+#: named separately rather than merged: the distinction is only enforceable once
+#: the IR can tell a prediction from a measurement.
+PREDICTIVE_DESIGNS = frozenset({
+    "in_silico", "network_prediction", "docking", "molecular_dynamics",
+    "target_prediction", "pathway_enrichment",
+})
+
+#: Every design an ``EvidenceSpec`` may declare.
+DESIGNS = EVIDENCE_DESIGNS | PREDICTIVE_DESIGNS
 
 
 def _array(value: Any) -> tuple:

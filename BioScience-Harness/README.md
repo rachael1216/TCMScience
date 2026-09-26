@@ -1,5 +1,106 @@
 # bioagent-harness v2.6 — a composable harness for biomedical AI agents
 
+## v2.7 — scientific data contracts, compiled skills, and a governed update path
+
+> **This section describes the newest layer. It is the one most likely to be
+> what you came here for if you are looking at how the system keeps a model from
+> overstating what it found.**
+
+Four packages were added, and each exists to close a specific way a scientific
+agent goes wrong. Two of them changed the *kernel's* vocabulary, which is
+recorded in PSH-Harness's `workflow/ir.py` and `workflow/compiler.py` rather than
+hidden in a private copy here.
+
+### `bioagent.contracts` — four schemas and one gate
+
+`SourceCard → EvidenceItem → CandidateClaim → ResearchArtifact`, with
+`validate_artifact` as the only entry point a publisher needs. It is a pure
+function — no clock, no network, no registry — so a published artifact can be
+re-checked by a reviewer holding nothing but the file.
+
+Two decisions changed what the system can *say*, not just how it says it:
+
+**Design is stored; the ordinal tier is derived.** `EvidenceTier` is one rank that
+collapses `animal` and `in_vitro` into `PRECLINICAL`. An assay and an animal study
+license very different claims, so the finer study *design* is now the stored fact
+and the tier is recovered on read. The lossy step is visible instead of silent, and
+a test asserts this package and PSH agree on the design names.
+
+**Computational prediction cannot become clinical fact.** In PSH's claim-support
+table, predictive designs appear in exactly **one** row, `MECHANISTIC`, so a
+network-pharmacology skill can claim a mechanism from a docking result and cannot
+claim efficacy, association or safety from one. That is the kernel's type system
+enforcing it, not a prompt instruction. Overclaiming claims are *constructible*
+and refused by the validator with a distinct code (`ART106` / `CLM004`), because a
+system that could not represent an overclaim could not measure one either.
+
+### `bioagent.skills` — a manifest is compiled, prose is not
+
+A skill is compiled from `skill.yaml` into a `ScientificProgram` that **PSH's own
+compiler validates**. `SKILL.md` is documentation and is never parsed for
+authority — otherwise the security argument would reduce to a language model
+reading a README. Authority is by *intersection*: a skill asking for more than the
+run envelope holds is refused with `SKILL101`, not silently trimmed.
+
+Writing this against a real kernel rather than an assumed one found three rules I
+had wrong, each now a test: evidence and claims live on *different* tasks
+(`EVIDENCE101`/`102`); a repeat-safe declaration or automatic retry needs a
+manifest the kernel has verified (`EFFECT106`/`RETRY102`); and a task reaching a
+public host can never be `PURE` however deterministic (`EFFECT105`).
+
+### `bioagent.updates` — discovery that cannot activate
+
+```text
+candidate ──audit──▶ 8 hard eliminations ──▶ 100-point score ──human──▶ stable
+                                         │                              │
+                                    stays visible                 Season frozen
+```
+
+`Registry.promote` is the only writer of a stable entry and it requires a
+`PromotionDecision`, which refuses an empty `decided_by` — an unattributed
+approval is not an approval. The scout CLI has no flag for promotion and cannot
+reach a host outside its allowlist. Community growth is capped at 5/100 and the
+cap is asserted. A hard elimination runs *before* scoring, so a good total cannot
+outvote a licensing problem.
+
+### `bioagent.benchmarks` — where a refusal is not a failure
+
+Six tracks × 20 cases, eight score dimensions, four hard gates. A hard gate blocks
+the **board**, not the score: a run that fabricated a citation still has a
+`task_success` number, and zeroing it would hide how well the rest worked. When a
+run declines a claim because its evidence does not reach, `claim_calibration`
+counts that as correct — a harness that scored abstention as a miss would push
+systems toward asserting more.
+
+Aggregation is a weighted **harmonic** mean rather than the geometric mean the
+plan names: a geometric mean with any zero term is zero, which would make one
+failed dimension indistinguishable from a system that scored nothing anywhere.
+
+### Three bugs this layer found in its own foundation
+
+Recorded because they are the kind that look like working code:
+
+1. The skill content hash covered only the manifest *directory*, so it pinned the
+   declaration and left `src/bioagent/skills/p0/` editable — an unreviewed
+   implementation change would not have moved the pin.
+2. All four entrypoints named `bioagent.skills.p0:fn`, a package, so `find_spec`
+   resolved to `__init__.py` rather than the module holding the code.
+3. The digest embedded a name derived from the path *as the caller spelled it*,
+   so a relative and an absolute path to the same tree hashed differently and a
+   lockfile generated by the CLI failed to verify under CI. A pin that depends on
+   the caller is not a pin.
+
+### Try it
+
+```bash
+pip install -e ".[dev]"
+PYTHONPATH=src:../PSH-Harness/src python -m pytest -q -m unit      # 847 tests
+PYTHONPATH=src:../PSH-Harness/src python scripts/check_lockfile.py  # pins match the tree
+python -m bioagent.cli scout --skills skills/tcm --out candidates.json
+```
+
+---
+
 ## v2.6 — a TCM knowledge layer, a doctor, and a bridge that keeps its promises
 
 Three things from the 2026-09-18 architecture review (`PSH-Harness/docs/REVIEW_RESPONSE_2026-09-18.md`).

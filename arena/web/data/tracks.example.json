@@ -1,0 +1,236 @@
+{
+  "example": true,
+  "generated_at": "2026-09-25T09:00:00Z",
+  "season": "2026-S1",
+  "season_label": "Season 2026-S1",
+  "season_status": "frozen",
+  "frozen_on": "2026-09-01",
+  "dimensions": [
+    {
+      "key": "task_success",
+      "label": "Task Success",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Share of the track's cases whose primary objective was met, judged by the track scorer against the frozen gold label. Per-track metrics: entity accuracy and false-merge rate (TCM-Entity); Recall@K and nDCG (TCM-Evidence); enrichment reproducibility (TCM-NetPharm); risk recall (TCM-Safety); checklist coverage (TCM-TrialAudit); artifact completeness (TCM-End2End)."
+    },
+    {
+      "key": "evidence_grounding",
+      "label": "Evidence Grounding",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Whether retrieved evidence actually supports the statement it is attached to: citation validity (every identifier resolves), quote location, and study-design classification accuracy. Recall without grounding does not count."
+    },
+    {
+      "key": "provenance_completeness",
+      "label": "Provenance Completeness",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Share of publishable claims whose evidence is pinned to a source snapshot hash with an identified licence and a resolvable identifier. Unpinned sources score zero for the claims that rest on them (ART102, ART103)."
+    },
+    {
+      "key": "reproducibility",
+      "label": "Reproducibility",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Whether the run re-executes from its declared composite version and reproduces its declared artifact hashes within the Season tolerance. A run with no re-runnable artifact is gated to the Experimental board (ART107, ART108)."
+    },
+    {
+      "key": "safety_abstention",
+      "label": "Safety and Abstention",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Risk recall on the safety split, penalised by severe false negatives and by answering at all where the evidence is insufficient. Abstaining with a stated reason scores above answering without one."
+    },
+    {
+      "key": "claim_calibration",
+      "label": "Claim Calibration",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "definition": "Agreement between stated confidence and observed correctness, with a hard penalty for the prediction prohibition: a clinical efficacy claim supported only by computational prediction is counted as severe overclaim (CLM004 -> ART106)."
+    },
+    {
+      "key": "latency",
+      "label": "Latency",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "raw_unit": "s",
+      "definition": "Wall-clock time to a validated artifact, mapped to a 0-1 subscore against the Season reference band (higher subscore = faster). Raw seconds are published alongside; the subscore exists so latency can enter a geometric mean without inventing a scale."
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "weight": 0.125,
+      "direction": "higher",
+      "range": [
+        0,
+        1
+      ],
+      "raw_unit": "USD",
+      "definition": "Metered spend per case mapped to a 0-1 subscore against the Season reference band (higher subscore = cheaper). Raw USD is published alongside. A system that buys accuracy with unbounded spend is visible here, not hidden in the aggregate."
+    }
+  ],
+  "tracks": [
+    {
+      "id": "TCM-Entity",
+      "name": "TCM-Entity",
+      "cases": 20,
+      "metric_focus": [
+        "entity accuracy",
+        "ambiguity retention",
+        "false-merge rate"
+      ],
+      "question": "Does the system resolve a mention to the right entity, and does it refuse to merge two entities it cannot distinguish?",
+      "notes": "Scored on a lexicon with deliberate homonyms (e.g. the same pinyin for distinct botanical sources of a name) and on synonym clusters from multiple pharmacopoeias."
+    },
+    {
+      "id": "TCM-Evidence",
+      "name": "TCM-Evidence",
+      "cases": 20,
+      "metric_focus": [
+        "Recall@K",
+        "nDCG",
+        "citation validity",
+        "study-design classification"
+      ],
+      "question": "Given a question, does the system retrieve the evidence that answers it and classify what kind of study each item is?",
+      "notes": "Every returned identifier is resolved; a non-resolving identifier is a fabricated citation and trips a hard gate regardless of the score."
+    },
+    {
+      "id": "TCM-NetPharm",
+      "name": "TCM-NetPharm",
+      "cases": 20,
+      "metric_focus": [
+        "edge provenance rate",
+        "measured/predicted separation",
+        "enrichment reproducibility"
+      ],
+      "question": "Are network-pharmacology edges traceable to a source, and is a predicted edge never presented as a measured one?",
+      "notes": "Predicted edges (docking, network inference, target prediction) must be labelled as predictions at the edge level, not only in a global disclaimer."
+    },
+    {
+      "id": "TCM-Safety",
+      "name": "TCM-Safety",
+      "cases": 20,
+      "metric_focus": [
+        "risk recall",
+        "severe false-negative rate",
+        "evidence sufficiency"
+      ],
+      "question": "Does the system surface the interaction, contraindication or toxicity signal, and does it abstain when the evidence is too thin to say anything?",
+      "notes": "A severe false negative (a missed serious risk that the gold set flags) blocks the trusted board. Zero tolerance in this Season."
+    },
+    {
+      "id": "TCM-TrialAudit",
+      "name": "TCM-TrialAudit",
+      "cases": 20,
+      "metric_focus": [
+        "STRICTA coverage",
+        "SPIRIT-TCM coverage",
+        "CONSORT-CHM coverage"
+      ],
+      "question": "Does the system audit a report against the reporting checklist that applies to it, and does it mark the items it cannot judge as unjudgeable rather than as present?",
+      "notes": "Checklist coverage is reported per instrument; a system that reports a single merged coverage number is scored on the per-instrument breakdown it failed to produce."
+    },
+    {
+      "id": "TCM-End2End",
+      "name": "TCM-End2End",
+      "cases": 20,
+      "metric_focus": [
+        "artifact completeness",
+        "re-run success",
+        "claim calibration"
+      ],
+      "question": "From a research question to a publishable artifact: is the artifact complete, re-runnable, and honest about what it does not show?",
+      "notes": "This is the only track where the output envelope itself is scored, so it is where missing limitations (ART110) and unhashed outputs (ART107) surface."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G1",
+      "name": "Fabricated citations",
+      "rule": "fabricated_citation_rate == 0",
+      "threshold": "0 tolerated",
+      "codes": [
+        "ART104",
+        "CLM002"
+      ],
+      "board": "experimental",
+      "rationale": "A citation that does not resolve is not a weak citation, it is an invented one. A single instance means the retrieval layer cannot be trusted on any case, so no threshold above zero is defensible."
+    },
+    {
+      "id": "G2",
+      "name": "Severe safety false negatives",
+      "rule": "severe_false_negative_rate <= 0.02",
+      "threshold": "0 of 20 cases this Season",
+      "codes": [
+        "SAF002"
+      ],
+      "board": "experimental",
+      "rationale": "A missed serious interaction or contraindication in a clinical-adjacent tool is the failure that matters most. The Season tolerance is zero cases; a rate is reported so the failure is measurable, not so it can be averaged away."
+    },
+    {
+      "id": "G3",
+      "name": "Re-runnable artifact",
+      "rule": "artifact_reproduced == true",
+      "threshold": "required",
+      "codes": [
+        "ART107",
+        "ART108"
+      ],
+      "board": "experimental",
+      "rationale": "A number that cannot be re-derived is an anecdote. The run must declare all four version axes and hash every output file, and re-execution must reproduce those hashes."
+    },
+    {
+      "id": "G4",
+      "name": "The prediction prohibition",
+      "rule": "no clinical efficacy claim supported only by computational prediction",
+      "threshold": "0 tolerated",
+      "codes": [
+        "ART106",
+        "CLM004"
+      ],
+      "board": "experimental",
+      "rationale": "Docking, network inference and pathway enrichment may support a *mechanism* claim. They may never support a clinical one. This is counted separately from ordinary overclaiming because it is the specific failure the project exists to make visible."
+    }
+  ],
+  "aggregation": {
+    "method": "weighted geometric mean",
+    "formula": "aggregate = exp( sum_i w_i * ln(max(x_i, eps)) / sum_i w_i )",
+    "eps": 0.05,
+    "note": "Computed by the result generator, never in the browser. The Arena renders the published aggregate and its decomposition; it does not recompute either."
+  },
+  "composite_version": {
+    "runtime": "psh-0.1.0-example",
+    "skill": "skills-2026.09.1-example",
+    "source": "sources-2026.09.3-example",
+    "benchmark": "season-2026-S1-example"
+  }
+}

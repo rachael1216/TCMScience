@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=../../src/bioagent/skills/schema/skill.schema.json
+
+# TCM evidence retrieval — declares what this skill may do. This file, not SKILL.md, is
+# what gets compiled and audited (see docs/adr/0003).
+#
+# `evidence.claim_kinds` is the ceiling on what the skill may assert, and the
+# compiler refuses a manifest whose claim kinds its own tier ceiling cannot
+# support. For `analyze-tcm-network-pharmacology` that means `mechanism` only:
+# its evidence is computational, and in the kernel's claim-support table
+# predictive designs appear in exactly one row. A clinical claim from it is
+# refused by its own manifest *and* independently by the kernel.
+
+api_version: "1"
+id: retrieve-tcm-evidence
+name: TCM evidence retrieval
+version: "1.0.0"
+summary: >-
+  Retrieve study records and classical passages about a subject, labelling study design and reporting retraction state, coverage limits and quality per dimension.
+maintainer: TCMScience
+license_spdx: MIT
+integration_mode: native
+documentation: SKILL.md
+
+runtime:
+  backend: python
+  entrypoint: "bioagent.skills.p0.retrieve:retrieve_tcm_evidence"
+  timeout_s: 120
+  memory_mb: 2048
+  deterministic: true
+  idempotent: true
+
+permissions:
+  # The seed corpus is compiled into the package, so these skills reach no
+  # network and write nothing. A connector-backed variant would declare hosts
+  # here, and the compiler would derive PUBLIC_REMOTE from them.
+  network: []
+  filesystem_read: []
+  filesystem_write: []
+  subprocess: false
+  secrets: []
+
+evidence:
+  max_tier: expert_experience
+  claim_kinds:
+    - attribution
+    - traditional_use
+  forbidden_claims:
+    - efficacy
+    - recommendation
+  require_pinned_sources: true
+  require_quote_verified: true
+  required_quality_dimensions:
+    - directness
+
+resources:
+  expected_tokens: 0
+  expected_usd: 0.0
+  expected_latency_s: 2.0
+
+# Declared so the registry resolves them and the artifact can name the corpus it
+# read. An undeclared source cannot be reached.
+sources:
+  - tcmscience.tcm.seed
+
+inputs:
+  type: object
+  properties:
+    query:
+      type: string
+      description: the name or subject to analyse
+
+outputs:
+  type: object
+  properties:
+    evidence:
+      type: array
+    conflicts:
+      type: array
+    search:
+      type: object
+
+risk: r1_routine
+min_autonomy: observe
