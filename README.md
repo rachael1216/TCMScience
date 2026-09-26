@@ -12,19 +12,19 @@
 
 ## Authors · 作者
 
-**康砚澜** Yanlan Kang ¹†　·　**刘瑞琦** Ruiqi Liu ²†　·　**许帅** Shuai Xu ³\*　·　**张绪坤** Xukun Zhang ⁴\*　·　**[朱正忠](https://www.sciopen.com/scholar/info?id=1952658822209773569) William Cheng-Chung Chu** ⁵\*
+**康砚澜** Yanlan Kang <sup>1,†</sup> &nbsp;·&nbsp; **刘瑞琦** Ruiqi Liu <sup>2,†</sup> &nbsp;·&nbsp; **许帅** Shuai Xu <sup>3,*</sup> &nbsp;·&nbsp; **张绪坤** Xukun Zhang <sup>4,*</sup> &nbsp;·&nbsp; **[朱正忠](https://www.sciopen.com/scholar/info?id=1952658822209773569) William Cheng-Chung Chu** <sup>5,*</sup>
 
 <sub>
 
-¹ Institute of Medical Philosophy & Future AI (IMPF-AI) · 医学哲学与未来人工智能研究所<br>
-² Shanghai Medical College, Fudan University · 复旦大学上海医学院<br>
-³ Shanghai Ziranerran Traditional Chinese Medicine Foundation · 上海自然尔然中医药基金会<br>
-⁴ Li Ka Shing Faculty of Medicine, The University of Hong Kong · 香港大学李嘉诚医学院<br>
-⁵ Fuyao University of Science and Technology · 福耀科技大学
+1. Institute of Medical Philosophy & Future AI (IMPF-AI) · 医学哲学与未来人工智能研究所
+2. Shanghai Medical College, Fudan University · 复旦大学上海医学院
+3. Shanghai Ziranerran Traditional Chinese Medicine Foundation · 上海自然尔然中医药基金会
+4. Li Ka Shing Faculty of Medicine, The University of Hong Kong · 香港大学李嘉诚医学院
+5. Fuyao University of Science and Technology · 福耀科技大学
 
 </sub>
 
-† These authors contributed equally · 同等贡献　　\* Co-corresponding authors · 共同通讯作者
+<sup>†</sup> These authors contributed equally · 同等贡献 &nbsp;&nbsp; <sup>*</sup> Co-corresponding authors · 共同通讯作者
 
 [![ci](https://github.com/rachael1216/TCMScience/actions/workflows/ci.yml/badge.svg)](https://github.com/rachael1216/TCMScience/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -32,7 +32,7 @@
 ![PSH](https://img.shields.io/badge/kernel-PSH%200.5.3-6f42c1)
 ![Skills](https://img.shields.io/badge/stable%20skills-4%20pinned-1f6feb)
 ![Benchmark](https://img.shields.io/badge/benchmark-6%20tracks%20%C2%B7%20120%20cases-0969da)
-![Arena](https://img.shields.io/badge/Arena-read--only-57606a)
+[![Arena](https://img.shields.io/badge/Arena-live%20site-2ea44f)](https://rachael1216.github.io/TCMScience/)
 ![Tests](https://img.shields.io/badge/tests-1811%20passing-2ea44f)
 
 </div>
@@ -64,6 +64,23 @@ It prints the complete result of all four TCM skills, including each one's **sta
 
 <!-- zh -->
 **这就是全部。** 想看更详细的安装与调用方式，跳到 [安装](#-install--安装) 或读 [INSTALL.md](INSTALL.md) / [USAGE.md](USAGE.md)。
+
+---
+
+## Evaluation site · 评测网站
+
+**https://rachael1216.github.io/TCMScience/** — the public Arena: leaderboards,
+benchmark registry, skill registry, run traces and methodology.
+
+<!-- zh -->
+**https://rachael1216.github.io/TCMScience/** —— 公开评测平台：排行榜、基准注册表、
+技能注册表、运行 trace 与方法论说明。
+
+The site is read-only and static: it renders published result bundles and never
+computes a score, so compromising it cannot compromise a result.
+
+<!-- zh -->
+该站点只读且为静态：它只渲染已发布的结果包，**永不计算分数**，因此攻破它也无法影响评测结果。
 
 ---
 
