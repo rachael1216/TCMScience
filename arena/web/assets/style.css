@@ -811,3 +811,17 @@ pre.code {
   white-space: pre-wrap;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
+
+/* Authors list on the overview page. */
+.author-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.author-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid hsl(var(--border));
+  line-height: 1.7;
+}
+.author-list li:last-child { border-bottom: 0; }
+.author-list sup { color: hsl(var(--primary)); font-weight: 600; }

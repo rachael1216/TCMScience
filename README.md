@@ -12,11 +12,13 @@
 
 ## Authors · 作者
 
-**Yanlan Kang¹† · Ruiqi Liu²† · Shuai Xu³\* · Xukun Zhang⁴\* · [William Cheng-Chung Chu](https://www.sciopen.com/scholar/info?id=1952658822209773569)⁵\***
-
-¹ Institute of Medical Philosophy & Future AI (IMPF-AI)　·　² Shanghai Medical College, Fudan University
-³ Shanghai Ziranerran Traditional Chinese Medicine Foundation　·　⁴ Li Ka Shing Faculty of Medicine, The University of Hong Kong
-⁵ Fuyao University of Science and Technology
+| | 中文 | English | 单位 |
+|---|---|---|---|
+| ¹† | **康砚澜** | Yanlan Kang | Institute of Medical Philosophy & Future AI (IMPF-AI) |
+| ²† | **刘瑞琦** | Ruiqi Liu | Shanghai Medical College, Fudan University |
+| ³\* | **许帅** | Shuai Xu | Shanghai Ziranerran Traditional Chinese Medicine Foundation |
+| ⁴\* | **张绪坤** | Xukun Zhang | Li Ka Shing Faculty of Medicine, The University of Hong Kong |
+| ⁵\* | **朱正忠** | [William Cheng-Chung Chu](https://www.sciopen.com/scholar/info?id=1952658822209773569) | Fuyao University of Science and Technology |
 
 † These authors contributed equally · 同等贡献　　\* Co-corresponding authors · 共同通讯作者
 
@@ -437,9 +439,10 @@ flowchart LR
 @software{kang2026tcmscience,
   title        = {TCMScience: An Autonomous Scientist for Traditional Chinese Medicine},
   author       = {Kang, Yanlan and Liu, Ruiqi and Xu, Shuai and Zhang, Xukun and Chu, William Cheng-Chung},
+  author+an    = {1=康砚澜; 2=刘瑞琦; 3=许帅; 4=张绪坤; 5=朱正忠},
   year         = {2026},
   url          = {https://github.com/rachael1216/TCMScience},
-  note         = {Open-source research software}
+  note         = {Open-source research software. 中文作者：康砚澜、刘瑞琦、许帅、张绪坤、朱正忠}
 }
 ```
 
