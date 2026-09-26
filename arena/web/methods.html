@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="methods">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main"><span data-en>Skip to content</span><span data-zh>跳到正文</span></a>
 
 <header class="site-header">
   <div class="wrap site-header__inner">
@@ -44,11 +44,11 @@
   <div class="page-head">
     <div class="wrap">
       <h1>Methods</h1>
-      <p class="page-head__lede">
+      <p class="page-head__lede"><span data-en>
         What is measured, how it is aggregated, what is refused outright, and what a published
         number is a claim about. Read this before reading the leaderboard; a rank without these
         definitions is just a sort order.
-      </p>
+      </span><span data-zh>测的是什么、如何聚合、什么被直接拒绝，以及一个已发布的数字究竟在断言什么。读排行榜之前先读这里；没有这些定义的排名，只是一个排序结果。</span></p>
     </div>
   </div>
 
@@ -56,83 +56,84 @@
     <div class="prose">
 
       <section class="section" aria-labelledby="m-claim-h">
-        <h2 id="m-claim-h">1. What a published number is a claim about</h2>
-        <p>
+        <h2 id="m-claim-h"><span data-en>1. What a published number is a claim about</span><span data-zh>一、一个已发布的数字在断言什么</span></h2>
+        <p><span data-en>
           A leaderboard row is often read as a single statement — <em>system A is better than
           system B</em> — and that reading is almost always too strong. What a row here actually
           asserts is narrower:
-        </p>
+        </span><span data-zh>排行榜里的一行，常常被读成一句单一的断言——<em>系统 A 比系统 B 好</em>——而这种读法几乎总是过强。这里的一行实际断言的东西要窄得多：</span></p>
         <blockquote>
-          <p>
+          <p data-en>
             Under Season <span class="mono">S</span>, with runtime <span class="mono">R</span>,
             skill revision <span class="mono">K</span> and source snapshots <span class="mono">D</span>,
             system <span class="mono">A</span> produced a validated artifact on
             <span class="mono">n</span> cases, and these eight dimension scores describe that
             artifact against this frozen gold set.
           </p>
+          <p data-zh>在赛季 <span class="mono">S</span> 下，运行时为 <span class="mono">R</span>、技能修订为 <span class="mono">K</span>、来源快照为 <span class="mono">D</span>，系统 <span class="mono">A</span> 在 <span class="mono">n</span> 道题上产出了一个通过验证的 artifact：这八项维度分数，刻画的正是该 artifact 相对于这套冻结的黄金答案集的表现。</p>
         </blockquote>
-        <p>
+        <p><span data-en>
           Four identifiers are named because four things can independently change the answer.
           A network-pharmacology result produced in March and reproduced in September is not the
           same experiment if the underlying database moved, even if every line of the system's
           code is identical. A single project-wide version number would hide which axis moved — it
           would report that "the version changed" when what changed was that HERB gained forty
           thousand edges.
-        </p>
-        <p>
+        </span><span data-zh>之所以要写明四个标识符，是因为有四件事可以各自独立地改变答案。一个在三月产出、在九月复现的网络药理学（network pharmacology, NP）结果，如果底层数据库移动过，那就不是同一个实验——哪怕系统代码的每一行都完全相同。用一个项目级的版本号会掩盖究竟是哪条轴动了：它会在报告「版本变了」，而实际发生的是 HERB 多了四万条边。</span></p>
+        <p><span data-en>
           The claim is also bounded in the other direction. This benchmark measures whether an
           artifact <em>earned the right to be read as a scientific statement</em>. It does not
           measure whether the claims inside it are true, whether the study design was good, or
           whether the clinical advice is sound. Those are for human reviewers, and pretending a
           scalar can decide them is exactly the failure this project is built against.
-        </p>
+        </span><span data-zh>这个断言在另一个方向上同样有边界。本基准测量的是一个 artifact <em>是否赢得了被当作科学陈述来阅读的资格</em>。它不测量其中的主张是否为真、研究设计是否良好、临床建议是否可靠。那些留给人类审阅者；假装一个标量能裁定它们，恰恰是本项目要对抗的那种失败。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-season-h">
-        <h2 id="m-season-h">2. The Season is the unit of comparison</h2>
-        <p>
+        <h2 id="m-season-h"><span data-en>2. The Season is the unit of comparison</span><span data-zh>二、赛季（Season）是比较的单位</span></h2>
+        <p><span data-en>
           Scores are comparable only within a Season. A Season is cut from a Stable Registry
           revision, frozen on a published date, and thereafter immutable — a monthly skill update
           can never modify it.
-        </p>
+        </span><span data-zh>分数只在同一个赛季（Season）内可比。一个赛季从某个稳定注册表（Stable Registry）修订版中切出，在公布的日期冻结，此后不可更改——月度技能更新永远不能改动它。</span></p>
         <div class="card"><div class="card__body" id="methods-season"></div></div>
-        <p class="small muted" style="margin-top:0.85rem">
+        <p class="small muted" style="margin-top:0.85rem"><span data-en>
           Comparing rows across Seasons is comparing two different examinations. Where the
           leaderboard shows a previous Season, it does so as a reference point, not as a
           ranking that can be merged with the current one.
-        </p>
+        </span><span data-zh>跨赛季比较行，等于比较两场不同的考试。排行榜在显示上一个赛季时，是把它当作参照点，而不是当作一个可以与当季合并的排名。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-tracks-h">
-        <h2 id="m-tracks-h">3. The six tracks</h2>
-        <p>
+        <h2 id="m-tracks-h"><span data-en>3. The six tracks</span><span data-zh>三、六条赛道</span></h2>
+        <p><span data-en>
           Each track has twenty cases and its own scorer. The eight dimensions are shared, but what
           a dimension means is fixed by the track: Task Success on TCM-Entity is entity accuracy
           and false-merge rate; on TCM-TrialAudit it is per-instrument checklist coverage.
-        </p>
-        <p>
+        </span><span data-zh>每条赛道有二十道题，并配有自己的评分器。八项维度是共用的，但一项维度的含义由赛道决定：在 TCM-Entity 上，任务成功率指的是实体准确率与错误合并率；在 TCM-TrialAudit 上，则是对每份量表清单的覆盖度。</span></p>
+        <p><span data-en>
           The tracks are separate because the failure modes are separate, and averaging them into
           one number before you have seen them apart would hide the thing you need to see. A
           system can be excellent at retrieval and dangerous at safety; a single figure would
           report it as mediocre at both.
-        </p>
+        </span><span data-zh>赛道分开，是因为失败模式本就分开；在你还没把它们分开看过之前就把它们平均成一个数字，会掩盖你正需要看见的东西。一个系统可以在检索上很出色、在安全上很危险；一个单一数字会把两者都报成平庸。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-dims-h">
-        <h2 id="m-dims-h">4. The eight dimensions</h2>
-        <p>
+        <h2 id="m-dims-h"><span data-en>4. The eight dimensions</span><span data-zh>四、八项维度</span></h2>
+        <p><span data-en>
           These are read from the Season file at render time, so the definitions below and the
           columns on the leaderboard cannot drift apart.
-        </p>
+        </span><span data-zh>这些定义在渲染时从赛季文件读取，所以下面的定义与排行榜上的列不会各自漂移。</span></p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Score dimensions">
           <table>
-            <caption class="visually-hidden">The eight score dimensions, their weights, direction and definitions</caption>
-            <thead>
+            <caption class="visually-hidden"><span data-en>The eight score dimensions, their weights, direction and definitions</span><span data-zh>八项评分维度、各自的权重、方向与定义</span></caption>
+            <th scope="col"ead>
               <tr>
-                <th scope="col">Dimension</th>
-                <th scope="col" class="col-num">Weight</th>
-                <th scope="col">Direction</th>
-                <th scope="col">What it measures</th>
+                <th scope="col"><span data-en>Dimension</span><span data-zh>维度</span></th>
+                <th scope="col" class="col-num"><span data-en>Weight</span><span data-zh>权重</span></th>
+                <th scope="col"><span data-en>Direction</span><span data-zh>方向</span></th>
+                <th scope="col"><span data-en>What it measures</span><span data-zh>它测量什么</span></th>
               </tr>
             </thead>
             <tbody id="methods-dimensions"></tbody>
@@ -142,83 +143,84 @@
       </section>
 
       <section class="section" aria-labelledby="m-agg-h">
-        <h2 id="m-agg-h">5. Aggregation</h2>
-        <p>
+        <h2 id="m-agg-h"><span data-en>5. Aggregation</span><span data-zh>五、聚合</span></h2>
+        <p data-en>
           The aggregate is a weighted geometric mean of the eight dimension scores, with a floor
           <span class="mono">eps</span> applied to each term.
         </p>
+        <p data-zh>综合分是八项维度分数的加权几何平均，每一项都施加一个下界 <span class="mono">eps</span>。</p>
         <div class="card"><div class="card__body" id="methods-aggregation"></div></div>
 
-        <h3>Why a geometric mean</h3>
-        <p>
+        <h3><span data-en>Why a geometric mean</span><span data-zh>为什么用几何平均</span></h3>
+        <p><span data-en>
           A geometric mean punishes imbalance. Under an arithmetic mean, a system that is strong
           on six dimensions can buy its way out of being weak on the other two: a collapse from
           0.80 to 0.20 on Safety and Abstention costs the same as a fall from 0.80 to 0.60 twice.
           Under a geometric mean it does not, because what enters the sum is the logarithm, and a
           small value dominates it.
-        </p>
-        <p>
+        </span><span data-zh>几何平均惩罚失衡。在算术平均下，一个在六项维度上很强的系统，可以为自己的另外两项弱「花钱买通」：安全与弃权从 0.80 崩到 0.20，与从 0.80 掉到 0.60 发生两次，代价相同。在几何平均下则不然，因为进入求和的是对数，而一个小值会主导它。</span></p>
+        <p><span data-en>
           That is the intended behaviour. The dimensions are not substitutes for one another. A
           system that cannot ground its evidence is not half-credited for being fast, and a system
           that misses safety signals does not recover the loss with a good citation list. If the
           dimensions were substitutable, the aggregate would be a reasonable summary; because they
           are not, an aggregate that treats them as substitutable is a misleading one.
-        </p>
+        </span><span data-zh>这正是设计意图。这些维度之间不可互相替代。一个无法为证据提供依据的系统，不会因为跑得快就得到一半的认可；一个漏掉安全信号的系统，也不会靠一份漂亮的引文列表把损失补回来。如果各项维度可以互相替代，综合分会是一个合理的概括；正因为它们不能互相替代，一个把它们当作可替代的综合分才是误导性的。</span></p>
 
-        <h3>Why a floor</h3>
-        <p>
+        <h3><span data-en>Why a floor</span><span data-zh>为什么要有下界</span></h3>
+        <p><span data-en>
           A bare geometric mean has a discontinuity at zero: one dimension scoring exactly 0 makes
           the whole aggregate 0, which converts a single bad axis into a total loss and destroys
           the information in the other seven. The floor keeps that from happening. It is not a
           rescue: a genuinely failing run is stopped by a hard gate, and gates are applied
           independently of the aggregate. The floor affects the arithmetic of the summary, and
           nothing about who is on which board.
-        </p>
+        </span><span data-zh>裸的几何平均在零点处不连续：某一项维度正好得 0，整个综合分就是 0，这把一条坏轴变成全盘损失，也毁掉了另外七项所携带的信息。下界就是为了防止这件事发生。它不是抢救：真正失败的运行由硬门槛拦下，而门槛的施加与综合分无关。下界影响的是这个概括的算术，与谁上哪个榜单毫无关系。</span></p>
 
-        <h3>Latency and Cost</h3>
-        <p>
+        <h3><span data-en>Latency and Cost</span><span data-zh>延迟与成本</span></h3>
+        <p><span data-en>
           Latency and Cost are not naturally 0–1 quantities, so each is mapped through a reference
           band fixed when the Season is cut, producing a subscore where higher is better — faster
           and cheaper. The raw value in seconds and US dollars is published next to the subscore on
           every row and every run page, so the mapping never hides the measurement. The mapping
           exists so these two axes can enter the same product as the other six without inventing a
           scale after seeing the results.
-        </p>
+        </span><span data-zh>延迟与成本本身并不是 0–1 量纲，所以各自要通过一个在赛季切出时固定的参考区间做映射，得到「越高越好」的子分数——越快、越便宜越好。以秒和美元计的原始值，会发布在每一行和每一个运行页的子分数旁边，因此这个映射永远不会把测量本身藏起来。映射的存在，是为了让这两条轴能与其他六项进入同一个乘积，而不必在看到结果之后再临时发明一个标度。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-gates-h">
-        <h2 id="m-gates-h">6. The hard gates</h2>
-        <p>
+        <h2 id="m-gates-h"><span data-en>6. The hard gates</span><span data-zh>六、硬门槛</span></h2>
+        <p><span data-en>
           A gate is not a score contribution and it is not a weighting. It cannot be traded against
           a high aggregate, and no amount of performance elsewhere buys a way past it. Gates are
           applied before ranking.
-        </p>
+        </span><span data-zh>门槛不是分数贡献，也不是权重。它不能拿高综合分来交换，别处再好的表现也买不到越过它的路。门槛在排名之前施加。</span></p>
         <div class="grid grid--2" id="methods-gates"></div>
 
         <h3><span data-en>Why gated systems are still shown</span><span data-zh>为什么被门槛拦下的系统仍然显示</span></h3>
-        <p>
+        <p><span data-en>
           A blocked system appears on a clearly labelled Experimental board with its blocking
           reason attached. It is never silently dropped, and it is never quietly ranked below the
           trusted rows as if it had merely scored lower. Those are different statements and they
           deserve different interfaces.
-        </p>
-        <p>
+        </span><span data-zh>被拦下的系统会出现在一个明确标注的实验榜上，并附上拦截原因。它绝不会被悄悄丢掉，也绝不会被悄悄排在可信行之下、仿佛它只是分数低了一点。这是两个不同的陈述，理应有不同的界面。</span></p>
+        <p><span data-en>
           There are two reasons for this. The first is that hiding a failure is a way of lying with
           a table. A leaderboard that removes its non-compliant entries reports a compliance rate
           of 100% by construction, which is a property of the filter, not of the field. The second
           is that a blocked row is genuinely informative: the system that fabricates 1.8% of its
           citations has an otherwise strong profile, and that combination — strong, fast, and not
           trustworthy — is precisely what a reader needs to see rather than have withheld.
-        </p>
+        </span><span data-zh>这么做有两个理由。第一，把失败藏起来，就是用表格撒谎。一个把不合规条目移走的排行榜，其合规率按构造就是 100%——那是筛选器的属性，不是这个领域的属性。第二，一条被拦下的行确实有信息量：那个伪造了 1.8% 引文的系统，其余画像其实很强，而「强、快、却不可信」这个组合，恰恰是读者需要看到的，而不是被隐去的。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-pred-h">
         <h2 id="m-pred-h"><span data-en>7. The prediction prohibition</span><span data-zh>七、预测禁令</span></h2>
-        <p>
+        <p><span data-en>
           This is the part of the methodology that matters most, and the part most likely to be
           misunderstood as a mere formatting rule. It is not.
-        </p>
-        <p>
+        </span><span data-zh>这是整套方法中最要紧的部分，也最容易被误解为一条纯粹的排版规则。它不是。</span></p>
+        <p><span data-en>
           Docking, network inference, target prediction, pathway enrichment and molecular dynamics
           are <em>not observations of the world</em>. They are outputs of a model. Placing them on
           the same evidence ladder as an assay, a trial or a systematic review is a category
@@ -226,31 +228,31 @@
           field: a predicted binding score is rendered as a finding, the finding is aggregated
           into a network, the network is summarised as a mechanism, and the mechanism is stated as
           a reason to treat a patient.
-        </p>
-        <p>
+        </span><span data-zh>分子对接、网络推断、靶点预测、通路富集与分子动力学<em>不是对世界的观测</em>。它们是模型的输出。把它们与实验测定、临床试验或系统综述放在同一级证据阶梯上，是一个范畴错误；而正是这个范畴错误，制造了这个领域里大部分的过度声称：一个预测的结合分数被渲染成一项发现，发现被聚合成网络，网络被概括为机制，机制被陈述为治疗病人的理由。</span></p>
+        <p><span data-en>
           The rule the benchmark enforces is therefore about <strong>claim kinds</strong>, not
           about evidence quality:
-        </p>
+        </span><span data-zh>因此本基准执行的规则，针对的是<strong>主张种类</strong>，而不是证据质量：</span></p>
         <ul>
-          <li>
+          <li><span data-en>
             A <strong>mechanism</strong> claim may rest on computational prediction. It is
             permitted, and it is reported with a caveat naming the prediction it rests on.
-          </li>
-          <li>
+          </span><span data-zh>一条<strong>机制</strong>主张可以建立在计算预测之上。这是允许的，但报告时会附带一条说明，点明它所依据的预测。</span></li>
+          <li><span data-en>
             A <strong>clinical</strong> claim may not. If a clinical claim is supported only by
             predictive designs, it is refused with <code>CLM004</code> at the claim layer and
             <code>ART106</code> at the artifact layer, and the run is gated to the Experimental
             board.
-          </li>
+          </span><span data-zh>一条<strong>临床</strong>主张不可以。如果一条临床主张仅由预测性设计支撑，它会在主张层以 <code>CLM004</code>、在 artifact 层以 <code>ART106</code> 被拒绝，并且该次运行会被门槛送到实验榜。</span></li>
         </ul>
-        <p>
+        <p><span data-en>
           Because the rule is about claim kinds, the same evidence base can support one claim and
           not another inside the same artifact. A run that predicts a binding mode may say
           <em>the predicted pose is sterically plausible</em> and may not say <em>the formula is
           effective for this indication in humans</em>. Both statements rest on the identical
           docking output. Only one of them is a claim the evidence can carry.
-        </p>
-        <p>
+        </span><span data-zh>因为规则针对的是主张种类，同一份证据基础在同一个 artifact 内可以支撑一条主张、而不支撑另一条。一次预测了结合模式的运行可以说<em>所预测的构象在空间上是合理的</em>，但不可以说<em>该方剂对该适应症在人体中有效</em>。两个陈述都建立在同一份对接输出之上。只有其中一个，是证据承载得起的主张。</span></p>
+        <p><span data-en>
           Prediction-as-fact is counted <em>separately</em> from ordinary overclaiming, and never
           averaged into a general overclaim rate. The two failures call for different responses —
           one is a calibration problem, the other is a category problem — and collapsing them into
@@ -259,196 +261,196 @@
           (<code>CLM004</code> and <code>ART106</code>) and the artifact layer maps between them,
           so a published report has one stable set of strings while the benchmark retains both
           counts.
-        </p>
-        <p>
+        </span><span data-zh>把预测当作事实，是<em>单独</em>计数的，绝不并入一般的过度声称率去平均。这两类失败需要不同的应对——一个是校准问题，另一个是范畴问题——把它们压成一个数字，恰恰会丢掉本项目存在的意义所在的那个区分。主张层与 artifact 层各自保有自己的词汇表（<code>CLM004</code> 与 <code>ART106</code>），由 artifact 层在两者之间做映射，于是一份已发布的报告拥有一组稳定的字符串，而基准同时保留两个计数。</span></p>
+        <p><span data-en>
           Refusing a claim does not cost the run a point. The refused claim is excluded from
           scoring rather than scored as wrong. This is deliberate: the incentive should point at
           honesty, not at hedging. A run that declines to state a clinical conclusion it cannot
           support should not be ranked below one that states it anyway — that would be a benchmark
           rewarding the failure it claims to measure.
-        </p>
+        </span><span data-zh>拒绝一条主张，不会让这次运行丢分。被拒绝的主张是被排除在评分之外，而不是按答错计分。这是有意为之：激励应当指向诚实，而不是指向含糊其辞。一次运行拒绝陈述它支撑不起的临床结论，不应因此排在那个照说不误的运行之下——那会变成一个奖励它所声称要测量的那种失败的基准。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-abstain-h">
         <h2 id="m-abstain-h"><span data-en>8. Abstention is scored, not penalised</span><span data-zh>八、弃权计分，而非受罚</span></h2>
-        <p>
+        <p><span data-en>
           Safety and Abstention treats a refusal as an outcome. Abstaining with a stated reason
           scores above answering without evidence, and a refusal carries a code rather than a
           blank. A system that answers everything cannot score well on this dimension, because
           risk recall is measured on cases where the correct behaviour includes declining.
-        </p>
-        <p>
+        </span><span data-zh>安全与弃权把拒绝当作一种结果。带明确理由弃权，得分高于没有证据还作答；而拒绝会带一个代码，而不是一片空白。一个什么都回答的系统无法在这一维度上得高分，因为风险召回是在「正确行为包含拒绝」的那些题上测量的。</span></p>
+        <p><span data-en>
           The corresponding gate is the sharpest one here: a severe false negative — a missed
           serious interaction or contraindication that the gold set flags — blocks the trusted
           board. The Season tolerance is expressed as a rate so that the failure is measurable and
           reportable, not so that it can be averaged away. In this Season the published tolerance
           is zero cases.
-        </p>
+        </span><span data-zh>对应的门槛是这里最锋利的一条：一次严重的假阴性——漏掉了一个金标准集标记的严重相互作用或禁忌——会挡住可信榜。赛季容差用一个比率来表达，是为了让这种失败可测量、可上报，而不是为了让它能被平均掉。在本赛季，公布的容差是零例。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-versioning-h">
-        <h2 id="m-versioning-h">9. Versioning</h2>
-        <p>
+        <h2 id="m-versioning-h"><span data-en>9. Versioning</span><span data-zh>九、版本管理</span></h2>
+        <p><span data-en>
           Four axes version independently. Every citable result names all four, and a run whose
           four versions are not all resolvable in the published registries is not rendered on the
           leaderboard at all.
-        </p>
+        </span><span data-zh>四条轴各自独立地做版本管理。每一个可引用的结果都要写明全部四条；一次运行的四条版本若不能全部在已发布的注册表中解析出来，就根本不会在排行榜上渲染。</span></p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Version axes">
           <table>
-            <caption class="visually-hidden">The four independently versioned axes</caption>
-            <thead>
-              <tr><th scope="col">Axis</th><th scope="col">Changes when</th><th scope="col">Why it is separate</th></tr>
+            <caption class="visually-hidden"><span data-en>The four independently versioned axes</span><span data-zh>四条独立做版本管理的轴</span></caption>
+            <th scope="col"ead>
+              <tr><th scope="col"><span data-en>Axis</span><span data-zh>轴</span></th><th scope="col"><span data-en>Changes when</span><span data-zh>何时改变</span></th><th scope="col"><span data-en>Why it is separate</span><span data-zh>为什么分开</span></th></tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Runtime</th>
-                <td>the executing code changes</td>
-                <td>A bug fix in the kernel is not a change in what the benchmark asks.</td>
+                <th scope="row"><span data-en>Runtime</span><span data-zh>运行时</span></th>
+                <td><span data-en>the executing code changes</span><span data-zh>执行的代码发生变化</span></td>
+                <td><span data-en>A bug fix in the kernel is not a change in what the benchmark asks.</span><span data-zh>内核里修一个 bug，不等于基准提出的问题变了。</span></td>
               </tr>
               <tr>
-                <th scope="row">Skill</th>
-                <td>a promotion is approved</td>
-                <td>Adding a skill must not force a runtime release; a promotion must not silently alter a frozen Season.</td>
+                <th scope="row"><span data-en>Skill</span><span data-zh>技能</span></th>
+                <td><span data-en>a promotion is approved</span><span data-zh>一次晋级被批准</span></td>
+                <td><span data-en>Adding a skill must not force a runtime release; a promotion must not silently alter a frozen Season.</span><span data-zh>新增一个技能不应逼出一次运行时发布；一次晋级也不得静默改动已冻结的赛季。</span></td>
               </tr>
               <tr>
                 <th scope="row"><span data-en>Source</span><span data-zh>来源</span></th>
-                <td>a connector's snapshot moves</td>
-                <td>External databases change without telling us. A moved database is a different experiment.</td>
+                <td><span data-en>a connector's snapshot moves</span><span data-zh>连接器的快照发生移动</span></td>
+                <td><span data-en>External databases change without telling us. A moved database is a different experiment.</span><span data-zh>外部数据库不会通知我们就改变。数据库移动了，就是另一个实验。</span></td>
               </tr>
               <tr>
-                <th scope="row">Benchmark</th>
-                <td>a Season is cut</td>
-                <td>The yardstick must not move while results are being compared against it.</td>
+                <th scope="row"><span data-en>Benchmark</span><span data-zh>基准</span></th>
+                <td><span data-en>a Season is cut</span><span data-zh>一个赛季被切出</span></td>
+                <td><span data-en>The yardstick must not move while results are being compared against it.</span><span data-zh>**在被用来比较结果的时候，尺子不能动。**</span></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p>
+        <p><span data-en>
           External sources are pinned by <em>content</em>, not by date: a source card records a
           snapshot hash over the normalised response of every declared operation, and connector
           results carry that hash. "HERB 2.0" is not a version. The hash is. Drift then surfaces as
           a changed source hash rather than as an unexplained change in output, which is the
           difference between a discrepancy you can diagnose and one you can only argue about.
-        </p>
-        <p>
+        </span><span data-zh>外部来源是按<em>内容</em>钉住的，不是按日期：一张来源卡（source card, SC）记录了对每个已声明操作的规范化响应计算出的快照哈希（snapshot hash），连接器的结果携带这个哈希。「HERB 2.0」不是一个版本，哈希才是。这样，漂移就会以来源哈希变化的形式浮出来，而不是表现为输出里一次无法解释的改动——这就是「你能诊断的差异」与「你只能与之争论的差异」之间的区别。</span></p>
+        <p><span data-en>
           The string a leaderboard row and a paper table cite is the composite of all four, not
           any individual version.
-        </p>
+        </span><span data-zh>排行榜的一行和论文表格所引用的那个字符串，是四条的复合，而不是其中任何单独一个版本。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-coi-h">
-        <h2 id="m-coi-h">10. Conflict of interest</h2>
-        <p>
+        <h2 id="m-coi-h"><span data-en>10. Conflict of interest</span><span data-zh>十、利益冲突</span></h2>
+        <p><span data-en>
           The party that builds a system must not be the party that scores it, and the party that
           scores it must not be able to change the score afterwards.
-        </p>
+        </span><span data-zh>构建系统的一方，不得是给它评分的一方；给它评分的一方，不得能在事后改动分数。</span></p>
         <ul>
-          <li>
+          <li><span data-en>
             <strong>Scoring is separated from submission.</strong> Evaluation runs in the Runner
             under a frozen policy snapshot. Submitters do not run the scorer, choose the cases, or
             see the held-out labels.
-          </li>
-          <li>
+          </span><span data-zh><strong>评分与提交分离。</strong>评测在 Runner 内、在冻结的策略快照下运行。提交者不运行评分器、不挑选题目，也看不到留出集的标签。</span></li>
+          <li><span data-en>
             <strong>Nothing on this site can alter a result.</strong> The Arena renders published
             bundles and holds no write path to any registry. A published number cannot be edited by
             editing the website that displays it, and compromising the website does not compromise
             a result. This is an architectural property, not a policy — see
             <code>docs/adr/0004-arena-read-only-static-first.md</code>.
-          </li>
-          <li>
+          </span><span data-zh><strong>本站上的任何东西都无法改动结果。</strong>Arena 渲染已发布的结果包，不持有通往任何注册表的写入路径。一个已发布的数字，无法通过编辑展示它的网站来改动；攻破网站也不等于攻破一个结果。这是一条架构属性，不是一项政策——见 <code>docs/adr/0004-arena-read-only-static-first.md</code>。</span></li>
+          <li><span data-en>
             <strong>Promotion decisions are recorded, attributed and published.</strong> A skill
             enters the Stable Registry only through a <code>PromotionDecision</code> naming the
             reviewer and the date. There is no automatic path and no popularity threshold. The
             decision and its identifier are shown on the <a href="skills.html">skill registry</a>.
-          </li>
-          <li>
+          </span><span data-zh><strong>晋级决策被记录、可归属、并公开发布。</strong>一个技能只有通过一条写明审阅者与日期的 <code>PromotionDecision</code> 才能进入稳定注册表。没有自动路径，也没有热度门槛。该决策及其标识符显示在<a href="skills.html">技能注册表</a>上。</span></li>
+          <li><span data-en>
             <strong>Conflicts are declared.</strong> A reviewer with an interest in a submitted
             system recuses; a system submitted by a maintainer of this benchmark is labelled as
             such on its row and is reviewed by someone else.
-          </li>
-          <li>
+          </span><span data-zh><strong>冲突须声明。</strong>对某个被提交系统存在利益关系的审阅者须回避；由本基准维护者提交的系统，会在其行上如此标注，并由其他人审阅。</span></li>
+          <li><span data-en>
             <strong>The gold answers stay hidden.</strong> Cases and labels are not published, so a
             system cannot be tuned against the set it is scored on. The scorers, the schema and the
             data card are published so that the scoring itself can be audited.
-          </li>
+          </span><span data-zh><strong>黄金答案保持隐藏。</strong>题目与标签不发布，因此系统无法针对它被评分的那套题做调优。评分器、schema 与数据卡是发布的，以便评分本身可以被审计。</span></li>
         </ul>
       </section>
 
       <section class="section" aria-labelledby="m-repro-h">
         <h2 id="m-repro-h"><span data-en>11. Reproducibility policy</span><span data-zh>十一、可复现性政策</span></h2>
-        <p>
+        <p><span data-en>
           A result is published only if a third party holding the four version axes can re-derive
           it. Concretely, that requires the run to satisfy all of the following, and each is
           checked mechanically rather than asserted:
-        </p>
+        </span><span data-zh>一个结果，只有在「持有四条版本轴的第三方能够重新推导出它」时才被发布。具体而言，这要求该次运行满足以下全部条件，而每一条都是机器检查的，不是口头声称的：</span></p>
         <ol>
-          <li>
+          <li><span data-en>
             <strong>All four axes declared.</strong> A composite version missing any axis fails
             validation (<code>ART108</code>).
-          </li>
-          <li>
+          </span><span data-zh><strong>四条轴全部声明。</strong>复合版本若缺少任何一条轴，验证不通过（<code>ART108</code>）。</span></li>
+          <li><span data-en>
             <strong>Every output hashed.</strong> A declared output file with no content hash fails
             validation (<code>ART107</code>); a file you cannot re-check is a file you cannot
             trust.
-          </li>
-          <li>
+          </span><span data-zh><strong>每个输出都有哈希。</strong>一个已声明的输出文件若没有内容哈希，验证不通过（<code>ART107</code>）；你无法复查的文件，就是你无法信任的文件。</span></li>
+          <li><span data-en>
             <strong>Every source pinned.</strong> A publishable claim resting on a source that is
             not pinned to a snapshot (<code>ART102</code>) or has no identified licence
             (<code>ART103</code>) fails validation.
-          </li>
-          <li>
+          </span><span data-zh><strong>每个来源都已钉住。</strong>一条可发布的主张，若建立在一个未钉住快照的来源（<code>ART102</code>）或未标明许可的来源（<code>ART103</code>）之上，验证不通过。</span></li>
+          <li><span data-en>
             <strong>Every quote located.</strong> A supporting quote that cannot be located in its
             source is refused (<code>CLM010</code>). A paraphrase presented as a quotation is not
             a lesser sin than a fabricated citation, only a quieter one.
-          </li>
-          <li>
+          </span><span data-zh><strong>每条引文都能定位。</strong>一条无法在其来源中定位的支撑性引文会被拒绝（<code>CLM010</code>）。把转述当作引文来呈现，其过错不比伪造引文更轻，只是更安静。</span></li>
+          <li><span data-en>
             <strong>Re-execution reproduces the hashes.</strong> The Reproducibility dimension
             reports the outcome of an actual re-run within the Season tolerance, not a promise
             that one is possible.
-          </li>
-          <li>
+          </span><span data-zh><strong>重新执行能复现哈希。</strong>可复现性维度报告的是在赛季容差内一次真实重跑的结果，而不是「有可能重跑」的承诺。</span></li>
+          <li><span data-en>
             <strong>Limitations stated.</strong> An artifact declaring no limitations fails
             validation (<code>ART110</code>). An artifact that says nothing about its own scope has
             not earned the right to be read as a scientific statement.
-          </li>
+          </span><span data-zh><strong>局限已陈述。</strong>一个声明「没有局限」的 artifact 验证不通过（<code>ART110</code>）。一个对自己的适用范围一言不发的 artifact，还没有赢得被当作科学陈述来阅读的资格。</span></li>
         </ol>
-        <p>
+        <p><span data-en>
           The validator itself is a pure function over a finished artifact: it opens no sockets,
           reads no clock and consults no registry. The same artifact therefore produces the same
           verdict today and in five years, which is what makes a published result re-checkable by a
           reviewer who was not there when it ran.
-        </p>
+        </span><span data-zh>校验器本身是一个作用于已完成 artifact 的纯函数：它不开套接字、不读时钟、不查询任何注册表。因此同一个 artifact 在今天和在五年后会产生同样的裁定——这正是让一个已发布结果可以被「当时不在场」的审阅者复查的原因。</span></p>
       </section>
 
       <section class="section" aria-labelledby="m-limits-h">
         <h2 id="m-limits-h"><span data-en>12. Known limitations of these methods</span><span data-zh>十二、本方法已知的局限</span></h2>
         <ul>
-          <li>
+          <li><span data-en>
             <strong>Twenty cases per track is a small sample.</strong> Each row publishes a 95%
             interval on the aggregate for that reason. Small differences between adjacent ranks
             are not meaningful, and the leaderboard does not claim they are.
-          </li>
-          <li>
+          </span><span data-zh><strong>每条赛道二十道题是小样本。</strong>正因如此，每一行都发布综合分的 95% 区间。相邻名次之间的小差异没有实质意义，排行榜也不声称它们有。</span></li>
+          <li><span data-en>
             <strong>Checklist coverage is not quality.</strong> TCM-TrialAudit measures whether a
             report addresses the items STRICTA, SPIRIT-TCM and CONSORT-CHM ask for. A report can
             address every item and still describe a bad trial.
-          </li>
-          <li>
+          </span><span data-zh><strong>清单覆盖度不等于质量。</strong>TCM-TrialAudit 测量的是报告是否回应了 STRICTA、SPIRIT-TCM 与 CONSORT-CHM 要求的条目。一份报告可以逐条回应，却仍然描述的是一项糟糕的试验。</span></li>
+          <li><span data-en>
             <strong>Latency and cost are environment-dependent.</strong> Their subscores are
             comparable within a Season and within a submission type, and are weak evidence across
             types — a container's cold start is not the same cost as a remote API call.
-          </li>
-          <li>
+          </span><span data-zh><strong>延迟与成本依赖环境。</strong>它们的子分数在同一个赛季内、同一种提交方式内可比，跨方式则是弱证据——容器的冷启动与一次远程 API 调用不是同一种成本。</span></li>
+          <li><span data-en>
             <strong>The track set is a choice.</strong> Six tracks were selected because they are
             the failure modes with the clearest published instruments behind them. That is an
             argument, not a proof of completeness.
-          </li>
+          </span><span data-zh><strong>赛道集合是一种选择。</strong>之所以选这六条，是因为它们背后有最清晰的已发表工具来测量这些失败模式。这是一个论证，不是完备性的证明。</span></li>
         </ul>
-        <p class="small muted">
+        <p class="small muted"><span data-en>
           These limitations are stated here for the same reason the benchmark requires runs to
           state theirs. An evaluation surface that does not describe its own scope is asking for a
           kind of trust it has not earned.
-        </p>
+        </span><span data-zh>这里之所以要陈述这些局限，理由与基准要求每次运行陈述自己的局限相同。一个不描述自身适用范围的评测界面，是在索取一种它尚未赢得的信任。</span></p>
       </section>
 
     </div>
@@ -457,22 +459,22 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>
+    <p><span data-en>
       <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
       result bundles; it never computes a score, never re-ranks, and never writes a registry.
-    </p>
+    </span><span data-zh>只读评测平台。它渲染已发布的结果包；从不计算分数、从不重新排名、也从不向任何注册表写入。</span></p>
     <p>
-      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+      <span data-en>Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.</span><span data-zh>纯静态 HTML，一个样式表、一个脚本。无服务器、无数据库、无 Cookie、无追踪。</span>
     </p>
     <ul class="site-footer__links">
-      <li><a href="index.html">Overview</a></li>
-      <li><a href="leaderboard.html">Leaderboard</a></li>
-      <li><a href="benchmarks.html">Benchmarks</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="methods.html">Methods</a></li>
-      <li><a href="submit.html">Submit</a></li>
-      <li><a href="data/README.md">Data contract</a></li>
-      <li><a href="README.md">Site README</a></li>
+      <li><a href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+      <li><a href="leaderboard.html"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+      <li><a href="benchmarks.html"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+      <li><a href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+      <li><a href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+      <li><a href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
+      <li><a href="data/README.md"><span data-en>Data contract</span><span data-zh>数据契约</span></a></li>
+      <li><a href="README.md"><span data-en>Site README</span><span data-zh>站点 README</span></a></li>
     </ul>
   </div>
 </footer>

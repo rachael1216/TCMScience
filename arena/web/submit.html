@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="submit">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main"><span data-en>Skip to content</span><span data-zh>跳到正文</span></a>
 
 <header class="site-header">
   <div class="wrap site-header__inner">
@@ -43,15 +43,15 @@
 <main id="main">
   <div class="page-head">
     <div class="wrap">
-      <h1>Submit a system</h1>
-      <p class="page-head__lede">
+      <h1><span data-en>Submit a system</span><span data-zh>提交系统</span></h1>
+      <p class="page-head__lede"><span data-en>
         Three submission modes, one evaluation path. There is no form on this page because there is
         no backend to accept one: a submission is a pull request or an issue, and it is evaluated by
         the Runner before anything appears on the leaderboard.
-      </p>
+      </span><span data-zh>三种提交方式，一条评测路径。本页没有表单，因为没有后端来接收它：提交就是一个 pull request 或一个 issue，它在任何东西出现在排行榜上之前先由 Runner 评测。</span></p>
       <p class="page-head__meta">
-        <span class="badge badge--plain">Manual submission</span>
-        <span class="badge badge--plain">No account, no upload, no tracking</span>
+        <span class="badge badge--plain"><span data-en>Manual submission</span><span data-zh>人工提交</span></span>
+        <span class="badge badge--plain"><span data-en>No account, no upload, no tracking</span><span data-zh>无需账号 · 无需上传 · 无追踪</span></span>
       </p>
     </div>
   </div>
@@ -60,23 +60,23 @@
     <div class="prose">
 
       <section class="section" aria-labelledby="s-what-h">
-        <h2 id="s-what-h">What you are submitting</h2>
-        <p>
+        <h2 id="s-what-h"><span data-en>What you are submitting</span><span data-zh>你提交的是什么</span></h2>
+        <p><span data-en>
           You are not submitting a score, and you cannot submit one. You are submitting a
           <strong>run request</strong>: a pinned description of a system, plus everything needed to
           execute it against a frozen Season inside the trusted runtime. The score is produced by
           the evaluation, not by the submitter, and there is no path by which a number you supply
           reaches the leaderboard.
-        </p>
+        </span><span data-zh>你不是在提交一个分数，也无法提交分数。你提交的是一份<strong>运行请求</strong>（run request）：对一个系统的钉住描述，以及在一个冻结赛季上、在可信运行时内执行它所需的一切。分数由评测产出，而不是由提交者产出；你提供的数字没有任何路径能到达排行榜。</span></p>
         <div class="callout callout--info">
-          <p class="callout__title">Read this before you build anything</p>
-          <p>
+          <p class="callout__title"><span data-en>Read this before you build anything</span><span data-zh>动手之前先读这里</span></p>
+          <p><span data-en>
             A system that cannot emit a <code>ResearchArtifact</code> envelope cannot be scored.
             The envelope is required rather than encouraged: one envelope, one validator, one place
             where "may this be published?" is decided. A system that returns prose instead cannot
             be validated, cannot be re-run against, and cannot be scored. Start from the envelope,
             not from the answer.
-          </p>
+          </span><span data-zh>一个无法产出 <code>ResearchArtifact</code> 信封的系统无法被评分。信封是必需的，而不是被鼓励的：一个信封、一个校验器、一个裁定「这个可以发布吗？」的地方。一个改而返回散文的系统无法被验证、无法被重跑、也无法被评分。从信封开始，而不是从答案开始。</span></p>
         </div>
       </section>
 
@@ -84,227 +84,230 @@
         <h2 id="s-modes-h"><span data-en>The three submission modes</span><span data-zh>三种提交方式</span></h2>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Comparison of the three submission modes">
           <table>
-            <caption class="visually-hidden">Submission modes, what each one is, and what each requires</caption>
-            <thead>
+            <caption class="visually-hidden"><span data-en>Submission modes, what each one is, and what each requires</span><span data-zh>三种提交方式、各自是什么，以及各自要求什么</span></caption>
+            <th scope="col"ead>
               <tr>
-                <th scope="col">Mode</th>
-                <th scope="col">What it is</th>
-                <th scope="col">Required</th>
-                <th scope="col">Not accepted</th>
+                <th scope="col"><span data-en>Mode</span><span data-zh>方式</span></th>
+                <th scope="col"><span data-en>What it is</span><span data-zh>它是什么</span></th>
+                <th scope="col"><span data-en>Required</span><span data-zh>必需</span></th>
+                <th scope="col"><span data-en>Not accepted</span><span data-zh>不接受</span></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">TCMScience Skill<br><span class="small muted">native</span></th>
-                <td>
+                <th scope="row" data-en>TCMScience Skill<br><span class="small muted">native</span></th>
+                <th scope="row" data-zh>TCMScience 技能<br><span class="small muted">原生</span></th>
+                <td><span data-en>
                   A skill manifest plus its implementation, resolved from a pinned revision of the
                   Stable Registry and executed inside the trusted runtime.
-                </td>
+                </span><span data-zh>技能清单及其实现，从稳定注册表的一个钉住修订版解析出来，并在可信运行时内执行。</span></td>
                 <td>
                   <ul class="small">
-                    <li>a <code>SKILL.md</code> / manifest conforming to the compilation contract</li>
-                    <li>an explicit permission set — nothing implicit</li>
-                    <li>a licence determination for the skill and for every source it reads</li>
-                    <li>a pinned dependency lockfile</li>
-                    <li>a declared API version</li>
+                    <li><span data-en>a <code>SKILL.md</code> / manifest conforming to the compilation contract</span><span data-zh>一份符合编译契约的 <code>SKILL.md</code> / 清单</span></li>
+                    <li><span data-en>an explicit permission set — nothing implicit</span><span data-zh>一组显式声明的权限——不允许任何隐式权限</span></li>
+                    <li><span data-en>a licence determination for the skill and for every source it reads</span><span data-zh>对这个技能以及它读取的每一个来源的许可判定</span></li>
+                    <li><span data-en>a pinned dependency lockfile</span><span data-zh>一个钉住的依赖 lockfile</span></li>
+                    <li><span data-en>a declared API version</span><span data-zh>一个已声明的 API 版本</span></li>
                   </ul>
                 </td>
                 <td class="small">
-                  Network access not declared in the manifest. Dependencies resolved at run time.
+                  <span data-en>Network access not declared in the manifest. Dependencies resolved at run time.</span><span data-zh>清单里未声明的网络访问；运行时才解析的依赖。</span>
                 </td>
               </tr>
               <tr>
-                <th scope="row">OCI Container<br><span class="small muted">bring your own stack</span></th>
-                <td>
+                <th scope="row" data-en>OCI Container<br><span class="small muted">bring your own stack</span></th>
+                <th scope="row" data-zh>OCI 容器<br><span class="small muted">自带技术栈</span></th>
+                <td><span data-en>
                   A container image executed under the Runner's policy snapshot, for systems whose
                   orchestration is not expressible as a single skill.
-                </td>
+                </span><span data-zh>一个在 Runner 策略快照下执行的容器镜像，适用于那些编排无法表达为单个技能的系统。</span></td>
                 <td>
                   <ul class="small">
-                    <li>an image digest, not a tag</li>
-                    <li>a full manifest digest recorded in the run request</li>
-                    <li>the artifact envelope written to the declared output path</li>
-                    <li>no network egress at evaluation time unless declared and allowlisted</li>
-                    <li>a reproducible build (the image is rebuilt from source and compared)</li>
+                    <li><span data-en>an image digest, not a tag</span><span data-zh>镜像 digest，而不是 tag</span></li>
+                    <li><span data-en>a full manifest digest recorded in the run request</span><span data-zh>运行请求中记录的完整 manifest digest</span></li>
+                    <li><span data-en>the artifact envelope written to the declared output path</span><span data-zh>写入已声明输出路径的 artifact 信封</span></li>
+                    <li><span data-en>no network egress at evaluation time unless declared and allowlisted</span><span data-zh>评测时无网络出口，除非已声明并加入允许列表</span></li>
+                    <li><span data-en>a reproducible build (the image is rebuilt from source and compared)</span><span data-zh>可复现的构建（镜像从源码重建并比对）</span></li>
                   </ul>
                 </td>
                 <td class="small">
-                  Floating tags. Images that fetch models or data at start-up.
+                  <span data-en>Floating tags. Images that fetch models or data at start-up.</span><span data-zh>浮动标签（floating tag）；启动时才拉取模型或数据的镜像。</span>
                 </td>
               </tr>
               <tr>
-                <th scope="row">Remote Agent API<br><span class="small muted">hosted</span></th>
-                <td>
+                <th scope="row" data-en>Remote Agent API<br><span class="small muted">hosted</span></th>
+                <th scope="row" data-zh>远程 Agent API<br><span class="small muted">托管</span></th>
+                <td><span data-en>
                   An HTTPS endpoint the Runner calls with a case and a budget, receiving an artifact
                   envelope back. The system stays yours; the evaluation stays ours.
-                </td>
+                </span><span data-zh>一个 HTTPS 端点，Runner 用一道题和一个预算去调用它，并收回一个 artifact 信封。系统仍然是你的，评测仍然是我们的。</span></td>
                 <td>
                   <ul class="small">
-                    <li>a stable endpoint with a documented request and response schema</li>
-                    <li>a declared maximum latency and cost per case</li>
-                    <li>the endpoint pinned to an immutable deployment for the duration of the evaluation</li>
-                    <li>a published model and data version for the run</li>
+                    <li><span data-en>a stable endpoint with a documented request and response schema</span><span data-zh>一个稳定的端点，配有文档化的请求与响应 schema</span></li>
+                    <li><span data-en>a declared maximum latency and cost per case</span><span data-zh>每题声明的最大延迟与成本</span></li>
+                    <li><span data-en>the endpoint pinned to an immutable deployment for the duration of the evaluation</span><span data-zh>在评测期间把端点钉在一个不可变的部署上</span></li>
+                    <li><span data-en>a published model and data version for the run</span><span data-zh>该次运行已发布的模型与数据版本</span></li>
                   </ul>
                 </td>
-                <td class="small">
+                <td class="small"><span data-en>
                   Endpoints that change mid-evaluation. Undeclared human-in-the-loop. Silent
                   retrieval from sources you have not disclosed.
-                </td>
+                </span><span data-zh>评测中途发生改变的端点。未声明的 human-in-the-loop。从你未披露的来源做静默检索。</span></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="small muted">
+        <p class="small muted"><span data-en>
           A remote API submission can satisfy every other requirement and still fail Reproducibility,
           because the Runner cannot re-execute someone else's deployment. It is evaluated, published,
           and labelled — a remote row states its mode on the leaderboard, and any Reproducibility
           score it carries is the one the submitter's own re-run produced, not the Runner's.
-        </p>
+        </span><span data-zh>一次远程 API 提交可以满足其他每一项要求，却仍然在可复现性上不及格，因为 Runner 无法重新执行别人的部署。它会被评测、被发布、并被标注——远程行会在排行榜上写明自己的方式，而它所携带的任何可复现性分数，都是提交者自己那次重跑产出的，不是 Runner 的。</span></p>
       </section>
 
       <section class="section" aria-labelledby="s-envelope-h">
         <h2 id="s-envelope-h"><span data-en>What every submission must produce</span><span data-zh>任何提交都必须产出什么</span></h2>
-        <p>
+        <p><span data-en>
           Regardless of mode, the run must emit one artifact envelope containing all of the
           following. These are validation requirements, not documentation suggestions, and each one
           is checked by a validator that returns stable codes.
-        </p>
+        </span><span data-zh>无论采用哪种方式，运行都必须产出一个 artifact 信封，其中包含以下全部内容。这些是验证要求，不是文档建议，而且每一条都由一个返回稳定代码的校验器检查。</span></p>
         <ul>
-          <li><strong>Sources declared</strong>, each pinned to a source-card snapshot hash with an identified licence.</li>
-          <li><strong>Every claim scoped to a claim kind</strong> — mechanism, clinical, methodological, uncertainty or recommendation — with the evidence supporting it.</li>
-          <li><strong>Every citation resolvable</strong>, and every supporting quote located in its source rather than paraphrased.</li>
-          <li><strong>Every output file hashed</strong>, with a media type and a size.</li>
-          <li><strong>All four version axes declared</strong>: runtime, skill, source, benchmark.</li>
-          <li><strong>Limitations stated.</strong> At least one, in your own words, naming what the run does not show.</li>
+          <li><span data-en><strong>Sources declared</strong>, each pinned to a source-card snapshot hash with an identified licence.</span><span data-zh><strong>来源已声明</strong>，每一个都钉在一张来源卡（source card, SC）的快照哈希（snapshot hash）上，并带有已标明的许可。</span></li>
+          <li><span data-en><strong>Every claim scoped to a claim kind</strong> — mechanism, clinical, methodological, uncertainty or recommendation — with the evidence supporting it.</span><span data-zh><strong>每条主张都归属到一个主张种类</strong>——机制、临床、方法学、不确定性或建议——并附上支撑它的证据。</span></li>
+          <li><span data-en><strong>Every citation resolvable</strong>, and every supporting quote located in its source rather than paraphrased.</span><span data-zh><strong>每条引文都可解析</strong>，且每条支撑性引文都在其来源中定位到，而不是转述。</span></li>
+          <li><span data-en><strong>Every output file hashed</strong>, with a media type and a size.</span><span data-zh><strong>每个输出文件都有哈希</strong>，并带媒体类型与大小。</span></li>
+          <li><span data-en><strong>All four version axes declared</strong>: runtime, skill, source, benchmark.</span><span data-zh><strong>四条版本轴全部声明</strong>：运行时、技能、来源、基准。</span></li>
+          <li><span data-en><strong>Limitations stated.</strong> At least one, in your own words, naming what the run does not show.</span><span data-zh><strong>局限已陈述。</strong>至少一条，用你自己的话，写明这次运行没有展示什么。</span></li>
         </ul>
-        <p>
+        <p><span data-en>
           And one prohibition, stated separately because it is the failure this benchmark exists to
           make visible: <strong>a clinical efficacy claim may not rest on computational prediction
           alone.</strong> Docking, network inference and enrichment may support a mechanism claim.
           They may not support a claim about what happens in a patient. A run that states one is
           gated to the Experimental board with <code>CLM004</code> / <code>ART106</code>, however
           strong the rest of its profile.
-        </p>
+        </span><span data-zh>还有一条禁令单独列出，因为它正是本基准存在的意义所要暴露的那种失败：<strong>临床疗效主张不得仅凭计算预测而立。</strong>对接、网络推断与富集可以支撑一条机制主张。它们不能支撑一条关于病人身上会发生什么的主张。凡陈述此类主张的运行，无论其余画像多强，都会被门槛送到实验榜，并附上 <code>CLM004</code> / <code>ART106</code>。</span></p>
       </section>
 
       <section class="section" aria-labelledby="s-flow-h">
-        <h2 id="s-flow-h">The evaluation flow</h2>
+        <h2 id="s-flow-h"><span data-en>The evaluation flow</span><span data-zh>评测流程</span></h2>
         <ol>
-          <li>
+          <li><span data-en>
             <strong>Open an issue</strong> describing the system, its mode, its source repository
             or endpoint, its licence and its declared permissions. This is a conversation, not a
             queue position: most submissions are improved substantially at this step.
-          </li>
-          <li>
+          </span><span data-zh><strong>开一个 issue</strong>，描述这个系统、它的方式、它的源仓库或端点、它的许可以及它声明的权限。这是一次对话，不是一个排队位置：大多数提交都在这一步得到实质性的改进。</span></li>
+          <li><span data-en>
             <strong>Eligibility check.</strong> The declared permissions are reviewed against what
             the system actually needs, and the licence position is established. A submission that
             cannot name a licence for its sources is stopped here rather than after a run.
-          </li>
-          <li>
+          </span><span data-zh><strong>资格检查。</strong>对已声明的权限，会对照系统实际需要什么来审阅，并确定许可立场。一个无法为其来源指明许可的提交，会在这里被拦下，而不是在跑完一次之后。</span></li>
+          <li><span data-en>
             <strong>Development-split run.</strong> The system is executed against the published
             development split so you can see where it fails before anything is frozen. Results at
             this stage are private to the submitter and the evaluators.
-          </li>
-          <li>
+          </span><span data-zh><strong>开发集运行。</strong>系统对着已发布的开发集执行，让你在任何东西被冻结之前看到它在哪里失败。这一阶段的结果只对提交者与评测者可见。</span></li>
+          <li><span data-en>
             <strong>Freeze the run request.</strong> Mode, image digest or endpoint, permission
             set, declared versions. After this point the request is immutable: changing it starts a
             new submission.
-          </li>
-          <li>
+          </span><span data-zh><strong>冻结运行请求。</strong>方式、镜像 digest 或端点、权限集、已声明的版本。过了这一点，请求不可更改：改动它就等于开始一次新的提交。</span></li>
+          <li><span data-en>
             <strong>Evaluation on the held-out split.</strong> Executed once, by the evaluators,
             under the Season's policy snapshot. The held-out labels are not available to the
             submitter at any point.
-          </li>
-          <li>
+          </span><span data-zh><strong>在留出集上评测。</strong>由评测者执行一次，在赛季的策略快照之下。留出集的标签在任何时候都不对提交者开放。</span></li>
+          <li><span data-en>
             <strong>Validation.</strong> The artifact envelope is checked by the pure-function
             validator. Every violation carries a stable code, and any hard-gate violation routes
             the run to the Experimental board rather than discarding it.
-          </li>
-          <li>
+          </span><span data-zh><strong>验证。</strong>artifact 信封由纯函数校验器检查。每一项违规都带一个稳定代码，而任何硬门槛违规都会把这次运行送到实验榜，而不是把它丢弃。</span></li>
+          <li><span data-en>
             <strong>Publication.</strong> The result bundle — scores, decomposition, trace,
             evidence, artifacts, claim verdicts — is written to the Frozen Benchmark Registry and
             appears on the leaderboard at the next data regeneration.
-          </li>
-          <li>
+          </span><span data-zh><strong>发布。</strong>结果包——分数、拆解、轨迹、证据、artifact、主张裁定——被写入冻结基准注册表（Frozen Benchmark Registry），并在下一次数据再生成时出现在排行榜上。</span></li>
+          <li><span data-en>
             <strong>Appeal window.</strong> A submitter may contest a scoring decision by opening
             an issue against the scorer, with the artifact and the case. An appeal can change a
             scorer or a Season; it cannot change a published row of a frozen Season. Corrections
             are issued as a new Season or an erratum, never as a silent edit.
-          </li>
+          </span><span data-zh><strong>申诉窗口。</strong>提交者可以针对评分器开一个 issue 来质疑评分决定，并附上 artifact 与题目。一次申诉可以改变一个评分器或一个赛季；它不能改变一个已冻结赛季的已发布行。更正以新赛季或勘误的形式发布，绝不作为静默的编辑。</span></li>
         </ol>
-        <p class="small muted">
+        <p class="small muted"><span data-en>
           There is no queue position, no fee, and no fast path. Two things move a submission
           forward: a system that resolves its citations, and a submission that declares what its
           system cannot do.
-        </p>
+        </span><span data-zh>没有排队位置，没有费用，也没有快速通道。有两件事能推动一次提交前进：一个能解析自己引文的系统，以及一份声明了自己系统做不到什么的提交。</span></p>
       </section>
 
       <section class="section" aria-labelledby="s-codes-h">
-        <h2 id="s-codes-h">Codes you may get back</h2>
-        <p>
+        <h2 id="s-codes-h"><span data-en>Codes you may get back</span><span data-zh>你可能收到的代码</span></h2>
+        <p><span data-en>
           A refused claim or a failed validation is reported with a stable code, never as prose
           alone, because these strings end up in benchmark output and in paper tables and must not
           be renumbered by an edit. The <a href="run.html">run page</a> prints the code next to its
           published meaning. The most common ones at submission time:
-        </p>
+        </span><span data-zh>被拒绝的主张或未通过的验证，都以一个稳定代码报告，绝不只以散文形式，因为这些字符串最终会出现在基准输出和论文表格里，不能因为一次编辑而被重新编号。<a href="run.html">运行页</a>会把代码印在它已发布的含义旁边。提交时最常见的有：</span></p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Common refusal codes">
           <table>
-            <caption class="visually-hidden">Frequently returned refusal and violation codes</caption>
-            <thead>
-              <tr><th scope="col">Code</th><th scope="col">Meaning</th><th scope="col">Usual cause</th></tr>
+            <caption class="visually-hidden"><span data-en>Frequently returned refusal and violation codes</span><span data-zh>经常返回的拒绝与违规代码</span></caption>
+            <th scope="col"ead>
+              <tr><th scope="col"><span data-en>Code</span><span data-zh>代码</span></th><th scope="col"><span data-en>Meaning</span><span data-zh>含义</span></th><th scope="col"><span data-en>Usual cause</span><span data-zh>常见原因</span></th></tr>
             </thead>
             <tbody>
-              <tr><th scope="row" class="mono">ART101</th><td>artifact declares no sources</td><td class="small">The envelope was emitted without the source list.</td></tr>
-              <tr><th scope="row" class="mono">ART102</th><td>a publishable claim rests on a source that is not pinned to a snapshot</td><td class="small">A live API was read without recording its snapshot hash.</td></tr>
-              <tr><th scope="row" class="mono">ART103</th><td>a publishable claim rests on a source with no identified licence</td><td class="small">A scraped or user-supplied corpus with no licence determination.</td></tr>
-              <tr><th scope="row" class="mono">ART104</th><td>a claim cites evidence id that is not present in the artifact</td><td class="small">Identifiers were generated rather than retrieved. This trips gate G1.</td></tr>
-              <tr><th scope="row" class="mono">ART106</th><td>a clinical claim is supported only by computational prediction</td><td class="small">Docking or network output stated as clinical efficacy. This trips gate G4.</td></tr>
-              <tr><th scope="row" class="mono">ART107</th><td>a declared output file has no content hash</td><td class="small">Files were written by a path that bypassed the envelope builder.</td></tr>
-              <tr><th scope="row" class="mono">ART108</th><td>composite_version is incomplete</td><td class="small">One of the four axes was not threaded through the artifact.</td></tr>
-              <tr><th scope="row" class="mono">ART110</th><td>no limitations are stated</td><td class="small">The limitations field was left empty, which is treated as a claim of completeness.</td></tr>
-              <tr><th scope="row" class="mono">CLM009</th><td>an extrapolation beyond the evidence is not declared</td><td class="small">Absence of a signal was reported as absence of risk.</td></tr>
-              <tr><th scope="row" class="mono">CLM010</th><td>a supporting quote was not located in its source</td><td class="small">A quotation was reconstructed rather than extracted.</td></tr>
+              <tr><th scope="row" class="mono">ART101</th><td><span data-en>artifact declares no sources</span><span data-zh>artifact 未声明任何数据源</span></td><td class="small"><span data-en>The envelope was emitted without the source list.</span><span data-zh>信封产出时没有带来源列表。</span></td></tr>
+              <tr><th scope="row" class="mono">ART102</th><td><span data-en>a publishable claim rests on a source that is not pinned to a snapshot</span><span data-zh>一个可发布的主张，建立在**未钉住快照**的数据源之上</span></td><td class="small"><span data-en>A live API was read without recording its snapshot hash.</span><span data-zh>读取了一个在线 API，却没有记录它的快照哈希（snapshot hash）。</span></td></tr>
+              <tr><th scope="row" class="mono">ART103</th><td><span data-en>a publishable claim rests on a source with no identified licence</span><span data-zh>一个可发布的主张，建立在**未标明许可**的数据源之上</span></td><td class="small"><span data-en>A scraped or user-supplied corpus with no licence determination.</span><span data-zh>一个抓取来或用户提供的语料，未做许可判定。</span></td></tr>
+              <tr><th scope="row" class="mono">ART104</th><td><span data-en>a claim cites evidence id that is not present in the artifact</span><span data-zh>主张引用了 artifact 中不存在的证据 id</span></td><td class="small"><span data-en>Identifiers were generated rather than retrieved. This trips gate G1.</span><span data-zh>标识符是**生成的**而非检索到的。这会触发门槛 G1。</span></td></tr>
+              <tr><th scope="row" class="mono">ART106</th><td><span data-en>a clinical claim is supported only by computational prediction</span><span data-zh>一个临床主张，仅由计算预测支撑</span></td><td class="small"><span data-en>Docking or network output stated as clinical efficacy. This trips gate G4.</span><span data-zh>把对接或网络输出表述为临床疗效。这会触发门槛 G4。</span></td></tr>
+              <tr><th scope="row" class="mono">ART107</th><td><span data-en>a declared output file has no content hash</span><span data-zh>声明的输出文件没有内容哈希</span></td><td class="small"><span data-en>Files were written by a path that bypassed the envelope builder.</span><span data-zh>文件经由绕过信封构建器的路径写入。</span></td></tr>
+              <tr><th scope="row" class="mono">ART108</th><td><span data-en>composite_version is incomplete</span><span data-zh>composite_version 不完整</span></td><td class="small"><span data-en>One of the four axes was not threaded through the artifact.</span><span data-zh>四条轴中有一条没有贯穿到 artifact。</span></td></tr>
+              <tr><th scope="row" class="mono">ART110</th><td><span data-en>no limitations are stated</span><span data-zh>未陈述任何局限</span></td><td class="small"><span data-en>The limitations field was left empty, which is treated as a claim of completeness.</span><span data-zh>limitations 字段留空——这会被视为**声称没有局限**。</span></td></tr>
+              <tr><th scope="row" class="mono">CLM009</th><td><span data-en>an extrapolation beyond the evidence is not declared</span><span data-zh>超出证据范围的外推未经声明</span></td><td class="small"><span data-en>Absence of a signal was reported as absence of risk.</span><span data-zh>把「没有信号」报成了「没有风险」。</span></td></tr>
+              <tr><th scope="row" class="mono">CLM010</th><td><span data-en>a supporting quote was not located in its source</span><span data-zh>支撑性引文未能在其来源中定位</span></td><td class="small"><span data-en>A quotation was reconstructed rather than extracted.</span><span data-zh>引文是**重建**的，而不是**抽取**的。</span></td></tr>
             </tbody>
           </table>
         </div>
-        <p>
+        <p><span data-en>
           A refusal is fixable. <code>CLM009</code> in particular is marked
           <em>fixable by declaring the limit</em>: the claim is permitted once the run states the
           extrapolation it is making. The point of the code is to tell you which of those two
           situations you are in — change your evidence, or change your sentence.
-        </p>
+        </span><span data-zh>拒绝是可以修的。<code>CLM009</code> 尤其被标为<em>可通过声明该局限来修复</em>：只要运行声明了它正在做的那一步外推，该主张就是允许的。这个代码的意义，是告诉你身处这两种情形中的哪一种——改你的证据，或者改你的句子。</span></p>
       </section>
 
       <section class="section" aria-labelledby="s-not-h">
-        <h2 id="s-not-h">What will not be accepted</h2>
+        <h2 id="s-not-h"><span data-en>What will not be accepted</span><span data-zh>什么不会被接受</span></h2>
         <ul>
-          <li>
+          <li><span data-en>
             <strong>A number without an artifact.</strong> If the run cannot be re-executed, there
             is nothing to publish. A perfect score with no reproducible artifact is an anecdote
             with a decimal point.
-          </li>
-          <li>
+          </span><span data-zh><strong>没有 artifact 的数字。</strong>如果这次运行无法被重新执行，就没有什么可发布的。一个没有可复现 artifact 的满分，是一个带小数点的轶事。</span></li>
+          <li><span data-en>
             <strong>Retrieval from undisclosed sources.</strong> Undeclared corpora cannot be
             licence-checked, cannot be snapshot-pinned, and cannot be cited.
-          </li>
-          <li>
+          </span><span data-zh><strong>从未披露的来源检索。</strong>未声明的语料无法做许可检查、无法钉住快照，也无法被引用。</span></li>
+          <li><span data-en>
             <strong>Human-in-the-loop undisclosed.</strong> If a person contributed to an answer,
             the run request says so. A benchmark that measures a person and reports it as a system
             is measuring nothing useful.
-          </li>
-          <li>
+          </span><span data-zh><strong>未声明的 human-in-the-loop。</strong>如果有人类对某个答案有贡献，运行请求要写明这一点。一个测量的是人、却当作系统来报告的基准，什么有用的东西都没测。</span></li>
+          <li><span data-en>
             <strong>Tuning against the held-out split.</strong> The development split exists so
             that this is unnecessary. Evaluation on the held-out split is run once; a resubmission
             that follows an attempt to infer the labels is declined.
-          </li>
+          </span><span data-zh><strong>针对留出集调优。</strong>开发集的存在就是为了让这件事没有必要。在留出集上的评测只跑一次；一次紧跟「试图推断标签」之后的重新提交会被拒绝。</span></li>
         </ul>
         <div class="callout callout--ok">
-          <p class="callout__title">What you get if it passes</p>
-          <p>
+          <p class="callout__title"><span data-en>What you get if it passes</span><span data-zh>通过了会得到什么</span></p>
+          <p><span data-en>
             A row on the trusted board with all eight dimensions decomposed, a run page with the
             full trace, and a citable composite version naming all four axes. If it fails a gate
             you still get the row and the run page — on the Experimental board, with the reason.
-          </p>
+          </span><span data-zh>可信榜上的一行，八项维度全部拆解；一个带完整轨迹的运行页；以及一个写明四条轴的可引用复合版本。如果它没通过某条门槛，你仍然会得到这一行和运行页——在实验榜上，并附上原因。</span></p>
         </div>
       </section>
 
@@ -314,22 +317,22 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>
+    <p><span data-en>
       <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
       result bundles; it never computes a score, never re-ranks, and never writes a registry.
-    </p>
+    </span><span data-zh>只读评测平台。它渲染已发布的结果包；从不计算分数、从不重新排名、也从不向任何注册表写入。</span></p>
     <p>
-      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+      <span data-en>Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.</span><span data-zh>纯静态 HTML，一个样式表、一个脚本。无服务器、无数据库、无 Cookie、无追踪。</span>
     </p>
     <ul class="site-footer__links">
-      <li><a href="index.html">Overview</a></li>
-      <li><a href="leaderboard.html">Leaderboard</a></li>
-      <li><a href="benchmarks.html">Benchmarks</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="methods.html">Methods</a></li>
-      <li><a href="submit.html">Submit</a></li>
-      <li><a href="data/README.md">Data contract</a></li>
-      <li><a href="README.md">Site README</a></li>
+      <li><a href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+      <li><a href="leaderboard.html"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+      <li><a href="benchmarks.html"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+      <li><a href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+      <li><a href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+      <li><a href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
+      <li><a href="data/README.md"><span data-en>Data contract</span><span data-zh>数据契约</span></a></li>
+      <li><a href="README.md"><span data-en>Site README</span><span data-zh>站点 README</span></a></li>
     </ul>
   </div>
 </footer>

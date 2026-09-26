@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="skills">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main"><span data-en>Skip to content</span><span data-zh>跳到正文</span></a>
 
 <header class="site-header">
   <div class="wrap site-header__inner">
@@ -44,12 +44,12 @@
   <div class="page-head">
     <div class="wrap">
       <h1><span data-en>Skill registry</span><span data-zh>技能注册表</span></h1>
-      <p class="page-head__lede">
+      <p class="page-head__lede"><span data-en>
         A skill executed inside the trusted runtime is code running with the operator's
         authority. Star count is not evidence of fitness for that. Skills are discovered
         automatically, promoted by a recorded human decision, and measured before promotion —
         not after.
-      </p>
+      </span><span data-zh>在可信运行时内执行的技能，是带着运营方权限运行的代码。星标数不是它适合这一角色的证据。技能被自动发现、由一次被记录的人类决策晋级，并且在晋级<em>之前</em>就被测量——不是之后。</span></p>
     </div>
   </div>
 
@@ -57,29 +57,29 @@
 
     <section class="section" aria-labelledby="registries-h">
       <h2 id="registries-h"><span data-en>Three registries, three lifecycles</span><span data-zh>三个注册表，三种生命周期</span></h2>
-      <p class="section__lede">
+      <p class="section__lede"><span data-en>
         What we have found, what we have approved, and what we measure against are different
         objects. Conflating them is how a leaderboard silently becomes meaningless.
-      </p>
+      </span><span data-zh>「我们发现了什么」「我们批准了什么」「我们拿什么做测量基准」是三个不同的对象。把它们混为一谈，就是一个排行榜悄悄变得毫无意义的开始。</span></p>
       <div class="grid grid--3" id="skill-registries"></div>
       <div class="callout callout--info" style="margin-top:1.25rem">
         <p class="callout__title"><span data-en>The promotion path is one-way</span><span data-zh>晋级路径是单向的</span></p>
         <p id="skill-rule"></p>
-        <p class="small">
+        <p class="small"><span data-en>
           A monthly update may never modify the Benchmark Registry. Otherwise the current
           month's score and last month's are not on the same scale.
-        </p>
+        </span><span data-zh>月度更新永远不能改动基准注册表（Benchmark Registry）。否则本月与上月的分数就不在同一把尺子上。</span></p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="skills-h">
       <h2 id="skills-h"><span data-en>Entries</span><span data-zh>条目</span></h2>
-      <p class="section__lede">
+      <p class="section__lede"><span data-en>
         Stable skills are the only ones the runtime resolves. Candidate skills are listed with
         their requested permissions because that is the thing a reviewer has to judge — a
         candidate that asks for <code>network:any</code> or <code>exec:python</code> is asking
         for more than its benchmark delta can justify.
-      </p>
+      </span><span data-zh>运行时只解析稳定技能。候选技能连同它们申请的权限一并列出，因为那正是审阅者必须判断的东西——一个申请 <code>network:any</code> 或 <code>exec:python</code> 的候选，所索取的已经超出它的基准增量所能辩护的范围。</span></p>
 
       <div class="card" style="margin-bottom:1rem">
         <div class="card__body">
@@ -98,13 +98,13 @@
 
       <div class="table-scroll" tabindex="0" role="region" aria-label="Skill registry entries">
         <table class="plain">
-          <caption class="visually-hidden">
+          <caption class="visually-hidden"><span data-en>
             Skill registry entries with status, version, source, licence, requested permissions,
             measured benchmark delta and approval decision
-          </caption>
-          <thead>
+          </span><span data-zh>技能注册表条目，含状态、版本、来源、许可、申请的权限、实测基准增量与批准决定</span></caption>
+          <th scope="col"ead>
             <tr>
-              <th scope="col">Skill</th>
+              <th scope="col"><span data-en>Skill</span><span data-zh>技能</span></th>
               <th scope="col"><span data-en>Status</span><span data-zh>状态</span></th>
               <th scope="col"><span data-en>Version</span><span data-zh>版本</span></th>
               <th scope="col"><span data-en>Source</span><span data-zh>来源</span></th>
@@ -117,43 +117,44 @@
           <tbody id="skill-body"></tbody>
         </table>
       </div>
-      <p class="small muted" style="margin-top:0.75rem">
+      <p class="small muted" style="margin-top:0.75rem" data-en>
         A benchmark delta is the measured change in the named metric when the skill is added to
         the reference stack, over the stated number of cases. <code>not measured</code> means
         exactly that — a candidate is never promoted on the strength of an unmeasured claim.
         Permission chips marked <span aria-hidden="true">⚠</span> are the ones that widen the
         runtime's authority.
       </p>
+      <p class="small muted" style="margin-top:0.75rem" data-zh>基准增量是指：把该技能加入参考技术栈后，在所述题目数量上，指定指标的实测变化。<code>not measured</code> 就是这个意思——候选永远不会因为一条未经测量的说法而晋级。标有 <span aria-hidden="true">⚠</span> 的权限标签，是那些会扩大运行时权限的权限。</p>
     </section>
 
     <section class="section" aria-labelledby="promote-h">
-      <h2 id="promote-h">How a skill is promoted</h2>
+      <h2 id="promote-h"><span data-en>How a skill is promoted</span><span data-zh>一个技能如何晋级</span></h2>
       <div class="prose">
         <ol>
-          <li>
+          <li><span data-en>
             <strong>Discovery.</strong> The monthly pipeline scans upstream projects and newly
             published <code>SKILL.md</code> files. It may write only to the Candidate Catalog.
             Candidate skills are never executed in production.
-          </li>
-          <li>
+          </span><span data-zh><strong>发现。</strong>月度流水线扫描上游项目和新发布的 <code>SKILL.md</code> 文件。它只能写入候选目录（Candidate Catalog）。候选技能永远不在生产环境中执行。</span></li>
+          <li><span data-en>
             <strong>Licence and security review.</strong> Run once, at promotion, rather than on
             every execution. The review records the licence determination and the permission set.
-          </li>
-          <li>
+          </span><span data-zh><strong>许可与安全审阅。</strong>只在晋级时运行一次，而不是每次执行都跑。这次审阅记录下许可判定与权限集。</span></li>
+          <li><span data-en>
             <strong>Measurement.</strong> The candidate is benchmarked against the reference
             stack on the current Season, producing a delta with a case count. A negative or absent
             delta holds the promotion.
-          </li>
-          <li>
+          </span><span data-zh><strong>测量。</strong>候选会在当前赛季上对着参考技术栈做基准测试，产出一个带题目数量的增量。增量为负或缺失，就暂缓晋级。</span></li>
+          <li><span data-en>
             <strong>Decision.</strong> A <code>PromotionDecision</code> is recorded by a named
             reviewer. It is the only writer of a Stable Registry revision; there is no automatic
             path, and no popularity threshold.
-          </li>
-          <li>
+          </span><span data-zh><strong>决策。</strong>一条 <code>PromotionDecision</code> 由具名审阅者记录。它是稳定注册表（Stable Registry）修订版的唯一写入者；没有自动路径，也没有热度门槛。</span></li>
+          <li><span data-en>
             <strong>Season cut.</strong> A benchmark Season is cut from a Stable revision and is
             thereafter immutable. Promote into the registry, and the next Season picks it up;
             never into the Season.
-          </li>
+          </span><span data-zh><strong>赛季切出。</strong>一个基准赛季从稳定修订版中切出，此后不可更改。要晋级就晋到注册表里，下一个赛季会把它带上；永远不要晋到赛季里。</span></li>
         </ol>
       </div>
     </section>
@@ -163,22 +164,22 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>
+    <p><span data-en>
       <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
       result bundles; it never computes a score, never re-ranks, and never writes a registry.
-    </p>
+    </span><span data-zh>只读评测平台。它渲染已发布的结果包；从不计算分数、从不重新排名、也从不向任何注册表写入。</span></p>
     <p>
-      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+      <span data-en>Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.</span><span data-zh>纯静态 HTML，一个样式表、一个脚本。无服务器、无数据库、无 Cookie、无追踪。</span>
     </p>
     <ul class="site-footer__links">
-      <li><a href="index.html">Overview</a></li>
-      <li><a href="leaderboard.html">Leaderboard</a></li>
-      <li><a href="benchmarks.html">Benchmarks</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="methods.html">Methods</a></li>
-      <li><a href="submit.html">Submit</a></li>
-      <li><a href="data/README.md">Data contract</a></li>
-      <li><a href="README.md">Site README</a></li>
+      <li><a href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+      <li><a href="leaderboard.html"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+      <li><a href="benchmarks.html"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+      <li><a href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+      <li><a href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+      <li><a href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
+      <li><a href="data/README.md"><span data-en>Data contract</span><span data-zh>数据契约</span></a></li>
+      <li><a href="README.md"><span data-en>Site README</span><span data-zh>站点 README</span></a></li>
     </ul>
   </div>
 </footer>

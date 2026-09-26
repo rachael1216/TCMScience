@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TCMScience Arena — a read-only evaluation surface for TCM+AI systems</title>
+<title>TCMScience Arena — 面向中医药+AI 系统的只读评测平台</title>
 <meta name="description" content="The TCMScience Arena renders published evaluation results for TCM+AI systems: six tracks, eight score dimensions, hard gates that are visible rather than silent.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="overview">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main"><span data-en>Skip to content</span><span data-zh>跳到正文</span></a>
 
 <header class="site-header">
   <div class="wrap site-header__inner">
@@ -65,25 +65,16 @@
 
     <section class="howto" aria-labelledby="howto-h">
       <h2 id="howto-h"><span data-en>How to read this site</span><span data-zh>怎么看这个网站</span></h2>
-      <ol data-en>
-        <li><strong>Start with the leaderboard.</strong> Each row is one system on one task
-          type. The score is broken into eight parts; all eight are always visible.</li>
-        <li><strong>Click any row</strong> to see exactly what that system did — what it
-          looked up, what it produced, and which claims it refused to make.</li>
-        <li><strong>Check the "Board" label.</strong> <em>Trusted</em> means the system
+      <ol>
+        <li><span data-en><strong>Start with the leaderboard.</strong> Each row is one system on one task
+          type. The score is broken into eight parts; all eight are always visible.</span><span data-zh><strong>先看「排行榜」。</strong>每一行 = 一个系统在某类任务上的成绩。分数拆成八项，八项永远同时显示。</span></li>
+        <li><span data-en><strong>Click any row</strong> to see exactly what that system did — what it
+          looked up, what it produced, and which claims it refused to make.</span><span data-zh><strong>点任意一行</strong>，能看到这个系统具体做了什么——查了什么、产出了什么，以及它<em>拒绝</em>做出哪些结论。</span></li>
+        <li><span data-en><strong>Check the "Board" label.</strong> <em>Trusted</em> means the system
           passed all four hard rules. <em>Experimental</em> means it did not, and the
-          reason is printed next to it.</li>
-        <li><strong>Numbers are never edited by this site.</strong> It only displays what the
-          evaluation produced.</li>
-      </ol>
-      <ol data-zh>
-        <li><strong>先看「排行榜」。</strong>每一行 = 一个系统在某类任务上的成绩。分数拆成
-          八项，八项永远同时显示。</li>
-        <li><strong>点任意一行</strong>，能看到这个系统具体做了什么——查了什么、产出了什么、
-          以及它<em>拒绝</em>做出哪些结论。</li>
-        <li><strong>注意「榜单」标签。</strong><em>可信榜</em>＝四条硬规则全部通过；
-          <em>实验榜</em>＝未通过，旁边会写明原因。</li>
-        <li><strong>本站不改动任何数字。</strong>它只显示评测产出的结果。</li>
+          reason is printed next to it.</span><span data-zh><strong>注意「榜单」标签。</strong><em>可信榜</em>＝四条硬规则全部通过；<em>实验榜</em>＝未通过，旁边会写明原因。</span></li>
+        <li><span data-en><strong>Numbers are never edited by this site.</strong> It only displays what the
+          evaluation produced.</span><span data-zh><strong>本站不改动任何数字。</strong>它只显示评测产出的结果。</span></li>
       </ol>
       <p style="margin:0.75rem 0 0;font-size:0.875rem" data-en>
         The data on this page is a <strong>demonstration run</strong>: the four TCM skills
@@ -154,34 +145,34 @@
     <section class="section" aria-labelledby="what-h">
       <h2 id="what-h"><span data-en>What the Arena is</span><span data-zh>这个平台是什么</span></h2>
       <div class="prose">
-        <p>
+        <p><span data-en>
           The Arena is the publishing half of TCMScience. Evaluation happens elsewhere — in the
           Runner, under a frozen policy snapshot — and writes signed result bundles into the
           Frozen Benchmark Registry. This site <strong>renders</strong> those bundles.
-        </p>
-        <p>
+        </span><span data-zh>Arena 是 TCMScience 的发布端。评测在别处进行——在 Runner 里、在冻结的策略快照之下——并把已签名的结果包写入冻结基准注册表（Frozen Benchmark Registry）。本站<strong>渲染</strong>这些结果包。</span></p>
+        <p><span data-en>
           That division is the whole design. It exists so that a leaderboard number cannot be
           edited by the website that displays it, and so that compromising the website does not
           compromise a result. Every score on every page is read from a JSON document as
           published; this site contains no code that could compute a different one.
-        </p>
-        <p>
+        </span><span data-zh>这种分工就是整个设计。它的存在，是为了让排行榜上的数字无法被展示它的网站改动，也为了让攻破网站不等于攻破一个结果。每一页上的每一个分数，都按已发布的 JSON 文档原样读取；本站不含任何能算出另一个分数的代码。</span></p>
+        <p><span data-en>
           The six tracks are the six things a TCM+AI system has to get right: resolving an
           entity without silently merging two, retrieving and grounding evidence, keeping
           network-pharmacology predictions separate from measurements, surfacing risk, auditing
           a trial report against the checklist that applies to it, and producing an artifact
           someone else can re-run. Each track has its own scorer and its own metric focus.
-        </p>
+        </span><span data-zh>六条赛道就是 TCM+AI 系统必须做对的六件事：解析实体而不把两个实体悄悄合并；检索证据并为它提供依据；把网络药理学（network pharmacology, NP）预测与实测结果分开；把风险摆到台面上；对照适用的清单审计一份试验报告；以及产出别人能重跑的 artifact。每条赛道有自己的评分器和自己的指标重心。</span></p>
       </div>
 
       <div class="table-scroll" tabindex="0" role="region" aria-label="The six tracks" style="margin-top:1.25rem">
         <table class="plain">
           <caption class="visually-hidden"><span data-en>The six benchmark tracks, their metric focus and case counts</span><span data-zh>六条基准赛道、各自的核心指标与题目数量</span></caption>
-          <thead>
+          <th scope="col"ead>
             <tr>
               <th scope="col"><span data-en>Track</span><span data-zh>赛道</span></th>
               <th scope="col"><span data-en>Metric focus</span><span data-zh>核心指标</span></th>
-              <th scope="col" class="col-num">Cases</th>
+              <th scope="col" class="col-num"><span data-en>Cases</span><span data-zh>题目数</span></th>
             </tr>
           </thead>
           <tbody id="overview-tracks"></tbody>
@@ -192,38 +183,38 @@
     <section class="section" aria-labelledby="thesis-h">
       <h2 id="thesis-h"><span data-en>The governance thesis</span><span data-zh>治理主张</span></h2>
       <div class="prose">
-        <p>
+        <p><span data-en>
           Three commitments distinguish this from a generic medical QA leaderboard. They are
           interface decisions, not decoration, and each one costs something to keep.
-        </p>
+        </span><span data-zh>有三项承诺把本站与通用的医学问答排行榜区分开来。它们是接口层面的取舍，不是装饰，而且每一条都要付出代价才能维持。</span></p>
 
         <h3><span data-en>Every score is decomposed</span><span data-zh>每个分数都拆开显示</span></h3>
-        <p>
+        <p><span data-en>
           A row shows Task Success, Evidence Grounding, Provenance Completeness,
           Reproducibility, Safety and Abstention, Claim Calibration, Latency and Cost. A
           single aggregate is available and published, but it is never shown alone. A row
           without its decomposition is not rendered — that is a rule in the data checker, not
           a style preference. A system that scores well by being fast and cheap has to show you
           the dimensions where it is neither.
-        </p>
+        </span><span data-zh>一行会显示任务成功率（Task Success）、证据支撑度（Evidence Grounding）、溯源完整性（Provenance Completeness）、可复现性（Reproducibility）、安全与弃权（Safety and Abstention）、主张校准（Claim Calibration）、延迟与成本（Latency and Cost）。综合分也有发布，但绝不单独显示。缺少维度拆解的行不会被渲染——这是数据校验器里的一条规则，不是风格偏好。靠又快又便宜拿到好分数的系统，必须让你看到它在哪些维度上既不快也不便宜。</span></p>
 
         <h3><span data-en>Hard gates are visible</span><span data-zh>硬门槛是明示的</span></h3>
-        <p>
+        <p><span data-en>
           A system is kept off the trusted board if it fabricates citations, if it misses
           severe safety signals, if it cannot produce a re-runnable artifact, or if it states
           a clinical efficacy conclusion on prediction-only evidence. It is then
           <em>shown anyway</em>, on a clearly labelled Experimental board, with the blocking
           reason attached. Rows are never silently dropped. An evaluation surface that removes
           its failures is not reporting, it is advertising.
-        </p>
+        </span><span data-zh>如果系统伪造引文、漏掉严重安全信号、无法产出可重跑的 artifact，或者仅凭预测性证据就给出临床疗效结论，它就会被挡在可信榜之外。然后它<em>仍然会被显示出来</em>——放在明确标注的实验榜上，并附上拦截原因。任何一行都不会被悄悄丢掉。一个把失败项移走的评测界面不是在做报告，而是在做广告。</span></p>
 
         <h3><span data-en>A run is inspectable</span><span data-zh>每一次运行都可查看</span></h3>
-        <p>
+        <p><span data-en>
           Every published result has a run page: the tool calls it made, the evidence it
           retrieved and how each item was classified, the budget it consumed, the files it
           produced with their content hashes, and a verdict on every claim it wanted to make —
           including the claims it was refused permission to make, with the code.
-        </p>
+        </span><span data-zh>每一个已发布的结果都有一个运行页：它发起的工具调用、它检索到的证据以及每一条证据如何被分类、它消耗的预算、它产出的文件及其内容哈希，以及对它想做出的每一条主张的裁定——包括被拒绝允许做出的主张，并附上代码。</span></p>
       </div>
     </section>
 
@@ -233,58 +224,58 @@
         <span data-en>A gate is not a score contribution. It cannot be traded against a high aggregate.</span><span data-zh>门槛不是分数贡献，不能用高综合分来交换。</span>
       </p>
       <div class="grid grid--2" id="overview-gates"></div>
-      <p class="small muted" style="margin-top:0.85rem">
-        Full statements and their code mappings are on the <a href="methods.html"><span data-en>methods page</span><span data-zh>方法页</span></a>.
-      </p>
+      <p class="small muted" style="margin-top:0.85rem"><span data-en>
+        Full statements and their code mappings are on the <a href="methods.html">methods page</a>.
+      </span><span data-zh>完整条文及其代码映射见<a href="methods.html">方法页</a>。</span></p>
     </section>
 
     <section class="section" aria-labelledby="go-h">
       <h2 id="go-h"><span data-en>Where to go next</span><span data-zh>接下来看什么</span></h2>
       <div class="grid grid--3">
         <a class="card card--link" href="leaderboard.html">
-          <h3 class="card__title">Leaderboard</h3>
-          <p class="card__text">
+          <h3 class="card__title"><span data-en>Leaderboard</span><span data-zh>排行榜</span></h3>
+          <p class="card__text"><span data-en>
             Filter by track, submission type and board. Every row carries its eight dimensions.
-          </p>
+          </span><span data-zh>按赛道、提交方式与榜单筛选。每一行都带八项维度。</span></p>
           <span class="card__more"><span data-en>Open the leaderboard →</span><span data-zh>打开排行榜 →</span></span>
         </a>
         <a class="card card--link" href="compare.html">
           <h3 class="card__title"><span data-en>Compare two systems</span><span data-zh>对比两个系统</span></h3>
-          <p class="card__text">
+          <p class="card__text"><span data-en>
             Side by side, track by track, dimension by dimension.
-          </p>
+          </span><span data-zh>并排对照，逐条赛道、逐项维度。</span></p>
           <span class="card__more"><span data-en>Compare systems →</span><span data-zh>开始对比 →</span></span>
         </a>
         <a class="card card--link" href="benchmarks.html">
           <h3 class="card__title"><span data-en>Benchmark registry</span><span data-zh>基准注册表</span></h3>
-          <p class="card__text">
+          <p class="card__text"><span data-en>
             Seasons, dates frozen, data sources with licences, scoring rules, and how to cite.
-          </p>
+          </span><span data-zh>赛季、冻结日期、带许可的数据源、评分规则，以及如何引用。</span></p>
           <span class="card__more"><span data-en>Open the registry →</span><span data-zh>打开注册表 →</span></span>
         </a>
         <a class="card card--link" href="skills.html">
           <h3 class="card__title"><span data-en>Skill registry</span><span data-zh>技能注册表</span></h3>
-          <p class="card__text">
+          <p class="card__text"><span data-en>
             Stable and candidate skills: version, commit, licence, permissions requested, and
             the measured effect on the benchmark.
-          </p>
+          </span><span data-zh>稳定技能与候选技能：版本、commit、许可、申请的权限，以及在基准上实测到的效果。</span></p>
           <span class="card__more"><span data-en>Open the registry →</span><span data-zh>打开注册表 →</span></span>
         </a>
         <a class="card card--link" href="methods.html">
-          <h3 class="card__title">Methods</h3>
-          <p class="card__text">
+          <h3 class="card__title"><span data-en>Methods</span><span data-zh>方法</span></h3>
+          <p class="card__text"><span data-en>
             Scoring definitions, the geometric-mean aggregation, conflict of interest,
             versioning and the reproducibility policy.
-          </p>
+          </span><span data-zh>评分定义、几何平均聚合、利益冲突、版本管理与可复现性政策。</span></p>
           <span class="card__more"><span data-en>Read the methods →</span><span data-zh>阅读方法说明 →</span></span>
         </a>
         <a class="card card--link" href="submit.html">
-          <h3 class="card__title">Submit a system</h3>
-          <p class="card__text">
+          <h3 class="card__title"><span data-en>Submit a system</span><span data-zh>提交系统</span></h3>
+          <p class="card__text"><span data-en>
             Three submission modes, what each requires, and the evaluation flow from issue to
             published row.
-          </p>
-          <span class="card__more">Read the guide →</span>
+          </span><span data-zh>三种提交方式、各自的要求，以及从一个 issue 到发布一行的评测流程。</span></p>
+          <span class="card__more"><span data-en>Read the guide →</span><span data-zh>阅读指南 →</span></span>
         </a>
       </div>
     </section>
@@ -292,20 +283,20 @@
     <section class="section" aria-labelledby="not-h">
       <h2 id="not-h"><span data-en>What this site does not do</span><span data-zh>本站不做什么</span></h2>
       <div class="callout callout--info">
-        <p class="callout__title">It does not evaluate anything</p>
-        <p>
+        <p class="callout__title"><span data-en>It does not evaluate anything</span><span data-zh>它不做任何评测</span></p>
+        <p><span data-en>
           No score is computed here, no rank is recalculated, and nothing is written back to a
           registry. There is no submission form because there is no backend to accept one:
           submissions are a pull request or an issue, and a run is evaluated by the Runner
           before it appears here. Filtering and sorting on the leaderboard change what you are
           looking at, not what a number is.
-        </p>
-        <p class="small">
+        </span><span data-zh>这里不计算任何分数、不重算任何排名，也不向任何注册表写回任何东西。没有提交表单，因为没有后端来接收它：提交就是一个 pull request 或一个 issue，而一次运行在出现在这里之前先由 Runner 评测。排行榜上的筛选与排序，改变的是你在看什么，而不是一个数字是什么。</span></p>
+        <p class="small"><span data-en>
           The architectural rule is recorded in
           <code>docs/adr/0004-arena-read-only-static-first.md</code>, alongside
           <a href="methods.html#m-versioning-h">the four version axes</a> that every published
           result names.
-        </p>
+        </span><span data-zh>这条架构规则记录在 <code>docs/adr/0004-arena-read-only-static-first.md</code> 中，与每一条已发布结果都要写明的<a href="methods.html#m-versioning-h">四条版本轴</a>放在一起。</span></p>
       </div>
     </section>
 
@@ -314,23 +305,23 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>
+    <p><span data-en>
       <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
       result bundles; it never computes a score, never re-ranks, and never writes a registry.
-    </p>
-    <p>
+    </span><span data-zh>只读评测平台。它渲染已发布的结果包；从不计算分数、从不重新排名、也从不向任何注册表写入。</span></p>
+    <p><span data-en>
       Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
       Data is regenerated from the registries by the result generator, which is the only writer.
-    </p>
+    </span><span data-zh>纯静态 HTML，一个样式表、一个脚本。无服务器、无数据库、无 Cookie、无追踪。数据由结果生成器从各注册表再生成，它是唯一的写入者。</span></p>
     <ul class="site-footer__links">
-      <li><a href="index.html">Overview</a></li>
-      <li><a href="leaderboard.html">Leaderboard</a></li>
-      <li><a href="benchmarks.html">Benchmarks</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="methods.html">Methods</a></li>
-      <li><a href="submit.html">Submit</a></li>
-      <li><a href="data/README.md">Data contract</a></li>
-      <li><a href="README.md">Site README</a></li>
+      <li><a href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+      <li><a href="leaderboard.html"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+      <li><a href="benchmarks.html"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+      <li><a href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+      <li><a href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+      <li><a href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
+      <li><a href="data/README.md"><span data-en>Data contract</span><span data-zh>数据契约</span></a></li>
+      <li><a href="README.md"><span data-en>Site README</span><span data-zh>站点 README</span></a></li>
     </ul>
   </div>
 </footer>

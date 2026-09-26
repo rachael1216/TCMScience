@@ -29,7 +29,8 @@ from bioagent.updates import (DIMENSIONS, ELIMINATIONS, GROWTH_CEILING, Candidat
                               to_candidate, version_from_spec)
 from bioagent.updates.scout import ALLOWED_HOSTS, Scout, load_sources
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[1]          # BioScience-Harness/
+ROOT = REPO.parent                                   # the repository root
 SKILLS_DIR = REPO / "skills" / "tcm"
 REGISTRY_DIR = REPO / "registry"
 
@@ -652,3 +653,73 @@ def test_the_bootstrap_prefers_an_installed_psh_over_the_sibling_tree():
     assert callable(_bootstrap.bootstrap)
     assert (_bootstrap.REPO_ROOT / "PSH-Harness").is_dir()
     assert _bootstrap.ROOT == REPO
+
+
+# --------------------------------------------------------------------------
+# every path an ADR or README promises must exist
+# --------------------------------------------------------------------------
+
+
+def test_the_artifacts_the_adrs_name_actually_exist():
+    """An ADR that names a file is making a promise the repository has to keep.
+
+    `ADR-0003` says `skill.schema.json` is the normative schema and `ADR-0002`
+    says `registry/sources.lock.yaml` is the Source version axis. Neither file
+    existed when this test was written — both were promised in prose and never
+    created, which is the kind of gap a reader finds only after trusting the
+    document.
+    """
+    promised = {
+        "BioScience-Harness/src/bioagent/skills/schema/skill.schema.json":
+            "ADR-0003 calls this the normative skill schema",
+        "BioScience-Harness/registry/skills.lock.yaml":
+            "ADR-0001 says the lockfile records the pinned stable set",
+        "BioScience-Harness/registry/sources.lock.yaml":
+            "ADR-0002 names this the Source version axis",
+        "BioScience-Harness/registry/skill_sources.yaml":
+            "the scout reads its declared sources from here",
+        "docs/adr/0001-three-registry-separation.md": "the ADR itself",
+        "docs/adr/0002-independent-version-axes.md": "the ADR itself",
+        "docs/adr/0003-skill-yaml-compilation-contract.md": "the ADR itself",
+        "docs/adr/0004-arena-read-only-static-first.md": "the ADR itself",
+        "INSTALL.md": "the install guide the README links to",
+        "USAGE.md": "the usage guide the README links to",
+    }
+    # The promised paths mix repository-root and harness-root forms; resolve
+    # against whichever root actually contains the file, and fail if neither does.
+    missing = [f"{p} — {why}" for p, why in promised.items()
+               if not (ROOT / p).exists() and not (REPO / p).exists()
+               and not (REPO / p.replace("BioScience-Harness/", "")).exists()]
+    assert not missing, "promised but absent:\n  " + "\n  ".join(missing)
+
+
+def test_the_skill_schema_is_normative_and_accepts_every_shipped_manifest():
+    """A schema that rejects the project's own manifests would be worse than
+    none: it would be a document contradicting the code."""
+    import json as _json
+
+    import yaml
+    try:
+        import jsonschema
+    except ModuleNotFoundError:
+        pytest.skip("jsonschema not installed")
+
+    schema = _json.loads(
+        (REPO / "src" / "bioagent" / "skills" / "schema"
+         / "skill.schema.json").read_text(encoding="utf-8"))
+    for path in sorted(SKILLS_DIR.glob("*/skill.yaml")):
+        manifest = yaml.safe_load(path.read_text(encoding="utf-8"))
+        jsonschema.validate(manifest, schema)
+
+
+def test_the_sources_lockfile_lists_every_declared_source():
+    """ADR-0002 makes the Source axis version independently, so the lockfile has
+    to name the same set the scout reads — otherwise a moved source is invisible."""
+    import yaml
+    from bioagent.updates.scout import load_sources
+
+    declared = load_sources(
+        (REPO / "registry" / "skill_sources.yaml").read_text(encoding="utf-8"))
+    locked = yaml.safe_load(
+        (REPO / "registry" / "sources.lock.yaml").read_text(encoding="utf-8"))
+    assert {s["id"] for s in locked["sources"]} == {s.id for s in declared}

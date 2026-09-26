@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tcmscience.org/schemas/skill-1.json",
+  "title": "TCMScience skill manifest",
+  "description": "The normative schema for `skill.yaml`. A skill is compiled from this document and never from prose in `SKILL.md` (see docs/adr/0003). Generated from `bioagent.skills.models` by scripts/export_skill_schema.py, so the schema and the code cannot drift apart.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "id",
+    "name",
+    "version",
+    "runtime",
+    "evidence",
+    "outputs"
+  ],
+  "properties": {
+    "api_version": {
+      "const": "1",
+      "description": "manifest API version"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "stable identifier; the lockfile pins id@version"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 400
+    },
+    "description": {
+      "type": "string"
+    },
+    "maintainer": {
+      "type": "string"
+    },
+    "license_spdx": {
+      "type": "string",
+      "description": "SPDX id. Empty means no grant identified, which the licence lattice treats as no permission."
+    },
+    "license": {
+      "type": "string",
+      "description": "alias for license_spdx"
+    },
+    "integration_mode": {
+      "enum": [
+        "vendor",
+        "native",
+        "federated"
+      ]
+    },
+    "documentation": {
+      "type": "string",
+      "description": "path to SKILL.md; attached to the artifact, never parsed for authority"
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backend"
+      ],
+      "properties": {
+        "backend": {
+          "enum": [
+            "python",
+            "http",
+            "container",
+            "subprocess",
+            "mcp"
+          ]
+        },
+        "entrypoint": {
+          "type": "string"
+        },
+        "timeout_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "memory_mb": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "deterministic": {
+          "type": "boolean"
+        },
+        "idempotent": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        }
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "network": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "hosts the skill may reach. Authority is derived from these, not from the backend."
+        },
+        "filesystem_read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filesystem_write": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subprocess": {
+          "type": "boolean"
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_tier",
+        "claim_kinds"
+      ],
+      "properties": {
+        "max_tier": {
+          "enum": [
+            "classical_text",
+            "expert_experience",
+            "preclinical",
+            "case_report",
+            "observational",
+            "randomized_trial",
+            "systematic_review"
+          ]
+        },
+        "claim_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "attribution",
+              "traditional_use",
+              "mechanism",
+              "safety_signal",
+              "association",
+              "efficacy",
+              "recommendation"
+            ]
+          },
+          "description": "claim kinds the skill may emit. A kind whose tier floor exceeds max_tier is refused at load."
+        },
+        "forbidden_claims": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require_pinned_sources": {
+          "type": "boolean",
+          "default": true
+        },
+        "require_quote_verified": {
+          "type": "boolean",
+          "default": true
+        },
+        "required_quality_dimensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expected_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expected_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "expected_latency_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "SourceCard ids the skill reads. An undeclared source cannot be reached."
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "outputs": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "JSON Schema for the skill's output. A skill with no declared output has nothing to validate."
+    },
+    "risk": {
+      "enum": [
+        "r0_trivial",
+        "r1_routine",
+        "r2_consequential",
+        "r3_clinical",
+        "r4_kernel"
+      ]
+    },
+    "min_autonomy": {
+      "enum": [
+        "observe",
+        "suggest",
+        "act_with_approval",
+        "act"
+      ]
+    },
+    "source_repo": {
+      "type": "string"
+    },
+    "source_commit": {
+      "type": "string",
+      "description": "immutable commit. A branch or tag is not a pin."
+    },
+    "content_hash": {
+      "type": "string"
+    }
+  }
+}

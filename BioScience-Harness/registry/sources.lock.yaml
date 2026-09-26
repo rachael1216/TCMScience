@@ -1,0 +1,74 @@
+# sources.lock.yaml — the *source* version axis (ADR-0002).
+#
+# Separate from `skills.lock.yaml` on purpose: the four axes version
+# independently, so a source that moved must be visible even when no skill
+# changed. Regenerate with:
+#
+#     python -m bioagent.cli scout --sources registry/skill_sources.yaml \
+#         --skills skills --out candidate-report.json
+#
+# A source is *watched*, not endorsed. Nothing discovered from any entry here
+# reaches production without an audit and a recorded human promotion decision.
+generated_at: '2026-09-26T00:00:00Z'
+sources:
+- id: k-dense-scientific-agent-skills
+  kind: repo
+  url: https://github.com/K-Dense-AI/scientific-agent-skills
+  ref: main
+  note: scientific skill collection; SKILL.md-based, needs adapters
+  enabled: true
+- id: clawbio
+  kind: repo
+  url: https://github.com/ClawBio/ClawBio
+  ref: main
+  note: bioinformatics agent skills
+  enabled: true
+- id: pantheonos
+  kind: repo
+  url: https://github.com/aristoteleo/PantheonOS
+  ref: main
+  note: agent operating system; watch for skill packaging conventions
+  enabled: true
+- id: biomni
+  kind: repo
+  url: https://github.com/snap-stanford/Biomni
+  ref: main
+  note: monitored as a tool and database *discovery source*, not adopted whole. Biomni integrates many
+    biomedical tools and databases; the useful signal is what it points at, not the package itself.
+  enabled: true
+- id: biomedarena
+  kind: repo
+  url: https://github.com/AI-in-Health/BioMedArena
+  ref: main
+  note: benchmark and harness design reference
+  enabled: true
+- id: tcm-cli
+  kind: repo
+  url: https://github.com/tigerneil/tcm-cli
+  ref: main
+  note: TCM command-line tooling
+  enabled: true
+- id: topic-biomedical-agent
+  kind: topic
+  url: https://github.com/topics/biomedical-agent
+  ref: main
+  note: newly published biomedical agent skills
+  enabled: true
+- id: topic-bioinformatics
+  kind: topic
+  url: https://github.com/topics/bioinformatics
+  ref: main
+  note: broad; relevant entries are filtered by the ranker's relevance dimension
+  enabled: true
+- id: topic-drug-discovery
+  kind: topic
+  url: https://github.com/topics/drug-discovery
+  ref: main
+  note: molecular and target-prediction tooling
+  enabled: true
+- id: topic-traditional-chinese-medicine
+  kind: topic
+  url: https://github.com/topics/traditional-chinese-medicine
+  ref: main
+  note: the most directly relevant topic; small but watched closely
+  enabled: true

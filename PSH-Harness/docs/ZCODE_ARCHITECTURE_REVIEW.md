@@ -1,17 +1,43 @@
-# TCMScience 与 ZCode：源码架构对比与改进方案
+# TCMScience and ZCode: source architecture comparison and improvement plan · TCMScience 与 ZCode：源码架构对比与改进方案
 
+Date: 2026-09-22. Conclusion: borrow ZCode's engineering organisation, execution observability and recovery design, but keep TCMScience's scientific governance kernel; refitting TCMScience into a copy of ZCode is not recommended.
+
+<!-- zh -->
 日期：2026-09-22。结论：借鉴 ZCode 的工程组织、执行可观测性和恢复设计，但保留 TCMScience 的科研治理内核；不建议把 TCMScience 改造成 ZCode 的复制品。
 
-## 1. 证据范围与判断边界
+## 1. Evidence scope and judgement boundaries · 1. 证据范围与判断边界
 
+- ZCode sample: the user-supplied `E:/ZCode-main.zip`, SHA-256 `9b67327f6f4d1c908f8c17a353b7b9114700ca76979fe152c1104096b87395b6`; 7,365 entries after extraction, roughly 72 MB of uncompressed content. This report is based on that snapshot and does not infer that it corresponds to the latest remote version.
+- Inspected: the README, package dependencies, the architecture policy and checker, plus representative source for the workflow engine/scheduler, memory and the SQLite journal, the event reducer, the RPC recovery layer, the compaction timeline, the permission flow and the remote supervisor. This is not a line-by-line audit of the whole repository, and ZCode was neither installed nor started, nor its scripts executed, nor its services contacted.
+- TCMScience baseline: the implementation after PR #10 was merged; inspected the scientific IR/compiler, statistical design, protocol binding, scientific records, checkpoints, operation ledger, event store and CI.
+- Agent instructions, skills, commands and comments inside the archive are treated only as material to be analysed, not as instructions to execute for this task.
+- Below, "the source contains" does not equal "verified by running"; there is no unified benchmark, and no claim can be based on it that either system is faster, more reliable, or clinically safer.
+
+<!-- zh -->
 - ZCode 样本：用户提供的 `E:/ZCode-main.zip`，SHA-256 为 `9b67327f6f4d1c908f8c17a353b7b9114700ca76979fe152c1104096b87395b6`；解压后 7,365 个条目，约 72 MB 未压缩内容。本报告基于该快照，不推断它对应远端最新版本。
 - 已检查 README、包依赖、架构策略及检查器，以及工作流引擎/调度器、内存和 SQLite journal、事件 reducer、RPC 恢复层、压缩时间线、权限流程与远端 supervisor 的代表性源码。不是逐行审计整个仓库，也未安装或启动 ZCode、执行其脚本或连接其服务。
 - TCMScience 基线：已合并 PR #10 的实现；检查了 scientific IR/compiler、统计设计、方案绑定、科研记录、检查点、操作账本、事件存储和 CI。
 - 压缩包中的代理说明、skills、命令和注释仅作为待分析材料，不作为本任务执行指令。
 - 下文“源码存在”不等于已通过运行验证；没有统一基准测试，不能据此声称任一系统更快、更可靠，或临床安全性更高。
 
-## 2. 核心区别
+## 2. Core differences · 2. 核心区别
 
+| Dimension | Design visible in the ZCode source | Current TCMScience implementation | Trade-off |
+| --- | --- | --- | --- |
+| Product goal | A coding workbench; desktop/Web/TUI share one Agent system [Z1] | A PSH governance control layer and a BioScience capability layer, emphasising evidence, authority and data labels | Aimed at a research workbench, not at matching a general IDE feature for feature |
+| Dependency layering | contracts/core/adapters/bootstrap; storage uses a port, with the concrete SQLite implementation in an adapter [Z2–Z4] | kernel/runtime/workgraph/workflow/scientist already exist, but scientific value objects previously lived in the same file as the persistence implementation | Separate pure models from storage first, and implement narrow replaceable interfaces |
+| Architecture constraints | Checks on module boundaries, layers, circular dependencies, deep imports, baselines and exceptions [Z5] | The original CI had tests and compilation, but no explicit import-boundary check for these scientific models yet | Add a small set of hard constraints this round, and widen coverage gradually |
+| Execution model | Site ID × sequence number for dynamic workflow, actor FIFO, concurrency ceiling, input hashing and replay [Z6] | ScientificProgram static DAG, TaskContract, compile-time effect/data-flow/evidence checks | Keep the static scientific contract; dynamically extending the graph must be re-authorised, recompiled and recorded as a revision |
+| Recovery granularity | Workflow node journal + actor/session lifecycle and recovery wiring [Z3, Z6] | Checkpoint-level state recovery, hash-chained journal, OperationLedger | Add an event-level reducer later; do not write "has a journal" as exactly-once |
+| Amendment/reuse | Monotonic divergence of the imported cache, consumption cursor, conservative cache rules after interaction with the outside world [Z7] | assess_amendment propagates invalidation and only offers pure task-reuse candidates; it does not read the result cache | Monotonic invalidation is worth borrowing; reuse also needs artifact digests, tool versions, current authority and labels |
+| Event/multi-client read surface | EventReducer builds projections from session events; messages carry fields such as origin/visibility [Z4, Z8] | EventStore is an audit record with redaction/hash chaining; WorkGraph is a scientific relationship graph, not a unified UI projection | Establish "audit event → controlled read surface" rather than sending raw events straight to the front end |
+| Network reliability | PersistentProtocol has ACK, replay of unacknowledged messages after a disconnect, bounded buffers and backpressure [Z9] | The scientific execution interfaces involved this round are mostly in-process; no equivalent multi-client protocol was built | Introduce it once there is a remote workbench requirement; transport replay must not re-execute scientific side effects |
+| Context management | The compact timeline contains boundaries, phases, token usage and summary anchors [Z10] | There is context/label governance, but no equivalent session compaction timeline was seen in this inspection | A summary must retain evidence IDs, counterexamples, protocol versions and sensitivity labels |
+| Authority governance | permission broker, project rules, approvals, re-check after a hook modifies the input [Z11] | AuthorityLattice, label propagation, model/tool/persistence egress and current-policy tightening checks | Learn the approval observability; do not replace the existing data flow and scientific evidence gating |
+| Scientific semantics | The checked modules focus on general tools and workflow | Protocol, Observation, Deviation, evidence design support scope, statistical claims and protocol binding | This is the professional capability TCMScience should keep deepening; it is not something a UI can fill in |
+| Operations/release | crash budget, runtime manifest, platform targets and component digest fields [Z12] | The Python environment, CI and release hygiene already have a basis; this machine was once affected by a runtime path change | Add a runtime environment manifest and start-up self-check gradually, and avoid depending on volatile install paths |
+
+<!-- zh -->
 | 维度 | ZCode 源码中可见的设计 | TCMScience 当前实现 | 取舍 |
 | --- | --- | --- | --- |
 | 产品目标 | 编码工作台，桌面/Web/TUI 共用 Agent 体系 [Z1] | PSH 治理控制层与 BioScience 能力层，强调证据、权限、数据标签 | 面向研究工作台，而非通用 IDE 功能追平 |
@@ -27,57 +53,119 @@
 | 科研语义 | 所检查模块重点是通用工具与工作流 | Protocol、Observation、Deviation、证据设计支持范围、统计声明与方案绑定 | 这是 TCMScience 要继续深化的专业能力，不是 UI 能补齐的部分 |
 | 运维/发行 | crash budget、runtime manifest、平台目标及组件摘要字段 [Z12] | Python 环境、CI 和 release hygiene 已有基础；本机曾受运行时路径变化影响 | 逐步增加运行环境清单与启动自检，避免依赖易变安装路径 |
 
-### 不能夸大的 ZCode 优势
+### ZCode advantages that must not be exaggerated · 不能夸大的 ZCode 优势
 
+1. `architecture-policy.yaml`'s `managedOnly: true` together with several `managed: false` entries shows that it too adopts incremental governance; its whole repository cannot be called strictly acyclic and free of deep imports.
+2. `@zcode/contracts` still depends on shared, zod and others, and core also contains several concrete libraries; "layered" does not mean that every domain object is entirely free of external packages.
+3. ACK/replay guarantee message transport; journal/replay likewise cannot on its own prove exactly-once for external tool side effects.
+4. The root LICENSE is Apache-2.0, with additional third-party notices. This round copies no ZCode source, assets or dependencies and only independently implements general architectural patterns; if code is ported in the future, the origin and notices of every file must be checked.
+5. This report does not prove that ZCode lacks all scientific functions or data protections, only that these were not the focus of the general execution design inspected this time.
+
+<!-- zh -->
 1. `architecture-policy.yaml` 的 `managedOnly: true` 与多个 `managed: false` 表明它也采用渐进治理；不能称其整个仓库已经严格无环、无深层导入。
 2. `@zcode/contracts` 仍依赖 shared、zod 等，core 也含若干具体库；“分层”不等于所有领域对象完全不依赖外部包。
 3. ACK/重放保障的是消息传输；journal/replay 也不能单独证明外部工具副作用 exactly-once。
 4. 根 LICENSE 是 Apache-2.0，另有第三方声明。本轮不复制 ZCode 源码、资源或依赖，仅独立实现通用架构模式；未来如移植代码，应逐文件核对来源与声明。
 5. 本报告没有证明 ZCode 缺少所有科研功能或数据防护，只是这些不属于本次检查到的通用执行设计重点。
 
-## 3. 本轮已经落地
+## 3. What landed this round · 3. 本轮已经落地
 
-### 3.1 科研值对象与持久化分离
+### 3.1 Separation of scientific value objects from persistence · 3.1 科研值对象与持久化分离
 
+`scientist/records.py` previously defined Hypothesis, Protocol, Observation, Deviation and ScientificLedger at the same time. Statistical design references Protocol, yet indirectly walked into persistence/WorkGraph-related code.
+
+<!-- zh -->
 原先 `scientist/records.py` 同时定义 Hypothesis、Protocol、Observation、Deviation 和 ScientificLedger。统计设计引用 Protocol，却间接走到 persistence/WorkGraph 相关代码。
 
+Now:
+
+<!-- zh -->
 现在：
 
+- `scientist/models.py`: scientific value objects, validation and stable content hashing; depends only on the standard library.
+- `scientist/ports.py`: defines the structured `ProtocolResolver` interface. The compiler, the planner and amendment accept this narrow interface, instead of using Any to hide the entire storage dependency.
+- `scientist/records.py`: keeps the governance and persistence logic of ScientificLedger, and re-exports the old class names, for compatibility with existing imports.
+- `workflow/statistics.py`: depends directly on the pure models.
+- `scientist.__init__`: lazily loads ScientificLedger; importing only the models or the statistical design no longer loads the scientific records adapter.
+
+<!-- zh -->
 - `scientist/models.py`：科研值对象、校验与稳定内容哈希；仅依赖标准库。
 - `scientist/ports.py`：定义结构化 `ProtocolResolver` 接口。编译器、规划器及 amendment 接受这个窄接口，而不是用 Any 隐藏整个存储依赖。
 - `scientist/records.py`：保留 ScientificLedger 的治理与持久化逻辑，并重导出旧类名，兼容已有导入。
 - `workflow/statistics.py`：直接依赖纯模型。
 - `scientist.__init__`：对 ScientificLedger 延迟加载；仅导入模型或统计设计不再加载科研 records adapter。
 
+Important boundary: the top-level `psh.__init__` still has historical kernel/runtime imports. This round only removes the new scientific-model → scientific-persistence coupling; it does not claim that the whole of psh has achieved side-effect-free imports or improved start-up performance.
+
+<!-- zh -->
 重要边界：顶层 `psh.__init__` 仍有历史性的 kernel/runtime 导入。本轮只移除新的科研模型→科研持久化耦合，不声称整个 psh 已实现无副作用导入或启动性能提升。
 
+`ProtocolResolver` is a trusted integration interface, not an authority sandbox. A replacement implementation must still perform project isolation, current policy and data-integrity checks. Production continues to use ScientificLedger, and there is no silent downgrade to an ungoverned in-memory store.
+
+<!-- zh -->
 `ProtocolResolver` 是可信集成接口，不是权限沙箱。替换实现仍必须执行项目隔离、当前策略和数据完整性检查。生产继续使用 ScientificLedger，不提供静默降级到不受治理的内存存储。
 
-### 3.2 可执行的架构回归检查
+### 3.2 Executable architecture regression checks · 3.2 可执行的架构回归检查
 
+Added `scripts/check_scientific_architecture.py`, which checks an explicit dependency allow-list for the three managed modules above:
+
+<!-- zh -->
 新增 `scripts/check_scientific_architecture.py`，对上述三个受管模块检查显式依赖白名单：
 
+- it checks absolute/relative imports, and also static imports inside functions and conditional branches.
+- it refuses cross-layer dependencies, wildcard imports, relative imports that escape the package, direct dynamic import/exec/eval, and missing managed files.
+- all three Python versions in CI run this check; a negative test additionally verifies that the checker really does refuse a violation.
+- this is a static import-convention check, not a security analyser for arbitrary Python programs; it does not analyse every dynamic loading route such as aliases or reflection, and it is not a whole-repository circular-dependency check.
+
+<!-- zh -->
 - 检查绝对/相对导入，也检查函数内和条件分支里的静态导入。
 - 拒绝越层依赖、通配导入、包外相对导入、直接动态导入/exec/eval，以及缺失的受管文件。
 - CI 的三种 Python 版本均运行该检查；另有负向测试验证检查器确实会拒绝违规。
 - 这是静态导入约定检查，不是任意 Python 程序的安全分析器；不分析通过别名、反射等所有动态加载方式，也不是全仓库循环依赖检查。
 
+No "400 lines" threshold was set for all historical code in one pass, and existing problems were not all written into an auto-refreshable exemption baseline. Establish clear constraints on the new boundary first, then widen the governance scope, so that a large-scale reformat or split does not mask real behaviour changes.
+
+<!-- zh -->
 没有为全部历史代码一次性设“400 行”门槛，也没有把既有问题全部写进可自动刷新的豁免基线。先对新边界建立明确约束，再扩展治理范围，避免大规模格式化或拆分掩盖真实行为变化。
 
-### 3.3 兼容性与验证
+### 3.3 Compatibility and verification · 3.3 兼容性与验证
 
+162 relevant tests pass locally, of which 17 are new architecture/interface tests, covering:
+
+<!-- zh -->
 本地 162 项相关测试通过，其中新增 17 项架构/接口测试，覆盖：
 
+- old/new imports of the models have identical class identity, and the hashing rule round-trips with object serialization;
+- in a new process, importing the pure models does not load the scientific persistence adapter, which is loaded only when ScientificLedger is accessed;
+- the compiler can use a test double that implements the same protocol, without depending on the concrete SQLite class;
+- positive, negative and missing-file cases of the architecture checker;
+- the existing protocol-binding, policy-tightening, scientific-records, statistical-design, compiler and recovery tests keep passing.
+
+<!-- zh -->
 - 模型的旧/新导入类身份一致，哈希规则与对象序列化往返；
 - 新进程中纯模型导入不加载科研持久化 adapter，访问 ScientificLedger 时再加载；
 - 编译器可用实现相同协议的测试替身，不依赖 SQLite 具体类；
 - 架构检查器的正向、负向和文件缺失用例；
 - 原有方案绑定、策略收紧、科研记录、统计设计、编译器和恢复测试保持通过。
 
+ZCode was not started this round and no cross-product performance benchmark was run; passing tests show that this boundary adjustment did not break already-covered behaviour, and do not mean that all scientific functionality is complete.
+
+<!-- zh -->
 没有在本轮启动 ZCode 或跑跨产品性能基准；测试通过说明本次边界调整未破坏已覆盖的行为，不代表全部科研功能完成。
 
-## 4. 建议的后续改进顺序与验收条件
+## 4. Recommended improvement order and acceptance conditions · 4. 建议的后续改进顺序与验收条件
 
+| Order | Improvement | What to borrow | TCMScience-specific constraints and acceptance |
+| --- | --- | --- | --- |
+| P1 | Controlled execution events and a read-only run projection | event reducer, a single read surface | sequence number/run ID/idempotency key; deterministic replay output; out-of-order/duplicate event tests; PHI does not enter the public projection |
+| P1 | Explicit workflow amendment records | monotonic divergence, recovery after a revision | record the old/new fingerprint, reason, approval and invalidation set; a non-idempotent UNKNOWN is not retried automatically; a cache hit re-checks authority/labels |
+| P1 | journal/operation store consistency test suite | in-memory/SQLite sharing one port | one set of cases covers reopen, interrupted transaction, duplicate write and revoked authority; persistence capability must not be silently lost |
+| P2 | Runtime environment manifest and local start-up self-check | runtime manifest, crash budget | pin Python/tool/model/data digests; check directory write permission and disk; do not put real secrets into diagnostic output |
+| P2 | Context compaction that preserves evidence fidelity | compact boundary/timeline | the summary retains source/counterexample/protocol hash; labels are only escalated; expired evidence cannot regain trusted status through summary reuse |
+| P2 | Research workbench read-only view, then control entry points | multi-client contracts, visible degradation | show hypothesis → protocol → observation → deviation → evidence first; execution/release operations still go through the existing kernel gating |
+| P3 | Controlled concurrency and remote streaming protocol | FIFO, backpressure, ACK | shared budget reservation, cancellation propagation, side-effect isolation and bounded queues; without these preconditions, do not open multi-actor parallelism directly |
+
+<!-- zh -->
 | 顺序 | 改进 | 借鉴点 | TCMScience 专有约束及验收 |
 | --- | --- | --- | --- |
 | P1 | 受控执行事件与只读运行投影 | event reducer、单一读面 | 序号/运行 ID/幂等键；重放输出确定；乱序/重复事件测试；PHI 不进入公开投影 |
@@ -88,12 +176,33 @@
 | P2 | 研究工作台只读视图，再做控制入口 | 多端契约、可见降级 | 先展示假设→方案→观察→偏差→证据；执行/发布操作仍走现有 kernel 门控 |
 | P3 | 受控并发和远端流式协议 | FIFO、背压、ACK | 共享预算预留、取消传播、副作用隔离和有界队列；没有这些前提不直接开放多 actor 并行 |
 
+What is not recommended now: a wholesale migration to TypeScript/Electron; copying the full plugin marketplace; wiring dynamic execution of user scripts straight into the high-authority scientific environment; substituting UI completeness for scientific evidence or statistical validation; treating "zero tool calls" as proof that a scientific artifact is safe to reuse.
+
+<!-- zh -->
 不建议现在做的事：整体迁移到 TypeScript/Electron；复制完整插件市场；将用户脚本动态执行直接接入科研高权限环境；以 UI 完整性替代科学证据或统计验证；直接按“工具调用次数为零”认定科研产物可安全复用。
 
-## 5. 源码证据索引
+## 5. Source evidence index · 5. 源码证据索引
 
+The Z paths below are all relative to `ZCode-main/` in the user's archive, to make offline re-checking convenient and to avoid depending on unverified remote links.
+
+<!-- zh -->
 以下 Z 路径均相对用户压缩包中的 `ZCode-main/`，便于离线复核，不依赖未经确认的远端链接。
 
+- Z1: `README.en.md`, the Interface/Development/Configuration sections.
+- Z2: `apps/zcode-cli/packages/contracts/package.json`; `apps/zcode-cli/packages/core/package.json`.
+- Z3: `apps/zcode-cli/packages/dynamic-workflow/src/engine/journal-memory.ts`; `apps/zcode-cli/packages/adapters/src/storage/session-store/repositories/dwf-journal.ts`.
+- Z4: `apps/zcode-cli/packages/contracts/src/interfaces/session-store.port.ts`; `packages/services/src/storage/contract.ts`.
+- Z5: `architecture-policy.yaml`; `scripts/architecture/index.mjs`; `scripts/architecture/architecture-check.mjs`; the root `package.json` and `.oxlintrc.json`.
+- Z6: `apps/zcode-cli/packages/dynamic-workflow/src/engine/engine.ts`, `scheduler.ts`; `apps/zcode-cli/packages/bootstrap/src/app/dynamic-workflow-run-journal.ts`.
+- Z7: `apps/zcode-cli/packages/dynamic-workflow/src/engine/imported-cache.ts`.
+- Z8: `apps/zcode-cli/packages/contracts/src/events/event-reducer.ts`.
+- Z9: `packages/rpc/src/persistent-protocol.ts`.
+- Z10: `apps/zcode-cli/packages/core/src/runtime/methods/compact-persistence.ts`.
+- Z11: `apps/zcode-cli/packages/core/src/tool/executor/permission-flow.ts`.
+- Z12: `packages/zcode-server-cli/src/supervisor/crashBudget.ts`; `packages/zcode-server-cli/src/runtime/manifest.ts`.
+- TCMScience: `PSH-Harness/src/psh/workflow/{ir,compiler,amend,statistics}.py`; `scientist/{models,ports,records}.py`; `runtime/{checkpoint,journal,operations,execgraph}.py`; `kernel/{authority,events}.py`; `.github/workflows/ci.yml`.
+
+<!-- zh -->
 - Z1：`README.en.md`，Interface/Development/Configuration 部分。
 - Z2：`apps/zcode-cli/packages/contracts/package.json`；`apps/zcode-cli/packages/core/package.json`。
 - Z3：`apps/zcode-cli/packages/dynamic-workflow/src/engine/journal-memory.ts`；`apps/zcode-cli/packages/adapters/src/storage/session-store/repositories/dwf-journal.ts`。
@@ -108,7 +217,11 @@
 - Z12：`packages/zcode-server-cli/src/supervisor/crashBudget.ts`；`packages/zcode-server-cli/src/runtime/manifest.ts`。
 - TCMScience：`PSH-Harness/src/psh/workflow/{ir,compiler,amend,statistics}.py`；`scientist/{models,ports,records}.py`；`runtime/{checkpoint,journal,operations,execgraph}.py`；`kernel/{authority,events}.py`；`.github/workflows/ci.yml`。
 
-## 6. 总结
+## 6. Summary · 6. 总结
 
+What is worth absorbing is ZCode's "stable contracts + replaceable implementations + recoverable execution + observable read surface + automated architecture constraints". On top of that engineering base, TCMScience needs to keep strengthening "evidence support scope + protocol registration/deviation + data labels + current policy + side-effect recovery".
+What this round completed is the architecture layering and the anti-regression foundation, not the delivery of a dynamic scientific workflow or a complete research workbench.
+
+<!-- zh -->
 适合吸收的是 ZCode 的“稳定契约 + 可替换实现 + 可恢复执行 + 可观测读面 + 自动化架构约束”。TCMScience 需要在这些工程基础上继续强化“证据支持范围 + 方案登记/偏差 + 数据标签 + 当前策略 + 副作用恢复”。
 本轮完成的是架构分层和防回退基础，不是动态科研工作流或完整研究桌面的交付。

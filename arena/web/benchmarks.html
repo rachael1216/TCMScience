@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="benchmarks">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main"><span data-en>Skip to content</span><span data-zh>跳到正文</span></a>
 
 <header class="site-header">
   <div class="wrap site-header__inner">
@@ -44,14 +44,14 @@
   <div class="page-head">
     <div class="wrap">
       <h1><span data-en>Benchmark registry</span><span data-zh>基准注册表</span></h1>
-      <p class="page-head__lede">
+      <p class="page-head__lede"><span data-en>
         A Season is the unit of comparability. It is cut from a Stable Registry revision and is
         thereafter immutable: a monthly skill update can never modify it, because otherwise this
         month's score and last month's are not on the same scale.
-      </p>
+      </span><span data-zh>赛季（Season）是比较性的单位。它从某个稳定注册表（Stable Registry）修订版中切出，此后不可更改：月度技能更新永远不能改动它，否则本月与上月的分数就不在同一把尺子上。</span></p>
       <p class="page-head__meta">
-        <span class="badge badge--plain">Frozen registry</span>
-        <span class="badge badge--plain">Append-only</span>
+        <span class="badge badge--plain"><span data-en>Frozen registry</span><span data-zh>冻结注册表</span></span>
+        <span class="badge badge--plain"><span data-en>Append-only</span><span data-zh>只追加</span></span>
       </p>
     </div>
   </div>
@@ -59,38 +59,38 @@
   <div class="wrap" id="benchmarks">
 
     <section class="section" aria-labelledby="seasons-h">
-      <h2 id="seasons-h">Seasons</h2>
-      <p class="section__lede">
+      <h2 id="seasons-h"><span data-en>Seasons</span><span data-zh>赛季</span></h2>
+      <p class="section__lede"><span data-en>
         Each Season names its version, the date it was frozen, its case count and its splits.
         The case files themselves are not published here.
-      </p>
+      </span><span data-zh>每个赛季写明自己的版本、冻结日期、题目数量与划分。题目文件本身不在这里发布。</span></p>
       <div class="grid grid--3" id="benchmark-seasons"></div>
       <div class="callout callout--info" style="margin-top:1.25rem">
-        <p class="callout__title">Why the cases are not on this page</p>
-        <p>
+        <p class="callout__title"><span data-en>Why the cases are not on this page</span><span data-zh>为什么题目不在本页</span></p>
+        <p><span data-en>
           A public gold answer contaminates the benchmark for everyone who clones it. The schema,
           the loader, the scorers and the data card are published; the cases and their gold labels
           are withheld so a clone cannot be prompted or trained against them. A new system
           iterates against the public development split and is scored, once, on the held-out one.
-        </p>
+        </span><span data-zh>公开的黄金答案，会污染每一个克隆它的人手中的基准。schema、加载器、评分器与数据卡是发布的；题目及其黄金标签被隐去，这样克隆者就无法针对它们做提示或训练。新系统对着公开的开发集迭代，只在留出集上被评分一次。</span></p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="tracks-h">
       <h2 id="tracks-h"><span data-en>Tracks in the current Season</span><span data-zh>当季赛道</span></h2>
-      <p class="section__lede">
+      <p class="section__lede"><span data-en>
         Six tracks, twenty cases each. Each track has its own scorer and its own metric focus —
         the dimensions are shared across tracks, what varies is what each one is measuring.
-      </p>
+      </span><span data-zh>六条赛道，每条二十道题。每条赛道有自己的评分器和自己的指标重心——维度在各赛道之间共用，变化的是每一项在测量什么。</span></p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Tracks in the current Season">
         <table class="plain">
-          <caption class="visually-hidden">Tracks, metric focus, case count and scoring notes</caption>
-          <thead>
+          <caption class="visually-hidden"><span data-en>Tracks, metric focus, case count and scoring notes</span><span data-zh>赛道、核心指标、题目数量与评分说明</span></caption>
+          <th scope="col"ead>
             <tr>
               <th scope="col"><span data-en>Track</span><span data-zh>赛道</span></th>
               <th scope="col"><span data-en>Metric focus</span><span data-zh>核心指标</span></th>
-              <th scope="col" class="col-num">Cases</th>
-              <th scope="col">Notes</th>
+              <th scope="col" class="col-num"><span data-en>Cases</span><span data-zh>题目数</span></th>
+              <th scope="col"><span data-en>Notes</span><span data-zh>说明</span></th>
             </tr>
           </thead>
           <tbody id="benchmark-tracks"></tbody>
@@ -99,65 +99,65 @@
     </section>
 
     <section class="section" aria-labelledby="sources-h">
-      <h2 id="sources-h">Data sources and licences</h2>
-      <p class="section__lede">
+      <h2 id="sources-h"><span data-en>Data sources and licences</span><span data-zh>数据源与许可</span></h2>
+      <p class="section__lede"><span data-en>
         External databases change without telling us. A source is pinned by content, not by a
         date: the snapshot hash is what a downstream artifact cites, because “version 2.0” is not
         a version and a hash is.
-      </p>
+      </span><span data-zh>外部数据库不会通知我们就改变。来源是按内容钉住的，不是按日期：下游 artifact 引用的是快照哈希（snapshot hash），因为「2.0 版」不是一个版本，而哈希是。</span></p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Data sources and licences">
         <table class="plain">
-          <caption class="visually-hidden">Data sources, licences, snapshot hashes and the tracks that use them</caption>
-          <thead>
+          <caption class="visually-hidden"><span data-en>Data sources, licences, snapshot hashes and the tracks that use them</span><span data-zh>数据源、许可、快照哈希，以及使用它们的赛道</span></caption>
+          <th scope="col"ead>
             <tr>
               <th scope="col"><span data-en>Source</span><span data-zh>来源</span></th>
               <th scope="col"><span data-en>Licence</span><span data-zh>许可</span></th>
-              <th scope="col">Snapshot</th>
-              <th scope="col">Used by</th>
-              <th scope="col">Link</th>
+              <th scope="col"><span data-en>Snapshot</span><span data-zh>快照</span></th>
+              <th scope="col"><span data-en>Used by</span><span data-zh>使用者</span></th>
+              <th scope="col"><span data-en>Link</span><span data-zh>链接</span></th>
             </tr>
           </thead>
           <tbody id="benchmark-sources"></tbody>
         </table>
       </div>
-      <p class="small muted" style="margin-top:0.75rem">
+      <p class="small muted" style="margin-top:0.75rem"><span data-en>
         A licence string is not evidence that a licence permits this use. Each source carries a
         <code>licence_verified</code> flag set by a human reviewer at Season cut; the flag is
         rendered next to the string rather than assumed from it. An artifact resting on a source
         with no identified licence fails validation (ART103).
-      </p>
+      </span><span data-zh>一个许可字符串，不等于该许可允许这种用法。每个来源带一个 <code>licence_verified</code> 标记，由人类审阅者在赛季切出时设置；该标记与字符串并排渲染，而不是由字符串假定而来。一个建立在未标明许可的来源之上的 artifact，验证不通过（ART103）。</span></p>
     </section>
 
     <section class="section" aria-labelledby="rules-h">
-      <h2 id="rules-h">Scoring rules</h2>
-      <p class="section__lede">
+      <h2 id="rules-h"><span data-en>Scoring rules</span><span data-zh>评分规则</span></h2>
+      <p class="section__lede"><span data-en>
         The rules below are the ones that apply to every track. Track-specific scorers are
         described with the track.
-      </p>
+      </span><span data-zh>下列规则适用于每一条赛道。赛道专属的评分器随赛道一同说明。</span></p>
       <div id="benchmark-rules"></div>
     </section>
 
     <section class="section" aria-labelledby="gates-b-h">
-      <h2 id="gates-b-h">Hard gates</h2>
-      <p class="section__lede">
+      <h2 id="gates-b-h"><span data-en>Hard gates</span><span data-zh>硬门槛</span></h2>
+      <p class="section__lede"><span data-en>
         Applied before ranking, never as a score contribution. A gated run appears on the
         Experimental board with its blocking reason.
-      </p>
+      </span><span data-zh>在排名之前施加，绝不作为分数贡献。被门槛拦下的运行，会连同拦截原因出现在实验榜上。</span></p>
       <div class="grid grid--2" id="benchmark-gates"></div>
     </section>
 
     <section class="section" aria-labelledby="cite-h">
-      <h2 id="cite-h">How to cite</h2>
-      <p class="section__lede">
+      <h2 id="cite-h"><span data-en>How to cite</span><span data-zh>如何引用</span></h2>
+      <p class="section__lede"><span data-en>
         Cite the Season and the four version axes, not the website. The axes are what make the
         number re-derivable by someone who has none of your code.
-      </p>
+      </span><span data-zh>引用赛季与四条版本轴，而不是引用这个网站。正是这四条轴，让一个手里没有你任何代码的人也能重新推导出这个数字。</span></p>
       <div class="card"><div class="card__body" id="benchmark-citation"></div></div>
-      <p class="small muted" style="margin-top:0.85rem">
+      <p class="small muted" style="margin-top:0.85rem"><span data-en>
         Replace the example identifiers with the ones printed on the run page of the result you
         are citing. A result whose four axes are not all resolvable in the published registries is
         not rendered on the leaderboard at all.
-      </p>
+      </span><span data-zh>把示例标识符替换成你所引用结果的运行页上印出的那些。一个四条轴不能全部在已发布注册表中解析出来的结果，根本不会在排行榜上渲染。</span></p>
     </section>
 
   </div>
@@ -165,22 +165,22 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>
+    <p><span data-en>
       <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
       result bundles; it never computes a score, never re-ranks, and never writes a registry.
-    </p>
+    </span><span data-zh>只读评测平台。它渲染已发布的结果包；从不计算分数、从不重新排名、也从不向任何注册表写入。</span></p>
     <p>
-      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+      <span data-en>Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.</span><span data-zh>纯静态 HTML，一个样式表、一个脚本。无服务器、无数据库、无 Cookie、无追踪。</span>
     </p>
     <ul class="site-footer__links">
-      <li><a href="index.html">Overview</a></li>
-      <li><a href="leaderboard.html">Leaderboard</a></li>
-      <li><a href="benchmarks.html">Benchmarks</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="methods.html">Methods</a></li>
-      <li><a href="submit.html">Submit</a></li>
-      <li><a href="data/README.md">Data contract</a></li>
-      <li><a href="README.md">Site README</a></li>
+      <li><a href="index.html"><span data-en>Overview</span><span data-zh>总览</span></a></li>
+      <li><a href="leaderboard.html"><span data-en>Leaderboard</span><span data-zh>排行榜</span></a></li>
+      <li><a href="benchmarks.html"><span data-en>Benchmarks</span><span data-zh>基准</span></a></li>
+      <li><a href="skills.html"><span data-en>Skills</span><span data-zh>技能</span></a></li>
+      <li><a href="methods.html"><span data-en>Methods</span><span data-zh>方法</span></a></li>
+      <li><a href="submit.html"><span data-en>Submit</span><span data-zh>提交</span></a></li>
+      <li><a href="data/README.md"><span data-en>Data contract</span><span data-zh>数据契约</span></a></li>
+      <li><a href="README.md"><span data-en>Site README</span><span data-zh>站点 README</span></a></li>
     </ul>
   </div>
 </footer>
