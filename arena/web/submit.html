@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Submit a system — TCMScience Arena</title>
+<title>Submit a system 提交系统 — TCMScience Arena</title>
 <meta name="description" content="How to submit a TCMScience Skill, an OCI container or a remote agent API to the Arena: what each mode requires, and the evaluation flow from issue to published row.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,7 +85,7 @@
         <div class="table-scroll" tabindex="0" role="region" aria-label="Comparison of the three submission modes">
           <table>
             <caption class="visually-hidden"><span data-en>Submission modes, what each one is, and what each requires</span><span data-zh>三种提交方式、各自是什么，以及各自要求什么</span></caption>
-            <th scope="col"ead>
+            <thead>
               <tr>
                 <th scope="col"><span data-en>Mode</span><span data-zh>方式</span></th>
                 <th scope="col"><span data-en>What it is</span><span data-zh>它是什么</span></th>
@@ -253,20 +253,20 @@
         <div class="table-scroll" tabindex="0" role="region" aria-label="Common refusal codes">
           <table>
             <caption class="visually-hidden"><span data-en>Frequently returned refusal and violation codes</span><span data-zh>经常返回的拒绝与违规代码</span></caption>
-            <th scope="col"ead>
+            <thead>
               <tr><th scope="col"><span data-en>Code</span><span data-zh>代码</span></th><th scope="col"><span data-en>Meaning</span><span data-zh>含义</span></th><th scope="col"><span data-en>Usual cause</span><span data-zh>常见原因</span></th></tr>
             </thead>
             <tbody>
               <tr><th scope="row" class="mono">ART101</th><td><span data-en>artifact declares no sources</span><span data-zh>artifact 未声明任何数据源</span></td><td class="small"><span data-en>The envelope was emitted without the source list.</span><span data-zh>信封产出时没有带来源列表。</span></td></tr>
-              <tr><th scope="row" class="mono">ART102</th><td><span data-en>a publishable claim rests on a source that is not pinned to a snapshot</span><span data-zh>一个可发布的主张，建立在**未钉住快照**的数据源之上</span></td><td class="small"><span data-en>A live API was read without recording its snapshot hash.</span><span data-zh>读取了一个在线 API，却没有记录它的快照哈希（snapshot hash）。</span></td></tr>
-              <tr><th scope="row" class="mono">ART103</th><td><span data-en>a publishable claim rests on a source with no identified licence</span><span data-zh>一个可发布的主张，建立在**未标明许可**的数据源之上</span></td><td class="small"><span data-en>A scraped or user-supplied corpus with no licence determination.</span><span data-zh>一个抓取来或用户提供的语料，未做许可判定。</span></td></tr>
-              <tr><th scope="row" class="mono">ART104</th><td><span data-en>a claim cites evidence id that is not present in the artifact</span><span data-zh>主张引用了 artifact 中不存在的证据 id</span></td><td class="small"><span data-en>Identifiers were generated rather than retrieved. This trips gate G1.</span><span data-zh>标识符是**生成的**而非检索到的。这会触发门槛 G1。</span></td></tr>
+              <tr><th scope="row" class="mono">ART102</th><td><span data-en>a publishable claim rests on a source that is not pinned to a snapshot</span><span data-zh>一个可发布的主张，建立在未钉住快照的数据源之上</span></td><td class="small"><span data-en>A live API was read without recording its snapshot hash.</span><span data-zh>读取了一个在线 API，却没有记录它的快照哈希（snapshot hash）。</span></td></tr>
+              <tr><th scope="row" class="mono">ART103</th><td><span data-en>a publishable claim rests on a source with no identified licence</span><span data-zh>一个可发布的主张，建立在未标明许可的数据源之上</span></td><td class="small"><span data-en>A scraped or user-supplied corpus with no licence determination.</span><span data-zh>一个抓取来或用户提供的语料，未做许可判定。</span></td></tr>
+              <tr><th scope="row" class="mono">ART104</th><td><span data-en>a claim cites evidence id that is not present in the artifact</span><span data-zh>主张引用了 artifact 中不存在的证据 id</span></td><td class="small"><span data-en>Identifiers were generated rather than retrieved. This trips gate G1.</span><span data-zh>标识符是生成的而非检索到的。这会触发门槛 G1。</span></td></tr>
               <tr><th scope="row" class="mono">ART106</th><td><span data-en>a clinical claim is supported only by computational prediction</span><span data-zh>一个临床主张，仅由计算预测支撑</span></td><td class="small"><span data-en>Docking or network output stated as clinical efficacy. This trips gate G4.</span><span data-zh>把对接或网络输出表述为临床疗效。这会触发门槛 G4。</span></td></tr>
               <tr><th scope="row" class="mono">ART107</th><td><span data-en>a declared output file has no content hash</span><span data-zh>声明的输出文件没有内容哈希</span></td><td class="small"><span data-en>Files were written by a path that bypassed the envelope builder.</span><span data-zh>文件经由绕过信封构建器的路径写入。</span></td></tr>
               <tr><th scope="row" class="mono">ART108</th><td><span data-en>composite_version is incomplete</span><span data-zh>composite_version 不完整</span></td><td class="small"><span data-en>One of the four axes was not threaded through the artifact.</span><span data-zh>四条轴中有一条没有贯穿到 artifact。</span></td></tr>
-              <tr><th scope="row" class="mono">ART110</th><td><span data-en>no limitations are stated</span><span data-zh>未陈述任何局限</span></td><td class="small"><span data-en>The limitations field was left empty, which is treated as a claim of completeness.</span><span data-zh>limitations 字段留空——这会被视为**声称没有局限**。</span></td></tr>
+              <tr><th scope="row" class="mono">ART110</th><td><span data-en>no limitations are stated</span><span data-zh>未陈述任何局限</span></td><td class="small"><span data-en>The limitations field was left empty, which is treated as a claim of completeness.</span><span data-zh>limitations 字段留空——这会被视为声称没有局限。</span></td></tr>
               <tr><th scope="row" class="mono">CLM009</th><td><span data-en>an extrapolation beyond the evidence is not declared</span><span data-zh>超出证据范围的外推未经声明</span></td><td class="small"><span data-en>Absence of a signal was reported as absence of risk.</span><span data-zh>把「没有信号」报成了「没有风险」。</span></td></tr>
-              <tr><th scope="row" class="mono">CLM010</th><td><span data-en>a supporting quote was not located in its source</span><span data-zh>支撑性引文未能在其来源中定位</span></td><td class="small"><span data-en>A quotation was reconstructed rather than extracted.</span><span data-zh>引文是**重建**的，而不是**抽取**的。</span></td></tr>
+              <tr><th scope="row" class="mono">CLM010</th><td><span data-en>a supporting quote was not located in its source</span><span data-zh>支撑性引文未能在其来源中定位</span></td><td class="small"><span data-en>A quotation was reconstructed rather than extracted.</span><span data-zh>引文是重建的，而不是抽取的。</span></td></tr>
             </tbody>
           </table>
         </div>
