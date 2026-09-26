@@ -1,0 +1,68 @@
+{
+  "transformation_coverage": {
+    "boundaries": 12,
+    "preserved": 12,
+    "coverage": 1.0,
+    "cases": {
+      "derive": true,
+      "dict_value": true,
+      "nested_dict": true,
+      "list_element": true,
+      "tuple_in_set": true,
+      "raw_nested_text": true,
+      "json_round_trip": true,
+      "tool_return": true,
+      "persistence_write": true,
+      "persistence_read": true,
+      "raw_ingress": true,
+      "mislabelled_ingress": true
+    },
+    "v01_comparison": "v0.1 measured 1 boundary (derive) to depth 1000; it lost the label at dict nesting, JSON, tool return and persistence"
+  },
+  "classification_overhead": {
+    "raw_value": {
+      "median_ms": 0.5233,
+      "p95_ms": 0.6455
+    },
+    "already_labelled": {
+      "median_ms": 0.4005,
+      "p95_ms": 0.5898
+    },
+    "long_text_1900ch": {
+      "median_ms": 0.7354,
+      "p95_ms": 0.9335
+    },
+    "nested_container": {
+      "median_ms": 0.7787,
+      "p95_ms": 1.1329
+    },
+    "note": "an already-labelled value costs the same as a raw one, by design: re-classification is what closes the mislabelled-payload hole, so there is deliberately no fast path for a caller-supplied label"
+  },
+  "authority_check": {
+    "is_subset": {
+      "median_ms": 0.0016,
+      "p95_ms": 0.0024
+    },
+    "restrict": {
+      "median_ms": 0.0118,
+      "p95_ms": 0.0187
+    },
+    "dimensions": 16
+  },
+  "release_path": {
+    "stages": 16,
+    "median_ms": 11.688,
+    "p95_ms": 14.766,
+    "released_on_pass": true,
+    "withheld_on_refusal": true,
+    "quarantine_ref_retained": true,
+    "note": "control-plane overhead only: no provider latency is included, since every model call in this benchmark is a local stub"
+  },
+  "claim_support": {
+    "faithful_total": 3,
+    "faithful_accepted": 0,
+    "fabricated_total": 6,
+    "fabricated_accepted": 0,
+    "note": "a 9-case regression suite, not a measure of sensitivity or specificity: those words imply a representative sample from a defined population, and these are hand-written cases"
+  }
+}

@@ -1,0 +1,510 @@
+# bioagent-harness v2.6 — a composable harness for biomedical AI agents
+
+## v2.7 — scientific data contracts, compiled skills, and a governed update path
+
+> **This section describes the newest layer. It is the one most likely to be
+> what you came here for if you are looking at how the system keeps a model from
+> overstating what it found.**
+
+Four packages were added, and each exists to close a specific way a scientific
+agent goes wrong. Two of them changed the *kernel's* vocabulary, which is
+recorded in PSH-Harness's `workflow/ir.py` and `workflow/compiler.py` rather than
+hidden in a private copy here.
+
+### `bioagent.contracts` — four schemas and one gate
+
+`SourceCard → EvidenceItem → CandidateClaim → ResearchArtifact`, with
+`validate_artifact` as the only entry point a publisher needs. It is a pure
+function — no clock, no network, no registry — so a published artifact can be
+re-checked by a reviewer holding nothing but the file.
+
+Two decisions changed what the system can *say*, not just how it says it:
+
+**Design is stored; the ordinal tier is derived.** `EvidenceTier` is one rank that
+collapses `animal` and `in_vitro` into `PRECLINICAL`. An assay and an animal study
+license very different claims, so the finer study *design* is now the stored fact
+and the tier is recovered on read. The lossy step is visible instead of silent, and
+a test asserts this package and PSH agree on the design names.
+
+**Computational prediction cannot become clinical fact.** In PSH's claim-support
+table, predictive designs appear in exactly **one** row, `MECHANISTIC`, so a
+network-pharmacology skill can claim a mechanism from a docking result and cannot
+claim efficacy, association or safety from one. That is the kernel's type system
+enforcing it, not a prompt instruction. Overclaiming claims are *constructible*
+and refused by the validator with a distinct code (`ART106` / `CLM004`), because a
+system that could not represent an overclaim could not measure one either.
+
+### `bioagent.skills` — a manifest is compiled, prose is not
+
+A skill is compiled from `skill.yaml` into a `ScientificProgram` that **PSH's own
+compiler validates**. `SKILL.md` is documentation and is never parsed for
+authority — otherwise the security argument would reduce to a language model
+reading a README. Authority is by *intersection*: a skill asking for more than the
+run envelope holds is refused with `SKILL101`, not silently trimmed.
+
+Writing this against a real kernel rather than an assumed one found three rules I
+had wrong, each now a test: evidence and claims live on *different* tasks
+(`EVIDENCE101`/`102`); a repeat-safe declaration or automatic retry needs a
+manifest the kernel has verified (`EFFECT106`/`RETRY102`); and a task reaching a
+public host can never be `PURE` however deterministic (`EFFECT105`).
+
+### `bioagent.updates` — discovery that cannot activate
+
+```text
+candidate ──audit──▶ 8 hard eliminations ──▶ 100-point score ──human──▶ stable
+                                         │                              │
+                                    stays visible                 Season frozen
+```
+
+`Registry.promote` is the only writer of a stable entry and it requires a
+`PromotionDecision`, which refuses an empty `decided_by` — an unattributed
+approval is not an approval. The scout CLI has no flag for promotion and cannot
+reach a host outside its allowlist. Community growth is capped at 5/100 and the
+cap is asserted. A hard elimination runs *before* scoring, so a good total cannot
+outvote a licensing problem.
+
+### `bioagent.benchmarks` — where a refusal is not a failure
+
+Six tracks × 20 cases, eight score dimensions, four hard gates. A hard gate blocks
+the **board**, not the score: a run that fabricated a citation still has a
+`task_success` number, and zeroing it would hide how well the rest worked. When a
+run declines a claim because its evidence does not reach, `claim_calibration`
+counts that as correct — a harness that scored abstention as a miss would push
+systems toward asserting more.
+
+Aggregation is a weighted **harmonic** mean rather than the geometric mean the
+plan names: a geometric mean with any zero term is zero, which would make one
+failed dimension indistinguishable from a system that scored nothing anywhere.
+
+### Three bugs this layer found in its own foundation
+
+Recorded because they are the kind that look like working code:
+
+1. The skill content hash covered only the manifest *directory*, so it pinned the
+   declaration and left `src/bioagent/skills/p0/` editable — an unreviewed
+   implementation change would not have moved the pin.
+2. All four entrypoints named `bioagent.skills.p0:fn`, a package, so `find_spec`
+   resolved to `__init__.py` rather than the module holding the code.
+3. The digest embedded a name derived from the path *as the caller spelled it*,
+   so a relative and an absolute path to the same tree hashed differently and a
+   lockfile generated by the CLI failed to verify under CI. A pin that depends on
+   the caller is not a pin.
+
+### Try it
+
+```bash
+pip install -e ".[dev]"
+PYTHONPATH=src:../PSH-Harness/src python -m pytest -q -m unit      # 847 tests
+PYTHONPATH=src:../PSH-Harness/src python scripts/check_lockfile.py  # pins match the tree
+python -m bioagent.cli scout --skills skills/tcm --out candidates.json
+```
+
+---
+
+## v2.6 — a TCM knowledge layer, a doctor, and a bridge that keeps its promises
+
+Three things from the 2026-09-18 architecture review (`PSH-Harness/docs/REVIEW_RESPONSE_2026-09-18.md`).
+
+**`bioagent.tcm` — typed traditional Chinese medicine knowledge (F11).** A formula is not
+a compound, a herb is not its processed form, and 桂枝汤主之 in the Shanghan Lun is an
+attribution, not a trial result. `Herb` (nature, flavours, meridians, actions, toxicity,
+aliases in three scripts), `ProcessedHerb` (炮制 changes nature and toxicity), `Formula`
+(ingredients in 君臣佐使 roles, source, indications, contraindications), `Syndrome` (证
+with manifestations, tongue, pulse, treatment principle), `ClassicalPassage`,
+`StudyEvidence`, `ActionRelation` carrying an `EvidenceTier`, and `SafetyRecord`.
+`EvidenceTier` orders 经典记载 → 专家经验 → 临床前 → 病例 → 观察性 → RCT → 系统评价 and
+`CLAIM_KINDS` says which tier a kind of claim needs: a classical passage licenses an
+attribution and never an efficacy claim. The knowledge base resolves names without
+guessing (参 is 人参 or 丹参 and the caller is told), judges a claim's applicability by
+tier and by the population and condition the evidence covers (*extrapolated* when they
+differ, *unsupported* when a study is retracted), inherits safety records from a formula's
+ingredients, and checks combinations against 十八反. A study above the expert tier must
+cite a PMID, DOI or registry id; the checked-in seed cites only public-domain texts, the
+pharmacopoeia and a textbook and holds **no invented trials**. Eight native tools expose
+it — `tcm_lookup`, `tcm_herb`, `tcm_formula`, `tcm_syndrome`, `tcm_compatibility`,
+`tcm_applicability`, `tcm_evidence_tiers`, `tcm_classical_search` — so the toolkit is
+147 tools in 12 domains.
+
+**`bioagent doctor` (F12).** `python -m bioagent.cli doctor [--json] [--smoke]` reports
+what this installation can do before a run finds out: backends, datasets present /
+fetchable / blocked, connectors, native tools (optionally every smoke test), the TCM seed,
+PSH's version, PHI detector and isolation report, the network proxy, and a verdict with a
+remedy per problem. It reads PSH only through `psh.environment_report()`; `bioagent`
+still never imports `psh.kernel`.
+
+**Bridge fidelity (F09, F12).** The loop's idempotency key used to be stripped with the
+other `_psh_` bookkeeping, so a side-effecting backend could not recognise a replay; it
+now reaches `Runtime.invoke(idempotency_key=...)` as the runtime's own keyword, recorded
+on the `ToolCalled` event and the result's metadata, and never becomes an argument of the
+entrypoint or a field on the wire. A `DEGRADED` result crosses as a `DegradedResult`
+whose shortfall PSH records as a caveat and lists as a limitation of the release; a
+`TIMEOUT` is a `ToolTimeout`. The isolated entrypoint reports both the same way.
+
+## v2.4 — PSH convergence, and a connector set worth converging
+
+The capability plane is now admitted into a trusted kernel, and it got a lot bigger.
+Design and evidence in `docs/V24_PSH_CONVERGENCE.md`. Third-party database connectors (TCMSP, HERB, SymMap, ...) follow `docs/THIRD_PARTY_DB_CONNECTOR_SPEC.md`.
+
+**`bioagent.psh` — the bridge.** A BioScience component becomes a PSH `ComponentManifest`
+with the dimensions PSH's gates rule on, derived conservatively from what the BioScience
+manifest declares: a public API is a `PUBLIC_REMOTE` destination with a de-identified
+ceiling, a local tool keeps the local ceiling, a declared write makes it mutating and
+consequential, a free-text data licence is normalised onto an SPDX id the lattice knows or
+left unlicensed. Its `invoke` runs through BioScience's own `Runtime`, so a call crosses
+**both** kernels in order — PSH classifies and gates, BioScience resolves, authorises and
+executes, PSH labels the result as the join — and neither can be skipped. One harness per
+domain at the top of PSH's two-level registry keeps the 2,567-row catalogue to a handful
+of manifests of planner context. `isolate=True` runs every component in a PSH child
+process with a clean environment behind the kernel's egress proxy. The bridge depends on
+PSH; PSH never depends on it, and nothing in `bioagent` imports `psh.kernel` (a test
+checks).
+
+**The kernel boundary.** `EvolutionPipeline` gained a `boundary` stage: a proposal whose
+entrypoint, source path or declared writes land in the trusted plane (PSH's kernel,
+policy, labels, contracts, licensing; this package's policy kernel and bridge) is
+quarantined before a smoke test or benchmark is spent on it.
+
+**`bioagent.tools` — native tools that run anywhere the harness runs (139 in v2.5, 147 in v2.6).** The census's
+honest number was that almost nothing in the 2,567-row catalogue is executable without a
+Biomni checkout, a container runtime or forty imports. This is the first tranche that is:
+pure Python, no dependencies, deterministic, each with an example that is its smoke test.
+Sequence analysis (reverse complement, translation, ORFs, GC, k-mers, codon usage,
+primer Tm, restriction sites, oligo mass), protein properties (mass, pI, GRAVY,
+hydropathy, extinction coefficient), Needleman–Wunsch and Smith–Waterman alignment
+(BLOSUM62 bundled and checked against its published values),
+FASTA/FASTQ/VCF/BED/GFF parsers, HGVS parsing, variant normalisation, allele frequencies
+with Hardy–Weinberg, Ts/Tv, and statistics from the standard library only
+(hypergeometric and Fisher tests, ORA with BH-FDR, Mann–Whitney, Welch's t with the
+regularised incomplete beta, CPM/TPM, correlation, diversity, odds ratio, relative risk,
+diagnostic metrics, ROC AUC, NNT). And thirty clinical calculators with the formula named
+on each: CKD-EPI 2021, Cockcroft–Gault, FENa, corrected calcium and sodium, anion gap,
+Henderson–Hasselbalch, alveolar gas, four QTc corrections, MAP, CHA₂DS₂-VASc, HAS-BLED,
+Wells DVT/PE, CURB-65, MELD-Na (UNOS 2016), Child–Pugh, NEWS2, GCS, qSOFA, Friedewald,
+eAG, Mifflin–St Jeor, Parkland, weight-based dosing, tidal volume, unit conversion,
+PHQ-9, GAD-7, Apgar, Bishop, gestational age and Naegele's due date.
+Through the bridge they are `LOCAL_COMPUTE` components at the PHI ceiling — a calculator
+may see an identifiable payload because nothing leaves the machine, and its result
+carries the label onward — which is the label model's point, and `test_psh_bridge.py`
+shows the same payload refused at a public connector. Values are pinned against
+hand-computed and textbook cases in `tests/test_native_tools.py`.
+
+**The second tranche (v0.2.5) adds sixty-two more, in the same discipline.** Pharmacology
+(one-compartment kinetics, half-life from two levels, loading and maintenance doses,
+accumulation to steady state, Calvert carboplatin, glucocorticoid and morphine-equivalent
+conversion, BSA dosing); survival analysis (Kaplan–Meier with Greenwood errors, the
+log-rank test — both pinned to the Freireich 6-MP trial and to R's `survdiff`);
+inference (inverse-variance meta-analysis with DerSimonian–Laird τ² and I², chi-square
+tests, OLS regression with the slope's t and CI, one-way ANOVA, Kruskal–Wallis, Wilcoxon
+signed-rank, Cohen's d, Bayesian post-test probability, sample sizes for proportions and
+means, exact Poisson incidence-rate intervals — every quantile and tail from the standard
+library); population genetics (D′/r², π, Watterson's θ, Tajima's D, G_ST and Hudson's
+F_ST); phylogenetics (p/JC69/K2P distances, neighbor joining that recovers the Saitou–Nei
+example exactly, UPGMA, a Newick parser and patristic distances); IUPAC motif search,
+CpG islands, six-frame translation, CRISPR guide enumeration, sequence entropy and primer
+checks; tryptic and other in-silico digests with monoisotopic masses and m/z; SAM, PDB and
+OBO parsers; a coding-variant consequence annotator that writes HGVS c. and p.; and twenty
+more clinical calculators (the 2013 Pooled Cohort Equations checked against the
+guideline's own worked examples, SOFA, osmolality and osmolar gap, Winters' formula and a
+full acid–base interpretation with anion gap and delta ratio, Holliday–Segar, free-water
+deficit, allowable blood loss, HEART, Centor/McIsaac, Alvarado, TIMI, ABCD², SIRS, RCRI,
+STOP-Bang, FIB-4, APRI, HOMA-IR). The acquisition layer gained fourteen size-pinned
+natural-product tables — NPASS 2.0, CMAUP 2.0, NP Atlas, LOTUS — plus NCBI Taxonomy and
+CellMarker 3.0, as `AcquisitionSpec`s the downloader verifies on fetch.
+
+**16 → 58 verified public sources, 45 → 153 typed operations.** Structures (AlphaFold DB,
+PDBe, InterPro), expression (Human Protein Atlas, GTEx, ENCODE, BioStudies, CELLxGENE,
+MetaboLights), pathways and enrichment (WikiPathways, OmniPath, g:Profiler, PANTHER), drug–
+gene and cancer genomics (DGIdb, CIViC, cBioPortal, NCI GDC), clinical terminology (ICD-10-CM,
+RxTerms, LOINC, HCPCS and conditions via NLM Clinical Tables; RxNav/RxNorm; DailyMed; MeSH),
+literature graphs (PubTator 3, Europe PMC Annotations, Crossref, OpenAlex, bioRxiv, EBI
+Search) and ontologies (OLS4, HPO, Monarch, Disease Ontology, QuickGO, Bioregistry,
+Identifiers.org), and natural products and taxonomy (Wikidata SPARQL — taxa, LOTUS
+compound occurrences by taxon and by InChIKey, Chinese-herbology items, any read-only
+query — and GBIF name matching and occurrences). Every operation is executed live by
+`scripts/verify_connectors.py` and recorded in `data/connector_live_verification.csv`;
+`tests/test_public_sources.py` refuses to ship an operation without a `SUCCEEDED` row.
+Three sources that did not answer were removed rather than listed on faith.
+
+    PYTHONPATH=src:../PSH-Harness/src python demo_convergence.py   # live: HGNC + UniProt through both kernels
+    PYTHONPATH=src python scripts/verify_connectors.py --no-write   # re-measure every operation
+
+## v2.3 — execution semantics
+
+v2.2 hardened the declarative layer. This release makes the execution layer
+honour it: in several places a manifest or a planner said what should happen and
+the backend did something else, or something else's work was scored as if it
+were this component's. Pinned by `tests/test_v23_execution_semantics.py`.
+
+**The planner's decisions now reach the backend**
+- `PlanStep.arguments` had no consumer anywhere in the codebase. A planner could
+  decide to call `/lookup/id/ENSG…` with specific parameters and the runtime
+  invoked the component with nothing at all. Step arguments now flow through both
+  `Runtime.run` and the legacy `BioAgent.run`, taking precedence over run-wide
+  defaults.
+
+**Self-evolution was scoring the wrong thing**
+- *Candidates were evaluated by running the incumbent.* `PythonBackend` resolves
+  entrypoints by `manifest.id` through the production loader, and a candidate
+  normally carries the incumbent's id — so "the candidate improved" was the old
+  version compared against itself. `Runtime.invoke_manifest()` now builds a
+  scratch registry, resolver, loader and rebound backends so the only reachable
+  implementation is the candidate's.
+- *Benchmarking bypassed the policy kernel.* The evaluator had its own
+  simplified chain (`resolve_manifest -> backend.invoke`) that never called
+  `authorize()`, so a candidate production would DENY still executed. There is
+  now one execution path.
+- *Only the first declared benchmark ran.* A candidate that improved
+  `benchmarks[0]` was promoted while a declared safety benchmark it broke was
+  never executed. Every benchmark runs; any regression beyond
+  `regression_tolerance` blocks promotion; and a component with no incumbent must
+  clear `min_absolute_score` instead of skipping the gate entirely.
+
+**Resolution reflects reality**
+- A required component being *registered* was treated as it being *usable*, so a
+  parent reported "dependencies satisfied" over a dependency that was itself
+  UNAVAILABLE. Resolution now recurses, with a re-entrancy guard for cycles.
+- `Runtime` built its Resolver with no `dataset_probe`, so the fallback
+  `lambda _cid: False` made every dataset component permanently UNAVAILABLE even
+  with the file in the lake — and dead-ended `auto_fetch`, whose re-resolution
+  after a successful download consulted the same always-False probe. The runtime
+  now wires its `DatasetBackend` in.
+- Hot reload's scratch resolver dropped the `backend_probe`, silently reverting
+  to the permissive default, so a candidate could clear the dependency gate under
+  environment assumptions the real runtime does not hold.
+
+**Entrypoints match their sources**
+- Module paths were derived as `f"{root}.{Path(rel).stem}"`, discarding every
+  intermediate package: `biomni/tool/tool_description/pharmacology.py` became
+  `biomni.tool.pharmacology`. Measured independently of the deriver, **697 of 817**
+  python-backed components disagreed with their own `source_paths`; it is now 0.
+  `scripts/entrypoint_census.py` reports CONSISTENT / IMPORTABLE / CALLABLE so the
+  error rate is measured rather than assumed.
+
+**Deny by default**
+- An http component declaring no `permissions.network` skipped the host check
+  entirely, making an empty allowlist the most permissive setting rather than the
+  least. Undeclared endpoints are refused.
+- The download size gate took the manifest's declared size in preference to the
+  server's (`expected_bytes or remote_size`), so a manifest claiming 10 MB waved
+  through a 20 GB body; with neither known the hint was 0 and the gate never
+  applied. It now takes the largest estimate and also enforces the cap
+  mid-stream, aborting on the byte that crosses it.
+
+**Honest reporting**
+- *Execution success is not a scientific finding.* The default critique reported
+  ACCEPTED for "all steps succeeded", which the runtime turned into
+  `ScientificVerdict.ACCEPTED`. A statistical test can run cleanly and return
+  p = 0.83. Planners that only watch steps execute now report INCONCLUSIVE, and
+  only a validator comparing against a metric, threshold, benchmark or ground
+  truth may set ACCEPTED.
+- `ContainerBackend` ran `<rt> run --rm --network none <image>`, ignoring the
+  entrypoint and every argument, then reported SUCCEEDED *for that component* and
+  advanced it to READY — so every component sharing an image behaved identically.
+  It now requires an entrypoint and passes the invocation through.
+- `SubprocessBackend` required a `code=` argument no planner path supplies. It
+  builds the call from the manifest's `module:function` entrypoint instead.
+- `DataLakeAdapter._load_json` called `json.load()` on the whole file before
+  slicing to `nrows`, so a bounded read of an 8 GB file parsed 8 GB. JSON Lines is
+  detected and streamed; an oversized single document is refused with the reason,
+  because a JSON document genuinely cannot be sliced without being parsed.
+
+**Release gate**
+- `--check` was a junk sweep plus a syntax parse, and both pass on a tree missing
+  an entire package — a deleted package has no files to fail. It printed OK while
+  `bioagent.workspace` did not exist. The gate now imports a **declared** list of
+  public packages (a discovered list cannot detect absence) and compares the tree
+  against `git ls-files`.
+- `pyproject.toml` and `__init__.py` disagreed on the version (0.2.2 vs 0.2.1).
+
+## v2.2 — trusted-core hardening
+
+No new agents or connectors in this release. It closes gaps between what the
+harness *declared* and what it *enforced*, each pinned by a regression test in
+`tests/test_v22_trusted_core.py` and `tests/test_packaging.py`.
+
+**Release integrity**
+- The v2.1 tarball carried ~80 macOS AppleDouble sidecars (`._name`). `._test_*.py`
+  is a filename pytest collects, so unpacking the release and running the suite
+  failed during collection. `scripts/make_release.py` now sanitizes the tree and
+  *refuses* to publish an artifact containing them.
+- The wheel shipped no capability catalogue: it was never declared as package
+  data, and `catalogue_path()` returned a path that resolves only in a source
+  checkout. The catalogue now lives in `src/bioagent/data/` and travels with the
+  distribution. CI installs the wheel into a clean venv, outside the repository,
+  and loads the catalogue from it — the check a source-checkout suite structurally
+  cannot make.
+- `demo_run.py` shipped with an import spliced into the middle of a string
+  literal, so it raised `SyntaxError` on import. Fixed, and the release check now
+  parses every shipped python file.
+
+**Policy enforcement**
+- *auto-fetch no longer bypasses the agent's profile.* `Runtime.fetch()`
+  authorized with a hardcoded `profile="biomedical-research"` whatever the spec
+  asked for, so an `offline-analysis` agent with `auto_fetch=True` completed a
+  download and was only then denied at invoke time — the bytes were already on
+  disk. The fetch now runs under the spec's own profile, and a caller that
+  supplies none falls back to the most restrictive profile rather than the most
+  permissive.
+- *Filesystem capabilities are checked.* `PermissionProfile` had carried
+  `allow_filesystem_read` / `allow_filesystem_write` since v2.0 and
+  `authorize()` had never looked at them. Declared paths are now ruled against
+  the profile's permitted roots, `..` cannot walk out of a root, and — because
+  the in-process python backend can enforce no write boundary at all — a
+  component declaring writes is refused that backend outright instead of being
+  granted a permission nothing enforces.
+- *Policy propagates along data lineage.* Rulings covered only the component
+  named in the request, so a permissively licensed tool whose
+  `requires.datasets` pointed at a denied dataset was authorized on its own
+  merits. `AuthorizationRequest.dependencies` now carries the resolved closure
+  (`Resolver.dependency_contexts()`), most-restrictive-wins, and an
+  unresolvable dependency fails closed.
+
+**Scientific correctness**
+- *Execution success is no longer reported as scientific acceptance.* A
+  validator that ran cleanly and rejected the result produced
+  `outcome=SUCCESS, ok=True, accepted=True` while its own critique said the
+  validation had failed. `RunReport` now reports `execution_outcome` (did the
+  machinery run) and `verdict` (`ACCEPTED` / `REJECTED` / `INCONCLUSIVE`, from
+  the critique) separately, and `ok` requires both. `outcome` remains as an
+  alias for `execution_outcome`.
+
+**Environment measurement**
+- *Container availability is measured, not asserted.* The resolver hardcoded
+  "container backend requires a container runtime (none available)", so
+  installing Docker changed nothing. `Resolver` takes a `backend_probe`, and
+  `Runtime` supplies one backed by its live `BackendRegistry`.
+
+## v2.1 — what changed
+- Ten architectural defects fixed, each pinned by a regression test (`tests/test_v21_regressions.py`);
+  one was security-class (path traversal into the immutable policy plane).
+- `HTTPBackend` (REST + GraphQL, stdlib-only) with per-host rate limits, retries, response cache.
+- 16 public data-source connectors, 45 typed operations, all verified live
+  (`data/connector_live_verification.csv`): Ensembl, UniProt, NCBI E-utilities, ChEMBL, PubChem,
+  ClinicalTrials.gov, openFDA, STRING, KEGG, Reactome, Open Targets, RCSB PDB, Europe PMC, gnomAD,
+  MyGene, MyVariant.
+- Acquisition layer: `AcquisitionSpec`, resumable checksum-verified `Downloader`, FETCHABLE resolution,
+  `AgentSpec(auto_fetch=True)`, and a CLI:
+
+      PYTHONPATH=src python -m bioagent.cli sources
+      PYTHONPATH=src python -m bioagent.cli fetchable
+      PYTHONPATH=src python -m bioagent.cli fetch hgnc.dataset.hgnc_complete_set_txt
+
+- Executable-now components: 76 → 96. 764 more have a verified-live equivalent source (routable,
+  not yet dispatched per component). See `data/capability_state_census_v21.csv`.
+
+
+Built from a survey of 16 biomedical agent projects (2,567 catalogued capabilities).
+v2 rebuilds the v1 scaffold as a **component runtime**: one manifest schema, a trusted
+policy kernel, pluggable execution backends, event-sourced provenance, and a validated
+self-evolution pipeline.
+
+## What v2 corrects
+
+v1 reported 621 capabilities as "confirmed routable". That was a routing decision, never a
+dispatch. v2 measures executability against the live environment and reports it honestly:
+
+    catalogued        2,567  (100%)
+    dependency-ok     1,024  (39.9%)
+    executable now       76  (3.0%)   <- all datasets
+
+Nine v1 defects were reproduced empirically and fixed; each has a regression test in
+`tests/test_regressions.py`.
+
+## Layout
+
+    src/bioagent/
+      status.py            ExecutionStatus, LifecycleState, RunOutcome + transition table
+      policy.py            immutable policy kernel (read-only license/permission tables)
+      config.py            path resolution: argument -> env var -> repo-relative
+      data/                packaged runtime data (the capability catalogue)
+      runtime/
+        component.py       ComponentManifest (the one composable unit)
+        registry.py        ComponentRegistry / Resolver / Loader
+        events.py          event-sourced provenance with graph replay
+        hmr.py             transactional hot reload + LazyComponentSet
+        agentspec.py       AgentSpec (data) + Runtime (executes any spec)
+      backends/            python | mcp | dataset | subprocess | container | none
+      providers/           discovery from catalogue rows, SKILL.md trees and 58 public sources
+      tools/               147 native bioinformatics, clinical and TCM tools (no dependencies)
+      tcm/                 typed TCM knowledge: herbs, processing, formulas, syndromes, classics,
+                           evidence tiers, scope, 十八反
+      doctor.py            readiness report with a remedy per problem (bioagent doctor)
+      psh/                 the PSH bridge: manifest derivation, the crossing, domain harnesses,
+                           the isolated entrypoint (needs PSH-Harness; the rest does not)
+      planners/            self-registering plugins: heuristic, llm
+      evolution/           propose -> boundary -> test -> benchmark -> policy -> promote
+      workspace/           file workspace with an enforced trust boundary + git
+      adapters/            v1 adapters (retained; superseded by backends)
+
+## Quick start
+
+    export PYTHONPATH=src
+    export BIOAGENT_DATA_LAKE=/path/to/biomni_lake     # optional
+    python demo_harness.py                             # full v2 demo
+    python -m pytest -q                                # full suite
+    python -m pytest -q -m unit                        # no data lake, no network
+
+## Tests
+
+    tests/test_regressions.py        pins all 8 v1 blocker defects
+    tests/test_v2_harness.py         manifests, lifecycle, policy, backends, HMR, evolution
+    tests/test_bioagent.py           v1 surface (migrated to status semantics)
+    tests/test_v21_regressions.py    the ten v2 architectural-audit defects
+    tests/test_v22_trusted_core.py   profile bypass, filesystem capabilities, lineage
+                                     propagation, execution-vs-verdict, backend probing
+    tests/test_packaging.py          release hygiene: sidecars, parseability, wheel contents
+    tests/test_v23_execution_semantics.py
+                                     step arguments, candidate isolation, dependency
+                                     propagation, dataset probing, deny-by-default,
+                                     promotion gates, verdict honesty
+    tests/test_psh_bridge.py         the PSH bridge: derivation, the crossing, retrieval,
+                                     isolation, the kernel boundary (needs PSH importable;
+                                     conftest finds the sibling checkout)
+    tests/test_public_sources.py     the connector table and its verification record
+    tests/test_native_tools.py       every native tool from its example; values pinned
+
+Measuring the catalogue's python entrypoints:
+
+    python scripts/entrypoint_census.py --no-imports   # consistency with source_paths
+    python scripts/entrypoint_census.py                # + importable / callable here
+
+Building a release, with the checks that refuse a broken one:
+
+    python scripts/make_release.py --check   # verify the tree; build nothing
+    python scripts/make_release.py           # sanitize, build sdist + wheel, verify both
+
+## What "trusted" means here, precisely
+
+This is a **policy-gated, provenance-aware runtime**, not a sandbox. The
+distinction is load-bearing, and `PolicyKernel.enforcement_report()` states it
+per capability class at runtime rather than leaving it to prose:
+
+| capability | how it is enforced |
+| --- | --- |
+| license / integration mode | **mechanism** — the invocation is refused |
+| subprocess | **mechanism** — the invocation is refused |
+| filesystem write | **mechanism** — backends that cannot confine writes are refused |
+| filesystem read | **declaration** — declared paths are gated; reads are not intercepted |
+| network hosts | **declaration** — declared hosts are gated; sockets are not intercepted |
+
+"Declaration" means the kernel rules on what a component *declares* and records
+the decision; it does not interpose on syscalls, so code that reaches a backend
+still runs with the harness's own OS privileges. Genuine capability isolation
+needs a container runtime, and `ContainerBackend` / `HardenedExecutor.guarantees()`
+report whether one is present rather than assuming either way.
+
+## Honesty notes
+
+* Filesystem and network isolation depend on a container runtime; both
+  `ContainerBackend.available()` and `HardenedExecutor.guarantees()` report what
+  is actually present on the machine instead of implying it.
+* This sandbox refuses to lower RLIMIT_AS, so `HardenedExecutor.guarantees()` probes what
+  is actually enforced (CPU + file size) and reports the memory cap as unenforced.
+* The Biomni data lake (15.1 GB) is not redistributable; only its inventory ships here.
+* Unlicensed upstream projects are never vendored — they are invoked in place, and the
+  policy kernel denies a vendor route for them on every call.
+
+## License
+
+MIT for this harness. `NOTICE` records every upstream project, its license, and whether it
+is vendorable or federated-only.

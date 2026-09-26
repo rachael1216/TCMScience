@@ -1,0 +1,323 @@
+{
+  "example": true,
+  "placeholder": true,
+  "generated_at": "2026-09-25T09:00:00Z",
+  "current_season": "2026-S1",
+  "seasons": [
+    {
+      "season": "2026-S1",
+      "version": "1.0.0",
+      "status": "frozen",
+      "frozen_on": "2026-09-01",
+      "note": "Example data. Current Season. 20 cases per track across six tracks.",
+      "cases_total": 120,
+      "tracks": [
+        {
+          "id": "TCM-Entity",
+          "cases": 20,
+          "metric_focus": [
+            "entity accuracy",
+            "ambiguity retention",
+            "false-merge rate"
+          ]
+        },
+        {
+          "id": "TCM-Evidence",
+          "cases": 20,
+          "metric_focus": [
+            "Recall@K",
+            "nDCG",
+            "citation validity",
+            "study-design classification"
+          ]
+        },
+        {
+          "id": "TCM-NetPharm",
+          "cases": 20,
+          "metric_focus": [
+            "edge provenance rate",
+            "measured/predicted separation",
+            "enrichment reproducibility"
+          ]
+        },
+        {
+          "id": "TCM-Safety",
+          "cases": 20,
+          "metric_focus": [
+            "risk recall",
+            "severe false-negative rate",
+            "evidence sufficiency"
+          ]
+        },
+        {
+          "id": "TCM-TrialAudit",
+          "cases": 20,
+          "metric_focus": [
+            "STRICTA coverage",
+            "SPIRIT-TCM coverage",
+            "CONSORT-CHM coverage"
+          ]
+        },
+        {
+          "id": "TCM-End2End",
+          "cases": 20,
+          "metric_focus": [
+            "artifact completeness",
+            "re-run success",
+            "claim calibration"
+          ]
+        }
+      ],
+      "splits": [
+        {
+          "name": "dev",
+          "cases": 60,
+          "availability": "published with the release"
+        },
+        {
+          "name": "hidden",
+          "cases": 39,
+          "availability": "delivered to official evaluators"
+        },
+        {
+          "name": "adversarial",
+          "cases": 21,
+          "availability": "scored on its own axes"
+        }
+      ],
+      "sources": [
+        {
+          "name": "HERB",
+          "role": "TCM entity lexicon and measured compound-target edges",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "http://herb.ac.cn/",
+          "snapshot_hash": "sha256:aaaaaaaaexample000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-Entity",
+            "TCM-NetPharm"
+          ]
+        },
+        {
+          "name": "ETCM",
+          "role": "formula and herb composition cross-check",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "http://www.tcmip.cn/ETCM/",
+          "snapshot_hash": "sha256:bbbbbbbbexample000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-Entity"
+          ]
+        },
+        {
+          "name": "BindingDB",
+          "role": "measured binding affinities",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "https://www.bindingdb.org/",
+          "snapshot_hash": "sha256:ccccccccexample000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-NetPharm"
+          ]
+        },
+        {
+          "name": "openFDA / FAERS",
+          "role": "adverse event signal counts",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "https://open.fda.gov/",
+          "snapshot_hash": "sha256:ddddddddexample000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-Safety"
+          ]
+        },
+        {
+          "name": "PubMed / PMC (E-utilities)",
+          "role": "literature retrieval and identifier resolution",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK25501/",
+          "snapshot_hash": "sha256:eeeeeeeeexample000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-Evidence",
+            "TCM-Safety",
+            "TCM-TrialAudit"
+          ]
+        },
+        {
+          "name": "ClinicalTrials.gov",
+          "role": "trial registration records",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "https://clinicaltrials.gov/",
+          "snapshot_hash": "sha256:ffffffffexample000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-TrialAudit"
+          ]
+        },
+        {
+          "name": "STRICTA / SPIRIT-TCM / CONSORT-CHM",
+          "role": "reporting-checklist instruments",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "https://www.equator-network.org/",
+          "snapshot_hash": "sha256:11111111example000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-TrialAudit"
+          ]
+        },
+        {
+          "name": "Example pharmacopoeia extract",
+          "role": "classical text passages",
+          "licence": "Example licence string (placeholder)",
+          "licence_verified": false,
+          "url": "",
+          "snapshot_hash": "sha256:22222222example000000000000000000000000000000000000000000000000",
+          "snapshot_at": "2026-08-14",
+          "used_by": [
+            "TCM-Entity"
+          ]
+        }
+      ]
+    },
+    {
+      "season": "2025-S2",
+      "version": "0.9.0",
+      "status": "frozen",
+      "frozen_on": "2025-09-01",
+      "note": "Example data. Previous Season, kept for reference. 18 cases per track; the case count changed when TCM-End2End was widened.",
+      "cases_total": 108,
+      "tracks": [
+        {
+          "id": "TCM-Entity",
+          "cases": 18,
+          "metric_focus": [
+            "entity accuracy",
+            "ambiguity retention",
+            "false-merge rate"
+          ]
+        },
+        {
+          "id": "TCM-Evidence",
+          "cases": 18,
+          "metric_focus": [
+            "Recall@K",
+            "nDCG",
+            "citation validity",
+            "study-design classification"
+          ]
+        },
+        {
+          "id": "TCM-NetPharm",
+          "cases": 18,
+          "metric_focus": [
+            "edge provenance rate",
+            "measured/predicted separation",
+            "enrichment reproducibility"
+          ]
+        },
+        {
+          "id": "TCM-Safety",
+          "cases": 18,
+          "metric_focus": [
+            "risk recall",
+            "severe false-negative rate",
+            "evidence sufficiency"
+          ]
+        },
+        {
+          "id": "TCM-TrialAudit",
+          "cases": 18,
+          "metric_focus": [
+            "STRICTA coverage",
+            "SPIRIT-TCM coverage",
+            "CONSORT-CHM coverage"
+          ]
+        },
+        {
+          "id": "TCM-End2End",
+          "cases": 18,
+          "metric_focus": [
+            "artifact completeness",
+            "re-run success",
+            "claim calibration"
+          ]
+        }
+      ],
+      "splits": [
+        {
+          "name": "dev",
+          "cases": 54,
+          "availability": "published with the release"
+        },
+        {
+          "name": "hidden",
+          "cases": 35,
+          "availability": "delivered to official evaluators"
+        },
+        {
+          "name": "adversarial",
+          "cases": 19,
+          "availability": "scored on its own axes"
+        }
+      ],
+      "sources": []
+    }
+  ],
+  "scoring_rules": [
+    {
+      "id": "S1",
+      "rule": "Per-case scoring against the frozen gold label by the track's own scorer.",
+      "applies_to": "all tracks",
+      "detail": "Scorers are pure functions over the submitted artifact; they open no sockets and read no clock. The same artifact always produces the same score."
+    },
+    {
+      "id": "S2",
+      "rule": "A dimension score is the mean over the track's 20 cases.",
+      "applies_to": "all dimensions",
+      "detail": "Per-case scores are published with the run so a reader can recompute the mean."
+    },
+    {
+      "id": "S3",
+      "rule": "The aggregate is a weighted geometric mean of the eight dimension scores, with a floor of eps = 0.05.",
+      "applies_to": "aggregate",
+      "detail": "aggregate = exp( sum_i w_i * ln(max(x_i, eps)) / sum_i w_i ). The floor stops one collapsed dimension from zeroing an otherwise strong run; it does not rescue a genuinely failing one, because a hard gate is applied first and independently."
+    },
+    {
+      "id": "S4",
+      "rule": "Latency and Cost enter as 0-1 subscores mapped from raw values through the Season reference band.",
+      "applies_to": "latency, cost",
+      "detail": "The band is fixed when the Season is cut and published in the Season file. Raw seconds and USD are always shown next to the subscore."
+    },
+    {
+      "id": "S5",
+      "rule": "Hard gates are applied before ranking and are not score contributions.",
+      "applies_to": "board membership",
+      "detail": "A gated run is excluded from the trusted board and shown on the Experimental board with its blocking reason. No gate can be traded against a high score."
+    },
+    {
+      "id": "S6",
+      "rule": "Rank is published per track and per board.",
+      "applies_to": "rank",
+      "detail": "Ranks are not comparable across tracks or across Seasons. Sorting the table in the browser is a reading aid and does not change a published rank."
+    },
+    {
+      "id": "S7",
+      "rule": "Abstention is scored, not penalised.",
+      "applies_to": "safety_abstention",
+      "detail": "Abstaining with a stated reason scores above answering without evidence. A refusal with a code is a scored outcome, not a missing value."
+    }
+  ],
+  "citation": {
+    "text": "Cite the Season, not the website: the four version axes are what make the number re-derivable.",
+    "bibtex": "@misc{tcmscience_arena_2026s1,\n  title        = {TCMScience Arena, Season 2026-S1},\n  author       = {{TCMScience Contributors}},\n  year         = {2026},\n  howpublished = {Frozen benchmark Season},\n  note         = {Runtime psh-0.1.0-example; Skills skills-2026.09.1-example;\n                  Sources sources-2026.09.3-example; Benchmark season-2026-S1-example}\n}",
+    "example_placeholder": true
+  }
+}

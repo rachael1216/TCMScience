@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "psh"
+version = "0.5.3"
+description = "Physician-Scientist Harness: a governed control plane that composes domain harnesses."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = []
+
+[project.optional-dependencies]
+# hypothesis is not optional in practice: the authority-monotonicity property tests
+# ``importorskip`` it, so leaving it out of this list meant the checks that cover the
+# lattice exhaustively were silently skipped in every clean install and in CI.
+test = ["pytest>=8", "hypothesis>=6"]
+sable = ["sable>=0.1.0"]
+
+[project.scripts]
+psh = "psh.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Network-touching tests are deselected by default rather than by remembering a flag. The
+# marker existed in v0.4 and nothing applied it, so `pytest tests/` ran live calls and
+# failed wherever there was no network — the documented command and the shipped
+# configuration disagreed. Run them deliberately with `-m live`.
+addopts = "-m 'not live'"
+markers = [
+    "live: hits real external APIs; deselect with -m 'not live' (the default)",
+]

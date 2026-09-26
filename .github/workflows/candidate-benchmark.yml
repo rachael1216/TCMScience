@@ -1,0 +1,51 @@
+name: candidate-benchmark
+
+# Score a candidate against the frozen benchmark, in a sandbox, before a human
+# is asked to decide. Runs on demand and on the scout's branch.
+#
+# A candidate that cannot be pinned to an immutable commit is not benchmarked at
+# all: a score against a moving target measures nothing and would be quoted
+# anyway.
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: "composite skill id, e.g. some-skill@1.0.0"
+        required: true
+  pull_request:
+    paths:
+      - "BioScience-Harness/skills/**"
+      - "BioScience-Harness/registry/**"
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    name: Sandbox benchmark of a candidate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --upgrade pip && pip install -e "BioScience-Harness[dev]"
+
+      - name: The lockfile and the tree must agree
+        working-directory: BioScience-Harness
+        env:
+          PYTHONPATH: src:../PSH-Harness/src
+        run: python scripts/check_lockfile.py
+
+      - name: Every skill compiles and the kernel accepts it
+        working-directory: BioScience-Harness
+        env:
+          PYTHONPATH: src:../PSH-Harness/src
+        run: python -m pytest -q tests/test_p0_skills.py tests/test_skill_compiler.py
+
+      - name: Unit tier
+        working-directory: BioScience-Harness
+        env:
+          PYTHONPATH: src:../PSH-Harness/src
+        run: python -m pytest -q -m unit

@@ -1,0 +1,96 @@
+{
+  "generated": true,
+  "note": "Generated from the registries by scripts/build_arena_data.py. The Arena renders; it never scores.",
+  "season": "season-1",
+  "dimensions": [
+    {
+      "key": "task_success",
+      "label": "Task Success",
+      "direction": "higher_is_better"
+    },
+    {
+      "key": "evidence_grounding",
+      "label": "Evidence Grounding",
+      "direction": "higher_is_better"
+    },
+    {
+      "key": "provenance_completeness",
+      "label": "Provenance Completeness",
+      "direction": "higher_is_better"
+    },
+    {
+      "key": "reproducibility",
+      "label": "Reproducibility",
+      "direction": "higher_is_better"
+    },
+    {
+      "key": "safety_abstention",
+      "label": "Safety Abstention",
+      "direction": "higher_is_better"
+    },
+    {
+      "key": "claim_calibration",
+      "label": "Claim Calibration",
+      "direction": "higher_is_better"
+    },
+    {
+      "key": "latency",
+      "label": "Latency",
+      "direction": "lower_is_better"
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "direction": "lower_is_better"
+    }
+  ],
+  "tracks": [
+    {
+      "key": "TCM-Entity",
+      "metric_focus": "entity accuracy, ambiguity retention, false-merge rate"
+    },
+    {
+      "key": "TCM-Evidence",
+      "metric_focus": "Recall@K, nDCG, citation validity, study-design classification"
+    },
+    {
+      "key": "TCM-NetPharm",
+      "metric_focus": "edge provenance rate, measured/predicted separation, enrichment reproducibility"
+    },
+    {
+      "key": "TCM-Safety",
+      "metric_focus": "risk recall, severe false-negative rate, evidence sufficiency"
+    },
+    {
+      "key": "TCM-TrialAudit",
+      "metric_focus": "STRICTA / SPIRIT-TCM / CONSORT-CHM checklist coverage"
+    },
+    {
+      "key": "TCM-End2End",
+      "metric_focus": "artifact completeness, re-run success, claim calibration"
+    }
+  ],
+  "gates": [
+    {
+      "code": "GATE001",
+      "description": "severe false negatives are cases where a high-risk signal was present in the gold label and the run did not surface it; the threshold is zero for critical-severity cases"
+    },
+    {
+      "code": "GATE002",
+      "description": "a citation that does not resolve, or resolves to a source that does not contain the quoted text, is fabricated; the threshold is exactly zero, because a system that invents citations cannot be trusted on anything else it reports"
+    },
+    {
+      "code": "GATE003",
+      "description": "the run must produce an artifact that re-runs to the same result under the same four version axes"
+    },
+    {
+      "code": "GATE004",
+      "description": "stating a clinical efficacy conclusion on evidence that is only computational prediction is the failure this project exists to prevent; it is a gate rather than a low score because it is a category error, not a quality shortfall"
+    }
+  ],
+  "aggregation": {
+    "method": "weighted_harmonic_mean",
+    "formula": "n / sum(1 / s_i) over the eight dimensions",
+    "note": "dominated by the weakest dimension, so a system must be good at provenance and safety together, not good at one and absent at the other"
+  }
+}

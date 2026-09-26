@@ -1,0 +1,169 @@
+{
+  "classification": {
+    "phi_note": {
+      "chars": 596,
+      "median_ms": 0.1056,
+      "p95_ms": 0.1402,
+      "throughput_kb_per_s": 5510.1,
+      "sensitivity": "PHI",
+      "categories": [
+        "medical_record_number",
+        "date_of_birth",
+        "name_cued"
+      ]
+    },
+    "research_prose": {
+      "chars": 584,
+      "median_ms": 0.1264,
+      "p95_ms": 0.1562,
+      "throughput_kb_per_s": 4512.5,
+      "sensitivity": "INTERNAL",
+      "categories": []
+    },
+    "classifier": "psh.fallback"
+  },
+  "taint_propagation": {
+    "depth_1": {
+      "total_ms": 0.0087,
+      "us_per_derivation": 8.684,
+      "label_preserved": "PHI"
+    },
+    "depth_10": {
+      "total_ms": 0.0381,
+      "us_per_derivation": 3.813,
+      "label_preserved": "PHI"
+    },
+    "depth_100": {
+      "total_ms": 0.2986,
+      "us_per_derivation": 2.986,
+      "label_preserved": "PHI"
+    },
+    "depth_1000": {
+      "total_ms": 3.0668,
+      "us_per_derivation": 3.067,
+      "label_preserved": "PHI"
+    }
+  },
+  "egress_gate": {
+    "refusal": {
+      "median_us": 306.44,
+      "p95_us": 482.81
+    },
+    "approval": {
+      "median_us": 261.81,
+      "p95_us": 378.77
+    },
+    "decisions_recorded": 4000
+  },
+  "context_compiler": {
+    "candidates": 592,
+    "raw_tokens": 59237,
+    "projection_tokens": 7991,
+    "budget": 8000,
+    "reduction_ratio": 0.8651,
+    "within_budget": true,
+    "compile_ms": 10.901,
+    "trace": {
+      "candidates": 592,
+      "after_dedup": 552,
+      "dropped_policy": 0,
+      "dropped_budget": 469,
+      "included": 83,
+      "tokens": 7991
+    },
+    "turn_retained": true,
+    "instruction_retained": true
+  },
+  "hierarchical_retrieval": {
+    "total_capabilities": 2520,
+    "flat": {
+      "considered": 2520,
+      "resolve_ms": 16.835,
+      "returned": 8,
+      "top_hit": "statistics.cap0"
+    },
+    "hierarchical": {
+      "considered": 840,
+      "resolve_ms": 6.189,
+      "returned": 8,
+      "domains_selected": [
+        "statistics-harness",
+        "omics-harness"
+      ],
+      "top_hit": "statistics.cap0"
+    },
+    "candidates_examined_ratio": 0.3333,
+    "speedup": 2.72,
+    "context_tokens_flat": 184,
+    "context_tokens_hierarchical": 184,
+    "registry": {
+      "top_level": 6,
+      "harnesses": 6,
+      "nested_capabilities": 2520,
+      "nested_by_harness": {
+        "omics-harness": 420,
+        "imaging-harness": 420,
+        "statistics-harness": 420,
+        "literature-harness": 420,
+        "writing-harness": 420,
+        "coding-harness": 420
+      },
+      "invocable": 0,
+      "with_outcome_history": 0
+    }
+  },
+  "claim_support": {
+    "supported_cases": 3,
+    "correctly_supported": 3,
+    "unsupported_cases": 6,
+    "false_supports": 0,
+    "recall_on_supported": 1.0,
+    "specificity_on_unsupported": 1.0,
+    "median_ms": 0.1392,
+    "abstract_chars": 502
+  },
+  "event_store": {
+    "records": 5000,
+    "append_ms_each": 0.2204,
+    "verify_seconds": 0.1447,
+    "verify_records_per_s": 34551,
+    "intact": true,
+    "db_bytes": 1658880
+  },
+  "workgraph": {
+    "nodes": 1001,
+    "edges": 999,
+    "build_ms_per_node": 0.4033,
+    "lineage_depth_found": 999,
+    "lineage_ms": 18.882,
+    "why_lines": 10,
+    "why_ms": 0.538,
+    "briefing_ms": 6.047,
+    "briefing_chars": 191
+  },
+  "trusted_path": {
+    "runs": 30,
+    "median_ms": 12.178,
+    "p95_ms": 18.189,
+    "stages": 16,
+    "median_ms_by_stage": {
+      "ingest": 0.01,
+      "classify": 0.51,
+      "policy_snapshot": 0.615,
+      "bind": 3.355,
+      "plan": 0.02,
+      "validate_plan": 0.01,
+      "resolve": 0.02,
+      "compile_context": 0.15,
+      "preflight": 0.01,
+      "execute": 0.985,
+      "capture_to_quarantine": 1.135,
+      "ingest_evidence": 1.37,
+      "verify": 1.43,
+      "release_gate": 1.445,
+      "commit_validated_state": 0.34,
+      "checkpoint": 0.385
+    },
+    "all_stages_ok": true
+  }
+}

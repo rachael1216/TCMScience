@@ -1,0 +1,83 @@
+# skill_sources.yaml — the repositories, topics and submissions the monthly scout
+# monitors. An entry here is a *watch*, not an endorsement: nothing discovered
+# from any of these reaches production without an audit and a human decision.
+#
+# `ref` records what to watch and is never used as a pin. A pin is a commit, and
+# `SkillVersion` refuses a repository that names no commit — see ADR-0001.
+#
+# Adding a URL here is a governance action. The scout refuses any host outside
+# its allowlist (`bioagent.updates.scout.ALLOWED_HOSTS`), so a submitted link
+# cannot send the runtime somewhere new.
+
+api_version: "1"
+
+sources:
+  # --- the first cohort the plan fixes --------------------------------
+  - id: k-dense-scientific-agent-skills
+    kind: repo
+    url: https://github.com/K-Dense-AI/scientific-agent-skills
+    ref: main
+    note: scientific skill collection; SKILL.md-based, needs adapters
+
+  - id: clawbio
+    kind: repo
+    url: https://github.com/ClawBio/ClawBio
+    ref: main
+    note: bioinformatics agent skills
+
+  - id: pantheonos
+    kind: repo
+    url: https://github.com/aristoteleo/PantheonOS
+    ref: main
+    note: agent operating system; watch for skill packaging conventions
+
+  - id: biomni
+    kind: repo
+    url: https://github.com/snap-stanford/Biomni
+    ref: main
+    note: >-
+      monitored as a tool and database *discovery source*, not adopted whole.
+      Biomni integrates many biomedical tools and databases; the useful signal
+      is what it points at, not the package itself.
+
+  - id: biomedarena
+    kind: repo
+    url: https://github.com/AI-in-Health/BioMedArena
+    ref: main
+    note: benchmark and harness design reference
+
+  - id: tcm-cli
+    kind: repo
+    url: https://github.com/tigerneil/tcm-cli
+    ref: main
+    note: TCM command-line tooling
+
+  # --- GitHub topics the plan names -----------------------------------
+  - id: topic-biomedical-agent
+    kind: topic
+    url: https://github.com/topics/biomedical-agent
+    ref: ""
+    note: newly published biomedical agent skills
+
+  - id: topic-bioinformatics
+    kind: topic
+    url: https://github.com/topics/bioinformatics
+    ref: ""
+    note: broad; relevant entries are filtered by the ranker's relevance dimension
+
+  - id: topic-drug-discovery
+    kind: topic
+    url: https://github.com/topics/drug-discovery
+    ref: ""
+    note: molecular and target-prediction tooling
+
+  - id: topic-traditional-chinese-medicine
+    kind: topic
+    url: https://github.com/topics/traditional-chinese-medicine
+    ref: ""
+    note: the most directly relevant topic; small but watched closely
+
+  # --- administrator submissions --------------------------------------
+  # Add entries with kind `manual` here. They are resolved from a checkout
+  # rather than fetched, so a submitted repository is reviewed as code before
+  # the scout ever reads it.

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare systems — TCMScience Arena</title>
+<meta name="description" content="Two TCMScience systems compared side by side, track by track, across all eight score dimensions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="compare">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html">Skills</a></li>
+        <li><a class="nav__link" href="methods.html">Methods</a></li>
+        <li><a class="nav__link" href="compare.html" aria-current="page">Compare</a></li>
+        <li><a class="nav__link" href="submit.html">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Compare two systems</h1>
+      <p class="page-head__lede">
+        Track by track and dimension by dimension. Two systems can share an aggregate and disagree
+        on every dimension underneath it, which is the reason the aggregate is never shown alone.
+      </p>
+      <p class="page-head__meta">
+        <span class="badge badge--plain">Shareable as <code>compare.html?a=&lt;system&gt;&amp;b=&lt;system&gt;</code></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="compare"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

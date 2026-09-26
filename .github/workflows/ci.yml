@@ -1,0 +1,79 @@
+name: ci
+
+# Workflows only run from the repository root, so this is the one that runs. The copy
+# under BioScience-Harness/.github/ is the package's own from before the monorepo and
+# is kept for reference.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  psh:
+    name: PSH-Harness (trusted kernel + agent runtime)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # The extra is declared in PSH-Harness/pyproject.toml; installing by hand
+      # here is how the two drifted apart before.
+      - run: python -m pip install --upgrade pip && pip install -e "PSH-Harness[test]"
+      - name: Full suite
+        working-directory: PSH-Harness
+        env:
+          PYTHONPATH: src
+        run: python -m pytest -q
+      - name: Byte-compile
+        working-directory: PSH-Harness
+        run: python -m compileall -q src
+      - name: Scientific contract dependency boundaries
+        working-directory: PSH-Harness
+        run: python scripts/check_scientific_architecture.py
+
+  bioscience:
+    name: BioScience-Harness (capability plane) + PSH bridge
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e "BioScience-Harness[dev]"
+      - name: Unit tier, with the PSH bridge tests (PSH importable from the sibling tree)
+        working-directory: BioScience-Harness
+        env:
+          PYTHONPATH: ../PSH-Harness/src
+        run: python -m pytest -q -m unit
+      - name: Connector table is self-consistent and its verification record is complete
+        working-directory: BioScience-Harness
+        run: python -m pytest -q tests/test_public_sources.py
+      - name: Release hygiene
+        working-directory: BioScience-Harness
+        run: python scripts/make_release.py --check
+
+  live-connectors:
+    # Opt-in: the public sources are other people's services. Verified on demand, and the
+    # record in data/connector_live_verification.csv says when.
+    name: Live connector verification (manual)
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - working-directory: BioScience-Harness
+        run: PYTHONPATH=src python scripts/verify_connectors.py --no-write

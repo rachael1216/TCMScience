@@ -1,0 +1,188 @@
+{
+  "run_id": "783e5a01bf51",
+  "catalogue_version": "unified-v1",
+  "started_at": 1789302095.2442405,
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Linux-6.18.44-fc-v24-x86_64-with-glibc2.39"
+  },
+  "n_steps": 8,
+  "entries": [
+    {
+      "step": 1,
+      "capability": "BindingDB_All_202409.tsv",
+      "adapter": "native-mcp",
+      "integration_mode": "vendor",
+      "inputs": {
+        "nrows": 3
+      },
+      "input_hash": "sha256:6564674bd02d8d2a2fa4bf7311327675",
+      "output_hash": "sha256:074031313221c744198a26f77573cf82",
+      "status": "RESOLVED",
+      "error": null,
+      "duration_s": 0.0,
+      "timestamp": 1789302095.3484113,
+      "contributing_projects": [
+        "Biomni"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "attempt": 1,
+      "policy_reason": "Apache-2.0 permits native use; no network access requested; no filesystem read access requested; no filesystem write access requested; no unconfined write requested"
+    },
+    {
+      "step": 2,
+      "capability": "broad_repurposing_hub_phase_moa_target_info.parquet",
+      "adapter": "none",
+      "integration_mode": "vendor",
+      "inputs": {
+        "nrows": 3
+      },
+      "input_hash": "sha256:6564674bd02d8d2a2fa4bf7311327675",
+      "output_hash": "sha256:74234e98afe7498fb5daf1f36ac2d78a",
+      "status": "UNAVAILABLE",
+      "error": "no adapter can handle dataset:broad_repurposing_hub_phase_moa_target_info.parquet",
+      "duration_s": 0.0,
+      "timestamp": 1789302095.3486648,
+      "contributing_projects": [
+        "Biomni"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "attempt": 1,
+      "policy_reason": null
+    },
+    {
+      "step": 3,
+      "capability": "miRTarBase_MicroRNA_Target_Sites.parquet",
+      "adapter": "none",
+      "integration_mode": "vendor",
+      "inputs": {
+        "nrows": 3
+      },
+      "input_hash": "sha256:6564674bd02d8d2a2fa4bf7311327675",
+      "output_hash": "sha256:74234e98afe7498fb5daf1f36ac2d78a",
+      "status": "UNAVAILABLE",
+      "error": "no adapter can handle dataset:miRTarBase_MicroRNA_Target_Sites.parquet",
+      "duration_s": 0.0,
+      "timestamp": 1789302095.3488529,
+      "contributing_projects": [
+        "Biomni"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "attempt": 1,
+      "policy_reason": null
+    },
+    {
+      "step": 4,
+      "capability": "affinity_capture-ms.parquet",
+      "adapter": "none",
+      "integration_mode": "vendor",
+      "inputs": {
+        "nrows": 3
+      },
+      "input_hash": "sha256:6564674bd02d8d2a2fa4bf7311327675",
+      "output_hash": "sha256:74234e98afe7498fb5daf1f36ac2d78a",
+      "status": "UNAVAILABLE",
+      "error": "no adapter can handle dataset:affinity_capture-ms.parquet",
+      "duration_s": 0.0,
+      "timestamp": 1789302095.3491087,
+      "contributing_projects": [
+        "Biomni"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "attempt": 1,
+      "policy_reason": null
+    },
+    {
+      "step": 5,
+      "capability": "ToolExecutor",
+      "adapter": "native-mcp",
+      "integration_mode": "adapter-only",
+      "inputs": {},
+      "input_hash": "sha256:44136fa355b3678a1146ad16f7e8649e",
+      "output_hash": "sha256:25ba6b5fdcbfc195062f27d54ddc75f0",
+      "status": "RESOLVED",
+      "error": null,
+      "duration_s": 0.0,
+      "timestamp": 1789302095.4010158,
+      "contributing_projects": [
+        "OriGene"
+      ],
+      "licenses": [
+        "NOASSERTION"
+      ],
+      "attempt": 1,
+      "policy_reason": "NOASSERTION permits native use; no network access requested; no filesystem read access requested; no filesystem write access requested; no unconfined write requested"
+    },
+    {
+      "step": 6,
+      "capability": "ChEMBL",
+      "adapter": "native-mcp",
+      "integration_mode": "adapter-only",
+      "inputs": {},
+      "input_hash": "sha256:44136fa355b3678a1146ad16f7e8649e",
+      "output_hash": "sha256:a29b69fa90163040e4eb9b3a8d582211",
+      "status": "RESOLVED",
+      "error": null,
+      "duration_s": 0.0,
+      "timestamp": 1789302095.4012496,
+      "contributing_projects": [
+        "OrigeneMCP"
+      ],
+      "licenses": [
+        "NONE"
+      ],
+      "attempt": 1,
+      "policy_reason": "NONE permits native use; no network access requested; no filesystem read access requested; no filesystem write access requested; no unconfined write requested"
+    },
+    {
+      "step": 7,
+      "capability": "DepMap",
+      "adapter": "native-mcp",
+      "integration_mode": "adapter-only",
+      "inputs": {},
+      "input_hash": "sha256:44136fa355b3678a1146ad16f7e8649e",
+      "output_hash": "sha256:25ba6b5fdcbfc195062f27d54ddc75f0",
+      "status": "RESOLVED",
+      "error": null,
+      "duration_s": 0.0,
+      "timestamp": 1789302095.4014351,
+      "contributing_projects": [
+        "OrigeneMCP"
+      ],
+      "licenses": [
+        "NONE"
+      ],
+      "attempt": 1,
+      "policy_reason": "NONE permits native use; no network access requested; no filesystem read access requested; no filesystem write access requested; no unconfined write requested"
+    },
+    {
+      "step": 8,
+      "capability": "Ensembl",
+      "adapter": "native-mcp",
+      "integration_mode": "adapter-only",
+      "inputs": {},
+      "input_hash": "sha256:44136fa355b3678a1146ad16f7e8649e",
+      "output_hash": "sha256:a88b70fe182305b3fc1c448bc78a83b0",
+      "status": "RESOLVED",
+      "error": null,
+      "duration_s": 0.0,
+      "timestamp": 1789302095.4016619,
+      "contributing_projects": [
+        "OrigeneMCP"
+      ],
+      "licenses": [
+        "NONE"
+      ],
+      "attempt": 1,
+      "policy_reason": "NONE permits native use; no network access requested; no filesystem read access requested; no filesystem write access requested; no unconfined write requested"
+    }
+  ]
+}

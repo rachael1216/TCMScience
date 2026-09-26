@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCMScience Arena — a read-only evaluation surface for TCM+AI systems</title>
+<meta name="description" content="The TCMScience Arena renders published evaluation results for TCM+AI systems: six tracks, eight score dimensions, hard gates that are visible rather than silent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="overview">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html" aria-current="page">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html">Skills</a></li>
+        <li><a class="nav__link" href="methods.html">Methods</a></li>
+        <li><a class="nav__link" href="compare.html">Compare</a></li>
+        <li><a class="nav__link" href="submit.html">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>The TCMScience Arena</h1>
+      <p class="page-head__lede">
+        A public evaluation surface for systems that answer Traditional Chinese Medicine
+        research questions with evidence. Six tracks, twenty cases each. Eight score
+        dimensions, always decomposed. Four hard gates that are shown rather than
+        quietly applied.
+      </p>
+      <p class="page-head__meta">
+        <span class="badge badge--info">Static site</span>
+        <span class="badge badge--plain">Read-only</span>
+        <span class="badge badge--plain">No tracking, no cookies, no server</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="overview">
+
+    <section class="section" aria-labelledby="glance-h">
+      <h2 id="glance-h">At a glance</h2>
+      <p class="section__lede">Counts read from the Season file, not typed into this page.</p>
+      <div class="stat-row" id="at-a-glance"></div>
+    </section>
+
+    <section class="section" aria-labelledby="what-h">
+      <h2 id="what-h">What the Arena is</h2>
+      <div class="prose">
+        <p>
+          The Arena is the publishing half of TCMScience. Evaluation happens elsewhere — in the
+          Runner, under a frozen policy snapshot — and writes signed result bundles into the
+          Frozen Benchmark Registry. This site <strong>renders</strong> those bundles.
+        </p>
+        <p>
+          That division is the whole design. It exists so that a leaderboard number cannot be
+          edited by the website that displays it, and so that compromising the website does not
+          compromise a result. Every score on every page is read from a JSON document as
+          published; this site contains no code that could compute a different one.
+        </p>
+        <p>
+          The six tracks are the six things a TCM+AI system has to get right: resolving an
+          entity without silently merging two, retrieving and grounding evidence, keeping
+          network-pharmacology predictions separate from measurements, surfacing risk, auditing
+          a trial report against the checklist that applies to it, and producing an artifact
+          someone else can re-run. Each track has its own scorer and its own metric focus.
+        </p>
+      </div>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="The six tracks" style="margin-top:1.25rem">
+        <table class="plain">
+          <caption class="visually-hidden">The six benchmark tracks, their metric focus and case counts</caption>
+          <thead>
+            <tr>
+              <th scope="col">Track</th>
+              <th scope="col">Metric focus</th>
+              <th scope="col" class="col-num">Cases</th>
+            </tr>
+          </thead>
+          <tbody id="overview-tracks"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="thesis-h">
+      <h2 id="thesis-h">The governance thesis</h2>
+      <div class="prose">
+        <p>
+          Three commitments distinguish this from a generic medical QA leaderboard. They are
+          interface decisions, not decoration, and each one costs something to keep.
+        </p>
+
+        <h3>Every score is decomposed</h3>
+        <p>
+          A row shows Task Success, Evidence Grounding, Provenance Completeness,
+          Reproducibility, Safety and Abstention, Claim Calibration, Latency and Cost. A
+          single aggregate is available and published, but it is never shown alone. A row
+          without its decomposition is not rendered — that is a rule in the data checker, not
+          a style preference. A system that scores well by being fast and cheap has to show you
+          the dimensions where it is neither.
+        </p>
+
+        <h3>Hard gates are visible</h3>
+        <p>
+          A system is kept off the trusted board if it fabricates citations, if it misses
+          severe safety signals, if it cannot produce a re-runnable artifact, or if it states
+          a clinical efficacy conclusion on prediction-only evidence. It is then
+          <em>shown anyway</em>, on a clearly labelled Experimental board, with the blocking
+          reason attached. Rows are never silently dropped. An evaluation surface that removes
+          its failures is not reporting, it is advertising.
+        </p>
+
+        <h3>A run is inspectable</h3>
+        <p>
+          Every published result has a run page: the tool calls it made, the evidence it
+          retrieved and how each item was classified, the budget it consumed, the files it
+          produced with their content hashes, and a verdict on every claim it wanted to make —
+          including the claims it was refused permission to make, with the code.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="gates-h">
+      <h2 id="gates-h">The four hard gates</h2>
+      <p class="section__lede">
+        A gate is not a score contribution. It cannot be traded against a high aggregate.
+      </p>
+      <div class="grid grid--2" id="overview-gates"></div>
+      <p class="small muted" style="margin-top:0.85rem">
+        Full statements and their code mappings are on the <a href="methods.html">methods page</a>.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="go-h">
+      <h2 id="go-h">Where to go next</h2>
+      <div class="grid grid--3">
+        <a class="card card--link" href="leaderboard.html">
+          <h3 class="card__title">Leaderboard</h3>
+          <p class="card__text">
+            Filter by track, submission type and board. Every row carries its eight dimensions.
+          </p>
+          <span class="card__more">Open the leaderboard →</span>
+        </a>
+        <a class="card card--link" href="compare.html">
+          <h3 class="card__title">Compare two systems</h3>
+          <p class="card__text">
+            Side by side, track by track, dimension by dimension.
+          </p>
+          <span class="card__more">Compare systems →</span>
+        </a>
+        <a class="card card--link" href="benchmarks.html">
+          <h3 class="card__title">Benchmark registry</h3>
+          <p class="card__text">
+            Seasons, dates frozen, data sources with licences, scoring rules, and how to cite.
+          </p>
+          <span class="card__more">Open the registry →</span>
+        </a>
+        <a class="card card--link" href="skills.html">
+          <h3 class="card__title">Skill registry</h3>
+          <p class="card__text">
+            Stable and candidate skills: version, commit, licence, permissions requested, and
+            the measured effect on the benchmark.
+          </p>
+          <span class="card__more">Open the registry →</span>
+        </a>
+        <a class="card card--link" href="methods.html">
+          <h3 class="card__title">Methods</h3>
+          <p class="card__text">
+            Scoring definitions, the geometric-mean aggregation, conflict of interest,
+            versioning and the reproducibility policy.
+          </p>
+          <span class="card__more">Read the methods →</span>
+        </a>
+        <a class="card card--link" href="submit.html">
+          <h3 class="card__title">Submit a system</h3>
+          <p class="card__text">
+            Three submission modes, what each requires, and the evaluation flow from issue to
+            published row.
+          </p>
+          <span class="card__more">Read the guide →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="not-h">
+      <h2 id="not-h">What this site does not do</h2>
+      <div class="callout callout--info">
+        <p class="callout__title">It does not evaluate anything</p>
+        <p>
+          No score is computed here, no rank is recalculated, and nothing is written back to a
+          registry. There is no submission form because there is no backend to accept one:
+          submissions are a pull request or an issue, and a run is evaluated by the Runner
+          before it appears here. Filtering and sorting on the leaderboard change what you are
+          looking at, not what a number is.
+        </p>
+        <p class="small">
+          The architectural rule is recorded in
+          <code>docs/adr/0004-arena-read-only-static-first.md</code>, alongside
+          <a href="methods.html#m-versioning-h">the four version axes</a> that every published
+          result names.
+        </p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+      Data is regenerated from the registries by the result generator, which is the only writer.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

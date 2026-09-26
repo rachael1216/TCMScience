@@ -1,0 +1,17 @@
+project,repo_slug,head_commit,license_spdx,license_file,vendorable,integration_mode,stars,last_push,n_files,size_mb,license_note
+K-Dense-scientific-agent-skills,K-Dense-AI/scientific-agent-skills,5ad4aae76bc40257b914367afacc6fd686a282d5,MIT,LICENSE.md,True,vendor,33423,2026-08-12T00:44:57Z,2447,491.1,
+Biomni,snap-stanford/Biomni,400c1f366b96a35ca253e13c9b06c5076af41d65,Apache-2.0,LICENSE,True,vendor,3700,2026-08-10T18:56:17Z,260,4.9,
+ClawBio,ClawBio/ClawBio,794dd1f5aacc1af308694c9b2f7966d0e396916e,MIT,LICENSE,True,vendor,1100,2026-08-13T16:42:28Z,1467,212.1,"MIT License, Copyright (c) 2026 Manuel Corpas (GitHub classifier returned NOASSERTION)"
+Robin,Future-House/robin,4a5cce310f3bc7663a67117db88af43b84733ffe,Apache-2.0,LICENSE,True,vendor,664,2026-04-21T23:58:38Z,917,263.1,
+PantheonOS_src,aristoteleo/PantheonOS,a4d69f0a4ea0fec6e712cc4f2b9026207f50e1b2,BSD-2-Clause,LICENSE,True,vendor,479,2026-08-13T16:04:37Z,1221,277.3,
+AutoBA,JoshuaChou2018/AutoBA,a9f8f1244faf8b33cf1154150d612acf5026a4d9,MIT,LICENSE,True,vendor,235,2024-11-04T11:50:04Z,119,37.1,
+OriGene,GENTEL-lab/OriGene,bc984db2cb604e7acde520af5b5940e5ec8ae0af,NOASSERTION,LICENSE,False,adapter-only,219,2026-02-24T12:23:52Z,100,119.5,
+STELLA,zaixizhang/STELLA,25002958e3f43475d1d68657b0b0c922525513c6,Apache-2.0,LICENSE,True,vendor,148,2026-08-07T01:24:40Z,131,6.9,
+GenoMAS,Liu-Hy/GenoMAS,d6365a700794587b53958db3bf22bb1fb80c3451,MIT,LICENSE,True,vendor,135,2026-04-20T02:09:09Z,89,12.0,
+BioMedAgent,BOBQWERA/BioMedAgent,74fa3f038655fd369e3579ca6934e97c245c960d,NONE,(none),False,adapter-only,132,2026-06-16T08:46:38Z,72,6.3,
+OrigeneMCP,GENTEL-lab/OrigeneMCP,b22913ecae629c9ec10aaf6c8e03abf091de4211,NONE,(none),False,adapter-only,38,2026-02-24T03:48:51Z,125,16.7,
+Agentomics,BioGeMT/agentomics-ml,ae523800e8847215024b3f7f94ba0abae4398bc6,MIT,LICENSE,True,vendor,31,2026-08-09T19:56:22Z,187,2.1,
+BioMedArena,AI-in-Health/BioMedArena,4ea206b8a68e8f66357623e349774bf26431446f,MIT,LICENSE,True,vendor,23,2026-06-25T02:41:02Z,245,2.6,
+CellAgent,liu-shiqiang/CellAgent,763050dd5e0e5a4829b68748096780eab09ababb,NONE,(none),False,adapter-only,,,42,0.2,No LICENSE file present in repo
+GeneAgent,ncbi-nlp/GeneAgent,88fd1adb40dce9545bde5b904ef3a628c09d747c,NLM-Public-Domain,LICENSE,True,vendor,,,70,22.3,"NIH/NLM PUBLIC DOMAIN NOTICE - US government work, no copyright"
+CRISPR-GPT,cong-lab/crispr-gpt-pub,01abb74dfa449f1986901847c3a8ebe96ab9e99f,NONE,(none),False,adapter-only,,,57,1.6,No LICENSE file present; repo is a public welcome page only

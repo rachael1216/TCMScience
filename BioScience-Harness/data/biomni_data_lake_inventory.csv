@@ -1,0 +1,77 @@
+filename,size_bytes,size_mb,format,declared,description,omics_type
+BindingDB_All_202409.tsv,6245551822,6245.55,tsv,True,Measured binding affinities between proteins and small molecules for drug discovery.,chemistry
+DepMap_CRISPRGeneDependency.csv,422842760,422.84,csv,True,"Gene dependency probability estimates for cancer cell lines, including all DepMap models.",general
+DepMap_CRISPRGeneEffect.csv,430424412,430.42,csv,True,"Genome-wide CRISPR gene effect estimates for cancer cell lines, including all DepMap models.",wgs
+DepMap_Model.csv,694278,0.69,csv,True,Metadata describing all cancer models/cell lines which are referenced by a dataset contained within the DepMap portal.,general
+DepMap_OmicsExpressionProteinCodingGenesTPMLogp1.csv,521526607,521.53,csv,True,"Gene expression in TPMs for cancer cell lines, including all DepMap models.",general
+DisGeNET.parquet,2951989,2.95,parquet,True,Gene-disease associations from multiple sources.,general
+McPAS-TCR.parquet,1035297,1.04,parquet,True,T-cell receptor sequences and specificity data from McPAS database.,general
+Virus-Host_PPI_P-HIPSTER_2020.parquet,793066,0.79,parquet,True,Virus-host protein-protein interactions from P-HIPSTER.,general
+affinity_capture-ms.parquet,5587239,5.59,parquet,True,Protein-protein interactions detected via affinity capture and mass spectrometry.,proteomics
+affinity_capture-rna.parquet,42956,0.04,parquet,True,Protein-RNA interactions detected by affinity capture.,general
+broad_repurposing_hub_molecule_with_smiles.parquet,1142823,1.14,parquet,True,Molecules from Broad Institute's Drug Repurposing Hub with SMILES annotations.,chemistry
+broad_repurposing_hub_phase_moa_target_info.parquet,178149,0.18,parquet,True,"Drug phases, mechanisms of action, and target information from Broad Institute.",general
+co-fractionation.parquet,1488231,1.49,parquet,True,Protein-protein interactions from co-fractionation experiments.,general
+czi_census_datasets_v4.parquet,376421,0.38,parquet,True,Datasets from the Chan Zuckerberg Initiative's Cell Census.,general
+ddinter_alimentary_tract_metabolism.csv,3343434,3.34,csv,True,Drug-drug interactions for alimentary tract and metabolism drugs from DDInter 2.0 database.,general
+ddinter_antineoplastic.csv,3885702,3.89,csv,True,Drug-drug interactions for antineoplastic and immunomodulating agents from DDInter 2.0 database.,general
+ddinter_antiparasitic.csv,317460,0.32,csv,True,Drug-drug interactions for antiparasitic products from DDInter 2.0 database.,general
+ddinter_blood_organs.csv,867726,0.87,csv,True,Drug-drug interactions for blood and blood forming organs drugs from DDInter 2.0 database.,general
+ddinter_dermatological.csv,1520704,1.52,csv,True,Drug-drug interactions for dermatological drugs from DDInter 2.0 database.,general
+ddinter_hormonal.csv,705088,0.71,csv,True,Drug-drug interactions for systemic hormonal preparations from DDInter 2.0 database.,general
+ddinter_respiratory.csv,1793766,1.79,csv,True,Drug-drug interactions for respiratory system drugs from DDInter 2.0 database.,general
+ddinter_various.csv,700777,0.7,csv,True,Drug-drug interactions for various drugs from DDInter 2.0 database.,general
+dosage_growth_defect.parquet,21623,0.02,parquet,True,Gene dosage changes affecting growth.,general
+enamine_cloud_library_smiles.pkl,15690,0.02,pkl,True,Compounds from Enamine REAL library with SMILES annotations.,chemistry
+evebio_assay_table.csv,12588,0.01,csv,True,Assay metadata with one row per assay from EveBio pharmome mapping.,general
+evebio_bundle_table.csv,8211,0.01,csv,True,Target subfamily bundles used for screening-to-profiling progression.,general
+evebio_compound_table.csv,150488,0.15,csv,True,Compound metadata with common identifiers from EveBio screening.,general
+evebio_control_table.csv,5477898,5.48,csv,True,Control datapoints for all screening and profiling plates.,general
+evebio_detailed_result_table.csv,48820614,48.82,csv,True,Expanded results on evebio_summary_result_table with curve fit parameters and phase categories.,general
+evebio_observed_points_table.csv,175336052,175.34,csv,True,Raw observed datapoints from all screening and profiling experiments.,general
+evebio_summary_result_table.csv,24076309,24.08,csv,True,Succinct summary of results for each assay-compound combination.,general
+evebio_target_table.csv,4295,0.0,csv,True,Target metadata with common identifiers from EveBio screening.,general
+gene_info.parquet,3945531,3.95,parquet,True,Comprehensive gene information.,general
+genebass_missense_LC_filtered.pkl,1662521913,1662.52,pkl,True,Filtered missense variants from GeneBass.,general
+genebass_pLoF_filtered.pkl,1524965298,1524.97,pkl,True,Predicted loss-of-function variants from GeneBass.,general
+genebass_synonymous_filtered.pkl,1659139054,1659.14,pkl,True,Filtered synonymous variants from GeneBass.,general
+genetic_interaction.parquet,8460950,8.46,parquet,True,Genetic interactions between genes.,general
+go-plus.json,129939533,129.94,json,True,Gene ontology data for functional gene annotations.,general
+gtex_tissue_gene_tpm.parquet,10873592,10.87,parquet,True,Gene expression (TPM) across human tissues from GTEx.,general
+gwas_catalog.pkl,181492262,181.49,pkl,True,Genome-wide association studies (GWAS) results.,wgs
+hp.obo,10058110,10.06,obo,True,Official HPO release in obographs format,general
+kg.csv,981751236,981.75,csv,True,"Precision medicine knowledge graph with 17,080 diseases and 4+ million relationships across biological scales.",general
+marker_celltype.parquet,73416,0.07,parquet,True,Cell type marker genes for identification.,scrnaseq
+miRDB_v6.0_results.parquet,68651385,68.65,parquet,True,Predicted microRNA targets from miRDB.,general
+miRTarBase_MicroRNA_Target_Sites.parquet,285973,0.29,parquet,True,Binding sites of microRNAs on target genes from miRTarBase.,general
+miRTarBase_microRNA_target_interaction.parquet,4765587,4.77,parquet,True,Experimentally validated microRNA-target interactions from miRTarBase.,general
+miRTarBase_microRNA_target_interaction_pubmed_abtract.txt,1725217,1.73,txt,True,PubMed abstracts for microRNA-target interactions in miRTarBase.,literature
+mousemine_m1_positional_geneset.parquet,271199,0.27,parquet,True,Positional gene sets from MouseMine.,general
+mousemine_m2_curated_geneset.parquet,1052069,1.05,parquet,True,Curated gene sets from MouseMine.,general
+mousemine_m3_regulatory_target_geneset.parquet,1992605,1.99,parquet,True,Regulatory target gene sets from MouseMine.,general
+mousemine_m5_ontology_geneset.parquet,4201180,4.2,parquet,True,Ontology-based gene sets from MouseMine.,general
+mousemine_m8_celltype_signature_geneset.parquet,232412,0.23,parquet,True,Cell type signature gene sets from MouseMine.,scrnaseq
+mousemine_mh_hallmark_geneset.parquet,47205,0.05,parquet,True,Hallmark gene sets from MouseMine.,general
+msigdb_human_c1_positional_geneset.parquet,269292,0.27,parquet,True,Human positional gene sets from MSigDB.,general
+msigdb_human_c2_curated_geneset.parquet,3031807,3.03,parquet,True,Curated human gene sets from MSigDB.,general
+msigdb_human_c3_regulatory_target_geneset.parquet,4112233,4.11,parquet,True,Regulatory target gene sets from MSigDB.,general
+msigdb_human_c3_subset_transcription_factor_targets_from_GTRD.parquet,2158592,2.16,parquet,True,Transcription factor targets from GTRD/MSigDB.,general
+msigdb_human_c4_computational_geneset.parquet,406170,0.41,parquet,True,Computationally derived gene sets from MSigDB.,general
+msigdb_human_c5_ontology_geneset.parquet,6423126,6.42,parquet,True,Ontology-based gene sets from MSigDB.,general
+msigdb_human_c6_oncogenic_signature_geneset.parquet,166656,0.17,parquet,True,Oncogenic signatures from MSigDB.,general
+msigdb_human_c7_immunologic_signature_geneset.parquet,5124930,5.12,parquet,True,Immunologic signatures from MSigDB.,general
+msigdb_human_c8_celltype_signature_geneset.parquet,762458,0.76,parquet,True,Cell type signatures from MSigDB.,scrnaseq
+msigdb_human_h_hallmark_geneset.parquet,45321,0.05,parquet,True,Hallmark gene sets from MSigDB.,general
+omim.parquet,2115285,2.12,parquet,True,Genetic disorders and associated genes from OMIM.,general
+proteinatlas.tsv,36611106,36.61,tsv,True,Protein expression data from Human Protein Atlas.,general
+proximity_label-ms.parquet,856099,0.86,parquet,True,Protein interactions via proximity labeling and mass spectrometry.,proteomics
+reconstituted_complex.parquet,15137,0.02,parquet,True,Protein complexes reconstituted in vitro.,general
+sgRNA_KO_SP_human.txt,379198983,379.2,txt,True,sgRNA knockout data for human.,general
+sgRNA_KO_SP_mouse.txt,372277534,372.28,txt,True,sgRNA knockout data for mouse.,general
+synthetic_growth_defect.parquet,20585,0.02,parquet,True,Synthetic growth defects from genetic interactions.,general
+synthetic_lethality.parquet,42885,0.04,parquet,True,Synthetic lethal interactions.,general
+synthetic_rescue.parquet,7170,0.01,parquet,True,Genetic interactions rescuing phenotypes.,general
+two-hybrid.parquet,49160,0.05,parquet,True,Protein-protein interactions detected by yeast two-hybrid assays.,general
+txgnn_name_mapping.pkl,1618512,1.62,pkl,True,Name mapping for TXGNN.,general
+txgnn_prediction.pkl,68272378,68.27,pkl,True,Prediction data for TXGNN.,general
+variant_table.parquet,9220367,9.22,parquet,True,Annotated genetic variants table.,general

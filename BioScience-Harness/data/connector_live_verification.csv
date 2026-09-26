@@ -1,0 +1,154 @@
+source,source_name,operation,smoke,status,http_status,attempts,latency_ms,result_hash,error,host,license,verified_at
+ensembl,Ensembl REST,gene_lookup,True,SUCCEEDED,200,1,3262,sha256:a884d6cd4e10,,rest.ensembl.org,Apache-2.0,2026-09-17T07:30:54Z
+ensembl,Ensembl REST,id_lookup,False,SUCCEEDED,200,1,2304,sha256:a884d6cd4e10,,rest.ensembl.org,Apache-2.0,2026-09-17T07:30:56Z
+ensembl,Ensembl REST,sequence,False,SUCCEEDED,200,1,12659,sha256:0fc07ae9346b,,rest.ensembl.org,Apache-2.0,2026-09-17T07:31:09Z
+ensembl,Ensembl REST,vep_hgvs,False,SUCCEEDED,200,1,2308,sha256:85122fba2761,,rest.ensembl.org,Apache-2.0,2026-09-17T07:31:11Z
+ensembl,Ensembl REST,xrefs,False,SUCCEEDED,200,1,3218,sha256:f6b438f27b51,,rest.ensembl.org,Apache-2.0,2026-09-17T07:31:14Z
+ensembl,Ensembl REST,ping,False,SUCCEEDED,200,1,662,sha256:83adb502bcac,,rest.ensembl.org,Apache-2.0,2026-09-17T07:31:15Z
+uniprot,UniProt REST,entry,True,SUCCEEDED,200,1,990,sha256:8f27052c0853,,rest.uniprot.org,CC-BY-4.0,2026-09-17T07:31:16Z
+uniprot,UniProt REST,search,False,SUCCEEDED,200,1,528,sha256:bbb806a4906f,,rest.uniprot.org,CC-BY-4.0,2026-09-17T07:31:16Z
+uniprot,UniProt REST,fasta,False,SUCCEEDED,200,1,522,sha256:414082e3bae7,,rest.uniprot.org,CC-BY-4.0,2026-09-17T07:31:17Z
+ncbi_eutils,NCBI E-utilities,esearch,False,SUCCEEDED,200,1,256,sha256:4a1f8d370b52,,eutils.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:17Z
+ncbi_eutils,NCBI E-utilities,esummary,True,SUCCEEDED,200,1,290,sha256:e8d2f7ec9cc9,,eutils.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:17Z
+ncbi_eutils,NCBI E-utilities,efetch,False,SUCCEEDED,200,1,346,sha256:c2e4e8354650,,eutils.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:18Z
+ncbi_eutils,NCBI E-utilities,einfo,False,SUCCEEDED,200,1,289,sha256:67ccbf6af03c,,eutils.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:18Z
+chembl,ChEMBL,molecule,False,SUCCEEDED,200,1,738,sha256:5f75bda96b83,,www.ebi.ac.uk,CC-BY-SA-3.0,2026-09-17T07:31:19Z
+chembl,ChEMBL,target,True,SUCCEEDED,200,1,499,sha256:7acbcbbdd4b8,,www.ebi.ac.uk,CC-BY-SA-3.0,2026-09-17T07:31:19Z
+chembl,ChEMBL,target_search,False,SUCCEEDED,200,1,843,sha256:19a09c4c4c74,,www.ebi.ac.uk,CC-BY-SA-3.0,2026-09-17T07:31:20Z
+chembl,ChEMBL,activities,False,SUCCEEDED,200,1,554,sha256:bca7944d6ab3,,www.ebi.ac.uk,CC-BY-SA-3.0,2026-09-17T07:31:21Z
+pubchem,PubChem PUG-REST,properties_by_cid,True,SUCCEEDED,200,1,501,sha256:1788af3597d9,,pubchem.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:21Z
+pubchem,PubChem PUG-REST,cid_by_name,False,SUCCEEDED,200,1,288,sha256:316685e68e17,,pubchem.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:22Z
+pubchem,PubChem PUG-REST,synonyms,False,SUCCEEDED,200,1,235,sha256:89b6a8baca4a,,pubchem.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:22Z
+clinicaltrials,ClinicalTrials.gov v2,search,True,SUCCEEDED,200,1,196,sha256:f8e9992c88b4,,clinicaltrials.gov,Public-domain (US Gov),2026-09-17T07:31:22Z
+clinicaltrials,ClinicalTrials.gov v2,study,False,SUCCEEDED,200,1,336,sha256:cbe09b41dbea,,clinicaltrials.gov,Public-domain (US Gov),2026-09-17T07:31:22Z
+openfda,openFDA,drug_label,True,SUCCEEDED,200,1,553,sha256:f4aee9685610,,api.fda.gov,Public-domain (US Gov),2026-09-17T07:31:23Z
+openfda,openFDA,drug_event,False,SUCCEEDED,200,1,960,sha256:10e700d8fd78,,api.fda.gov,Public-domain (US Gov),2026-09-17T07:31:24Z
+string,STRING,map_ids,True,SUCCEEDED,200,1,397,sha256:ecdd62ad4856,,string-db.org,CC-BY-4.0,2026-09-17T07:31:24Z
+string,STRING,network,False,SUCCEEDED,200,1,992,sha256:a10d4c30605d,,string-db.org,CC-BY-4.0,2026-09-17T07:31:25Z
+kegg,KEGG REST,get,True,SUCCEEDED,200,1,1372,sha256:4d5d65f09838,,rest.kegg.jp,Academic use free; commercial requires license,2026-09-17T07:31:27Z
+kegg,KEGG REST,find,False,SUCCEEDED,200,1,4748,sha256:075bd84d005d,,rest.kegg.jp,Academic use free; commercial requires license,2026-09-17T07:31:31Z
+kegg,KEGG REST,link,False,SUCCEEDED,200,1,1238,sha256:bde7b443b161,,rest.kegg.jp,Academic use free; commercial requires license,2026-09-17T07:31:33Z
+kegg,KEGG REST,info,False,SUCCEEDED,200,1,1450,sha256:981d7b1e7282,,rest.kegg.jp,Academic use free; commercial requires license,2026-09-17T07:31:34Z
+reactome,Reactome ContentService,query,True,SUCCEEDED,200,1,328,sha256:b719a7c8206e,,reactome.org,CC-BY-4.0,2026-09-17T07:31:34Z
+reactome,Reactome ContentService,pathways_for_entity,False,SUCCEEDED,200,1,360,sha256:6cbc12283fc3,,reactome.org,CC-BY-4.0,2026-09-17T07:31:35Z
+reactome,Reactome ContentService,version,False,SUCCEEDED,200,1,297,sha256:eea13a3c19d1,,reactome.org,CC-BY-4.0,2026-09-17T07:31:35Z
+opentargets,Open Targets Platform,target,True,SUCCEEDED,200,1,365,sha256:c373b8f9a3a8,,api.platform.opentargets.org,CC0-1.0,2026-09-17T07:31:35Z
+opentargets,Open Targets Platform,associated_diseases,False,SUCCEEDED,200,1,415,sha256:ccfb32416fe7,,api.platform.opentargets.org,CC0-1.0,2026-09-17T07:31:36Z
+rcsb,RCSB PDB Data API,entry,True,SUCCEEDED,200,1,283,sha256:61a8f2681862,,data.rcsb.org,CC0-1.0,2026-09-17T07:31:36Z
+rcsb,RCSB PDB Data API,polymer_entity,False,SUCCEEDED,200,1,219,sha256:b4764fcc2e97,,data.rcsb.org,CC0-1.0,2026-09-17T07:31:36Z
+europepmc,Europe PMC,search,True,SUCCEEDED,200,1,705,sha256:658e98040610,,www.ebi.ac.uk,CC-BY / mixed per article,2026-09-17T07:31:37Z
+europepmc,Europe PMC,citations,False,SUCCEEDED,200,1,568,sha256:405054074c32,,www.ebi.ac.uk,CC-BY / mixed per article,2026-09-17T07:31:38Z
+gnomad,gnomAD GraphQL,gene_constraint,True,SUCCEEDED,200,1,182,sha256:4ec892e447bb,,gnomad.broadinstitute.org,CC0-1.0 (data) / CC-BY-4.0,2026-09-17T07:31:38Z
+gnomad,gnomAD GraphQL,variant,False,SUCCEEDED,200,1,1150,sha256:2e631724648e,,gnomad.broadinstitute.org,CC0-1.0 (data) / CC-BY-4.0,2026-09-17T07:31:39Z
+mygene,MyGene.info,query,False,SUCCEEDED,200,1,998,sha256:7b1d0d94f32a,,mygene.info,Apache-2.0,2026-09-17T07:31:40Z
+mygene,MyGene.info,gene,True,SUCCEEDED,200,1,550,sha256:748b43232c90,,mygene.info,Apache-2.0,2026-09-17T07:31:40Z
+myvariant,MyVariant.info,variant,True,SUCCEEDED,200,1,598,sha256:f2b5c455fa56,,myvariant.info,Apache-2.0,2026-09-17T07:31:41Z
+myvariant,MyVariant.info,query,False,SUCCEEDED,200,1,793,sha256:b27b6ef59996,,myvariant.info,Apache-2.0,2026-09-17T07:31:42Z
+hgnc,HGNC REST,symbol,True,SUCCEEDED,200,1,571,sha256:e4ab4bd4054e,,rest.genenames.org,CC0-1.0,2026-09-17T07:31:42Z
+hgnc,HGNC REST,hgnc_id,False,SUCCEEDED,200,1,545,sha256:a25933487df5,,rest.genenames.org,CC0-1.0,2026-09-17T07:31:43Z
+hgnc,HGNC REST,search,False,SUCCEEDED,200,1,475,sha256:5f315ebf2999,,rest.genenames.org,CC0-1.0,2026-09-17T07:31:43Z
+ncbi_datasets,NCBI Datasets v2,gene_by_symbol,True,SUCCEEDED,200,1,1528,sha256:62faa344daf2,,api.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:45Z
+ncbi_datasets,NCBI Datasets v2,gene_by_id,False,SUCCEEDED,200,1,506,sha256:2c50929d9837,,api.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:46Z
+ncbi_datasets,NCBI Datasets v2,taxonomy,False,SUCCEEDED,200,1,475,sha256:9d1476729ecd,,api.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:46Z
+ncbi_datasets,NCBI Datasets v2,genome_report,False,SUCCEEDED,200,1,304,sha256:ae6fc243ae36,,api.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:31:46Z
+gwas_catalog,GWAS Catalog,snp,True,SUCCEEDED,200,1,627,sha256:4b89ac04b695,,www.ebi.ac.uk,EMBL-EBI terms of use (open),2026-09-17T07:31:47Z
+gwas_catalog,GWAS Catalog,associations_by_rsid,False,SUCCEEDED,200,1,97492,sha256:751f2a95f66e,,www.ebi.ac.uk,EMBL-EBI terms of use (open),2026-09-17T07:33:25Z
+gwas_catalog,GWAS Catalog,snps_by_gene,False,SUCCEEDED,200,1,1111,sha256:404799c2e3b1,,www.ebi.ac.uk,EMBL-EBI terms of use (open),2026-09-17T07:33:26Z
+ucsc,UCSC Genome Browser API,sequence,True,SUCCEEDED,200,1,1087,sha256:bf8626ebb26d,,api.genome.ucsc.edu,Public (UCSC terms),2026-09-17T07:33:27Z
+ucsc,UCSC Genome Browser API,track,False,SUCCEEDED,200,1,633,sha256:d4bca56a2b33,,api.genome.ucsc.edu,Public (UCSC terms),2026-09-17T07:33:28Z
+ucsc,UCSC Genome Browser API,genomes,False,SUCCEEDED,200,1,746,sha256:1c77b785e8c5,,api.genome.ucsc.edu,Public (UCSC terms),2026-09-17T07:33:28Z
+ucsc,UCSC Genome Browser API,chromosomes,False,SUCCEEDED,200,1,623,sha256:c695f3b71641,,api.genome.ucsc.edu,Public (UCSC terms),2026-09-17T07:33:29Z
+alphafold,AlphaFold DB,prediction,True,SUCCEEDED,200,1,448,sha256:e6c54b50aebf,,alphafold.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:29Z
+alphafold,AlphaFold DB,uniprot_summary,False,SUCCEEDED,200,1,233,sha256:62c06d5c52a5,,alphafold.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:30Z
+pdbe,PDBe API,entry_summary,True,SUCCEEDED,200,1,570,sha256:65319fe96040,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:30Z
+pdbe,PDBe API,molecules,False,SUCCEEDED,200,1,531,sha256:e6e342ea1f66,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:31Z
+pdbe,PDBe API,uniprot_mapping,False,SUCCEEDED,200,1,497,sha256:a785b45549d7,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:31Z
+pdbe,PDBe API,best_structures,False,SUCCEEDED,200,1,897,sha256:e360c8aab938,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:32Z
+interpro,InterPro API,entry,True,SUCCEEDED,200,1,652,sha256:9322921b9605,,www.ebi.ac.uk,CC0-1.0,2026-09-17T07:33:33Z
+interpro,InterPro API,protein_entries,False,SUCCEEDED,200,1,484,sha256:f9240f12aa7b,,www.ebi.ac.uk,CC0-1.0,2026-09-17T07:33:33Z
+interpro,InterPro API,protein,False,SUCCEEDED,200,1,494,sha256:9e250a80b635,,www.ebi.ac.uk,CC0-1.0,2026-09-17T07:33:34Z
+quickgo,QuickGO,go_term,True,SUCCEEDED,200,1,483,sha256:ccefd07d75cf,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:34Z
+quickgo,QuickGO,go_search,False,SUCCEEDED,200,1,600,sha256:618b483f24ab,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:35Z
+quickgo,QuickGO,annotations,False,SUCCEEDED,200,1,484,sha256:794fd8ea221d,,www.ebi.ac.uk,CC-BY-4.0,2026-09-17T07:33:35Z
+pride,PRIDE Archive,project,True,SUCCEEDED,200,1,702,sha256:d9352372062c,,www.ebi.ac.uk,CC0-1.0 (metadata),2026-09-17T07:33:36Z
+pride,PRIDE Archive,search,False,SUCCEEDED,200,1,572,sha256:087d91a477e9,,www.ebi.ac.uk,CC0-1.0 (metadata),2026-09-17T07:33:37Z
+proteinatlas,Human Protein Atlas,gene,True,SUCCEEDED,200,1,667,sha256:76b93e227993,,www.proteinatlas.org,CC-BY-SA-3.0,2026-09-17T07:33:37Z
+proteinatlas,Human Protein Atlas,search,False,SUCCEEDED,200,1,936,sha256:0a3cfe164544,,www.proteinatlas.org,CC-BY-SA-3.0,2026-09-17T07:33:38Z
+gtex,GTEx Portal API,gene,True,SUCCEEDED,200,1,285,sha256:d3324f351bb9,,gtexportal.org,Open (GTEx terms),2026-09-17T07:33:39Z
+gtex,GTEx Portal API,median_expression,False,SUCCEEDED,200,1,265,sha256:cf0b1cc0ddeb,,gtexportal.org,Open (GTEx terms),2026-09-17T07:33:39Z
+encode,ENCODE Portal,search,False,SUCCEEDED,200,1,607,sha256:6ad545f486b4,,www.encodeproject.org,CC-BY-4.0,2026-09-17T07:33:39Z
+encode,ENCODE Portal,experiment,True,SUCCEEDED,200,1,883,sha256:fc93da4dc14b,,www.encodeproject.org,CC-BY-4.0,2026-09-17T07:33:40Z
+ena,ENA Portal API,search,False,SUCCEEDED,200,1,666,sha256:bbb79b2f48e2,,www.ebi.ac.uk,Open (INSDC),2026-09-17T07:33:41Z
+ena,ENA Portal API,filereport,True,SUCCEEDED,200,1,505,sha256:c23f8f5e3045,,www.ebi.ac.uk,Open (INSDC),2026-09-17T07:33:42Z
+biostudies,BioStudies,search,False,SUCCEEDED,200,1,654,sha256:d3393d199af7,,www.ebi.ac.uk,Open (EMBL-EBI terms),2026-09-17T07:33:42Z
+biostudies,BioStudies,study,True,SUCCEEDED,200,1,1442,sha256:14ebe47ab513,,www.ebi.ac.uk,Open (EMBL-EBI terms),2026-09-17T07:33:44Z
+cellxgene,CZ CELLxGENE Discover,collection,True,SUCCEEDED,200,1,1693,sha256:c7f2e97df34e,,api.cellxgene.cziscience.com,CC-BY-4.0,2026-09-17T07:33:45Z
+metabolights,MetaboLights,study,True,SUCCEEDED,200,1,736,sha256:7daf1b4724ba,,www.ebi.ac.uk,CC0-1.0,2026-09-17T07:33:46Z
+metabolights,MetaboLights,studies,False,SUCCEEDED,200,1,618,sha256:cb89dc918303,,www.ebi.ac.uk,CC0-1.0,2026-09-17T07:33:47Z
+wikipathways,WikiPathways,info,True,SUCCEEDED,200,1,528,sha256:b961c475579d,,www.wikipathways.org,CC0-1.0,2026-09-17T07:33:47Z
+wikipathways,WikiPathways,find,False,SUCCEEDED,200,1,461,sha256:7da79f81b5dc,,www.wikipathways.org,CC0-1.0,2026-09-17T07:33:48Z
+wikipathways,WikiPathways,list,False,SUCCEEDED,200,1,330,sha256:d0a77362158d,,www.wikipathways.org,CC0-1.0,2026-09-17T07:33:48Z
+omnipath,OmniPath,interactions,True,SUCCEEDED,200,1,449,sha256:eaf3ea9cdcc5,,omnipathdb.org,Mixed per resource (some CC-BY-NC-SA),2026-09-17T07:33:49Z
+omnipath,OmniPath,annotations,False,SUCCEEDED,200,1,395,sha256:d00ec28a59cc,,omnipathdb.org,Mixed per resource (some CC-BY-NC-SA),2026-09-17T07:33:49Z
+dgidb,DGIdb GraphQL,gene_interactions,True,SUCCEEDED,200,1,498,sha256:5419d33feb1c,,dgidb.org,MIT (code) / CC-BY-4.0 (data),2026-09-17T07:33:49Z
+dgidb,DGIdb GraphQL,drug_interactions,False,SUCCEEDED,200,1,444,sha256:3a2934f711b4,,dgidb.org,MIT (code) / CC-BY-4.0 (data),2026-09-17T07:33:50Z
+civic,CIViC GraphQL,gene,True,SUCCEEDED,200,1,418,sha256:310e16263e74,,civicdb.org,CC0-1.0,2026-09-17T07:33:50Z
+civic,CIViC GraphQL,variant,False,SUCCEEDED,200,1,337,sha256:20591b4339d2,,civicdb.org,CC0-1.0,2026-09-17T07:33:51Z
+cbioportal,cBioPortal,gene,True,SUCCEEDED,200,1,310,sha256:aba72360a9ba,,www.cbioportal.org,ODbL / per-study terms,2026-09-17T07:33:51Z
+cbioportal,cBioPortal,studies,False,SUCCEEDED,200,1,199,sha256:5284d9de4f0d,,www.cbioportal.org,ODbL / per-study terms,2026-09-17T07:33:51Z
+cbioportal,cBioPortal,study,False,SUCCEEDED,200,1,232,sha256:52679b789502,,www.cbioportal.org,ODbL / per-study terms,2026-09-17T07:33:51Z
+cbioportal,cBioPortal,molecular_profiles,False,SUCCEEDED,200,1,201,sha256:b43f5279b798,,www.cbioportal.org,ODbL / per-study terms,2026-09-17T07:33:52Z
+gdc,NCI GDC API,project,True,SUCCEEDED,200,1,446,sha256:cc58e0761547,,api.gdc.cancer.gov,Public (NCI GDC open data),2026-09-17T07:33:52Z
+gdc,NCI GDC API,projects,False,SUCCEEDED,200,1,333,sha256:0b39f3b020e8,,api.gdc.cancer.gov,Public (NCI GDC open data),2026-09-17T07:33:52Z
+gdc,NCI GDC API,cases,False,SUCCEEDED,200,1,363,sha256:a2c208c39c02,,api.gdc.cancer.gov,Public (NCI GDC open data),2026-09-17T07:33:53Z
+gdc,NCI GDC API,status,False,SUCCEEDED,200,1,310,sha256:54a856d585aa,,api.gdc.cancer.gov,Public (NCI GDC open data),2026-09-17T07:33:53Z
+nlm_clinical_tables,NLM Clinical Table Search Service,icd10cm,True,SUCCEEDED,200,1,193,sha256:a8398306a3dd,,clinicaltables.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:53Z
+nlm_clinical_tables,NLM Clinical Table Search Service,rxterms,False,SUCCEEDED,200,1,296,sha256:0edad9cd9aa0,,clinicaltables.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:54Z
+nlm_clinical_tables,NLM Clinical Table Search Service,loinc,False,SUCCEEDED,200,1,339,sha256:3f9014eb100e,,clinicaltables.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:54Z
+nlm_clinical_tables,NLM Clinical Table Search Service,conditions,False,SUCCEEDED,200,1,194,sha256:86c90e535d97,,clinicaltables.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:54Z
+nlm_clinical_tables,NLM Clinical Table Search Service,hcpcs,False,SUCCEEDED,200,1,214,sha256:d3a3dfb88b1e,,clinicaltables.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:54Z
+rxnav,RxNav RxNorm API,properties,True,SUCCEEDED,200,1,339,sha256:58c7d7761f81,,rxnav.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:55Z
+rxnav,RxNav RxNorm API,rxcui_by_name,False,SUCCEEDED,200,1,275,sha256:95fcdba7b28f,,rxnav.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:55Z
+rxnav,RxNav RxNorm API,related,False,SUCCEEDED,200,1,296,sha256:c9ea3e39214b,,rxnav.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:55Z
+rxnav,RxNav RxNorm API,approximate,False,SUCCEEDED,200,1,378,sha256:21a6fc78e0f1,,rxnav.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:56Z
+rxnav,RxNav RxNorm API,drug_classes,False,SUCCEEDED,200,1,366,sha256:0b413af381e1,,rxnav.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:56Z
+dailymed,DailyMed,spls,True,SUCCEEDED,200,1,467,sha256:67476a155ff8,,dailymed.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:56Z
+dailymed,DailyMed,drug_names,False,SUCCEEDED,200,1,304,sha256:c2f6f8716e61,,dailymed.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:57Z
+mesh,MeSH RDF lookup,descriptor,True,SUCCEEDED,200,1,293,sha256:f800e8cf3b30,,id.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:57Z
+mesh,MeSH RDF lookup,term,False,SUCCEEDED,200,1,322,sha256:c0ef353ec3ea,,id.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:57Z
+mesh,MeSH RDF lookup,details,False,SUCCEEDED,200,1,237,sha256:1f6ff50f17dc,,id.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:58Z
+pubtator,PubTator 3,export,True,SUCCEEDED,200,1,225,sha256:92e237a09663,,www.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:33:58Z
+pubtator,PubTator 3,search,False,SUCCEEDED,200,1,2126,sha256:73fbd786913c,,www.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:34:00Z
+pubtator,PubTator 3,autocomplete,False,SUCCEEDED,200,1,209,sha256:bb9ac3639dc3,,www.ncbi.nlm.nih.gov,Public-domain (US Gov),2026-09-17T07:34:00Z
+europepmc_annotations,Europe PMC Annotations,by_article,True,SUCCEEDED,200,1,492,sha256:abb6cbc5ccdf,,www.ebi.ac.uk,CC-BY,2026-09-17T07:34:01Z
+europepmc_annotations,Europe PMC Annotations,by_entity,False,SUCCEEDED,200,1,1298,sha256:6f08d1526054,,www.ebi.ac.uk,CC-BY,2026-09-17T07:34:02Z
+crossref,Crossref,work,True,SUCCEEDED,200,1,196,sha256:5c453e4aa167,,api.crossref.org,CC0-1.0 (metadata),2026-09-17T07:34:02Z
+crossref,Crossref,search,False,SUCCEEDED,200,1,2133,sha256:0aebc59ff8e8,,api.crossref.org,CC0-1.0 (metadata),2026-09-17T07:34:04Z
+openalex,OpenAlex,work,True,SUCCEEDED,200,1,325,sha256:1a4a237f1890,,api.openalex.org,CC0-1.0,2026-09-17T07:34:05Z
+biorxiv,bioRxiv / medRxiv API,details,True,SUCCEEDED,200,1,551,sha256:862e1c1b1dc9,,api.biorxiv.org,CC-BY-4.0 (metadata),2026-09-17T07:34:05Z
+ebi_search,EBI Search,search,True,SUCCEEDED,200,1,516,sha256:03c78515b9d2,,www.ebi.ac.uk,Apache-2.0 (service),2026-09-17T07:34:06Z
+ebi_search,EBI Search,domains,False,SUCCEEDED,200,1,2386,sha256:589dbcc63c1e,,www.ebi.ac.uk,Apache-2.0 (service),2026-09-17T07:34:08Z
+ols,EMBL-EBI OLS4,term,True,SUCCEEDED,200,1,502,sha256:377b499fac14,,www.ebi.ac.uk,Apache-2.0 (service) / per ontology,2026-09-17T07:34:09Z
+ols,EMBL-EBI OLS4,search,False,SUCCEEDED,200,1,575,sha256:365a1804c02d,,www.ebi.ac.uk,Apache-2.0 (service) / per ontology,2026-09-17T07:34:09Z
+ols,EMBL-EBI OLS4,ontologies,False,SUCCEEDED,200,1,595,sha256:075d860fc877,,www.ebi.ac.uk,Apache-2.0 (service) / per ontology,2026-09-17T07:34:10Z
+hpo,HPO (JAX Ontology API),term,True,SUCCEEDED,200,1,202,sha256:6458354b206f,,ontology.jax.org,HPO licence (free with attribution),2026-09-17T07:34:10Z
+hpo,HPO (JAX Ontology API),search,False,SUCCEEDED,200,1,208,sha256:2fab392a40d8,,ontology.jax.org,HPO licence (free with attribution),2026-09-17T07:34:10Z
+hpo,HPO (JAX Ontology API),term_annotations,False,SUCCEEDED,200,1,405,sha256:bd2a86861d54,,ontology.jax.org,HPO licence (free with attribution),2026-09-17T07:34:11Z
+monarch,Monarch Initiative API v3,entity,True,SUCCEEDED,200,1,359,sha256:c7c4abff3c68,,api.monarchinitiative.org,BSD-3-Clause (service) / per source,2026-09-17T07:34:11Z
+monarch,Monarch Initiative API v3,search,False,SUCCEEDED,200,1,272,sha256:71530972c9dd,,api.monarchinitiative.org,BSD-3-Clause (service) / per source,2026-09-17T07:34:11Z
+monarch,Monarch Initiative API v3,associations,False,SUCCEEDED,200,1,261,sha256:caa3d1bfb46f,,api.monarchinitiative.org,BSD-3-Clause (service) / per source,2026-09-17T07:34:12Z
+disease_ontology,Disease Ontology,metadata,True,SUCCEEDED,200,1,362,sha256:4dc1de7837bc,,disease-ontology.org,CC0-1.0,2026-09-17T07:34:12Z
+bioregistry,Bioregistry,registry,True,SUCCEEDED,200,1,195,sha256:c9050bd3ed5a,,bioregistry.io,CC0-1.0,2026-09-17T07:34:12Z
+bioregistry,Bioregistry,reference,False,SUCCEEDED,200,1,274,sha256:df337725f282,,bioregistry.io,CC0-1.0,2026-09-17T07:34:12Z
+identifiers_org,Identifiers.org resolver,resolve,True,SUCCEEDED,200,1,289,sha256:218daab19520,,resolver.api.identifiers.org,CC0-1.0,2026-09-17T07:34:13Z
+gprofiler,g:Profiler,gost,True,SUCCEEDED,200,1,2614,sha256:4313407f97ff,,biit.cs.ut.ee,BSD-3-Clause (service),2026-09-17T07:34:15Z
+gprofiler,g:Profiler,convert,False,SUCCEEDED,200,1,1527,sha256:df9bae5f6176,,biit.cs.ut.ee,BSD-3-Clause (service),2026-09-17T07:34:17Z
+panther,PANTHER,geneinfo,True,SUCCEEDED,200,1,694,sha256:247e4b829b3c,,pantherdb.org,Free for research use (PANTHER terms),2026-09-17T07:34:17Z
+panther,PANTHER,enrich,False,SUCCEEDED,200,1,2979,sha256:3710e47a4166,,pantherdb.org,Free for research use (PANTHER terms),2026-09-17T07:34:21Z
+wikidata_sparql,Wikidata SPARQL,taxon_by_name,True,SUCCEEDED,200,1,1057,sha256:c5069014d3a8,,query.wikidata.org,CC0-1.0,2026-09-17T15:04:37Z
+wikidata_sparql,Wikidata SPARQL,compounds_in_taxon,False,SUCCEEDED,200,1,89694,sha256:01830fcf05f5,,query.wikidata.org,CC0-1.0,2026-09-17T15:06:07Z
+wikidata_sparql,Wikidata SPARQL,taxa_with_compound,False,SUCCEEDED,200,1,91413,sha256:6202ad6d6d04,,query.wikidata.org,CC0-1.0,2026-09-17T15:07:39Z
+wikidata_sparql,Wikidata SPARQL,sparql,False,SUCCEEDED,200,1,89871,sha256:ac6073277613,,query.wikidata.org,CC0-1.0,2026-09-17T15:09:08Z
+gbif,GBIF API,match,True,SUCCEEDED,200,1,461,sha256:05a61db930ff,,api.gbif.org,CC-BY-4.0 / CC0 (per dataset),2026-09-17T15:04:02Z
+gbif,GBIF API,species,False,SUCCEEDED,200,1,457,sha256:4fe3cb269d0b,,api.gbif.org,CC-BY-4.0 / CC0 (per dataset),2026-09-17T15:04:03Z
+gbif,GBIF API,occurrences,False,SUCCEEDED,200,2,13607,sha256:8d6584736148,,api.gbif.org,CC-BY-4.0 / CC0 (per dataset),2026-09-17T15:04:16Z

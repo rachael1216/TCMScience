@@ -1,0 +1,17 @@
+project,repo_slug,license_spdx,license_file,integration_mode,reuse_verdict,head_commit,stars,last_push,n_records,size_mb
+BioMedAgent,BOBQWERA/BioMedAgent,NONE,(none),adapter-only,No license granted - all rights reserved by default; NO code reuse. Federate by invoking upstream.,74fa3f038655fd369e3579ca6934e97c245c960d,132.0,2026-06-16T08:46:38Z,19,6.3
+CRISPR-GPT,cong-lab/crispr-gpt-pub,NONE,(none),adapter-only,No license granted - all rights reserved by default; NO code reuse. Federate by invoking upstream.,01abb74dfa449f1986901847c3a8ebe96ab9e99f,0.0,0,15,1.6
+CellAgent,liu-shiqiang/CellAgent,NONE,(none),adapter-only,No license granted - all rights reserved by default; NO code reuse. Federate by invoking upstream.,763050dd5e0e5a4829b68748096780eab09ababb,0.0,0,5,0.2
+OriGene,GENTEL-lab/OriGene,NOASSERTION,LICENSE,adapter-only,License not machine-identifiable; treat as all-rights-reserved. NO code reuse; federate only.,bc984db2cb604e7acde520af5b5940e5ec8ae0af,219.0,2026-02-24T12:23:52Z,2,119.5
+OrigeneMCP,GENTEL-lab/OrigeneMCP,NONE,(none),adapter-only,No license granted - all rights reserved by default; NO code reuse. Federate by invoking upstream.,b22913ecae629c9ec10aaf6c8e03abf091de4211,38.0,2026-02-24T03:48:51Z,671,16.7
+Agentomics,BioGeMT/agentomics-ml,MIT,LICENSE,vendor,OSI permissive - may vendor with attribution,ae523800e8847215024b3f7f94ba0abae4398bc6,31.0,2026-08-09T19:56:22Z,224,2.1
+AutoBA,JoshuaChou2018/AutoBA,MIT,LICENSE,vendor,OSI permissive - may vendor with attribution,a9f8f1244faf8b33cf1154150d612acf5026a4d9,235.0,2024-11-04T11:50:04Z,26,37.1
+BioMedArena,AI-in-Health/BioMedArena,MIT,LICENSE,vendor,OSI permissive - may vendor with attribution,4ea206b8a68e8f66357623e349774bf26431446f,23.0,2026-06-25T02:41:02Z,236,2.6
+Biomni,snap-stanford/Biomni,Apache-2.0,LICENSE,vendor,OSI permissive - may vendor with attribution + NOTICE,400c1f366b96a35ca253e13c9b06c5076af41d65,3700.0,2026-08-10T18:56:17Z,456,4.9
+ClawBio,ClawBio/ClawBio,MIT,LICENSE,vendor,OSI permissive - may vendor with attribution,794dd1f5aacc1af308694c9b2f7966d0e396916e,1100.0,2026-08-13T16:42:28Z,157,212.1
+GeneAgent,ncbi-nlp/GeneAgent,NLM-Public-Domain,LICENSE,vendor,"US Gov work, no copyright - may vendor freely",88fd1adb40dce9545bde5b904ef3a628c09d747c,0.0,0,13,22.3
+GenoMAS,Liu-Hy/GenoMAS,MIT,LICENSE,vendor,OSI permissive - may vendor with attribution,d6365a700794587b53958db3bf22bb1fb80c3451,135.0,2026-04-20T02:09:09Z,103,12.0
+K-Dense,K-Dense-AI/scientific-agent-skills,MIT,LICENSE.md,vendor,OSI permissive - may vendor with attribution,5ad4aae76bc40257b914367afacc6fd686a282d5,33423.0,2026-08-12T00:44:57Z,330,491.1
+PantheonOS,aristoteleo/PantheonOS,BSD-2-Clause,LICENSE,vendor,OSI permissive - may vendor with attribution,a4d69f0a4ea0fec6e712cc4f2b9026207f50e1b2,479.0,2026-08-13T16:04:37Z,173,277.3
+Robin,Future-House/robin,Apache-2.0,LICENSE,vendor,OSI permissive - may vendor with attribution + NOTICE,4a5cce310f3bc7663a67117db88af43b84733ffe,664.0,2026-04-21T23:58:38Z,22,263.1
+STELLA,zaixizhang/STELLA,Apache-2.0,LICENSE,vendor,OSI permissive - may vendor with attribution + NOTICE,25002958e3f43475d1d68657b0b0c922525513c6,148.0,2026-08-07T01:24:40Z,210,6.9

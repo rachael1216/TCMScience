@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.hypothesis/
+.venv/
+venv/
+.coverage
+htmlcov/
+
+# macOS AppleDouble sidecars. They are not Python files, they contain NUL bytes, and
+# `python -m compileall src` fails on every one of them — packaging a tree that still
+# carries them breaks compileall, linters and most static scanners.
+._*
+.DS_Store

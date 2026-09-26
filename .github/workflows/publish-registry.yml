@@ -1,0 +1,62 @@
+name: publish-registry
+
+# Cut and sign a registry release. Manual, and gated on a reviewer.
+#
+# A release is immutable: it names the exact skill versions, their content
+# hashes and the decisions that put them there. Re-running this with a different
+# stable registry produces a *different* release, not an overwrite — which is why
+# it is triggered by a tag rather than by a push to main.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "release id, e.g. registry-1.0.0"
+        required: true
+      season:
+        description: "benchmark Season this registry is cut against"
+        required: true
+        default: "season-1"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    name: Release the stable registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --upgrade pip && pip install -e "BioScience-Harness[dev]"
+
+      - name: Every promotion must name a human decision
+        working-directory: BioScience-Harness
+        run: python scripts/check_registry_provenance.py registry/skills.lock.yaml
+
+      - name: Build the release bundle
+        working-directory: BioScience-Harness
+        env:
+          PYTHONPATH: src:../PSH-Harness/src
+        run: |
+          python -m bioagent.cli registry-release \
+            --lockfile registry/skills.lock.yaml \
+            --release-id "${{ inputs.release_id }}" \
+            --season "${{ inputs.season }}" \
+            --out "registry/releases/${{ inputs.release_id }}.json"
+
+      - name: The bundle must verify against its own digest
+        working-directory: BioScience-Harness
+        env:
+          PYTHONPATH: src:../PSH-Harness/src
+        run: python scripts/check_release_digest.py "registry/releases/${{ inputs.release_id }}.json"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.release_id }}
+          path: |
+            BioScience-Harness/registry/releases/${{ inputs.release_id }}.json
+            BioScience-Harness/registry/skills.lock.yaml

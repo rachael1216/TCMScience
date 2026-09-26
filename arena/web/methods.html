@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methods — TCMScience Arena</title>
+<meta name="description" content="How TCMScience Arena scores: the eight dimensions, the geometric-mean aggregation, the four hard gates, the prediction prohibition, conflict of interest and the reproducibility policy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="methods">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html">Skills</a></li>
+        <li><a class="nav__link" href="methods.html" aria-current="page">Methods</a></li>
+        <li><a class="nav__link" href="compare.html">Compare</a></li>
+        <li><a class="nav__link" href="submit.html">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Methods</h1>
+      <p class="page-head__lede">
+        What is measured, how it is aggregated, what is refused outright, and what a published
+        number is a claim about. Read this before reading the leaderboard; a rank without these
+        definitions is just a sort order.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="methods-data">
+    <div class="prose">
+
+      <section class="section" aria-labelledby="m-claim-h">
+        <h2 id="m-claim-h">1. What a published number is a claim about</h2>
+        <p>
+          A leaderboard row is often read as a single statement — <em>system A is better than
+          system B</em> — and that reading is almost always too strong. What a row here actually
+          asserts is narrower:
+        </p>
+        <blockquote>
+          <p>
+            Under Season <span class="mono">S</span>, with runtime <span class="mono">R</span>,
+            skill revision <span class="mono">K</span> and source snapshots <span class="mono">D</span>,
+            system <span class="mono">A</span> produced a validated artifact on
+            <span class="mono">n</span> cases, and these eight dimension scores describe that
+            artifact against this frozen gold set.
+          </p>
+        </blockquote>
+        <p>
+          Four identifiers are named because four things can independently change the answer.
+          A network-pharmacology result produced in March and reproduced in September is not the
+          same experiment if the underlying database moved, even if every line of the system's
+          code is identical. A single project-wide version number would hide which axis moved — it
+          would report that "the version changed" when what changed was that HERB gained forty
+          thousand edges.
+        </p>
+        <p>
+          The claim is also bounded in the other direction. This benchmark measures whether an
+          artifact <em>earned the right to be read as a scientific statement</em>. It does not
+          measure whether the claims inside it are true, whether the study design was good, or
+          whether the clinical advice is sound. Those are for human reviewers, and pretending a
+          scalar can decide them is exactly the failure this project is built against.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-season-h">
+        <h2 id="m-season-h">2. The Season is the unit of comparison</h2>
+        <p>
+          Scores are comparable only within a Season. A Season is cut from a Stable Registry
+          revision, frozen on a published date, and thereafter immutable — a monthly skill update
+          can never modify it.
+        </p>
+        <div class="card"><div class="card__body" id="methods-season"></div></div>
+        <p class="small muted" style="margin-top:0.85rem">
+          Comparing rows across Seasons is comparing two different examinations. Where the
+          leaderboard shows a previous Season, it does so as a reference point, not as a
+          ranking that can be merged with the current one.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-tracks-h">
+        <h2 id="m-tracks-h">3. The six tracks</h2>
+        <p>
+          Each track has twenty cases and its own scorer. The eight dimensions are shared, but what
+          a dimension means is fixed by the track: Task Success on TCM-Entity is entity accuracy
+          and false-merge rate; on TCM-TrialAudit it is per-instrument checklist coverage.
+        </p>
+        <p>
+          The tracks are separate because the failure modes are separate, and averaging them into
+          one number before you have seen them apart would hide the thing you need to see. A
+          system can be excellent at retrieval and dangerous at safety; a single figure would
+          report it as mediocre at both.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-dims-h">
+        <h2 id="m-dims-h">4. The eight dimensions</h2>
+        <p>
+          These are read from the Season file at render time, so the definitions below and the
+          columns on the leaderboard cannot drift apart.
+        </p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Score dimensions">
+          <table>
+            <caption class="visually-hidden">The eight score dimensions, their weights, direction and definitions</caption>
+            <thead>
+              <tr>
+                <th scope="col">Dimension</th>
+                <th scope="col" class="col-num">Weight</th>
+                <th scope="col">Direction</th>
+                <th scope="col">What it measures</th>
+              </tr>
+            </thead>
+            <tbody id="methods-dimensions"></tbody>
+          </table>
+        </div>
+        <p class="small muted" id="methods-weights-note" style="margin-top:0.85rem"></p>
+      </section>
+
+      <section class="section" aria-labelledby="m-agg-h">
+        <h2 id="m-agg-h">5. Aggregation</h2>
+        <p>
+          The aggregate is a weighted geometric mean of the eight dimension scores, with a floor
+          <span class="mono">eps</span> applied to each term.
+        </p>
+        <div class="card"><div class="card__body" id="methods-aggregation"></div></div>
+
+        <h3>Why a geometric mean</h3>
+        <p>
+          A geometric mean punishes imbalance. Under an arithmetic mean, a system that is strong
+          on six dimensions can buy its way out of being weak on the other two: a collapse from
+          0.80 to 0.20 on Safety and Abstention costs the same as a fall from 0.80 to 0.60 twice.
+          Under a geometric mean it does not, because what enters the sum is the logarithm, and a
+          small value dominates it.
+        </p>
+        <p>
+          That is the intended behaviour. The dimensions are not substitutes for one another. A
+          system that cannot ground its evidence is not half-credited for being fast, and a system
+          that misses safety signals does not recover the loss with a good citation list. If the
+          dimensions were substitutable, the aggregate would be a reasonable summary; because they
+          are not, an aggregate that treats them as substitutable is a misleading one.
+        </p>
+
+        <h3>Why a floor</h3>
+        <p>
+          A bare geometric mean has a discontinuity at zero: one dimension scoring exactly 0 makes
+          the whole aggregate 0, which converts a single bad axis into a total loss and destroys
+          the information in the other seven. The floor keeps that from happening. It is not a
+          rescue: a genuinely failing run is stopped by a hard gate, and gates are applied
+          independently of the aggregate. The floor affects the arithmetic of the summary, and
+          nothing about who is on which board.
+        </p>
+
+        <h3>Latency and Cost</h3>
+        <p>
+          Latency and Cost are not naturally 0–1 quantities, so each is mapped through a reference
+          band fixed when the Season is cut, producing a subscore where higher is better — faster
+          and cheaper. The raw value in seconds and US dollars is published next to the subscore on
+          every row and every run page, so the mapping never hides the measurement. The mapping
+          exists so these two axes can enter the same product as the other six without inventing a
+          scale after seeing the results.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-gates-h">
+        <h2 id="m-gates-h">6. The hard gates</h2>
+        <p>
+          A gate is not a score contribution and it is not a weighting. It cannot be traded against
+          a high aggregate, and no amount of performance elsewhere buys a way past it. Gates are
+          applied before ranking.
+        </p>
+        <div class="grid grid--2" id="methods-gates"></div>
+
+        <h3>Why gated systems are still shown</h3>
+        <p>
+          A blocked system appears on a clearly labelled Experimental board with its blocking
+          reason attached. It is never silently dropped, and it is never quietly ranked below the
+          trusted rows as if it had merely scored lower. Those are different statements and they
+          deserve different interfaces.
+        </p>
+        <p>
+          There are two reasons for this. The first is that hiding a failure is a way of lying with
+          a table. A leaderboard that removes its non-compliant entries reports a compliance rate
+          of 100% by construction, which is a property of the filter, not of the field. The second
+          is that a blocked row is genuinely informative: the system that fabricates 1.8% of its
+          citations has an otherwise strong profile, and that combination — strong, fast, and not
+          trustworthy — is precisely what a reader needs to see rather than have withheld.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-pred-h">
+        <h2 id="m-pred-h">7. The prediction prohibition</h2>
+        <p>
+          This is the part of the methodology that matters most, and the part most likely to be
+          misunderstood as a mere formatting rule. It is not.
+        </p>
+        <p>
+          Docking, network inference, target prediction, pathway enrichment and molecular dynamics
+          are <em>not observations of the world</em>. They are outputs of a model. Placing them on
+          the same evidence ladder as an assay, a trial or a systematic review is a category
+          error, and it is the category error that produces most of the overclaiming in this
+          field: a predicted binding score is rendered as a finding, the finding is aggregated
+          into a network, the network is summarised as a mechanism, and the mechanism is stated as
+          a reason to treat a patient.
+        </p>
+        <p>
+          The rule the benchmark enforces is therefore about <strong>claim kinds</strong>, not
+          about evidence quality:
+        </p>
+        <ul>
+          <li>
+            A <strong>mechanism</strong> claim may rest on computational prediction. It is
+            permitted, and it is reported with a caveat naming the prediction it rests on.
+          </li>
+          <li>
+            A <strong>clinical</strong> claim may not. If a clinical claim is supported only by
+            predictive designs, it is refused with <code>CLM004</code> at the claim layer and
+            <code>ART106</code> at the artifact layer, and the run is gated to the Experimental
+            board.
+          </li>
+        </ul>
+        <p>
+          Because the rule is about claim kinds, the same evidence base can support one claim and
+          not another inside the same artifact. A run that predicts a binding mode may say
+          <em>the predicted pose is sterically plausible</em> and may not say <em>the formula is
+          effective for this indication in humans</em>. Both statements rest on the identical
+          docking output. Only one of them is a claim the evidence can carry.
+        </p>
+        <p>
+          Prediction-as-fact is counted <em>separately</em> from ordinary overclaiming, and never
+          averaged into a general overclaim rate. The two failures call for different responses —
+          one is a calibration problem, the other is a category problem — and collapsing them into
+          a single number would lose exactly the distinction this project exists to report. The
+          claim layer and the artifact layer each keep their own vocabulary
+          (<code>CLM004</code> and <code>ART106</code>) and the artifact layer maps between them,
+          so a published report has one stable set of strings while the benchmark retains both
+          counts.
+        </p>
+        <p>
+          Refusing a claim does not cost the run a point. The refused claim is excluded from
+          scoring rather than scored as wrong. This is deliberate: the incentive should point at
+          honesty, not at hedging. A run that declines to state a clinical conclusion it cannot
+          support should not be ranked below one that states it anyway — that would be a benchmark
+          rewarding the failure it claims to measure.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-abstain-h">
+        <h2 id="m-abstain-h">8. Abstention is scored, not penalised</h2>
+        <p>
+          Safety and Abstention treats a refusal as an outcome. Abstaining with a stated reason
+          scores above answering without evidence, and a refusal carries a code rather than a
+          blank. A system that answers everything cannot score well on this dimension, because
+          risk recall is measured on cases where the correct behaviour includes declining.
+        </p>
+        <p>
+          The corresponding gate is the sharpest one here: a severe false negative — a missed
+          serious interaction or contraindication that the gold set flags — blocks the trusted
+          board. The Season tolerance is expressed as a rate so that the failure is measurable and
+          reportable, not so that it can be averaged away. In this Season the published tolerance
+          is zero cases.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-versioning-h">
+        <h2 id="m-versioning-h">9. Versioning</h2>
+        <p>
+          Four axes version independently. Every citable result names all four, and a run whose
+          four versions are not all resolvable in the published registries is not rendered on the
+          leaderboard at all.
+        </p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Version axes">
+          <table>
+            <caption class="visually-hidden">The four independently versioned axes</caption>
+            <thead>
+              <tr><th scope="col">Axis</th><th scope="col">Changes when</th><th scope="col">Why it is separate</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Runtime</th>
+                <td>the executing code changes</td>
+                <td>A bug fix in the kernel is not a change in what the benchmark asks.</td>
+              </tr>
+              <tr>
+                <th scope="row">Skill</th>
+                <td>a promotion is approved</td>
+                <td>Adding a skill must not force a runtime release; a promotion must not silently alter a frozen Season.</td>
+              </tr>
+              <tr>
+                <th scope="row">Source</th>
+                <td>a connector's snapshot moves</td>
+                <td>External databases change without telling us. A moved database is a different experiment.</td>
+              </tr>
+              <tr>
+                <th scope="row">Benchmark</th>
+                <td>a Season is cut</td>
+                <td>The yardstick must not move while results are being compared against it.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          External sources are pinned by <em>content</em>, not by date: a source card records a
+          snapshot hash over the normalised response of every declared operation, and connector
+          results carry that hash. "HERB 2.0" is not a version. The hash is. Drift then surfaces as
+          a changed source hash rather than as an unexplained change in output, which is the
+          difference between a discrepancy you can diagnose and one you can only argue about.
+        </p>
+        <p>
+          The string a leaderboard row and a paper table cite is the composite of all four, not
+          any individual version.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-coi-h">
+        <h2 id="m-coi-h">10. Conflict of interest</h2>
+        <p>
+          The party that builds a system must not be the party that scores it, and the party that
+          scores it must not be able to change the score afterwards.
+        </p>
+        <ul>
+          <li>
+            <strong>Scoring is separated from submission.</strong> Evaluation runs in the Runner
+            under a frozen policy snapshot. Submitters do not run the scorer, choose the cases, or
+            see the held-out labels.
+          </li>
+          <li>
+            <strong>Nothing on this site can alter a result.</strong> The Arena renders published
+            bundles and holds no write path to any registry. A published number cannot be edited by
+            editing the website that displays it, and compromising the website does not compromise
+            a result. This is an architectural property, not a policy — see
+            <code>docs/adr/0004-arena-read-only-static-first.md</code>.
+          </li>
+          <li>
+            <strong>Promotion decisions are recorded, attributed and published.</strong> A skill
+            enters the Stable Registry only through a <code>PromotionDecision</code> naming the
+            reviewer and the date. There is no automatic path and no popularity threshold. The
+            decision and its identifier are shown on the <a href="skills.html">skill registry</a>.
+          </li>
+          <li>
+            <strong>Conflicts are declared.</strong> A reviewer with an interest in a submitted
+            system recuses; a system submitted by a maintainer of this benchmark is labelled as
+            such on its row and is reviewed by someone else.
+          </li>
+          <li>
+            <strong>The gold answers stay hidden.</strong> Cases and labels are not published, so a
+            system cannot be tuned against the set it is scored on. The scorers, the schema and the
+            data card are published so that the scoring itself can be audited.
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" aria-labelledby="m-repro-h">
+        <h2 id="m-repro-h">11. Reproducibility policy</h2>
+        <p>
+          A result is published only if a third party holding the four version axes can re-derive
+          it. Concretely, that requires the run to satisfy all of the following, and each is
+          checked mechanically rather than asserted:
+        </p>
+        <ol>
+          <li>
+            <strong>All four axes declared.</strong> A composite version missing any axis fails
+            validation (<code>ART108</code>).
+          </li>
+          <li>
+            <strong>Every output hashed.</strong> A declared output file with no content hash fails
+            validation (<code>ART107</code>); a file you cannot re-check is a file you cannot
+            trust.
+          </li>
+          <li>
+            <strong>Every source pinned.</strong> A publishable claim resting on a source that is
+            not pinned to a snapshot (<code>ART102</code>) or has no identified licence
+            (<code>ART103</code>) fails validation.
+          </li>
+          <li>
+            <strong>Every quote located.</strong> A supporting quote that cannot be located in its
+            source is refused (<code>CLM010</code>). A paraphrase presented as a quotation is not
+            a lesser sin than a fabricated citation, only a quieter one.
+          </li>
+          <li>
+            <strong>Re-execution reproduces the hashes.</strong> The Reproducibility dimension
+            reports the outcome of an actual re-run within the Season tolerance, not a promise
+            that one is possible.
+          </li>
+          <li>
+            <strong>Limitations stated.</strong> An artifact declaring no limitations fails
+            validation (<code>ART110</code>). An artifact that says nothing about its own scope has
+            not earned the right to be read as a scientific statement.
+          </li>
+        </ol>
+        <p>
+          The validator itself is a pure function over a finished artifact: it opens no sockets,
+          reads no clock and consults no registry. The same artifact therefore produces the same
+          verdict today and in five years, which is what makes a published result re-checkable by a
+          reviewer who was not there when it ran.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="m-limits-h">
+        <h2 id="m-limits-h">12. Known limitations of these methods</h2>
+        <ul>
+          <li>
+            <strong>Twenty cases per track is a small sample.</strong> Each row publishes a 95%
+            interval on the aggregate for that reason. Small differences between adjacent ranks
+            are not meaningful, and the leaderboard does not claim they are.
+          </li>
+          <li>
+            <strong>Checklist coverage is not quality.</strong> TCM-TrialAudit measures whether a
+            report addresses the items STRICTA, SPIRIT-TCM and CONSORT-CHM ask for. A report can
+            address every item and still describe a bad trial.
+          </li>
+          <li>
+            <strong>Latency and cost are environment-dependent.</strong> Their subscores are
+            comparable within a Season and within a submission type, and are weak evidence across
+            types — a container's cold start is not the same cost as a remote API call.
+          </li>
+          <li>
+            <strong>The track set is a choice.</strong> Six tracks were selected because they are
+            the failure modes with the clearest published instruments behind them. That is an
+            argument, not a proof of completeness.
+          </li>
+        </ul>
+        <p class="small muted">
+          These limitations are stated here for the same reason the benchmark requires runs to
+          state theirs. An evaluation surface that does not describe its own scope is asking for a
+          kind of trust it has not earned.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

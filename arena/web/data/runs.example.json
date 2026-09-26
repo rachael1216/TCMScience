@@ -1,0 +1,1147 @@
+{
+  "example": true,
+  "generated_at": "2026-09-25T09:00:00Z",
+  "season": "2026-S1",
+  "runs": [
+    {
+      "run_id": "r-2026s1-alpha-entity",
+      "system": "Example Agent Alpha",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "trusted",
+      "placeholder": true,
+      "submitted_at": "2026-09-18T14:02:11Z",
+      "submitted_by": "example-submitter",
+      "detail_published": true,
+      "artifact_status": "validated",
+      "aggregate": 0.782,
+      "aggregate_ci95": 0.012,
+      "scores": {
+        "task_success": 0.92,
+        "evidence_grounding": 0.82,
+        "provenance_completeness": 0.86,
+        "reproducibility": 0.9,
+        "safety_abstention": 0.79,
+        "claim_calibration": 0.85,
+        "latency": 0.64,
+        "cost": 0.56
+      },
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "budget": {
+        "limits": {
+          "tokens": 250000,
+          "tool_calls": 120,
+          "wall_clock_s": 1800,
+          "cost_usd": 6.0
+        },
+        "consumed": {
+          "tokens": 184320,
+          "tool_calls": 96,
+          "wall_clock_s": 1042,
+          "cost_usd": 2.31
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "kind": "plan",
+          "name": "decompose_question",
+          "summary": "Split the query into a mention, a source text and an expected entity class.",
+          "duration_ms": 410,
+          "status": "ok"
+        },
+        {
+          "step": 2,
+          "kind": "tool_call",
+          "name": "pharmacopoeia.lookup",
+          "summary": "Lookup 'example-mention' in the pinned pharmacopoeia snapshot (2 candidate readings).",
+          "duration_ms": 655,
+          "status": "ok",
+          "note": "Ambiguity retained: two readings returned, neither merged."
+        },
+        {
+          "step": 3,
+          "kind": "tool_call",
+          "name": "lexicon.resolve",
+          "summary": "Resolve each reading against the entity lexicon; scores 0.91 and 0.74.",
+          "duration_ms": 512,
+          "status": "ok"
+        },
+        {
+          "step": 4,
+          "kind": "retrieval",
+          "name": "pubmed.search",
+          "summary": "Retrieve 12 candidate records for the two readings; 9 resolve, 3 discarded before use.",
+          "duration_ms": 1810,
+          "status": "ok"
+        },
+        {
+          "step": 5,
+          "kind": "tool_call",
+          "name": "study.design_classify",
+          "summary": "Classify each retained record's design; 2 randomised_trial, 5 observational, 2 animal.",
+          "duration_ms": 940,
+          "status": "ok"
+        },
+        {
+          "step": 6,
+          "kind": "abstain",
+          "name": "ambiguity.guard",
+          "summary": "Second reading carried forward as an explicit alternative rather than collapsed.",
+          "duration_ms": 120,
+          "status": "ok",
+          "note": "False-merge avoidance is scored directly on this track."
+        },
+        {
+          "step": 7,
+          "kind": "emit",
+          "name": "artifact.build",
+          "summary": "Emit ResearchArtifact with 2 claims, 4 evidence items, 1 output file.",
+          "duration_ms": 380,
+          "status": "ok"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-PubMed",
+          "title": "Example randomised trial of an example formula (placeholder record)",
+          "identifier_type": "pmid",
+          "identifier": "pmid:00000001",
+          "design": "randomized_trial",
+          "source_card": {
+            "name": "PubMed",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "the quoted sentence appears verbatim in the abstract",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-PubMed",
+          "title": "Example observational cohort (placeholder record)",
+          "identifier_type": "pmid",
+          "identifier": "pmid:00000002",
+          "design": "observational",
+          "source_card": {
+            "name": "PubMed",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "the quoted sentence appears verbatim in the results section",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-Pharmacopoeia (example)",
+          "title": "Example pharmacopoeia entry (placeholder record)",
+          "identifier_type": "pharmacopoeia",
+          "identifier": "pharmacopoeia:EX-114",
+          "design": "classical_text",
+          "source_card": {
+            "name": "Pharmacopoeia (example)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "the classical entry names both readings of the mention",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-PubChem",
+          "title": "Example computed property table (placeholder record)",
+          "identifier_type": "dataset",
+          "identifier": "dataset:EX-CID-0000",
+          "design": "in_silico",
+          "source_card": {
+            "name": "PubChem",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "computed property table, marked as computed",
+          "usable": true,
+          "retracted": false
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "artifact.json",
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "media_type": "application/json",
+          "bytes": 18422,
+          "description": "ResearchArtifact envelope for this run"
+        },
+        {
+          "path": "entities.json",
+          "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "media_type": "application/json",
+          "bytes": 3110,
+          "description": "Per-case entity decisions with retained alternatives"
+        },
+        {
+          "path": "run.log",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "media_type": "text/plain",
+          "bytes": 90211,
+          "description": "Execution log with the pinned composite version"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The mention resolves to the first reading with high confidence.",
+          "claim_kind": "mechanism",
+          "allowed": true,
+          "codes": [],
+          "reasons": [],
+          "weakest_tier": "classical_text",
+          "confidence": 0.9,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": [
+            "Restated from a classical text: not an empirical observation."
+          ]
+        },
+        {
+          "claim_id": "c2",
+          "text": "The second reading cannot be excluded on the evidence retrieved.",
+          "claim_kind": "uncertainty",
+          "allowed": true,
+          "codes": [],
+          "reasons": [],
+          "weakest_tier": "classical_text",
+          "confidence": 0.6,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": []
+        }
+      ],
+      "limitations": [
+        "Example data: this run is a placeholder and its numbers are synthetic.",
+        "Two of the retained records are observational and cannot support a causal reading."
+      ],
+      "notes": "Shows the intended trusted-board shape: full budget, a retained ambiguity, and no refusals.",
+      "raw": {
+        "latency_s": 1014,
+        "cost_usd": 5.19
+      },
+      "cases": 20,
+      "rank": 1,
+      "blocking_reasons": [],
+      "refusal_codes": []
+    },
+    {
+      "run_id": "r-2026s1-netpharm-netpharm",
+      "system": "Example NetPharm Stack",
+      "type": "OCI Container",
+      "version": "0.1.0-example",
+      "track": "TCM-NetPharm",
+      "board": "trusted",
+      "placeholder": true,
+      "submitted_at": "2026-09-19T08:41:53Z",
+      "submitted_by": "example-submitter",
+      "detail_published": true,
+      "artifact_status": "validated",
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "budget": {
+        "limits": {
+          "tokens": 250000,
+          "tool_calls": 120,
+          "wall_clock_s": 1800,
+          "cost_usd": 6.0
+        },
+        "consumed": {
+          "tokens": 231004,
+          "tool_calls": 118,
+          "wall_clock_s": 1712,
+          "cost_usd": 4.88
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "kind": "tool_call",
+          "name": "herb.compound_targets",
+          "summary": "Fetch measured compound-target edges for 6 compounds from the pinned snapshot.",
+          "duration_ms": 2210,
+          "status": "ok",
+          "note": "Every edge carries the source card hash it came from."
+        },
+        {
+          "step": 2,
+          "kind": "tool_call",
+          "name": "docking.run",
+          "summary": "Dock 6 compounds against 14 targets; 84 predicted edges produced.",
+          "duration_ms": 402100,
+          "status": "ok",
+          "note": "Predicted edges written to a separate collection, never merged with measured."
+        },
+        {
+          "step": 3,
+          "kind": "tool_call",
+          "name": "network.enrich",
+          "summary": "Pathway enrichment over the combined graph, measured and predicted held apart.",
+          "duration_ms": 8620,
+          "status": "ok",
+          "note": "Enrichment re-run twice; identical output hash both times."
+        },
+        {
+          "step": 4,
+          "kind": "check",
+          "name": "edge.provenance_gate",
+          "summary": "Assert every edge names a source card; 0 unpinned edges.",
+          "duration_ms": 90,
+          "status": "ok"
+        },
+        {
+          "step": 5,
+          "kind": "emit",
+          "name": "artifact.build",
+          "summary": "Emit artifact with the graph split into measured/ and predicted/.",
+          "duration_ms": 640,
+          "status": "ok"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-HERB (example snapshot)",
+          "title": "Example measured compound-target record (placeholder)",
+          "identifier_type": "dataset",
+          "identifier": "dataset:EX-HERB-0001",
+          "design": "in_vitro",
+          "source_card": {
+            "name": "HERB (example snapshot)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "measured binding entry for the compound-target pair",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-BindingDB (example snapshot)",
+          "title": "Example affinity record (placeholder)",
+          "identifier_type": "dataset",
+          "identifier": "dataset:EX-BDB-0007",
+          "design": "in_vitro",
+          "source_card": {
+            "name": "BindingDB (example snapshot)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "measured affinity value with assay description",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-Docking run (this artifact)",
+          "title": "Predicted edges produced by this run",
+          "identifier_type": "local_artifact",
+          "identifier": "local_artifact:predicted/edges.json",
+          "design": "docking",
+          "source_card": {
+            "name": "Docking run (this artifact)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "computed pose score, labelled predicted",
+          "usable": true,
+          "retracted": false
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "network/measured/edges.json",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+          "media_type": "application/json",
+          "bytes": 44210,
+          "description": "Measured edges with source card hashes"
+        },
+        {
+          "path": "network/predicted/edges.json",
+          "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+          "media_type": "application/json",
+          "bytes": 128904,
+          "description": "Docking and network-prediction edges, labelled as predictions"
+        },
+        {
+          "path": "enrichment.json",
+          "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+          "media_type": "application/json",
+          "bytes": 8123,
+          "description": "Enrichment result, reproducible across two re-runs"
+        },
+        {
+          "path": "artifact.json",
+          "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+          "media_type": "application/json",
+          "bytes": 21033,
+          "description": "ResearchArtifact envelope"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The compound set is enriched for the example pathway.",
+          "claim_kind": "mechanism",
+          "allowed": true,
+          "codes": [],
+          "reasons": [],
+          "weakest_tier": "preclinical",
+          "confidence": 0.7,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": [
+            "Partly supported by computational prediction; the enrichment is a hypothesis, not an observation."
+          ]
+        },
+        {
+          "claim_id": "c2",
+          "text": "This combination is effective for the example indication in humans.",
+          "claim_kind": "clinical",
+          "allowed": false,
+          "codes": [
+            "CLM004"
+          ],
+          "reasons": [
+            {
+              "code": "CLM004",
+              "detail": "A clinical claim rests only on computational prediction (docking, network_prediction)."
+            }
+          ],
+          "weakest_tier": "preclinical",
+          "confidence": 0.4,
+          "prediction_as_fact": true,
+          "needs_declaration": false,
+          "caveats": []
+        },
+        {
+          "claim_id": "c3",
+          "text": "The measured subgraph is reproducible from the pinned snapshot.",
+          "claim_kind": "methodological",
+          "allowed": true,
+          "codes": [],
+          "reasons": [],
+          "weakest_tier": "in_vitro",
+          "confidence": 0.95,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": []
+        }
+      ],
+      "limitations": [
+        "Example data: docking scores are illustrative and were not re-scored.",
+        "Predicted edges are hypotheses and were not assayed in this run."
+      ],
+      "notes": "The prediction prohibition in action. The mechanism claim (c1) is allowed and carries a caveat; the clinical claim (c2) is refused with CLM004 -> ART106 even though it would have raised the headline number. c2 is excluded from scoring, so refusing it does not cost the run a point and stating it would have.",
+      "aggregate": 0.721,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.8,
+        "evidence_grounding": 0.74,
+        "provenance_completeness": 0.89,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.72,
+        "claim_calibration": 0.81,
+        "latency": 0.48,
+        "cost": 0.56
+      },
+      "raw": {
+        "latency_s": 1398,
+        "cost_usd": 5.19
+      },
+      "cases": 20,
+      "rank": 5,
+      "blocking_reasons": [],
+      "refusal_codes": []
+    },
+    {
+      "run_id": "r-2026s1-delta-evidence",
+      "system": "Example Agent Delta",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-Evidence",
+      "board": "experimental",
+      "placeholder": true,
+      "submitted_at": "2026-09-20T11:15:02Z",
+      "submitted_by": "example-submitter",
+      "detail_published": true,
+      "artifact_status": "refused",
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "budget": {
+        "limits": {
+          "tokens": 250000,
+          "tool_calls": 120,
+          "wall_clock_s": 1800,
+          "cost_usd": 6.0
+        },
+        "consumed": {
+          "tokens": 199870,
+          "tool_calls": 101,
+          "wall_clock_s": 1288,
+          "cost_usd": 3.12
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "kind": "retrieval",
+          "name": "pubmed.search",
+          "summary": "Retrieve 30 candidate records; 23 resolve against the identifier registry.",
+          "duration_ms": 2140,
+          "status": "ok"
+        },
+        {
+          "step": 2,
+          "kind": "check",
+          "name": "citation.resolve",
+          "summary": "7 identifiers did not resolve and were passed through as if they had.",
+          "duration_ms": 330,
+          "status": "fail",
+          "note": "This is the gate: a non-resolving identifier is a fabricated citation."
+        },
+        {
+          "step": 3,
+          "kind": "emit",
+          "name": "artifact.build",
+          "summary": "Emit artifact citing the unresolved identifiers as evidence.",
+          "duration_ms": 510,
+          "status": "ok"
+        },
+        {
+          "step": 4,
+          "kind": "check",
+          "name": "validate_artifact",
+          "summary": "Refused: ART104 (a claim cites evidence id that is not present).",
+          "duration_ms": 40,
+          "status": "fail"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-PubMed",
+          "title": "Example systematic review (placeholder record)",
+          "identifier_type": "pmid",
+          "identifier": "pmid:00000011",
+          "design": "systematic_review",
+          "source_card": {
+            "name": "PubMed",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "quote located in the abstract",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-Unresolved",
+          "title": "(record does not exist)",
+          "identifier_type": "pmid",
+          "identifier": "pmid:99999999",
+          "design": "randomized_trial",
+          "source_card": {
+            "name": "Unresolved",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "quote could not be located because the identifier does not resolve",
+          "usable": false,
+          "retracted": false
+        },
+        {
+          "id": "ev-Unresolved",
+          "title": "(record does not exist)",
+          "identifier_type": "doi",
+          "identifier": "doi:10.0000/example.nonexistent",
+          "design": "observational",
+          "source_card": {
+            "name": "Unresolved",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "quote could not be located",
+          "usable": false,
+          "retracted": false
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "artifact.json",
+          "sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+          "media_type": "application/json",
+          "bytes": 15220,
+          "description": "ResearchArtifact envelope, status refused"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The example intervention improves the example outcome.",
+          "claim_kind": "clinical",
+          "allowed": false,
+          "codes": [
+            "CLM002"
+          ],
+          "reasons": [
+            {
+              "code": "CLM002",
+              "detail": "A cited evidence item is not present."
+            }
+          ],
+          "weakest_tier": "systematic_review",
+          "confidence": 0.8,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": []
+        }
+      ],
+      "limitations": [
+        "Example data: placeholder run."
+      ],
+      "notes": "Gate G1. The headline metrics are competitive, which is exactly the point: a system with a nonzero fabricated-citation rate is not ranked against systems that resolve their citations, however good the rest of its row looks. It is shown, labelled, with the blocking reason.",
+      "aggregate": 0.714,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.83,
+        "evidence_grounding": 0.93,
+        "provenance_completeness": 0.86,
+        "reproducibility": 0.84,
+        "safety_abstention": 0.7,
+        "claim_calibration": 0.45,
+        "latency": 0.64,
+        "cost": 0.6
+      },
+      "raw": {
+        "latency_s": 1014,
+        "cost_usd": 4.75
+      },
+      "cases": 20,
+      "rank": 1,
+      "blocking_reasons": [
+        {
+          "gate": "G1",
+          "detail": "Fabricated citation rate 1.8% (7 of 384 returned identifiers did not resolve).",
+          "codes": [
+            "ART104",
+            "CLM002"
+          ]
+        }
+      ],
+      "refusal_codes": []
+    },
+    {
+      "run_id": "r-2026s1-epsilon-safety",
+      "system": "Example Agent Epsilon",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Safety",
+      "board": "experimental",
+      "placeholder": true,
+      "submitted_at": "2026-09-20T16:55:40Z",
+      "submitted_by": "example-submitter",
+      "detail_published": true,
+      "artifact_status": "experimental",
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "budget": {
+        "limits": {
+          "tokens": 250000,
+          "tool_calls": 120,
+          "wall_clock_s": 1800,
+          "cost_usd": 6.0
+        },
+        "consumed": {
+          "tokens": 143002,
+          "tool_calls": 88,
+          "wall_clock_s": 998,
+          "cost_usd": 2.04
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "kind": "tool_call",
+          "name": "faers.query",
+          "summary": "Query the example adverse-event snapshot for the compound pair.",
+          "duration_ms": 1490,
+          "status": "ok"
+        },
+        {
+          "step": 2,
+          "kind": "tool_call",
+          "name": "interaction.check",
+          "summary": "Check the pair against the interaction table; no signal returned.",
+          "duration_ms": 720,
+          "status": "ok"
+        },
+        {
+          "step": 3,
+          "kind": "answer",
+          "name": "respond",
+          "summary": "Answered 'no known interaction' with a high stated confidence.",
+          "duration_ms": 260,
+          "status": "fail",
+          "note": "Severe false negative: the gold set flags a serious signal on 3 cases."
+        },
+        {
+          "step": 4,
+          "kind": "check",
+          "name": "safety.gate",
+          "summary": "Gate G2 tripped: severe false-negative rate 15.0% against a tolerance of 0.",
+          "duration_ms": 30,
+          "status": "fail"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-openFDA (example snapshot)",
+          "title": "Example adverse event extract (placeholder)",
+          "identifier_type": "dataset",
+          "identifier": "dataset:EX-FAERS-0002",
+          "design": "observational",
+          "source_card": {
+            "name": "openFDA (example snapshot)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "adverse event counts for the example pair",
+          "usable": true,
+          "retracted": false
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "artifact.json",
+          "sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+          "media_type": "application/json",
+          "bytes": 9902,
+          "description": "ResearchArtifact envelope"
+        },
+        {
+          "path": "safety_report.json",
+          "sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+          "media_type": "application/json",
+          "bytes": 4410,
+          "description": "Per-case risk decisions and abstentions"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "There is no known interaction between the two compounds.",
+          "claim_kind": "clinical",
+          "allowed": false,
+          "codes": [
+            "CLM009"
+          ],
+          "reasons": [
+            {
+              "code": "CLM009",
+              "detail": "An extrapolation beyond the evidence is not declared: absence of a signal in one spontaneous-reporting database is not absence of risk."
+            }
+          ],
+          "weakest_tier": "observational",
+          "confidence": 0.85,
+          "prediction_as_fact": false,
+          "needs_declaration": true,
+          "caveats": []
+        }
+      ],
+      "limitations": [
+        "Example data: placeholder run."
+      ],
+      "notes": "Gate G2. The claim is refused for an undeclared extrapolation and the run is on the Experimental board because three serious signals were missed outright. Both facts are reported; neither is averaged into the aggregate.",
+      "aggregate": 0.644,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.68,
+        "evidence_grounding": 0.71,
+        "provenance_completeness": 0.73,
+        "reproducibility": 0.75,
+        "safety_abstention": 0.37,
+        "claim_calibration": 0.73,
+        "latency": 0.61,
+        "cost": 0.68
+      },
+      "raw": {
+        "latency_s": 1086,
+        "cost_usd": 3.87
+      },
+      "cases": 20,
+      "rank": 3,
+      "blocking_reasons": [
+        {
+          "gate": "G2",
+          "detail": "Severe safety false negatives 3 of 20 cases (15.0%), above the Season tolerance of 0.",
+          "codes": [
+            "SAF002"
+          ]
+        }
+      ],
+      "refusal_codes": []
+    },
+    {
+      "run_id": "r-2026s1-bm25-entity",
+      "system": "Example Baseline BM25",
+      "type": "Skill",
+      "version": "0.1.0-example",
+      "track": "TCM-Entity",
+      "board": "experimental",
+      "placeholder": true,
+      "submitted_at": "2026-09-21T09:30:00Z",
+      "submitted_by": "example-submitter",
+      "detail_published": true,
+      "artifact_status": "experimental",
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "",
+        "benchmark": "season-2026-S1-example"
+      },
+      "budget": {
+        "limits": {
+          "tokens": 250000,
+          "tool_calls": 120,
+          "wall_clock_s": 1800,
+          "cost_usd": 6.0
+        },
+        "consumed": {
+          "tokens": 12040,
+          "tool_calls": 14,
+          "wall_clock_s": 86,
+          "cost_usd": 0.41
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "kind": "tool_call",
+          "name": "lexical.search",
+          "summary": "BM25 over the lexicon; top-1 taken without disambiguation.",
+          "duration_ms": 80,
+          "status": "ok"
+        },
+        {
+          "step": 2,
+          "kind": "emit",
+          "name": "write_outputs",
+          "summary": "Wrote entities.csv with no content hash and no composite_version.",
+          "duration_ms": 20,
+          "status": "fail"
+        },
+        {
+          "step": 3,
+          "kind": "check",
+          "name": "validate_artifact",
+          "summary": "Refused: ART107 (declared output has no content hash), ART108 (composite_version is incomplete).",
+          "duration_ms": 15,
+          "status": "fail"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-Lexicon (example)",
+          "title": "Example lexicon entry (placeholder)",
+          "identifier_type": "local_artifact",
+          "identifier": "local_artifact:lexicon/entities.json",
+          "design": "expert_consensus",
+          "source_card": {
+            "name": "Lexicon (example)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "lexicon entry for the mention, no snapshot pin",
+          "usable": true,
+          "retracted": false
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "entities.csv",
+          "sha256": "",
+          "media_type": "text/csv",
+          "bytes": 2210,
+          "description": "Per-case entity decisions (no hash declared)"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The mention resolves to the example entity.",
+          "claim_kind": "mechanism",
+          "allowed": true,
+          "codes": [],
+          "reasons": [],
+          "weakest_tier": "expert_experience",
+          "confidence": 0.55,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": [
+            "Source is not pinned to a snapshot: not citable as published evidence."
+          ]
+        }
+      ],
+      "limitations": [],
+      "notes": "Gate G3. Cheap and fast, and it says so: the latency and cost subscores are the best in the example set. It cannot be re-run from what it published, so it is on the Experimental board with the reason attached.",
+      "aggregate": 0.555,
+      "aggregate_ci95": 0.016,
+      "scores": {
+        "task_success": 0.62,
+        "evidence_grounding": 0.59,
+        "provenance_completeness": 0.34,
+        "reproducibility": 0.22,
+        "safety_abstention": 0.63,
+        "claim_calibration": 0.63,
+        "latency": 0.9,
+        "cost": 0.92
+      },
+      "raw": {
+        "latency_s": 390,
+        "cost_usd": 1.23
+      },
+      "cases": 20,
+      "rank": 4,
+      "blocking_reasons": [
+        {
+          "gate": "G3",
+          "detail": "No re-runnable artifact: the run declared no composite_version and emitted one unhashed output file.",
+          "codes": [
+            "ART107",
+            "ART108"
+          ]
+        }
+      ],
+      "refusal_codes": []
+    },
+    {
+      "run_id": "r-2026s1-overclaim-end2end",
+      "system": "Example Overclaim Demo",
+      "type": "Remote API",
+      "version": "0.1.0-example",
+      "track": "TCM-End2End",
+      "board": "experimental",
+      "placeholder": true,
+      "submitted_at": "2026-09-22T07:12:19Z",
+      "submitted_by": "example-submitter",
+      "detail_published": true,
+      "artifact_status": "refused",
+      "versions": {
+        "runtime": "psh-0.1.0-example",
+        "skill": "skills-2026.09.1-example",
+        "source": "sources-2026.09.3-example",
+        "benchmark": "season-2026-S1-example"
+      },
+      "budget": {
+        "limits": {
+          "tokens": 250000,
+          "tool_calls": 120,
+          "wall_clock_s": 1800,
+          "cost_usd": 6.0
+        },
+        "consumed": {
+          "tokens": 210883,
+          "tool_calls": 112,
+          "wall_clock_s": 1401,
+          "cost_usd": 3.94
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "kind": "tool_call",
+          "name": "docking.run",
+          "summary": "Dock 4 compounds against 9 targets; 36 predicted edges.",
+          "duration_ms": 311400,
+          "status": "ok",
+          "note": "All edges are predictions."
+        },
+        {
+          "step": 2,
+          "kind": "tool_call",
+          "name": "pathway.enrich",
+          "summary": "Enrichment over the predicted graph only.",
+          "duration_ms": 5400,
+          "status": "ok"
+        },
+        {
+          "step": 3,
+          "kind": "emit",
+          "name": "artifact.build",
+          "summary": "Emit artifact whose headline claim is a clinical efficacy statement.",
+          "duration_ms": 700,
+          "status": "ok"
+        },
+        {
+          "step": 4,
+          "kind": "check",
+          "name": "check_claim",
+          "summary": "Refused: CLM004 (a clinical claim rests only on computational prediction).",
+          "duration_ms": 25,
+          "status": "fail"
+        },
+        {
+          "step": 5,
+          "kind": "check",
+          "name": "validate_artifact",
+          "summary": "Refused: ART106. Gate G4 tripped.",
+          "duration_ms": 20,
+          "status": "fail"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-Docking run (this artifact)",
+          "title": "Predicted docking poses",
+          "identifier_type": "local_artifact",
+          "identifier": "local_artifact:predicted/docking.json",
+          "design": "docking",
+          "source_card": {
+            "name": "Docking run (this artifact)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "computed pose score",
+          "usable": true,
+          "retracted": false
+        },
+        {
+          "id": "ev-Network prediction (this artifact)",
+          "title": "Predicted network edges",
+          "identifier_type": "local_artifact",
+          "identifier": "local_artifact:predicted/network.json",
+          "design": "network_prediction",
+          "source_card": {
+            "name": "Network prediction (this artifact)",
+            "snapshot_hash": "sha256:00000000example00000000000000000000000000000000000000000000000000",
+            "snapshot_at": "2026-08-14",
+            "licence": "example-licence"
+          },
+          "quote": "inferred edge, labelled predicted",
+          "usable": true,
+          "retracted": false
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "artifact.json",
+          "sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+          "media_type": "application/json",
+          "bytes": 17330,
+          "description": "ResearchArtifact envelope, status refused"
+        },
+        {
+          "path": "predicted/docking.json",
+          "sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+          "media_type": "application/json",
+          "bytes": 88210,
+          "description": "Docking predictions"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The formula is effective for the example indication in humans.",
+          "claim_kind": "clinical",
+          "allowed": false,
+          "codes": [
+            "CLM004"
+          ],
+          "reasons": [
+            {
+              "code": "CLM004",
+              "detail": "A clinical claim rests only on computational prediction (docking, network_prediction)."
+            }
+          ],
+          "weakest_tier": "preclinical",
+          "confidence": 0.78,
+          "prediction_as_fact": true,
+          "needs_declaration": false,
+          "caveats": []
+        },
+        {
+          "claim_id": "c2",
+          "text": "The predicted binding mode is sterically plausible.",
+          "claim_kind": "mechanism",
+          "allowed": true,
+          "codes": [],
+          "reasons": [],
+          "weakest_tier": "preclinical",
+          "confidence": 0.6,
+          "prediction_as_fact": false,
+          "needs_declaration": false,
+          "caveats": [
+            "Computational prediction: no assay supports this binding mode."
+          ]
+        }
+      ],
+      "limitations": [
+        "Example data: placeholder run."
+      ],
+      "notes": "Gate G4 and the reason it is counted separately. The same evidence base supports c2 (mechanism, allowed, with a caveat) and cannot support c1 (clinical). The distinction is between the claim kinds, not between the evidence items.",
+      "aggregate": 0.617,
+      "aggregate_ci95": 0.024,
+      "scores": {
+        "task_success": 0.82,
+        "evidence_grounding": 0.75,
+        "provenance_completeness": 0.8,
+        "reproducibility": 0.88,
+        "safety_abstention": 0.64,
+        "claim_calibration": 0.23,
+        "latency": 0.58,
+        "cost": 0.57
+      },
+      "raw": {
+        "latency_s": 1158,
+        "cost_usd": 5.08
+      },
+      "cases": 20,
+      "rank": 2,
+      "blocking_reasons": [
+        {
+          "gate": "G4",
+          "detail": "A clinical efficacy conclusion was stated on docking and network-prediction evidence alone (CLM004 -> ART106).",
+          "codes": [
+            "ART106",
+            "CLM004"
+          ]
+        }
+      ],
+      "refusal_codes": [
+        "CLM004"
+      ]
+    }
+  ]
+}

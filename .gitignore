@@ -1,0 +1,49 @@
+__pycache__/
+*.py[cod]
+.hypothesis/
+.pytest_cache/
+._*
+.DS_Store
+*.egg-info/
+build/
+dist/
+
+# ---------------------------------------------------------------------------
+# Research data and results stay local; the repository publishes the
+# architecture, not the findings.
+#
+# The repo exists so others can read, clone and re-run the *system*: the
+# runtime, the skill manifests and their implementations, the registry and its
+# lockfiles, the benchmark harness, the CI. It does not carry the benchmark
+# cases or their gold answers, the Arena's leaderboard data, or run traces.
+#
+# Two reasons. The paper is not on arXiv yet, and publishing the results first
+# would pre-empt it. And a public gold answer contaminates the benchmark for
+# everyone who clones it — the hidden split only means something if it stays
+# hidden.
+#
+# Framework code, schemas and data cards under these directories are NOT
+# ignored and should be committed; only data and results are.
+# ---------------------------------------------------------------------------
+BioScience-Harness/benchmarks/cases/**
+BioScience-Harness/benchmarks/hidden/**
+!BioScience-Harness/benchmarks/cases/README.md
+!BioScience-Harness/benchmarks/hidden/README.md
+# The Arena's data IS published. The owner decided on 2026-09-26 to make the
+# evaluation surface public, so the demonstration run and any future Season's
+# results are committed.
+#
+# What this does NOT publish, and the ignore rules below still enforce:
+#   * the benchmark cases and their gold answers — a public gold answer
+#     contaminates the benchmark for everyone who clones it;
+#   * the hidden and adversarial splits.
+# A result set without its cases is a leaderboard; a case set would be an
+# answer key. Only the first is here.
+!arena/web/data/*.json
+arena/web/runs/*
+!arena/web/runs/.gitkeep
+
+# Paper source and PDF. These live outside this working tree by design (in
+# `TCM+AI/paper/`), so nothing should ever appear here; the rule is a backstop.
+paper/
+plan/

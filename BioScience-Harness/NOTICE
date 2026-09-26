@@ -1,0 +1,31 @@
+bioagent — third-party attribution
+
+This project contains NO third-party source code. Capability METADATA
+(names, descriptions, signatures, licenses, source paths) was extracted by
+static analysis from the following upstream projects and is used to route
+calls to capabilities that remain the property of their respective authors.
+
+Vendorable (permissive) — metadata reused with attribution:
+  Biomni              Apache-2.0   snap-stanford/Biomni
+  PantheonOS          BSD-2-Clause aristoteleo/PantheonOS
+  K-Dense skills      MIT          K-Dense-AI/scientific-agent-skills
+  ClawBio             MIT          ClawBio/ClawBio
+  Robin               Apache-2.0   Future-House/robin
+  AutoBA              MIT          JoshuaChou2018/AutoBA
+  STELLA              Apache-2.0   zaixizhang/STELLA
+  GenoMAS             MIT          Liu-Hy/GenoMAS
+  Agentomics          MIT          BioGeMT/agentomics-ml
+  BioMedArena         MIT          AI-in-Health/BioMedArena
+  GeneAgent           NLM public domain (US Gov work)  ncbi-nlp/GeneAgent
+
+Adapter-only (NO license granted; invoked in place, never copied):
+  OrigeneMCP          GENTEL-lab/OrigeneMCP
+  OriGene             GENTEL-lab/OriGene
+  BioMedAgent         BOBQWERA/BioMedAgent
+  CellAgent           liu-shiqiang/CellAgent
+  CRISPR-GPT          cong-lab/crispr-gpt-pub
+
+Data: the Biomni data lake is redistributed by Stanford under the terms of
+its own upstream sources; individual datasets (BindingDB, DepMap, genebass,
+Broad Repurposing Hub, ...) carry their own licenses and are NOT redistributed
+by this project.

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark registry — TCMScience Arena</title>
+<meta name="description" content="The frozen TCMScience benchmark registry: Seasons, dates frozen, tracks, data sources with licences, scoring rules and how to cite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="benchmarks">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html" aria-current="page">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html">Skills</a></li>
+        <li><a class="nav__link" href="methods.html">Methods</a></li>
+        <li><a class="nav__link" href="compare.html">Compare</a></li>
+        <li><a class="nav__link" href="submit.html">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Benchmark registry</h1>
+      <p class="page-head__lede">
+        A Season is the unit of comparability. It is cut from a Stable Registry revision and is
+        thereafter immutable: a monthly skill update can never modify it, because otherwise this
+        month's score and last month's are not on the same scale.
+      </p>
+      <p class="page-head__meta">
+        <span class="badge badge--plain">Frozen registry</span>
+        <span class="badge badge--plain">Append-only</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="benchmarks">
+
+    <section class="section" aria-labelledby="seasons-h">
+      <h2 id="seasons-h">Seasons</h2>
+      <p class="section__lede">
+        Each Season names its version, the date it was frozen, its case count and its splits.
+        The case files themselves are not published here.
+      </p>
+      <div class="grid grid--3" id="benchmark-seasons"></div>
+      <div class="callout callout--info" style="margin-top:1.25rem">
+        <p class="callout__title">Why the cases are not on this page</p>
+        <p>
+          A public gold answer contaminates the benchmark for everyone who clones it. The schema,
+          the loader, the scorers and the data card are published; the cases and their gold labels
+          are withheld so a clone cannot be prompted or trained against them. A new system
+          iterates against the public development split and is scored, once, on the held-out one.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tracks-h">
+      <h2 id="tracks-h">Tracks in the current Season</h2>
+      <p class="section__lede">
+        Six tracks, twenty cases each. Each track has its own scorer and its own metric focus —
+        the dimensions are shared across tracks, what varies is what each one is measuring.
+      </p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Tracks in the current Season">
+        <table class="plain">
+          <caption class="visually-hidden">Tracks, metric focus, case count and scoring notes</caption>
+          <thead>
+            <tr>
+              <th scope="col">Track</th>
+              <th scope="col">Metric focus</th>
+              <th scope="col" class="col-num">Cases</th>
+              <th scope="col">Notes</th>
+            </tr>
+          </thead>
+          <tbody id="benchmark-tracks"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-h">
+      <h2 id="sources-h">Data sources and licences</h2>
+      <p class="section__lede">
+        External databases change without telling us. A source is pinned by content, not by a
+        date: the snapshot hash is what a downstream artifact cites, because “version 2.0” is not
+        a version and a hash is.
+      </p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Data sources and licences">
+        <table class="plain">
+          <caption class="visually-hidden">Data sources, licences, snapshot hashes and the tracks that use them</caption>
+          <thead>
+            <tr>
+              <th scope="col">Source</th>
+              <th scope="col">Licence</th>
+              <th scope="col">Snapshot</th>
+              <th scope="col">Used by</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody id="benchmark-sources"></tbody>
+        </table>
+      </div>
+      <p class="small muted" style="margin-top:0.75rem">
+        A licence string is not evidence that a licence permits this use. Each source carries a
+        <code>licence_verified</code> flag set by a human reviewer at Season cut; the flag is
+        rendered next to the string rather than assumed from it. An artifact resting on a source
+        with no identified licence fails validation (ART103).
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="rules-h">
+      <h2 id="rules-h">Scoring rules</h2>
+      <p class="section__lede">
+        The rules below are the ones that apply to every track. Track-specific scorers are
+        described with the track.
+      </p>
+      <div id="benchmark-rules"></div>
+    </section>
+
+    <section class="section" aria-labelledby="gates-b-h">
+      <h2 id="gates-b-h">Hard gates</h2>
+      <p class="section__lede">
+        Applied before ranking, never as a score contribution. A gated run appears on the
+        Experimental board with its blocking reason.
+      </p>
+      <div class="grid grid--2" id="benchmark-gates"></div>
+    </section>
+
+    <section class="section" aria-labelledby="cite-h">
+      <h2 id="cite-h">How to cite</h2>
+      <p class="section__lede">
+        Cite the Season and the four version axes, not the website. The axes are what make the
+        number re-derivable by someone who has none of your code.
+      </p>
+      <div class="card"><div class="card__body" id="benchmark-citation"></div></div>
+      <p class="small muted" style="margin-top:0.85rem">
+        Replace the example identifiers with the ones printed on the run page of the result you
+        are citing. A result whose four axes are not all resolvable in the published registries is
+        not rendered on the leaderboard at all.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

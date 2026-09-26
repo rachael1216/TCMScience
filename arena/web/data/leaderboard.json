@@ -1,0 +1,1926 @@
+{
+  "generated": true,
+  "season": "demo-1",
+  "season_label": "Demonstration run",
+  "dimensions": [
+    "task_success",
+    "evidence_grounding",
+    "provenance_completeness",
+    "reproducibility",
+    "safety_abstention",
+    "claim_calibration",
+    "latency",
+    "cost"
+  ],
+  "boards": {
+    "demonstration": "The four P0 skills, run for real. Real artifacts and real validation verdicts; three of eight dimensions are measurable without a published gold corpus.",
+    "trusted": "Empty. No Season has been evaluated.",
+    "experimental": "Empty."
+  },
+  "runs": [
+    {
+      "run_id": "demo-entity-01",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-Entity",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "Resolve 姜 to a corpus entity",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "the run produced an empty result and made no claim, which is the correct behaviour",
+        "latency": "measured 1 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.001079,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "normalize-tcm-entities@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "normalize-tcm-entities",
+        "version": "1.0.0",
+        "content_hash": "bec56d455addd50569d4ce8844159646e6857f815578d552c5bdbc5c5e763681"
+      },
+      "validation": {
+        "artifact_id": "normalize-tcm-entities",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [
+          {
+            "code": "ART105",
+            "detail": "artifact makes no claims; it reports material but asserts nothing",
+            "severity": "warning"
+          }
+        ],
+        "claim_verdicts": [],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "79728594ca8af1930d02358fc7be09860c59f58eac137d93004ccb175d7a067b",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [],
+        "claims": [],
+        "outputs": [
+          {
+            "path": "entities.json",
+            "sha256": "0e7ff9dd32813334494d4653cc5a6eb0bf520a8a8e550e296ca71ad57f2fa0fd",
+            "media_type": "application/json",
+            "bytes": 1518,
+            "description": "resolved entities and retained ambiguity"
+          }
+        ],
+        "limitations": [
+          "resolution is against the shipped seed corpus only; a name absent here may still be a real drug or formula",
+          "no external identifier (InChIKey, UniProt, HGNC) is assigned, because the seed corpus carries none; identifiers require a connector run",
+          "ambiguous for 1 input(s): ['姜']; the artifact returns candidates instead of choosing, because choosing would be wrong roughly half the time with no signal that it had happened"
+        ],
+        "assumptions": [
+          "the seed corpus is the intended reference for this query"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill normalize-tcm-entities@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "0 evidence item(s), 0 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "resolution is against the shipped seed corpus only; a name absent here may still be a real drug or formula",
+        "no external identifier (InChIKey, UniProt, HGNC) is assigned, because the seed corpus carries none; identifiers require a connector run",
+        "ambiguous for 1 input(s): ['姜']; the artifact returns candidates instead of choosing, because choosing would be wrong roughly half the time with no signal that it had happened"
+      ]
+    },
+    {
+      "run_id": "demo-entity-02",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-Entity",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "Resolve 甘草 and report its processed forms",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "1 claim(s), none overclaiming their evidence",
+        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.00043,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "normalize-tcm-entities@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "normalize-tcm-entities",
+        "version": "1.0.0",
+        "content_hash": "bec56d455addd50569d4ce8844159646e6857f815578d552c5bdbc5c5e763681"
+      },
+      "validation": {
+        "artifact_id": "normalize-tcm-entities",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [],
+        "claim_verdicts": [
+          {
+            "claim_id": "normalization.summary",
+            "allowed": true,
+            "codes": [],
+            "reasons": [],
+            "needs_declaration": false,
+            "prediction_as_fact": false,
+            "weakest_tier": "classical_text",
+            "caveats": [
+              "resolve.0: retraction status has not been checked",
+              "resolve.0: no lookupable identifier; the citation cannot be checked",
+              "resolve.0: quality dimension risk_of_bias was not assessed",
+              "resolve.0: quality dimension precision was not assessed",
+              "resolve.0: quality dimension consistency was not assessed"
+            ]
+          }
+        ],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "3c5a5de467e697fe6e1dad071be68d830ce4e7e81f80bfc887f1b48bcd3a703a",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "resolve.0",
+            "design": "classical_text",
+            "tier": "classical_text",
+            "tier_rank": 1,
+            "quote": "id=herb.gancao; chinese=甘草; pinyin=gan cao; latin=Glycyrrhizae Radix et Rhizoma; source=神农本草经（上品）; aliases=国老,甜草",
+            "citation": "TCMScience TCM seed corpus, entry herb.gancao",
+            "title": "",
+            "identifier": "herb.gancao",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "normalize-tcm-entities",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "甘草",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "normalize-tcm-entities",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          }
+        ],
+        "claims": [
+          {
+            "id": "normalization.summary",
+            "text": "1 of 1 queried names resolve to an entity in the seed corpus; 1 carry unresolved ambiguity",
+            "claim_kind": "attribution",
+            "subject": "甘草",
+            "predicate": "recorded_in",
+            "object": "tcmscience.tcm.seed",
+            "supports": [
+              "resolve.0"
+            ],
+            "asserted_population": "seed corpus",
+            "asserted_outcome": "entity resolution",
+            "supported_population": "seed corpus",
+            "supported_outcome": "entity resolution",
+            "direction": "unclear",
+            "magnitude": "",
+            "declared_extrapolations": {},
+            "confidence": 1.0,
+            "confidence_basis": "counted directly from the resolution results above",
+            "hedged": false,
+            "normative": false,
+            "rationale": "",
+            "falsified_by": "a corpus entry that resolves differently from the table above",
+            "produced_by": "normalize-tcm-entities",
+            "tier_floor": "classical_text",
+            "clinical": false
+          }
+        ],
+        "outputs": [
+          {
+            "path": "entities.json",
+            "sha256": "df2ebd9a39e2a6cf7f789757f78502992e01985e99737c06a7d765fe66e99961",
+            "media_type": "application/json",
+            "bytes": 1630,
+            "description": "resolved entities and retained ambiguity"
+          }
+        ],
+        "limitations": [
+          "resolution is against the shipped seed corpus only; a name absent here may still be a real drug or formula",
+          "no external identifier (InChIKey, UniProt, HGNC) is assigned, because the seed corpus carries none; identifiers require a connector run",
+          "ambiguous for 1 input(s): ['甘草']; the artifact returns candidates instead of choosing, because choosing would be wrong roughly half the time with no signal that it had happened"
+        ],
+        "assumptions": [
+          "the seed corpus is the intended reference for this query"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill normalize-tcm-entities@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "1 evidence item(s), 1 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "resolution is against the shipped seed corpus only; a name absent here may still be a real drug or formula",
+        "no external identifier (InChIKey, UniProt, HGNC) is assigned, because the seed corpus carries none; identifiers require a connector run",
+        "ambiguous for 1 input(s): ['甘草']; the artifact returns candidates instead of choosing, because choosing would be wrong roughly half the time with no signal that it had happened"
+      ]
+    },
+    {
+      "run_id": "demo-evidence-01",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-Evidence",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "What evidence exists about 附子?",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "1 claim(s), none overclaiming their evidence",
+        "latency": "measured 1 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.000552,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "retrieve-tcm-evidence@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "retrieve-tcm-evidence",
+        "version": "1.0.0",
+        "content_hash": "129fde3bce61bd268e9de41207930aac81a0a86078e143413266f9bc51db8d85"
+      },
+      "validation": {
+        "artifact_id": "retrieve-tcm-evidence",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [],
+        "claim_verdicts": [
+          {
+            "claim_id": "retrieval.coverage",
+            "allowed": true,
+            "codes": [],
+            "reasons": [],
+            "needs_declaration": false,
+            "prediction_as_fact": false,
+            "weakest_tier": "expert_experience",
+            "caveats": [
+              "study.study.pharmacopoeia_2020: no lookupable identifier; the citation cannot be checked",
+              "study.study.pharmacopoeia_2020: quality dimension risk_of_bias was not assessed",
+              "study.study.pharmacopoeia_2020: quality dimension precision was not assessed",
+              "study.study.pharmacopoeia_2020: quality dimension consistency was not assessed"
+            ]
+          }
+        ],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "760c34933161e43f6225ca1fe5ab3358535e349cf7875a6bc95909814dfbac09",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "study.study.pharmacopoeia_2020",
+            "design": "expert_consensus",
+            "tier": "expert_experience",
+            "tier_rank": 2,
+            "quote": "design=pharmacopoeial monograph",
+            "citation": "中华人民共和国药典（2020年版）一部",
+            "title": "study.pharmacopoeia_2020",
+            "identifier": "study.pharmacopoeia_2020",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "retrieve-tcm-evidence",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.fuzi",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "not_retracted",
+            "retrieved_by": "retrieve-tcm-evidence",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": "corpus tier expert_experience; design inferred as expert_consensus"
+          },
+          {
+            "id": "passage.passage.shibafan",
+            "design": "classical_text",
+            "tier": "classical_text",
+            "tier_rank": 1,
+            "quote": "本草明言十八反，半蒌贝蔹及攻乌，藻戟遂芫俱战草，诸参辛芍叛藜芦。",
+            "citation": "儒门事亲, 十八反歌",
+            "title": "儒门事亲 — 十八反歌",
+            "identifier": "passage.shibafan",
+            "identifier_type": "classical_passage",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "retrieve-tcm-evidence",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "附子",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "retrieve-tcm-evidence",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          }
+        ],
+        "claims": [
+          {
+            "id": "retrieval.coverage",
+            "text": "2 record(s) about 附子 were retrieved from the seed corpus; the strongest design available is expert_experience",
+            "claim_kind": "attribution",
+            "subject": "附子",
+            "predicate": "recorded_in",
+            "object": "tcmscience.tcm.seed",
+            "supports": [
+              "study.study.pharmacopoeia_2020"
+            ],
+            "asserted_population": "seed corpus",
+            "asserted_outcome": "retrieval coverage",
+            "supported_population": "seed corpus",
+            "supported_outcome": "retrieval coverage",
+            "direction": "unclear",
+            "magnitude": "",
+            "declared_extrapolations": {},
+            "confidence": 1.0,
+            "confidence_basis": "counted directly from the search above",
+            "hedged": false,
+            "normative": false,
+            "rationale": "",
+            "falsified_by": "a corpus record about this subject that the search missed",
+            "produced_by": "retrieve-tcm-evidence",
+            "tier_floor": "classical_text",
+            "clinical": false
+          }
+        ],
+        "outputs": [
+          {
+            "path": "evidence.json",
+            "sha256": "b99104973a50d48b411b2f2c47f358339ac6e9a9977b91a3b91fa4881b5dfb20",
+            "media_type": "application/json",
+            "bytes": 4239,
+            "description": "retrieved evidence with scope and limits"
+          }
+        ],
+        "limitations": [
+          "only the shipped seed corpus was searched; no live literature index (Europe PMC, PubMed) or trial registry (ClinicalTrials.gov, ChiCTR) was queried, so this is not a systematic search",
+          "absence of a record in this corpus is not absence of evidence; the corpus is illustrative and small",
+          "risk of bias, precision and consistency are NOT ASSESSED — the corpus carries no information on which to judge them, and a default of 'low' would be an invented finding",
+          "2 item(s) have no lookupable identifier and cannot be verified from the citation alone: ['study.study.pharmacopoeia_2020', 'passage.passage.shibafan']"
+        ],
+        "assumptions": [
+          "the seed corpus is an adequate stand-in for a literature search in this configuration; it is not"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill retrieve-tcm-evidence@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "2 evidence item(s), 1 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "only the shipped seed corpus was searched; no live literature index (Europe PMC, PubMed) or trial registry (ClinicalTrials.gov, ChiCTR) was queried, so this is not a systematic search",
+        "absence of a record in this corpus is not absence of evidence; the corpus is illustrative and small",
+        "risk of bias, precision and consistency are NOT ASSESSED — the corpus carries no information on which to judge them, and a default of 'low' would be an invented finding",
+        "2 item(s) have no lookupable identifier and cannot be verified from the citation alone: ['study.study.pharmacopoeia_2020', 'passage.passage.shibafan']"
+      ]
+    },
+    {
+      "run_id": "demo-netpharm-01",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-NetPharm",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "What target network is inferred for 桂枝汤?",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "the run produced an empty result and made no claim, which is the correct behaviour",
+        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.000417,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "analyze-tcm-network-pharmacology@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "analyze-tcm-network-pharmacology",
+        "version": "1.0.0",
+        "content_hash": "0965fcca1f6fee4d3fed87b9229dd06cc4ebfdd8f2315cef3ff8071fa0c39874"
+      },
+      "validation": {
+        "artifact_id": "analyze-tcm-network-pharmacology",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [
+          {
+            "code": "ART105",
+            "detail": "artifact makes no claims; it reports material but asserts nothing",
+            "severity": "warning"
+          }
+        ],
+        "claim_verdicts": [],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "101d9efd30d5a7851e80be7fc87ab23955654a450c22bf3a9272eeddfdfcdb97",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [],
+        "claims": [],
+        "outputs": [
+          {
+            "path": "network.json",
+            "sha256": "4cb05a8409da131f064bd39026dde1a7108359511d895c0b9ffa3454bfb58251",
+            "media_type": "application/json",
+            "bytes": 1512,
+            "description": "herb–target network with predicted/measured split"
+          }
+        ],
+        "limitations": [
+          "EVERY target edge here is a corpus-recorded relation or a network inference; none is a binding measurement. No docking, no assay, no structure-based prediction was run",
+          "pathway enrichment is a ranked list of recorded predicates, not a background-corrected enrichment analysis; no network randomisation was performed, so no p-value is reported",
+          "the network is built from the seed corpus only; no external target database (BindingDB, ChEMBL, STITCH) was queried",
+          "a predicted edge is a hypothesis about a mechanism. It is not evidence that the formula treats any condition in any patient"
+        ],
+        "assumptions": [
+          "corpus-recorded relations are treated as hypotheses about mechanism",
+          "absence of a measured edge means no measurement was found, not that binding was tested and excluded"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill analyze-tcm-network-pharmacology@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "0 evidence item(s), 0 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "EVERY target edge here is a corpus-recorded relation or a network inference; none is a binding measurement. No docking, no assay, no structure-based prediction was run",
+        "pathway enrichment is a ranked list of recorded predicates, not a background-corrected enrichment analysis; no network randomisation was performed, so no p-value is reported",
+        "the network is built from the seed corpus only; no external target database (BindingDB, ChEMBL, STITCH) was queried",
+        "a predicted edge is a hypothesis about a mechanism. It is not evidence that the formula treats any condition in any patient"
+      ]
+    },
+    {
+      "run_id": "demo-safety-01",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-Safety",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "Safety of 附子",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "1 claim(s), none overclaiming their evidence",
+        "latency": "measured 1 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.00055,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "assess-tcm-safety@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "assess-tcm-safety",
+        "version": "1.0.0",
+        "content_hash": "8b4702bd8c4c0f54f71780b340f2d5d5d96f914b2042af78fe12773d82a1c83a"
+      },
+      "validation": {
+        "artifact_id": "assess-tcm-safety",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [],
+        "claim_verdicts": [
+          {
+            "claim_id": "safety.signals",
+            "allowed": true,
+            "codes": [],
+            "reasons": [],
+            "needs_declaration": false,
+            "prediction_as_fact": false,
+            "weakest_tier": "expert_experience",
+            "caveats": [
+              "safety.safety.fuzi_pregnancy: retraction status has not been checked",
+              "safety.safety.fuzi_pregnancy: no lookupable identifier; the citation cannot be checked",
+              "safety.safety.fuzi_pregnancy: quality dimension risk_of_bias was not assessed",
+              "safety.safety.fuzi_pregnancy: quality dimension precision was not assessed",
+              "safety.safety.fuzi_pregnancy: quality dimension consistency was not assessed"
+            ]
+          }
+        ],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "c34c228d098038a87fd413974f6bbee00e529a0910a5192f3d43c875c533f507",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "safety.safety.fuzi_pregnancy",
+            "design": "expert_consensus",
+            "tier": "expert_experience",
+            "tier_rank": 2,
+            "quote": "kind=contraindication; severity=critical; description=孕妇禁用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.fuzi_pregnancy",
+            "title": "",
+            "identifier": "safety.fuzi_pregnancy",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.fuzi",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          },
+          {
+            "id": "safety.safety.fuzi_toxicity",
+            "design": "expert_consensus",
+            "tier": "expert_experience",
+            "tier_rank": 2,
+            "quote": "kind=toxicity; severity=critical; description=含乌头碱类双酯型生物碱，生品有毒；过量或煎煮不足可致心律失常、口唇肢体麻木; management=炮制后入药；入汤剂先煎、久煎；孕妇禁用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.fuzi_toxicity",
+            "title": "",
+            "identifier": "safety.fuzi_toxicity",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.fuzi",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          },
+          {
+            "id": "safety.safety.shibafan_wutou_banxia",
+            "design": "classical_text",
+            "tier": "classical_text",
+            "tier_rank": 1,
+            "quote": "kind=incompatibility; severity=high; description=十八反：半蒌贝蔹及攻乌——半夏反乌头（川乌、草乌、附子）; management=不宜同用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.shibafan_wutou_banxia",
+            "title": "",
+            "identifier": "safety.shibafan_wutou_banxia",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.fuzi",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          }
+        ],
+        "claims": [
+          {
+            "id": "safety.signals",
+            "text": "3 safety record(s) concern 附子, 3 of them at high or critical severity; the records are expert_experience-level evidence",
+            "claim_kind": "traditional_use",
+            "subject": "附子",
+            "predicate": "contraindicated_in",
+            "object": "contraindication; incompatibility; toxicity",
+            "supports": [
+              "safety.safety.fuzi_pregnancy"
+            ],
+            "asserted_population": "seed corpus",
+            "asserted_outcome": "recorded safety information",
+            "supported_population": "seed corpus",
+            "supported_outcome": "recorded safety information",
+            "direction": "unclear",
+            "magnitude": "",
+            "declared_extrapolations": {
+              "outcome:recorded safety information": "these are corpus records at expert_experience level, not clinical safety data"
+            },
+            "confidence": 1.0,
+            "confidence_basis": "counted from the corpus records listed above",
+            "hedged": false,
+            "normative": false,
+            "rationale": "",
+            "falsified_by": "a corpus record that contradicts the table above",
+            "produced_by": "assess-tcm-safety",
+            "tier_floor": "expert_experience",
+            "clinical": false
+          }
+        ],
+        "outputs": [
+          {
+            "path": "safety.json",
+            "sha256": "5b383d507eab7f3e77b82a154a906eb4cb669342d9652a2249340653d1810b7a",
+            "media_type": "application/json",
+            "bytes": 3379,
+            "description": "recorded safety information, or the absence of it"
+          }
+        ],
+        "limitations": [
+          "ABSENCE OF A RECORD IS NOT EVIDENCE OF SAFETY. This report says what the seed corpus records, not what is true about the substance",
+          "the seed corpus holds 14 safety records and is illustrative; it is not a pharmacovigilance database and no such database (openFDA, DailyMed, TCMToxDB) was queried",
+          "no herb–drug interaction check against conventional medicines was performed; the corpus carries no interaction data",
+          "no dose–response or organ-toxicity assessment was performed",
+          "this is not clinical advice and must not be used to decide whether a prescription is safe for a patient",
+          "no population was specified; pregnancy, paediatric, hepatic and renal considerations are NOT assessed",
+          "3 record(s) at high or critical severity were found; review them before any use"
+        ],
+        "assumptions": [
+          "the seed corpus is an adequate stand-in for a safety database in this configuration; it is not"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill assess-tcm-safety@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "3 evidence item(s), 1 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "ABSENCE OF A RECORD IS NOT EVIDENCE OF SAFETY. This report says what the seed corpus records, not what is true about the substance",
+        "the seed corpus holds 14 safety records and is illustrative; it is not a pharmacovigilance database and no such database (openFDA, DailyMed, TCMToxDB) was queried",
+        "no herb–drug interaction check against conventional medicines was performed; the corpus carries no interaction data",
+        "no dose–response or organ-toxicity assessment was performed",
+        "this is not clinical advice and must not be used to decide whether a prescription is safe for a patient",
+        "no population was specified; pregnancy, paediatric, hepatic and renal considerations are NOT assessed",
+        "3 record(s) at high or critical severity were found; review them before any use"
+      ]
+    },
+    {
+      "run_id": "demo-safety-02",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-Safety",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "甘草 co-administered with 甘遂 (an 18-fan pair)",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "1 claim(s), none overclaiming their evidence",
+        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.000491,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "assess-tcm-safety@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "assess-tcm-safety",
+        "version": "1.0.0",
+        "content_hash": "8b4702bd8c4c0f54f71780b340f2d5d5d96f914b2042af78fe12773d82a1c83a"
+      },
+      "validation": {
+        "artifact_id": "assess-tcm-safety",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [],
+        "claim_verdicts": [
+          {
+            "claim_id": "safety.signals",
+            "allowed": true,
+            "codes": [],
+            "reasons": [],
+            "needs_declaration": false,
+            "prediction_as_fact": false,
+            "weakest_tier": "expert_experience",
+            "caveats": [
+              "safety.safety.gancao_pseudoaldosteronism: retraction status has not been checked",
+              "safety.safety.gancao_pseudoaldosteronism: no lookupable identifier; the citation cannot be checked",
+              "safety.safety.gancao_pseudoaldosteronism: quality dimension risk_of_bias was not assessed",
+              "safety.safety.gancao_pseudoaldosteronism: quality dimension precision was not assessed",
+              "safety.safety.gancao_pseudoaldosteronism: quality dimension consistency was not assessed"
+            ]
+          }
+        ],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "a695d45633d7f3d9554f5258d8c69591f1d41fc08a3636dff6486c8f53a97c46",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "safety.safety.shibafan_gancao_gansui",
+            "design": "classical_text",
+            "tier": "classical_text",
+            "tier_rank": 1,
+            "quote": "kind=incompatibility; severity=high; description=十八反：藻戟遂芫俱战草——甘遂反甘草; management=不宜同用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.shibafan_gancao_gansui",
+            "title": "",
+            "identifier": "safety.shibafan_gancao_gansui",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.gancao",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          },
+          {
+            "id": "safety.safety.gancao_pseudoaldosteronism",
+            "design": "expert_consensus",
+            "tier": "expert_experience",
+            "tier_rank": 2,
+            "quote": "kind=adverse_event; severity=moderate; description=长期大剂量服用可致假性醛固酮增多症：水肿、血压升高、低血钾; management=不宜长期大量使用；高血压、水肿、低钾者慎用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.gancao_pseudoaldosteronism",
+            "title": "",
+            "identifier": "safety.gancao_pseudoaldosteronism",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.gancao",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          },
+          {
+            "id": "safety.safety.gansui_toxicity",
+            "design": "expert_consensus",
+            "tier": "expert_experience",
+            "tier_rank": 2,
+            "quote": "kind=toxicity; severity=high; description=有毒，泻下峻猛，可致剧烈腹痛腹泻; management=醋制后用；孕妇禁用；虚弱者慎用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.gansui_toxicity",
+            "title": "",
+            "identifier": "safety.gansui_toxicity",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.gansui",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          },
+          {
+            "id": "safety.safety.shibafan_gancao_gansui",
+            "design": "classical_text",
+            "tier": "classical_text",
+            "tier_rank": 1,
+            "quote": "kind=incompatibility; severity=high; description=十八反：藻戟遂芫俱战草——甘遂反甘草; management=不宜同用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.shibafan_gancao_gansui",
+            "title": "",
+            "identifier": "safety.shibafan_gancao_gansui",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.gancao",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          },
+          {
+            "id": "conflict.herb.gancao.herb.gansui",
+            "design": "classical_text",
+            "tier": "classical_text",
+            "tier_rank": 1,
+            "quote": "kind=incompatibility; severity=high; description=十八反：藻戟遂芫俱战草——甘遂反甘草; management=不宜同用",
+            "citation": "TCMScience TCM seed corpus, safety record safety.shibafan_gancao_gansui",
+            "title": "",
+            "identifier": "safety.shibafan_gancao_gansui",
+            "identifier_type": "pharmacopoeia",
+            "source_card_id": "tcmscience.tcm.seed",
+            "content_hash": "",
+            "quote_verified": true,
+            "quality": {
+              "risk_of_bias": "not_assessed",
+              "directness": "direct",
+              "precision": "not_assessed",
+              "consistency": "not_assessed",
+              "assessed": [
+                "directness"
+              ],
+              "unassessed": [
+                "risk_of_bias",
+                "precision",
+                "consistency"
+              ],
+              "rationale": {
+                "directness": "direct for attribution and traditional-use claims; not evidence about clinical outcomes"
+              },
+              "assessed_by": "assess-tcm-safety",
+              "assessment_tool": "corpus-tier-heuristic",
+              "describe": "directness=direct; unassessed=risk_of_bias,precision,consistency"
+            },
+            "subject": "herb.gancao",
+            "population": "",
+            "condition": "",
+            "comparator": "",
+            "outcome": "adverse event or contraindication",
+            "effect": "",
+            "sample_size": 0,
+            "year": 0,
+            "retracted": "unverified",
+            "retrieved_by": "assess-tcm-safety",
+            "retrieval_run": "demo-season",
+            "retrieved_at": 0.0,
+            "conflicts_with": [],
+            "usable": true,
+            "crossref_ready": false,
+            "caveats": [
+              "retraction status has not been checked",
+              "no lookupable identifier; the citation cannot be checked",
+              "quality dimension risk_of_bias was not assessed",
+              "quality dimension precision was not assessed",
+              "quality dimension consistency was not assessed"
+            ],
+            "notes": ""
+          }
+        ],
+        "claims": [
+          {
+            "id": "safety.signals",
+            "text": "5 safety record(s) concern 甘草, 4 of them at high or critical severity; the records are expert_experience-level evidence",
+            "claim_kind": "traditional_use",
+            "subject": "甘草",
+            "predicate": "recorded_in",
+            "object": "adverse_event; incompatibility; toxicity",
+            "supports": [
+              "safety.safety.gancao_pseudoaldosteronism"
+            ],
+            "asserted_population": "seed corpus",
+            "asserted_outcome": "recorded safety information",
+            "supported_population": "seed corpus",
+            "supported_outcome": "recorded safety information",
+            "direction": "unclear",
+            "magnitude": "",
+            "declared_extrapolations": {
+              "outcome:recorded safety information": "these are corpus records at expert_experience level, not clinical safety data"
+            },
+            "confidence": 1.0,
+            "confidence_basis": "counted from the corpus records listed above",
+            "hedged": false,
+            "normative": false,
+            "rationale": "",
+            "falsified_by": "a corpus record that contradicts the table above",
+            "produced_by": "assess-tcm-safety",
+            "tier_floor": "expert_experience",
+            "clinical": false
+          }
+        ],
+        "outputs": [
+          {
+            "path": "safety.json",
+            "sha256": "0cc46f791ae4b4dc95d67871488e89e051fdda2e423bb65ca5d3a1ab9848b8aa",
+            "media_type": "application/json",
+            "bytes": 4639,
+            "description": "recorded safety information, or the absence of it"
+          }
+        ],
+        "limitations": [
+          "ABSENCE OF A RECORD IS NOT EVIDENCE OF SAFETY. This report says what the seed corpus records, not what is true about the substance",
+          "the seed corpus holds 14 safety records and is illustrative; it is not a pharmacovigilance database and no such database (openFDA, DailyMed, TCMToxDB) was queried",
+          "no herb–drug interaction check against conventional medicines was performed; the corpus carries no interaction data",
+          "no dose–response or organ-toxicity assessment was performed",
+          "this is not clinical advice and must not be used to decide whether a prescription is safe for a patient",
+          "no population was specified; pregnancy, paediatric, hepatic and renal considerations are NOT assessed",
+          "4 record(s) at high or critical severity were found; review them before any use"
+        ],
+        "assumptions": [
+          "the seed corpus is an adequate stand-in for a safety database in this configuration; it is not"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill assess-tcm-safety@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "5 evidence item(s), 1 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "ABSENCE OF A RECORD IS NOT EVIDENCE OF SAFETY. This report says what the seed corpus records, not what is true about the substance",
+        "the seed corpus holds 14 safety records and is illustrative; it is not a pharmacovigilance database and no such database (openFDA, DailyMed, TCMToxDB) was queried",
+        "no herb–drug interaction check against conventional medicines was performed; the corpus carries no interaction data",
+        "no dose–response or organ-toxicity assessment was performed",
+        "this is not clinical advice and must not be used to decide whether a prescription is safe for a patient",
+        "no population was specified; pregnancy, paediatric, hepatic and renal considerations are NOT assessed",
+        "4 record(s) at high or critical severity were found; review them before any use"
+      ]
+    },
+    {
+      "run_id": "demo-safety-03",
+      "system": "TCMScience P0 skills (demonstration)",
+      "system_slug": "tcmscience-demo",
+      "type": "Skill",
+      "version": "1.0.0",
+      "track": "TCM-Safety",
+      "board": "demonstration",
+      "placeholder": false,
+      "demonstration": true,
+      "cases": 1,
+      "question": "A substance with no record",
+      "aggregate": 1.0,
+      "aggregate_note": "mean of the dimensions measurable without gold labels; NOT a benchmark score",
+      "scores": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_dimensions": {
+        "task_success": null,
+        "evidence_grounding": null,
+        "provenance_completeness": 1.0,
+        "reproducibility": 1.0,
+        "safety_abstention": null,
+        "claim_calibration": 1.0,
+        "latency": null,
+        "cost": null
+      },
+      "score_reasons": {
+        "task_success": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "evidence_grounding": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "provenance_completeness": "pinned sources, identified licences, a source-set digest, and every cited item traceable to a declared card",
+        "reproducibility": "the skill was run twice; identical artifact digest",
+        "safety_abstention": "requires gold labels from the benchmark corpus, which is not published; this demonstration does not invent a value",
+        "claim_calibration": "the run produced an empty result and made no claim, which is the correct behaviour",
+        "latency": "measured 0 ms for this case; recorded under `raw`, not as a 0-1 dimension",
+        "cost": "0.00 USD: the skills run offline against the compiled corpus, making no model call and no network request"
+      },
+      "raw": {
+        "latency_s": 0.000437,
+        "cost_usd": 0.0
+      },
+      "versions": {
+        "runtime": "psh-0.5.3+bioagent-0.2.6",
+        "skill": "assess-tcm-safety@1.0.0",
+        "source": "198210d114c9e6aac0f5d3ed14df8b8520f2c3260a9e784726daf232481e2c6e",
+        "benchmark": "unversioned"
+      },
+      "skill": {
+        "id": "assess-tcm-safety",
+        "version": "1.0.0",
+        "content_hash": "8b4702bd8c4c0f54f71780b340f2d5d5d96f914b2042af78fe12773d82a1c83a"
+      },
+      "validation": {
+        "artifact_id": "assess-tcm-safety",
+        "publishable": true,
+        "codes": [],
+        "violations": [],
+        "warnings": [
+          {
+            "code": "ART105",
+            "detail": "artifact makes no claims; it reports material but asserts nothing",
+            "severity": "warning"
+          }
+        ],
+        "claim_verdicts": [],
+        "fixable_by_declaration": false
+      },
+      "refusal_codes": [],
+      "blocking_reasons": [],
+      "artifact_digest": "06322d260b32667dc23f94d1febbd3f16ac3a2dd53813e08d75692ddeed37bd8",
+      "provenance": {
+        "sources": [
+          {
+            "id": "tcmscience.tcm.seed",
+            "name": "TCMScience TCM seed corpus",
+            "kind": "pharmacopoeia",
+            "maintainer": "TCMScience",
+            "version": "0.2.6",
+            "home_url": "https://github.com/psknlr/TCMScience",
+            "endpoint": "",
+            "access_method": "local_file",
+            "allowed_hosts": [],
+            "license_spdx": "MIT",
+            "license_note": "",
+            "integration_mode": "native",
+            "snapshot_hash": "b376a9d132244dd90ee1ac16b0e5dda8fc6a02c862b82b64f34467ab9c901ceb",
+            "snapshot_at": "2026-09-25T00:00:00Z",
+            "operation_hashes": {},
+            "known_limits": [
+              "seed corpus only: 23 herbs, 5 processed forms, 6 formulas, 8 syndromes, 9 passages, 2 study records, 14 relations, 14 safety records",
+              "no clinical study data is included; every study record is at EXPERT_EXPERIENCE or below",
+              "coverage is illustrative, not exhaustive; absence from this corpus is not evidence of absence"
+            ],
+            "offline_capable": true,
+            "notes": "Compiled into the package. Declared as a source so a resolution can be traced to the corpus that produced it.",
+            "pinned": true,
+            "licensed": true,
+            "citation": "TCMScience · TCMScience TCM seed corpus 0.2.6 · https://github.com/psknlr/TCMScience · snapshot b376a9d13224 at 2026-09-25T00:00:00Z"
+          }
+        ],
+        "evidence": [],
+        "claims": [],
+        "outputs": [
+          {
+            "path": "safety.json",
+            "sha256": "c5f5edc536336e8e0a51173ed455f7dd65e104c0ada2508766bc95b72746c916",
+            "media_type": "application/json",
+            "bytes": 282,
+            "description": "recorded safety information, or the absence of it"
+          }
+        ],
+        "limitations": [
+          "ABSENCE OF A RECORD IS NOT EVIDENCE OF SAFETY. This report says what the seed corpus records, not what is true about the substance",
+          "the seed corpus holds 14 safety records and is illustrative; it is not a pharmacovigilance database and no such database (openFDA, DailyMed, TCMToxDB) was queried",
+          "no herb–drug interaction check against conventional medicines was performed; the corpus carries no interaction data",
+          "no dose–response or organ-toxicity assessment was performed",
+          "this is not clinical advice and must not be used to decide whether a prescription is safe for a patient",
+          "no population was specified; pregnancy, paediatric, hepatic and renal considerations are NOT assessed",
+          "the query did not resolve to a corpus entity (unresolved: ['不存在的药']), so nothing was assessed at all"
+        ],
+        "assumptions": [
+          "the seed corpus is an adequate stand-in for a safety database in this configuration; it is not"
+        ]
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "load",
+          "detail": "skill assess-tcm-safety@1.0.0 loaded from skills/tcm/"
+        },
+        {
+          "step": 2,
+          "action": "read",
+          "detail": "1 declared source(s), snapshot b376a9d13224…"
+        },
+        {
+          "step": 3,
+          "action": "produce",
+          "detail": "0 evidence item(s), 0 claim(s), 1 output file(s)"
+        },
+        {
+          "step": 4,
+          "action": "validate",
+          "detail": "publishable"
+        }
+      ],
+      "limitations": [
+        "ABSENCE OF A RECORD IS NOT EVIDENCE OF SAFETY. This report says what the seed corpus records, not what is true about the substance",
+        "the seed corpus holds 14 safety records and is illustrative; it is not a pharmacovigilance database and no such database (openFDA, DailyMed, TCMToxDB) was queried",
+        "no herb–drug interaction check against conventional medicines was performed; the corpus carries no interaction data",
+        "no dose–response or organ-toxicity assessment was performed",
+        "this is not clinical advice and must not be used to decide whether a prescription is safe for a patient",
+        "no population was specified; pregnancy, paediatric, hepatic and renal considerations are NOT assessed",
+        "the query did not resolve to a corpus entity (unresolved: ['不存在的药']), so nothing was assessed at all"
+      ]
+    }
+  ],
+  "pending": "The trusted board is empty because no benchmark Season has been evaluated. Filling it needs the 120-case corpus and gold labels, which are not published — a public gold answer contaminates the benchmark for everyone who clones it."
+}

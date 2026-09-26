@@ -1,0 +1,20 @@
+# Source-distribution contents.
+#
+# The exclusions are not cosmetic: macOS AppleDouble sidecars (`._*`) are valid
+# filenames that pytest happily collects as modules, so a release built on a Mac
+# without them shipped ~80 unimportable files and broke collection for anyone who
+# unpacked it. `scripts/make_release.py` refuses to build a package containing
+# them, and tests/test_packaging.py checks the working tree.
+
+include LICENSE NOTICE README.md
+recursive-include src/bioagent/data *.csv *.json *.parquet
+recursive-include tests *.py
+recursive-include docs *.md
+
+global-exclude ._*
+global-exclude .DS_Store
+global-exclude __MACOSX
+global-exclude *.py[cod]
+prune .git
+prune build
+prune dist

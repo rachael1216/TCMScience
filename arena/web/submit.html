@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit a system — TCMScience Arena</title>
+<meta name="description" content="How to submit a TCMScience Skill, an OCI container or a remote agent API to the Arena: what each mode requires, and the evaluation flow from issue to published row.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="submit">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">TCMScience</span>
+      <span class="brand__name">Arena</span>
+    </a>
+    <span class="brand__sub">Read-only evaluation surface</span>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Overview</a></li>
+        <li><a class="nav__link" href="leaderboard.html">Leaderboard</a></li>
+        <li><a class="nav__link" href="benchmarks.html">Benchmarks</a></li>
+        <li><a class="nav__link" href="skills.html">Skills</a></li>
+        <li><a class="nav__link" href="methods.html">Methods</a></li>
+        <li><a class="nav__link" href="compare.html">Compare</a></li>
+        <li><a class="nav__link" href="submit.html" aria-current="page">Submit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="data-banner" class="data-banner" hidden></div>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Submit a system</h1>
+      <p class="page-head__lede">
+        Three submission modes, one evaluation path. There is no form on this page because there is
+        no backend to accept one: a submission is a pull request or an issue, and it is evaluated by
+        the Runner before anything appears on the leaderboard.
+      </p>
+      <p class="page-head__meta">
+        <span class="badge badge--plain">Manual submission</span>
+        <span class="badge badge--plain">No account, no upload, no tracking</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="prose">
+
+      <section class="section" aria-labelledby="s-what-h">
+        <h2 id="s-what-h">What you are submitting</h2>
+        <p>
+          You are not submitting a score, and you cannot submit one. You are submitting a
+          <strong>run request</strong>: a pinned description of a system, plus everything needed to
+          execute it against a frozen Season inside the trusted runtime. The score is produced by
+          the evaluation, not by the submitter, and there is no path by which a number you supply
+          reaches the leaderboard.
+        </p>
+        <div class="callout callout--info">
+          <p class="callout__title">Read this before you build anything</p>
+          <p>
+            A system that cannot emit a <code>ResearchArtifact</code> envelope cannot be scored.
+            The envelope is required rather than encouraged: one envelope, one validator, one place
+            where "may this be published?" is decided. A system that returns prose instead cannot
+            be validated, cannot be re-run against, and cannot be scored. Start from the envelope,
+            not from the answer.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="s-modes-h">
+        <h2 id="s-modes-h">The three submission modes</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Comparison of the three submission modes">
+          <table>
+            <caption class="visually-hidden">Submission modes, what each one is, and what each requires</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mode</th>
+                <th scope="col">What it is</th>
+                <th scope="col">Required</th>
+                <th scope="col">Not accepted</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">TCMScience Skill<br><span class="small muted">native</span></th>
+                <td>
+                  A skill manifest plus its implementation, resolved from a pinned revision of the
+                  Stable Registry and executed inside the trusted runtime.
+                </td>
+                <td>
+                  <ul class="small">
+                    <li>a <code>SKILL.md</code> / manifest conforming to the compilation contract</li>
+                    <li>an explicit permission set — nothing implicit</li>
+                    <li>a licence determination for the skill and for every source it reads</li>
+                    <li>a pinned dependency lockfile</li>
+                    <li>a declared API version</li>
+                  </ul>
+                </td>
+                <td class="small">
+                  Network access not declared in the manifest. Dependencies resolved at run time.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">OCI Container<br><span class="small muted">bring your own stack</span></th>
+                <td>
+                  A container image executed under the Runner's policy snapshot, for systems whose
+                  orchestration is not expressible as a single skill.
+                </td>
+                <td>
+                  <ul class="small">
+                    <li>an image digest, not a tag</li>
+                    <li>a full manifest digest recorded in the run request</li>
+                    <li>the artifact envelope written to the declared output path</li>
+                    <li>no network egress at evaluation time unless declared and allowlisted</li>
+                    <li>a reproducible build (the image is rebuilt from source and compared)</li>
+                  </ul>
+                </td>
+                <td class="small">
+                  Floating tags. Images that fetch models or data at start-up.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Remote Agent API<br><span class="small muted">hosted</span></th>
+                <td>
+                  An HTTPS endpoint the Runner calls with a case and a budget, receiving an artifact
+                  envelope back. The system stays yours; the evaluation stays ours.
+                </td>
+                <td>
+                  <ul class="small">
+                    <li>a stable endpoint with a documented request and response schema</li>
+                    <li>a declared maximum latency and cost per case</li>
+                    <li>the endpoint pinned to an immutable deployment for the duration of the evaluation</li>
+                    <li>a published model and data version for the run</li>
+                  </ul>
+                </td>
+                <td class="small">
+                  Endpoints that change mid-evaluation. Undeclared human-in-the-loop. Silent
+                  retrieval from sources you have not disclosed.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">
+          A remote API submission can satisfy every other requirement and still fail Reproducibility,
+          because the Runner cannot re-execute someone else's deployment. It is evaluated, published,
+          and labelled — a remote row states its mode on the leaderboard, and any Reproducibility
+          score it carries is the one the submitter's own re-run produced, not the Runner's.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="s-envelope-h">
+        <h2 id="s-envelope-h">What every submission must produce</h2>
+        <p>
+          Regardless of mode, the run must emit one artifact envelope containing all of the
+          following. These are validation requirements, not documentation suggestions, and each one
+          is checked by a validator that returns stable codes.
+        </p>
+        <ul>
+          <li><strong>Sources declared</strong>, each pinned to a source-card snapshot hash with an identified licence.</li>
+          <li><strong>Every claim scoped to a claim kind</strong> — mechanism, clinical, methodological, uncertainty or recommendation — with the evidence supporting it.</li>
+          <li><strong>Every citation resolvable</strong>, and every supporting quote located in its source rather than paraphrased.</li>
+          <li><strong>Every output file hashed</strong>, with a media type and a size.</li>
+          <li><strong>All four version axes declared</strong>: runtime, skill, source, benchmark.</li>
+          <li><strong>Limitations stated.</strong> At least one, in your own words, naming what the run does not show.</li>
+        </ul>
+        <p>
+          And one prohibition, stated separately because it is the failure this benchmark exists to
+          make visible: <strong>a clinical efficacy claim may not rest on computational prediction
+          alone.</strong> Docking, network inference and enrichment may support a mechanism claim.
+          They may not support a claim about what happens in a patient. A run that states one is
+          gated to the Experimental board with <code>CLM004</code> / <code>ART106</code>, however
+          strong the rest of its profile.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="s-flow-h">
+        <h2 id="s-flow-h">The evaluation flow</h2>
+        <ol>
+          <li>
+            <strong>Open an issue</strong> describing the system, its mode, its source repository
+            or endpoint, its licence and its declared permissions. This is a conversation, not a
+            queue position: most submissions are improved substantially at this step.
+          </li>
+          <li>
+            <strong>Eligibility check.</strong> The declared permissions are reviewed against what
+            the system actually needs, and the licence position is established. A submission that
+            cannot name a licence for its sources is stopped here rather than after a run.
+          </li>
+          <li>
+            <strong>Development-split run.</strong> The system is executed against the published
+            development split so you can see where it fails before anything is frozen. Results at
+            this stage are private to the submitter and the evaluators.
+          </li>
+          <li>
+            <strong>Freeze the run request.</strong> Mode, image digest or endpoint, permission
+            set, declared versions. After this point the request is immutable: changing it starts a
+            new submission.
+          </li>
+          <li>
+            <strong>Evaluation on the held-out split.</strong> Executed once, by the evaluators,
+            under the Season's policy snapshot. The held-out labels are not available to the
+            submitter at any point.
+          </li>
+          <li>
+            <strong>Validation.</strong> The artifact envelope is checked by the pure-function
+            validator. Every violation carries a stable code, and any hard-gate violation routes
+            the run to the Experimental board rather than discarding it.
+          </li>
+          <li>
+            <strong>Publication.</strong> The result bundle — scores, decomposition, trace,
+            evidence, artifacts, claim verdicts — is written to the Frozen Benchmark Registry and
+            appears on the leaderboard at the next data regeneration.
+          </li>
+          <li>
+            <strong>Appeal window.</strong> A submitter may contest a scoring decision by opening
+            an issue against the scorer, with the artifact and the case. An appeal can change a
+            scorer or a Season; it cannot change a published row of a frozen Season. Corrections
+            are issued as a new Season or an erratum, never as a silent edit.
+          </li>
+        </ol>
+        <p class="small muted">
+          There is no queue position, no fee, and no fast path. Two things move a submission
+          forward: a system that resolves its citations, and a submission that declares what its
+          system cannot do.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="s-codes-h">
+        <h2 id="s-codes-h">Codes you may get back</h2>
+        <p>
+          A refused claim or a failed validation is reported with a stable code, never as prose
+          alone, because these strings end up in benchmark output and in paper tables and must not
+          be renumbered by an edit. The <a href="run.html">run page</a> prints the code next to its
+          published meaning. The most common ones at submission time:
+        </p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Common refusal codes">
+          <table>
+            <caption class="visually-hidden">Frequently returned refusal and violation codes</caption>
+            <thead>
+              <tr><th scope="col">Code</th><th scope="col">Meaning</th><th scope="col">Usual cause</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row" class="mono">ART101</th><td>artifact declares no sources</td><td class="small">The envelope was emitted without the source list.</td></tr>
+              <tr><th scope="row" class="mono">ART102</th><td>a publishable claim rests on a source that is not pinned to a snapshot</td><td class="small">A live API was read without recording its snapshot hash.</td></tr>
+              <tr><th scope="row" class="mono">ART103</th><td>a publishable claim rests on a source with no identified licence</td><td class="small">A scraped or user-supplied corpus with no licence determination.</td></tr>
+              <tr><th scope="row" class="mono">ART104</th><td>a claim cites evidence id that is not present in the artifact</td><td class="small">Identifiers were generated rather than retrieved. This trips gate G1.</td></tr>
+              <tr><th scope="row" class="mono">ART106</th><td>a clinical claim is supported only by computational prediction</td><td class="small">Docking or network output stated as clinical efficacy. This trips gate G4.</td></tr>
+              <tr><th scope="row" class="mono">ART107</th><td>a declared output file has no content hash</td><td class="small">Files were written by a path that bypassed the envelope builder.</td></tr>
+              <tr><th scope="row" class="mono">ART108</th><td>composite_version is incomplete</td><td class="small">One of the four axes was not threaded through the artifact.</td></tr>
+              <tr><th scope="row" class="mono">ART110</th><td>no limitations are stated</td><td class="small">The limitations field was left empty, which is treated as a claim of completeness.</td></tr>
+              <tr><th scope="row" class="mono">CLM009</th><td>an extrapolation beyond the evidence is not declared</td><td class="small">Absence of a signal was reported as absence of risk.</td></tr>
+              <tr><th scope="row" class="mono">CLM010</th><td>a supporting quote was not located in its source</td><td class="small">A quotation was reconstructed rather than extracted.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          A refusal is fixable. <code>CLM009</code> in particular is marked
+          <em>fixable by declaring the limit</em>: the claim is permitted once the run states the
+          extrapolation it is making. The point of the code is to tell you which of those two
+          situations you are in — change your evidence, or change your sentence.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="s-not-h">
+        <h2 id="s-not-h">What will not be accepted</h2>
+        <ul>
+          <li>
+            <strong>A number without an artifact.</strong> If the run cannot be re-executed, there
+            is nothing to publish. A perfect score with no reproducible artifact is an anecdote
+            with a decimal point.
+          </li>
+          <li>
+            <strong>Retrieval from undisclosed sources.</strong> Undeclared corpora cannot be
+            licence-checked, cannot be snapshot-pinned, and cannot be cited.
+          </li>
+          <li>
+            <strong>Human-in-the-loop undisclosed.</strong> If a person contributed to an answer,
+            the run request says so. A benchmark that measures a person and reports it as a system
+            is measuring nothing useful.
+          </li>
+          <li>
+            <strong>Tuning against the held-out split.</strong> The development split exists so
+            that this is unnecessary. Evaluation on the held-out split is run once; a resubmission
+            that follows an attempt to infer the labels is declined.
+          </li>
+        </ul>
+        <div class="callout callout--ok">
+          <p class="callout__title">What you get if it passes</p>
+          <p>
+            A row on the trusted board with all eight dimensions decomposed, a run page with the
+            full trace, and a citable composite version naming all four axes. If it fails a gate
+            you still get the row and the run page — on the Experimental board, with the reason.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      <strong>TCMScience Arena.</strong> A read-only evaluation surface. It renders published
+      result bundles; it never computes a score, never re-ranks, and never writes a registry.
+    </p>
+    <p>
+      Static HTML, one stylesheet, one script. No server, no database, no cookies, no tracking.
+    </p>
+    <ul class="site-footer__links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="methods.html">Methods</a></li>
+      <li><a href="submit.html">Submit</a></li>
+      <li><a href="data/README.md">Data contract</a></li>
+      <li><a href="README.md">Site README</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/fallback-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

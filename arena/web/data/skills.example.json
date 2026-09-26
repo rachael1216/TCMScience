@@ -1,0 +1,357 @@
+{
+  "example": true,
+  "generated_at": "2026-09-25T09:00:00Z",
+  "season": "2026-S1",
+  "registries": {
+    "candidate": {
+      "revision": "candidate-2026.09-example",
+      "updated": "2026-09-01",
+      "count": 42,
+      "role": "Everything discovered. Never executed in production."
+    },
+    "stable": {
+      "revision": "skills-2026.09.1-example",
+      "updated": "2026-09-12",
+      "count": 7,
+      "role": "The only registry the runtime resolves skills from."
+    },
+    "benchmark": {
+      "revision": "season-2026-S1-example",
+      "updated": "2026-09-01",
+      "role": "The frozen yardstick. A Season, once cut, is immutable."
+    }
+  },
+  "skills": [
+    {
+      "id": "tcm.entity-resolver",
+      "name": "TCM Entity Resolver",
+      "status": "stable",
+      "version": "1.3.0",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-skills",
+      "commit": "9f2c1ab",
+      "licence": "Apache-2.0",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:none"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-Entity",
+        "metric": "entity accuracy",
+        "delta": 0.031,
+        "n": 20,
+        "note": "Retains the ambiguous reading instead of merging; false-merge rate fell to 0.0."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-014",
+        "decided_by": "example-reviewer-a",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry. Demonstrates the stable-registry shape.",
+      "placeholder": true
+    },
+    {
+      "id": "tcm.evidence-retriever",
+      "name": "TCM Evidence Retriever",
+      "status": "stable",
+      "version": "2.1.0",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-skills",
+      "commit": "4be07d3",
+      "licence": "Apache-2.0",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:pubmed"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-Evidence",
+        "metric": "Recall@10",
+        "delta": 0.058,
+        "n": 20,
+        "note": "Identifier resolution runs before ranking, so unresolved records never surface."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-015",
+        "decided_by": "example-reviewer-a",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "tcm.study-design-classifier",
+      "name": "Study Design Classifier",
+      "status": "stable",
+      "version": "1.0.4",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-skills",
+      "commit": "c1a9e02",
+      "licence": "MIT",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-Evidence",
+        "metric": "study-design classification",
+        "delta": 0.022,
+        "n": 20,
+        "note": "Predictive designs are classified as predictions, never as assays."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-016",
+        "decided_by": "example-reviewer-b",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "tcm.netpharm-graph",
+      "name": "Network Pharmacology Graph Builder",
+      "status": "stable",
+      "version": "0.9.2",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-netpharm",
+      "commit": "77de410",
+      "licence": "Apache-2.0",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:herb",
+        "network:bindingdb",
+        "exec:docking"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-NetPharm",
+        "metric": "edge provenance rate",
+        "delta": 0.077,
+        "n": 20,
+        "note": "Measured and predicted edges written to separate collections."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-017",
+        "decided_by": "example-reviewer-c",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "tcm.safety-screen",
+      "name": "Interaction and Contraindication Screen",
+      "status": "stable",
+      "version": "1.2.1",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-safety",
+      "commit": "0a3b881",
+      "licence": "Apache-2.0",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:openfda"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-Safety",
+        "metric": "risk recall",
+        "delta": 0.044,
+        "n": 20,
+        "note": "Abstains with a reason where the signal is too thin to report."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-018",
+        "decided_by": "example-reviewer-c",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "tcm.trial-audit",
+      "name": "Trial Report Auditor",
+      "status": "stable",
+      "version": "1.1.0",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-trials",
+      "commit": "5d6f220",
+      "licence": "CC-BY-4.0",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-TrialAudit",
+        "metric": "checklist coverage",
+        "delta": 0.019,
+        "n": 20,
+        "note": "Reports per-instrument coverage and marks unjudgeable items as unjudgeable."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-019",
+        "decided_by": "example-reviewer-b",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "tcm.artifact-envelope",
+      "name": "Artifact Envelope Emitter",
+      "status": "stable",
+      "version": "1.0.0",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-core",
+      "commit": "aa10c4f",
+      "licence": "Apache-2.0",
+      "licence_verified": false,
+      "permissions": [
+        "fs:write:artifacts"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-End2End",
+        "metric": "artifact completeness",
+        "delta": 0.0,
+        "n": 20,
+        "note": "Infrastructure skill: emits the envelope every other skill returns."
+      },
+      "approval": {
+        "status": "approved",
+        "decision_id": "PD-2026-020",
+        "decided_by": "example-reviewer-a",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "upstream.skill-md-import",
+      "name": "SKILL.md Import Adapter",
+      "status": "candidate",
+      "version": "0.3.0",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/upstream-skills",
+      "commit": "be2210a",
+      "licence": "Example licence string (placeholder)",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:any"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-Evidence",
+        "metric": "Recall@10",
+        "delta": null,
+        "n": 0,
+        "note": "Not yet benchmarked: candidate skills are never executed in production."
+      },
+      "approval": {
+        "status": "pending",
+        "decision_id": "",
+        "decided_by": "",
+        "decided_on": ""
+      },
+      "notes": "Example entry. Requested network:any is the reason promotion is not automatic.",
+      "placeholder": true
+    },
+    {
+      "id": "upstream.pdf-table-extract",
+      "name": "PDF Table Extractor",
+      "status": "candidate",
+      "version": "0.2.1",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/upstream-skills",
+      "commit": "33f9b71",
+      "licence": "Example licence string (placeholder)",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "fs:read:user-supplied"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-TrialAudit",
+        "metric": "checklist coverage",
+        "delta": null,
+        "n": 0,
+        "note": "Candidate: awaiting a licence determination."
+      },
+      "approval": {
+        "status": "pending",
+        "decision_id": "",
+        "decided_by": "",
+        "decided_on": ""
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "upstream.herb-graphrag",
+      "name": "HERB GraphRAG",
+      "status": "candidate",
+      "version": "0.1.0",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/graphrag-skills",
+      "commit": "9c0d552",
+      "licence": "Example licence string (placeholder)",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:herb",
+        "exec:python"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-NetPharm",
+        "metric": "edge provenance rate",
+        "delta": null,
+        "n": 0,
+        "note": "Candidate: requests exec:python, which requires an explicit review."
+      },
+      "approval": {
+        "status": "pending",
+        "decision_id": "",
+        "decided_by": "",
+        "decided_on": ""
+      },
+      "notes": "Example entry.",
+      "placeholder": true
+    },
+    {
+      "id": "upstream.tcm-cli-bridge",
+      "name": "tcm-cli Bridge",
+      "status": "candidate",
+      "version": "0.4.2",
+      "api_version": "1.0",
+      "source_repo": "github.com/example/tcm-cli",
+      "commit": "1f7a003",
+      "licence": "Example licence string (placeholder)",
+      "licence_verified": false,
+      "permissions": [
+        "fs:read:benchmark",
+        "network:none"
+      ],
+      "benchmark_delta": {
+        "track": "TCM-Entity",
+        "metric": "entity accuracy",
+        "delta": -0.012,
+        "n": 20,
+        "note": "Benchmarked on the dev split only; a negative delta holds promotion."
+      },
+      "approval": {
+        "status": "held",
+        "decision_id": "PD-2026-021",
+        "decided_by": "example-reviewer-a",
+        "decided_on": "2026-09-12"
+      },
+      "notes": "Example entry. A held candidate: measured, and not promoted.",
+      "placeholder": true
+    }
+  ],
+  "promotion_rule": "The monthly pipeline may write only to the Candidate Catalog. Promotion into the Stable Registry requires a recorded PromotionDecision; a Season is cut from a Stable revision and is thereafter immutable."
+}

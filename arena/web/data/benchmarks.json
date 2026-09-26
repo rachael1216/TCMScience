@@ -1,0 +1,69 @@
+{
+  "generated": true,
+  "note": "Generated from the registries by scripts/build_arena_data.py. The Arena renders; it never scores.",
+  "seasons": [
+    {
+      "season": "season-1",
+      "status": "designed",
+      "tracks": {
+        "TCM-Entity": {
+          "cases": 20,
+          "metric_focus": "entity accuracy, ambiguity retention, false-merge rate"
+        },
+        "TCM-Evidence": {
+          "cases": 20,
+          "metric_focus": "Recall@K, nDCG, citation validity, study-design classification"
+        },
+        "TCM-NetPharm": {
+          "cases": 20,
+          "metric_focus": "edge provenance rate, measured/predicted separation, enrichment reproducibility"
+        },
+        "TCM-Safety": {
+          "cases": 20,
+          "metric_focus": "risk recall, severe false-negative rate, evidence sufficiency"
+        },
+        "TCM-TrialAudit": {
+          "cases": 20,
+          "metric_focus": "STRICTA / SPIRIT-TCM / CONSORT-CHM checklist coverage"
+        },
+        "TCM-End2End": {
+          "cases": 20,
+          "metric_focus": "artifact completeness, re-run success, claim calibration"
+        }
+      },
+      "splits": {
+        "dev": 60,
+        "hidden": 40,
+        "adversarial": 20
+      },
+      "cases_published": false,
+      "note": "The cases and their gold labels are not published. Only their digests are, so a reported score can be tied to a revision of the case set without the set being disclosed."
+    }
+  ],
+  "scoring": [
+    {
+      "dimension": "task_success"
+    },
+    {
+      "dimension": "evidence_grounding"
+    },
+    {
+      "dimension": "provenance_completeness"
+    },
+    {
+      "dimension": "reproducibility"
+    },
+    {
+      "dimension": "safety_abstention"
+    },
+    {
+      "dimension": "claim_calibration"
+    },
+    {
+      "dimension": "latency"
+    },
+    {
+      "dimension": "cost"
+    }
+  ]
+}
