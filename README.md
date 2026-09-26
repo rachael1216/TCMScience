@@ -12,7 +12,7 @@
 
 [![ci](https://github.com/psknlr/TCMScience/actions/workflows/ci.yml/badge.svg)](https://github.com/psknlr/TCMScience/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 ![PSH](https://img.shields.io/badge/kernel-PSH%200.5.3-6f42c1)
 ![Skills](https://img.shields.io/badge/stable%20skills-4%20pinned-1f6feb)
 ![Benchmark](https://img.shields.io/badge/benchmark-6%20tracks%20%C2%B7%20120%20cases-0969da)

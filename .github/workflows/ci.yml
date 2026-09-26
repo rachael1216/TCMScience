@@ -17,7 +17,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        # 3.11 is PSH-Harness's declared floor (`requires-python = ">=3.11"`).
+        # This matrix previously included 3.10, which could never install the
+        # package — the old step pip-installed pytest and hypothesis by hand and
+        # never installed `psh`, so the contradiction was invisible until the
+        # step was changed to use the declared extra.
+        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -44,7 +49,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        # BioScience-Harness declares >=3.10, but it imports `psh`, whose floor
+        # is 3.11 — so the effective floor for the combined install is 3.11. The
+        # narrower matrix is the honest one: a 3.10 job cannot install the pair.
+        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

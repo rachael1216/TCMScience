@@ -628,3 +628,57 @@ def test_psh_declares_the_test_dependencies_its_suite_imports():
     assert "hypothesis" in declared, (
         "PSH's property tests importorskip hypothesis; leaving it out of the "
         "declared extras means those checks are skipped rather than run")
+
+
+def test_the_declared_python_floor_covers_every_package_it_imports():
+    """Both packages must declare a floor the *pair* satisfies.
+
+    `BioScience-Harness` declared `>=3.10` while importing `psh`, whose floor is
+    3.11 — true of this package alone and false of every way it is used. The CI
+    matrix repeated the error by testing 3.10, which could never install the
+    pair; the job had never actually installed `psh`, so nothing noticed.
+
+    A reader on the declared floor must be able to `pip install` both.
+    """
+    try:
+        import tomllib
+    except ModuleNotFoundError:                      # Python 3.10
+        import tomli as tomllib                      # type: ignore[no-redef]
+
+    def floor(path):
+        with open(path, "rb") as handle:
+            spec = tomllib.load(handle)["project"]["requires-python"]
+        # ">=3.11" → (3, 11)
+        digits = [int(p) for p in spec.replace(">=", "").strip().split(".")[:2]]
+        return tuple(digits)
+
+    psh = floor(ROOT / "PSH-Harness" / "pyproject.toml")
+    bio = floor(ROOT / "BioScience-Harness" / "pyproject.toml")
+    assert bio >= psh, (
+        f"BioScience-Harness declares Python {bio} but imports psh, whose floor "
+        f"is {psh}; a reader on the declared floor cannot install the pair")
+
+    # And the CI matrix must not test an interpreter below that floor.
+    ci = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    tested = {tuple(int(p) for p in v.split(".")[:2])
+              for v in __import__("re").findall(r'"(3\.\d+)"', ci)}
+    below = sorted(v for v in tested if v < psh)
+    assert not below, (
+        f"ci.yml tests Python {below}, below the declared floor {psh}; those jobs "
+        "cannot install the packages and will fail")
+
+
+def test_the_readme_badge_matches_the_declared_floor():
+    """The badge said 3.10+ while the kernel requires 3.11 — a reader would
+    install on 3.10 and hit a resolution error on their first command."""
+    try:
+        import tomllib
+    except ModuleNotFoundError:
+        import tomli as tomllib                      # type: ignore[no-redef]
+
+    with open(ROOT / "PSH-Harness" / "pyproject.toml", "rb") as handle:
+        spec = tomllib.load(handle)["project"]["requires-python"]
+    expected = spec.replace(">=", "").strip()
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert f"Python-{expected}%2B" in readme, (
+        f"README badge does not state Python {expected}+ (kernel floor is {spec})")

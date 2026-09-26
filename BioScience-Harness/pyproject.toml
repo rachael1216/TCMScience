@@ -6,7 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "bioagent"
 version = "0.2.6"
 description = "Federating biomedical agent: unified capability registry over 16 open-source biomedical agent projects"
-requires-python = ">=3.10"
+# 3.11, not 3.10: this package imports `psh`, whose floor is 3.11, so a 3.10
+# install cannot resolve the pair. Declaring 3.10 here was true of this package
+# alone and false of every way it is actually used.
+requires-python = ">=3.11"
 # PyYAML is a hard runtime dependency, not an optional convenience. The skill
 # loader, the registry and the scout all parse YAML, and a skill manifest that
 # cannot be read is not a skill. It was previously only *optionally* imported

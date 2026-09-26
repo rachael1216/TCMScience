@@ -7,7 +7,7 @@ the TCM knowledge layer is a seed corpus compiled into the package.
 
 ## 1. Try it in 30 seconds, without installing anything
 
-From the repository root, with nothing but Python 3.10+:
+From the repository root, with nothing but **Python 3.11+**:
 
 ```bash
 cd BioScience-Harness
