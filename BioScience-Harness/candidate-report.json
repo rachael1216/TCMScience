@@ -1,0 +1,12 @@
+{
+  "report": {
+    "found": 0,
+    "needs_adapter": 0,
+    "unreachable": 0
+  },
+  "unreachable": [],
+  "needs_adapter": [],
+  "candidates": [],
+  "stable": [],
+  "note": "Candidates only. Promotion requires a reviewed PromotionDecision and is not performed by this command."
+}
